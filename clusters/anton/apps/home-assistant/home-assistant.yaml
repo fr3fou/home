@@ -20,7 +20,7 @@ spec:
         labels: { }
         ingressClassName: "nginx"
         hosts:
-          - host: home-assistant.maikati
+          - host: home.lab.simo.sh
             paths:
               - path: /
                 pathType: Prefix
