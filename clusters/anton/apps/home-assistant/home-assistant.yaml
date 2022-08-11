@@ -16,8 +16,8 @@ spec:
     http:
       use_x_forwarded_for: true
       trusted_proxies:
-        - 10.42.0.0/16
-        - 100.64.0.0/10
+        - 10.42.0.0/16 # k3s Pod range
+        - 100.64.0.0/10 # Tailscale IP Range
     ingress:
       main:
         enabled: true
