@@ -16,9 +16,10 @@ spec:
     http:
       use_x_forwarded_for: true
       trusted_proxies:
-        - 10.42.0.0/16 # k3s Pod range
-        - 100.64.0.0/10 # Tailscale IP range
-        - 172.30.33.0/24 # home-assistant addons IP range
+        - 0.0.0.0/0
+    #        - 10.42.0.0/16 # k3s Pod range
+    #        - 100.64.0.0/10 # Tailscale IP range
+    #        - 172.30.33.0/24 # home-assistant addons IP range
     ingress:
       main:
         enabled: true
