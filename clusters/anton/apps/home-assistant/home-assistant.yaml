@@ -20,4 +20,4 @@ spec:
             labels: { }
             ingressClassName: "nginx"
             hosts:
-              - host: http://home-assistant.maikati/
+              - host: home-assistant.maikati
