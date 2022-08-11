@@ -21,3 +21,6 @@ spec:
         ingressClassName: "nginx"
         hosts:
           - host: home-assistant.maikati
+            paths:
+              - path: /
+                pathType: Prefix
