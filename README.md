@@ -11,5 +11,6 @@ $ k3sup install \
     --ip $IP \
     --user $USER \
     --ssh-key ~/.ssh/id_ed25519 \ # Use this if you don't use RSA keys
-    --local-path $HOME/.kube/config
+    --local-path $HOME/.kube/config \
+    --k3s-extra-args '--disable helm-controller --disable traefik'
 ```
