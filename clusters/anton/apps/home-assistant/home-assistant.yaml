@@ -48,7 +48,7 @@ spec:
         tls:
           - hosts:
               - *home-host
-        secretName: letsencrypt-home
+            secretName: letsencrypt-home
 
     persistence:
       config:
@@ -98,7 +98,7 @@ spec:
           tls:
             - hosts:
                 - *code-host
-        secretName: letsencrypt-code
+              secretName: letsencrypt-code
 
         resources:
           requests:
