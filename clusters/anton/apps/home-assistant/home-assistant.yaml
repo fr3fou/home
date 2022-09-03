@@ -46,3 +46,7 @@ spec:
           - host: "home.lab.simo.sh"
             paths:
               - path: /
+                   
+    persistence:
+      config:
+        enabled: true
