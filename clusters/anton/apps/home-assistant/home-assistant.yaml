@@ -20,9 +20,6 @@ spec:
       repository: ghcr.io/home-assistant/home-assistant
       tag: 2022.8.2
 
-    podAnnotations:
-      k8s.v1.cni.cncf.io/networks: macvlan-static-iot-hass
-
     dnsConfig:
       options:
         - name: ndots
@@ -46,7 +43,61 @@ spec:
           - host: "home.lab.simo.sh"
             paths:
               - path: /
-                   
+
     persistence:
       config:
         enabled: true
+
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+
+    resources:
+      requests:
+        cpu: 126m
+        memory: 411M
+      limits:
+        memory: 4417M
+
+    addons:
+      codeserver:
+        enabled: true
+
+        image:
+          repository: ghcr.io/k8s-at-home/code-server
+          tag: v4.6.0
+          pullPolicy: Always
+
+        args:
+          - --auth
+          - none
+          - --user-data-dir
+          - "/config/.vscode"
+          - --extensions-dir
+          - "/config/.vscode"
+
+        git:
+          deployKeySecret: home-assistant-deploykey
+
+        ingress:
+          enabled: true
+          ingressClassName: "nginx"
+          hosts:
+            - host: "code.lab.simo.sh"
+              paths:
+                - path: /
+
+        resources:
+          requests:
+            cpu: 11m
+            memory: 94M
+          limits:
+            memory: 1007M
+
+        volumeMounts:
+          - name: config
+            mountPath: /config
