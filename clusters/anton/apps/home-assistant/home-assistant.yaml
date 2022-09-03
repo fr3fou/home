@@ -4,24 +4,45 @@ metadata:
   name: home-assistant
   namespace: apps
 spec:
-  interval: 5m0s
+  interval: 15m
   chart:
     spec:
-      chart: home-assistant
-      version: "13.4.2"
+      chart: app-template
+      version: 0.1.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s
+        namespace: flux-system
+
   values:
+    image:
+      repository: ghcr.io/home-assistant/home-assistant
+      tag: 2022.8.7
+
+    podAnnotations:
+      k8s.v1.cni.cncf.io/networks: macvlan-static-iot-hass
+
+    dnsConfig:
+      options:
+        - name: ndots
+          value: "1"
+
+    hostNetwork: true
+
+    dnsPolicy: "ClusterFirstWithHostNet"
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8123
+
     ingress:
       main:
         enabled: true
-        annotations:
-          nginx.org/websocket-services: home-assistant
-        labels: { }
         ingressClassName: "nginx"
         hosts:
-          - host: home.lab.simo.sh
+          - host: "home.lab.simo.sh"
             paths:
               - path: /
-                pathType: Prefix
