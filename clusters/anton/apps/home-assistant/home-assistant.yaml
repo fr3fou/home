@@ -65,7 +65,7 @@ spec:
 
     addons:
       codeserver:
-        enabled: false
+        enabled: true
 
         image:
           repository: ghcr.io/k8s-at-home/code-server
@@ -79,9 +79,6 @@ spec:
           - "/config/.vscode"
           - --extensions-dir
           - "/config/.vscode"
-
-        git:
-          deployKeySecret: home-assistant-deploykey
 
         ingress:
           enabled: true
