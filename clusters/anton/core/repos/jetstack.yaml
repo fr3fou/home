@@ -1,8 +1,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: bjw-s
+  name: jetstack
   namespace: core
 spec:
   interval: 5m0s
-  url: http://bjw-s.github.io/helm-charts/
+  url: https://charts.jetstack.io
