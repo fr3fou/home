@@ -22,6 +22,10 @@ spec:
   interval: 10m0s
   path: ./clusters/anton
   prune: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   sourceRef:
     kind: GitRepository
     name: flux-system
