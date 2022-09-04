@@ -10,6 +10,9 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-issuer
     solvers:
-      - http01:
-          ingress:
-            class: nginx
+      - dns01:
+          cloudflare:
+            email: simo3003@me.com
+            apiKeySecretRef:
+              name: cloudflare-api-key-secret
+              key: api-key
