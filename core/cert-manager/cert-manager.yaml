@@ -14,3 +14,5 @@ spec:
         name: jetstack
   values:
     installCRDs: true
+    webhook:
+      enabled: true
