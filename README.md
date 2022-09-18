@@ -7,4 +7,4 @@ $ curl -sfL https://raw.githubusercontent.com/fr3fou/home/main/install.sh | sh -
 
 ## TODO
 
-- [ ] Proper dependency management with FluxCD's `dependsOn`
+- [x] Proper dependency management with FluxCD's `dependsOn`
