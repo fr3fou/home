@@ -8,5 +8,5 @@ spec:
     substitute: {}
     substituteFrom:
       - kind: ConfigMap
-        name: base-config
+        name: cluster-config
 
