@@ -4,4 +4,3 @@ resources:
   - base.yaml
   - home-assistant.yaml
   - plex.yaml
-

@@ -5,4 +5,3 @@ resources:
   - cert-manager.yaml
   - certs.yaml
   - ingress-nginx.yaml
-
