@@ -6,3 +6,4 @@ resources:
 
 patchesStrategicMerge:
   - secrets-age.yaml
+  - config-map-sub.yaml
