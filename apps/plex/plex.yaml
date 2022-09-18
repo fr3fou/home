@@ -44,6 +44,7 @@ spec:
                 return 301 $scheme://$host/web/index.html;
               }
             }
+          cert-manager.io/cluster-issuer: letsencrypt
         ingressClassName: nginx
         hosts:
           - host: &plex-host plex.${PERSONAL_DOMAIN}
