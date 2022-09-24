@@ -30,10 +30,6 @@ spec:
       SONARR__APPLICATION_URL: "https://sonarr.${PERSONAL_DOMAIN}"
       SONARR__LOG_LEVEL: info
 
-    envFrom:
-      - secretRef:
-          name: sonarr
-
     service:
       main:
         ports:
