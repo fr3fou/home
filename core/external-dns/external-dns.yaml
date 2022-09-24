@@ -59,4 +59,4 @@ spec:
             - --provider=cloudflare
           envFrom:
             - secretRef:
-                name: cloudflare-external-dns-secrets
+                name: cloudflare-external-dns-secret
