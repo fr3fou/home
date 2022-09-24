@@ -13,3 +13,5 @@ spec:
   dependsOn:
     - name: ingress-nginx
     - name: certs
+    - name: external-dns
+
