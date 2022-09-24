@@ -65,7 +65,6 @@ spec:
         mountPath: /storage/media
         type: hostPath # TODO: use a nas?
         hostPath: /home/simo/Media
-
       transcode:
         enabled: true
         type: emptyDir
