@@ -4,3 +4,5 @@ resources:
   - base.yaml
   - home-assistant.yaml
   - plex.yaml
+  - sonarr.yaml
+  - radarr.yaml

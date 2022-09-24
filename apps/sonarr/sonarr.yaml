@@ -1,0 +1,76 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sonarr
+  namespace: apps
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: apps
+
+  values:
+    image:
+      repository: ghcr.io/onedr0p/sonarr-develop
+      tag: 3.0.9.1555@sha256:63e06362f8c14829086c908e6e92768bc22568b70095bc21124cdf21f235e785
+
+    podSecurityContext:
+      supplementalGroups:
+        - 65539
+
+    env:
+      SONARR__INSTANCE_NAME: Sonarr
+      SONARR__PORT: &port 8989
+      SONARR__APPLICATION_URL: "https://sonarr.${PERSONAL_DOMAIN}"
+      SONARR__LOG_LEVEL: info
+
+    envFrom:
+      - secretRef:
+          name: sonarr
+
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            proxy_set_header Accept-Encoding "";
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - host: &sonarr-host "sonarr.${PERSONAL_DOMAIN}"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - *sonarr-host
+            secretName: letsencrypt-sonarr
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: sonarr-config
+
+      data:
+        enabled: true
+        mountPath: /data/host
+        type: hostPath # TODO: use a nas?
+        hostPath: /home/simo/Media
+
+    resources:
+      requests:
+        cpu: 15m
+        memory: 268M
+      limits:
+        memory: 2357M
