@@ -1,0 +1,100 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+  namespace: apps
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: apps
+
+  values:
+    image:
+      repository: ghcr.io/onedr0p/qbittorrent
+      tag: 4.4.5@sha256:8d3a198a125e08940c0a2615d1885e6111113d19cd727efd2883e78cf734504b
+
+    podAnnotations:
+      setGateway: "true"
+
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 65539
+
+    dnsConfig:
+      options:
+        - name: ndots
+          value: "1"
+
+    env:
+      UMASK: "022"
+      QBITTORRENT__PORT: &port 8080
+      QBITTORRENT__USE_PROFILE: "true"
+
+    hostname: qbittorrent
+
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            proxy_hide_header "x-webkit-csp";
+            proxy_hide_header "content-security-policy";
+            proxy_hide_header "X-Frame-Options";
+            proxy_set_header Accept-Encoding "";
+            sub_filter_once on;
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - host: &qbittorrent-host "qb.${PERSONAL_DOMAIN}"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - *qbittorrent-host
+            secretName: letsencrypt-qbittorrent
+
+    persistence:
+      config:
+        enabled: true
+        type: emptyDir
+        mountPath: /config/qBittorrent/config
+
+      cache:
+        enabled: true
+        type: emptyDir
+        mountPath: /config/qBittorrent/cache
+
+      data:
+        enabled: true
+        existingClaim: qbittorrent-config
+        mountPath: /config/qBittorrent/data
+
+      media:
+        enabled: true
+        mountPath: /storage/media
+        type: hostPath # TODO: use a nas?
+        hostPath: /home/simo/Media
+
+    resources:
+      requests:
+        cpu: 49m
+        memory: 765M
+      limits:
+        memory: 1426M

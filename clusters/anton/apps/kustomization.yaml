@@ -8,3 +8,4 @@ resources:
   - radarr.yaml
   - overseerr.yaml
   - prowlarr.yaml
+  - qbittorrent.yaml
