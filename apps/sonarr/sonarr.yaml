@@ -44,6 +44,8 @@ spec:
           nginx.ingress.kubernetes.io/configuration-snippet: |
             proxy_set_header Accept-Encoding "";
           cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/enable: "true"
+          hajimari.io/icon: television-box
         hosts:
           - host: &sonarr-host "sonarr.${PERSONAL_DOMAIN}"
             paths:

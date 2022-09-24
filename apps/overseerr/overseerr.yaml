@@ -44,6 +44,8 @@ spec:
             proxy_set_header Accept-Encoding "";
             sub_filter_once on;
           cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/enable: "true"
+          hajimari.io/icon: eye
         hosts:
           - host: &overseerr-host "overseerr.${PERSONAL_DOMAIN}"
             paths:

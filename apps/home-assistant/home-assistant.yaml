@@ -41,6 +41,8 @@ spec:
         ingressClassName: "nginx"
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/enable: "true"
+          hajimari.io/icon: home-assistant
         hosts:
           - host: &home-host home.${PERSONAL_DOMAIN}
             paths:

@@ -45,6 +45,8 @@ spec:
               }
             }
           cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/enable: "true"
+          hajimari.io/icon: plex
         ingressClassName: nginx
         hosts:
           - host: &plex-host plex.${PERSONAL_DOMAIN}

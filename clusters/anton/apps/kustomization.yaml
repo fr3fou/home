@@ -9,3 +9,4 @@ resources:
   - overseerr.yaml
   - prowlarr.yaml
   - qbittorrent.yaml
+  - hajimari.yaml

@@ -61,6 +61,8 @@ spec:
             proxy_set_header Accept-Encoding "";
             sub_filter_once on;
           cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/enable: "true"
+          hajimari.io/icon: cloud-download
         hosts:
           - host: &qbittorrent-host "qb.${PERSONAL_DOMAIN}"
             paths:

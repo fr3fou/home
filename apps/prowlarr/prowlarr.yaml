@@ -52,6 +52,8 @@ spec:
             proxy_set_header Accept-Encoding "";
             sub_filter_once on;
           cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/enable: "true"
+          hajimari.io/icon: cloud-search
         hosts:
           - host: &prowlarr-host "prowlarr.${PERSONAL_DOMAIN}"
             paths:
