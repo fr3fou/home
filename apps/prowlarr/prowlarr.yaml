@@ -1,0 +1,74 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prowlarr
+  namespace: apps
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: apps
+
+  values:
+    image:
+      repository: ghcr.io/onedr0p/prowlarr-nightly
+      tag: 0.4.7.1978@sha256:88bcd9955b4e0d1b3839e3084c1a97f7fda41111cf4b5901bc8ce6b68abb3b6f
+
+    podAnnotations:
+      setGateway: "true"
+
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+
+    env:
+      PROWLARR__INSTANCE_NAME: Prowlarr
+      PROWLARR__PORT: &port 9696
+      PROWLARR__LOG_LEVEL: info
+      PROWLARR__ANALYTICS_ENABLED: "False"
+
+    hostname: prowlarr
+
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            proxy_set_header Accept-Encoding "";
+            sub_filter_once on;
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - host: &prowlarr-host "prowlarr.${PERSONAL_DOMAIN}"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - *prowlarr-host
+            secretName: letsencrypt-prowlarr
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: prowlarr-config
+
+    resources:
+      requests:
+        cpu: 20m
+        memory: 273M
+      limits:
+        memory: 1841M
