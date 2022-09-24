@@ -8,4 +8,4 @@ $ curl -sfL https://raw.githubusercontent.com/fr3fou/home/main/install.sh | sh -
 ## TODO
 
 - [x] Proper dependency management with FluxCD's `dependsOn`
-- [ ] `external-dns` for automatic DNS records
+- [x] `external-dns` for automatic DNS records
