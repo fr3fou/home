@@ -1,11 +1,13 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  namespace: core
   name: external-dns
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
+  namespace: core
   name: external-dns
 rules:
   - apiGroups: [ "" ]
@@ -21,6 +23,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
+  namespace: core
   name: external-dns-viewer
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -34,6 +37,7 @@ subjects:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: core
   name: external-dns
 spec:
   strategy:
