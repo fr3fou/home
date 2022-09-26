@@ -10,4 +10,4 @@ patches:
       kind: Kustomization
       group: kustomize.toolkit.fluxcd.io
       version: v1beta2
-    path: config-map-sub.yaml
+    path: decryption-and-config.yaml

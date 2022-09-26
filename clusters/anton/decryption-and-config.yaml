@@ -5,6 +5,10 @@ metadata:
   name: not-used
   namespace: not-used
 spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   postBuild:
     substitute: {}
     substituteFrom:
