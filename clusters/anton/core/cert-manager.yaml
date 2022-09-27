@@ -10,5 +10,10 @@ spec:
     name: flux-system
   path: ./core/cert-manager
   prune: true
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: cert-manager
+      namespace: core
   dependsOn:
     - name: core-base
