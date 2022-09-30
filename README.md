@@ -14,4 +14,5 @@ $ curl -sfL https://raw.githubusercontent.com/fr3fou/home/main/install.sh | sh -
 - [ ] [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)
 - [ ] [freshrss](https://github.com/FreshRSS/FreshRSS)
 - [ ] [reddit-rss](https://github.com/trashhalo/reddit-rss) 
+- [ ] [libreddit](https://github.com/spikecodes/libreddit)
 - [ ] Backups for PVs
