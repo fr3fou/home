@@ -42,6 +42,7 @@ spec:
             proxy_set_header Accept-Encoding "";
             sub_filter_once on;
           cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/target: "${DDNS}"
         hosts:
           - host: &reddit-rss "reddit-rss.${ROOT_DOMAIN}"
             paths:
