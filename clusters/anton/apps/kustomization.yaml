@@ -4,6 +4,7 @@ resources:
   - base.yaml
   - home-assistant.yaml
   - plex.yaml
+  - libreddit.yaml
   - sonarr.yaml
   - radarr.yaml
   - overseerr.yaml
