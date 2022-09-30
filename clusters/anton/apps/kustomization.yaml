@@ -12,3 +12,4 @@ resources:
   - qbittorrent.yaml
   - hajimari.yaml
   - freshrss.yaml
+  - reddit-rss.yaml

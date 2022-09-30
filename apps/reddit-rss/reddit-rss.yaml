@@ -1,0 +1,60 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: reddit-rss
+  namespace: apps
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 0.2.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: apps
+
+  values:
+    image:
+      repository: ghcr.io/fr3fou/reddit-rss
+      tag: v1.0.0
+
+    env:
+      PORT: &port "8080"
+      REDDIT_URL: "https://reddit.com"
+
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            proxy_hide_header "x-webkit-csp";
+            proxy_hide_header "content-security-policy";
+            proxy_hide_header "X-Frame-Options";
+            proxy_set_header Accept-Encoding "";
+            sub_filter_once on;
+          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/target: "${DDNS}"
+        hosts:
+          - host: &reddit-rss "reddit-rss.${ROOT_DOMAIN}"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - *reddit-rss
+            secretName: letsencrypt-reddit-rss
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 50M
+      limits:
+        memory: 100M
