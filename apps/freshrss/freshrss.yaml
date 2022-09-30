@@ -32,6 +32,7 @@ spec:
         ingressClassName: "nginx"
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/target: "${DDNS}"
         hosts:
           - host: &freshrss-host "rss.${PERSONAL_DOMAIN}"
             paths:
