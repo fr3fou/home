@@ -10,3 +10,4 @@ resources:
   - prowlarr.yaml
   - qbittorrent.yaml
   - hajimari.yaml
+  - freshrss.yaml
