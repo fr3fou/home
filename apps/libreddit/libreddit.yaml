@@ -37,7 +37,7 @@ spec:
           hajimari.io/icon: "reddit"
           external-dns.alpha.kubernetes.io/target: "${DDNS}"
         hosts:
-          - host: &libreddit-host "reddit.${PERSONAL_DOMAIN}"
+          - host: &libreddit-host "reddit.${ROOT_DOMAIN}"
             paths:
               - path: /
 
