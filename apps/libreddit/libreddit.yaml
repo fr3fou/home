@@ -35,6 +35,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/enable: "true"
           hajimari.io/icon: "reddit"
+          external-dns.alpha.kubernetes.io/target: "${DDNS}"
         hosts:
           - host: &libreddit-host "reddit.${PERSONAL_DOMAIN}"
             paths:
