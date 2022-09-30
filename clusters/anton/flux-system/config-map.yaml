@@ -6,3 +6,4 @@ metadata:
 data:
   SVC_PLEX_ADDR: 192.168.0.30
   PERSONAL_DOMAIN: lab.simo.sh
+  DDNS: mila.ddns.nbis.net
