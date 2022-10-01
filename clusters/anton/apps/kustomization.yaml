@@ -15,4 +15,5 @@ resources:
   - ./reddit-rss.yaml
   - ./kube-prometheus-stack.yaml
   - ./loki-stack.yaml
+  - ./monitoring-config.yaml
 
