@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ./bjw-s.yaml
   - ./hajimari.yaml
+  - ./prometheus-community.yaml
