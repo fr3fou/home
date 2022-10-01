@@ -13,3 +13,4 @@ configMapGenerator:
     options:
       labels:
         grafana_dashboard: "1"
+        app.kubernetes.io/component: monitoring
