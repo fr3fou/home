@@ -14,4 +14,5 @@ resources:
   - ./freshrss.yaml
   - ./reddit-rss.yaml
   - ./kube-prometheus-stack.yaml
+  - ./loki-stack.yaml
 

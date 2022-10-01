@@ -1,0 +1,38 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: loki-stack
+  namespace: apps
+spec:
+  interval: 5m
+  dependsOn:
+    - name: kube-prometheus-stack
+  chart:
+    spec:
+      version: "2.8.3"
+      chart: loki-stack
+      sourceRef:
+        kind: HelmRepository
+        name: grafana-charts
+        namespace: apps
+      interval: 60m
+  values:
+    grafana:
+      enabled: false
+      sidecar:
+        datasources:
+          enabled: true
+          maxLines: 1000
+    promtail:
+      enabled: true
+    loki:
+      enabled: true
+      isDefault: false
+      serviceMonitor:
+        enabled: true
+      config:
+        chunk_store_config:
+          max_look_back_period: 0s
+        table_manager:
+          retention_deletes_enabled: true
+          retention_period: 12h
