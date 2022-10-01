@@ -1,52 +1,70 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: kube-prometheus-stack
-  namespace: apps
+    name: kube-prometheus-stack
+    namespace: apps
 spec:
-  interval: 5m
-  chart:
-    spec:
-      version: "40.3.1"
-      chart: kube-prometheus-stack
-      sourceRef:
-        kind: HelmRepository
-        name: prometheus-community
-        namespace: apps
-      interval: 60m
-  install:
-    crds: Create
-  upgrade:
-    crds: CreateReplace
-  values:
-    namespaceOverride: "apps"
-    alertmanager:
-      enabled: false
-    prometheus:
-      prometheusSpec:
-        retention: 24h
-        resources:
-          requests:
-            cpu: 200m
-            memory: 200Mi
-        podMonitorNamespaceSelector: {}
-        podMonitorSelector:
-          matchLabels:
-            app.kubernetes.io/component: monitoring
-    grafana:
-      ingress:
-        enabled: true
-        ingressClassName: "nginx"
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "fire"
-        hosts:
-          - &grafana-host grafana.${ROOT_DOMAIN}
-        tls:
-          - hosts:
-            - *grafana-host
-            secretName: "letsencrypt-grafana"
-
-          
-
+    interval: 5m
+    chart:
+        spec:
+            version: 40.3.1
+            chart: kube-prometheus-stack
+            sourceRef:
+                kind: HelmRepository
+                name: prometheus-community
+                namespace: apps
+            interval: 60m
+    install:
+        crds: Create
+    upgrade:
+        crds: CreateReplace
+    values:
+        namespaceOverride: apps
+        alertmanager:
+            enabled: false
+        prometheus:
+            prometheusSpec:
+                retention: 24h
+                resources:
+                    requests:
+                        cpu: 200m
+                        memory: 200Mi
+                podMonitorNamespaceSelector: {}
+                podMonitorSelector:
+                    matchLabels:
+                        app.kubernetes.io/component: monitoring
+        grafana:
+            adminPassword: ENC[AES256_GCM,data:8kpc0KMq9CAjc0fGN5PPK++gr+F9YP0/WdA+fSzx,iv:DwaK+ykTBZZ8uDML88aTX0z0ufIe/8YyJxojLlcYxZE=,tag:kLx17xTxrEcUwPyJIpNxpQ==,type:str]
+            ingress:
+                enabled: true
+                ingressClassName: nginx
+                annotations:
+                    cert-manager.io/cluster-issuer: letsencrypt
+                    hajimari.io/enable: "true"
+                    hajimari.io/icon: fire
+                hosts:
+                    - grafana.${ROOT_DOMAIN}
+                tls:
+                    - hosts:
+                        - grafana.${ROOT_DOMAIN}
+                      secretName: letsencrypt-grafana
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkQW9KRG5lbEhtUlE2aWg0
+            RzRyN2hwSmRidDliYTI2MUJxTkdya0E0YURzCnJuVDBGczFvSzRsSDJ1Q1FLdkFW
+            K0VmZnByY1NORjhjRWxVVjRodUhWRFkKLS0tIFZhVkJEeWVBYWNDejFGdlhRTGZ3
+            alNrdGd1YkxBZElLN21mOWxLd2VjbTgKzp6oUEklY6vqVM06VGWGXJ3ofw6xeHCJ
+            3xzKl7N2irmHENy0UgO77+iXhW1XUpB6CT/6c75/ElMdX3siibelsw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-10-01T19:24:21Z"
+    mac: ENC[AES256_GCM,data:f/jUNGicqElGm4Q7lNzrKVB/zQq4tpUky4/Bq5YZ2Zl2yxaeKRqR8o7/XGRG/oCA3Qc2swFrKcuKUddoBVg7CxlMh05DgShg1K9tVGOTobHmXvytnOpCe7V+4v8OATqQsD/arpTXpbDskoJoBp2rJdA3mJFeZMiznY6SAO0Uy5Q=,iv:j5wK5U0PEcq+aAY2h7Z3yfzJfrkxmvROrua/sdw7uJQ=,tag:K7vp30eeU970ik9qyrRQfw==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
+    version: 3.7.3
