@@ -22,7 +22,7 @@ spec:
 
     env:
       PORT: &port "8080"
-      REDDIT_URL: "https://reddit.com"
+      REDDIT_URL: "https://reddit.simo.sh"
 
     service:
       main:
