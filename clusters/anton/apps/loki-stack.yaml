@@ -10,5 +10,10 @@ spec:
     name: flux-system
   path: ./apps/loki-stack
   prune: true
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: StatefulSet
+      name: loki-stack
+      namespace: apps
   dependsOn:
-    - name: apps-base
+    - name: kube-prometheus-stack
