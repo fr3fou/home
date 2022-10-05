@@ -15,5 +15,6 @@ $ curl -sfL https://raw.githubusercontent.com/fr3fou/home/main/install.sh | sh -
 - [x] [freshrss](https://github.com/FreshRSS/FreshRSS)
 - [x] [reddit-rss](https://github.com/trashhalo/reddit-rss) 
 - [x] [libreddit](https://github.com/spikecodes/libreddit)
+- [ ] [recylcarr](https://github.com/recyclarr/recyclarr)
 - [ ] Backups for PVs
 - [ ] Group applications by namespaces - e.g `monitoring`, `rss`, `media-server`, `downloads`, etc
