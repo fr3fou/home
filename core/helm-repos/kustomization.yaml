@@ -4,3 +4,4 @@ resources:
   - ./jetstack.yaml
   - ./bitnami.yaml
   - ./ingress-nginx.yaml
+namespace: core

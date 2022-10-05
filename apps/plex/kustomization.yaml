@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - ./pvc.yaml
   - ./plex.yaml
-
-
+namespace: apps

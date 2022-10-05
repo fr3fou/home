@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./helm-repos
+namespace: core

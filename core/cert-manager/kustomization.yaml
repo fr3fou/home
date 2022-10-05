@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - ./cert-manager.yaml
   - ./cloudflare-api-key-secret.yaml
-
+namespace: core

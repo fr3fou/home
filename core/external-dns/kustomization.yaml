@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - ./external-dns.yaml
   - ./cloudflare-external-dns-secret.yaml
-
+namespace: core
