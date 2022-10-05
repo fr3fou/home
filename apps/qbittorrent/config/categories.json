@@ -1,0 +1,8 @@
+{
+  "radarr": {
+    "save_path": "/data/host/Downloads"
+  },
+  "tv-sonarr": {
+    "save_path": "/data/host/Downloads"
+  }
+}

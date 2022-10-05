@@ -20,6 +20,20 @@ spec:
       repository: ghcr.io/onedr0p/qbittorrent
       tag: 4.4.5@sha256:8d3a198a125e08940c0a2615d1885e6111113d19cd727efd2883e78cf734504b
 
+    initContainers:
+      copy-config:
+        image: busybox:latest@sha256:ad9bd57a3a57cc95515c537b89aaa69d83a6df54c4050fcf2b41ad367bec0cd5
+        command:
+          - "/bin/sh"
+          - -c
+        args:
+          - cp /data/configfiles/* /data/config/
+        volumeMounts:
+          - name: config
+            mountPath: /data/config
+          - name: configfiles
+            mountPath: /data/configfiles
+
     podAnnotations:
       setGateway: "true"
 
@@ -39,6 +53,7 @@ spec:
     env:
       UMASK: "022"
       QBITTORRENT__PORT: &port 8080
+      QBITTORRENT__BT_PORT: 50413
       QBITTORRENT__USE_PROFILE: "true"
 
     hostname: qbittorrent
@@ -48,6 +63,10 @@ spec:
         ports:
           http:
             port: *port
+
+    hostNetwork: true
+
+    dnsPolicy: "ClusterFirstWithHostNet"
 
     ingress:
       main:
@@ -77,6 +96,11 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /config/qBittorrent/config
+
+      configfiles:
+        enabled: true
+        type: configMap
+        name: qbittorrent-config
 
       cache:
         enabled: true
