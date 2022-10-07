@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: hajimari
-      version: 1.2.0
+      version: 2.0.2
       sourceRef:
         kind: HelmRepository
         name: hajimari
@@ -24,34 +24,30 @@ spec:
   values:
     image:
       repository: ghcr.io/toboshii/hajimari
-      tag: v0.2.0
+      tag: v0.3.1
     hajimari:
       defaultEnable: false
       namespaceSelector:
         matchNames:
           - apps
       name: "Simo"
-      groups:
-        - name: Dev
-          links:
+      globalBookmarks:
+        - group: Dev
+          bookmarks:
             - name: GitHub
               url: "https://github.com"
-        - name: Social
-          links:
+        - group: Social
+          bookmarks:
             - name: Twitter
               url: "https://twitter.com"
-        - name: Media
-          links:
+        - group: Media
+          bookmarks:
             - name: YouTube
               url: "https://youtube.com"
-        - name: Communicate
-          links:
+        - group: Communicate
+          bookmarks:
             - name: Messenger
               url: "https://facebook.com/messages"
-        - name: Cloud
-          links:
-            - name: Drive
-              url: "https://drive.google.com"
     ingress:
       main:
         enabled: true
