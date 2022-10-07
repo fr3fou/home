@@ -31,23 +31,6 @@ spec:
         matchNames:
           - apps
       name: "Simo"
-      globalBookmarks:
-        - group: Dev
-          bookmarks:
-            - name: GitHub
-              url: "https://github.com"
-        - group: Social
-          bookmarks:
-            - name: Twitter
-              url: "https://twitter.com"
-        - group: Media
-          bookmarks:
-            - name: YouTube
-              url: "https://youtube.com"
-        - group: Communicate
-          bookmarks:
-            - name: Messenger
-              url: "https://facebook.com/messages"
     ingress:
       main:
         enabled: true
