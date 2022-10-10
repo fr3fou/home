@@ -31,6 +31,24 @@ spec:
         matchNames:
           - apps
       name: "Simo"
+      lightTheme: "blackboard"
+      darkTheme: "blackboard"
+      searchProviders:
+        - name: Google
+          token: g
+          icon: simple-icons:google
+          searchUrl: https://www.google.com/search?q={query}
+          url: https://www.google.com
+        - name: YouTube
+          token: y
+          icon: simple-icons:youtube
+          searchUrl: https://www.youtube.com/results?search_query={query}
+          url: https://www.youtube.com
+        - name: WolframAlpha
+          token: w
+          icon: simple-icons:wolfram
+          searchUrl: https://www.wolframalpha.com/input?i={query}
+          url: https://www.wolframalpha.com
     ingress:
       main:
         enabled: true
