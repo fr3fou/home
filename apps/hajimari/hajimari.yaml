@@ -34,6 +34,7 @@ spec:
       lightTheme: "blackboard"
       darkTheme: "blackboard"
       showAppUrls: false
+      showBookmarks: false
       searchProviders:
         - name: Google
           token: g
