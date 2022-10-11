@@ -33,6 +33,7 @@ spec:
       name: "Simo"
       lightTheme: "blackboard"
       darkTheme: "blackboard"
+      showAppUrls: false
       searchProviders:
         - name: Google
           token: g
