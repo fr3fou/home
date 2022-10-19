@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/sonarr-develop
-      tag: 3.0.9.1555@sha256:63e06362f8c14829086c908e6e92768bc22568b70095bc21124cdf21f235e785
+      tag: 4.0.0.141@sha256:8f78f4e7dfbc30b911844b9da40db1e8492eaf802a0d2f0f44a93df17ffa1ace
 
     podSecurityContext:
       supplementalGroups:
@@ -29,6 +29,10 @@ spec:
       SONARR__PORT: &port 8989
       SONARR__APPLICATION_URL: "https://sonarr.${PERSONAL_DOMAIN}"
       SONARR__LOG_LEVEL: info
+      SONARR__API_KEY:
+        secretKeyRef:
+          name: sonarr-secrets
+          key: api-key
 
     service:
       main:

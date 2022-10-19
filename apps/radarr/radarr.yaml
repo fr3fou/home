@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/radarr-develop
-      tag: 4.2.3.6575@sha256:c18425b9a0e0871141db3d7e8892806df53376f682559d62b6f8c25bb9009d86
+      tag: 4.3.0.6671@sha256:edb7ee1c4c50119263c76d9073dcebbe4876506bb22dd583e8ef50241eb597d9
 
     podSecurityContext:
       runAsUser: 568
@@ -32,6 +32,10 @@ spec:
       RADARR__PORT: &port 7878
       RADARR__APPLICATION_URL: "https://radarr.${PERSONAL_DOMAIN}"
       RADARR__LOG_LEVEL: info
+      RADARR__API_KEY:
+        secretKeyRef:
+          name: radarr-secrets
+          key: api-key
 
     service:
       main:

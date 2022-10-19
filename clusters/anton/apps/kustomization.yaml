@@ -16,4 +16,5 @@ resources:
   - ./kube-prometheus-stack.yaml
   - ./loki-stack.yaml
   - ./monitoring-config.yaml
+  - ./recyclarr.yaml
 
