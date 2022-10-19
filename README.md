@@ -18,7 +18,7 @@ $ curl -sfL https://raw.githubusercontent.com/fr3fou/home/main/install.sh | sh -
 - [x] [recyclarr](https://github.com/recyclarr/recyclarr)
 - [ ] [bazarr](https://github.com/morpheus65535/bazarr)
 - [ ] [renovate](https://github.com/renovatebot/renovate)
-- [ ] Decrease flux's --requeue-dependency flag to 5s
+- [x] Decrease flux's --requeue-dependency flag to 5s
 - [ ] Flux GitHub Webhook for syncing
 - [ ] Backups for PVs
 - [ ] Group applications by namespaces - e.g `monitoring`, `rss`, `media-server`, `downloads`, etc
