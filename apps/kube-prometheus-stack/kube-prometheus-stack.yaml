@@ -34,7 +34,7 @@ spec:
                     matchLabels:
                         app.kubernetes.io/component: monitoring
         grafana:
-            adminPassword: ENC[AES256_GCM,data:8kpc0KMq9CAjc0fGN5PPK++gr+F9YP0/WdA+fSzx,iv:DwaK+ykTBZZ8uDML88aTX0z0ufIe/8YyJxojLlcYxZE=,tag:kLx17xTxrEcUwPyJIpNxpQ==,type:str]
+            adminPassword: ENC[AES256_GCM,data:xgDpPE8YFbP378qicTZYUYV73IJ50A2JS1sCxd1t,iv:7Xq83gKaugsw3HuN4jclUblse8a/6OqX3DDX664DjUU=,tag:uURY3T+mjRTNHsHeED90Cw==,type:str]
             ingress:
                 enabled: true
                 ingressClassName: nginx
@@ -57,14 +57,14 @@ sops:
         - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBkQW9KRG5lbEhtUlE2aWg0
-            RzRyN2hwSmRidDliYTI2MUJxTkdya0E0YURzCnJuVDBGczFvSzRsSDJ1Q1FLdkFW
-            K0VmZnByY1NORjhjRWxVVjRodUhWRFkKLS0tIFZhVkJEeWVBYWNDejFGdlhRTGZ3
-            alNrdGd1YkxBZElLN21mOWxLd2VjbTgKzp6oUEklY6vqVM06VGWGXJ3ofw6xeHCJ
-            3xzKl7N2irmHENy0UgO77+iXhW1XUpB6CT/6c75/ElMdX3siibelsw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnRjh3WVlRNHAzVEN3N0xU
+            SXp2K245WjZYam8zVGV3UkN0YjZtOXRWUzBFCldoYnQvYVYrcCt5UHlpYUhYNHFw
+            RGNKL3JoUnA5ZUQrTDBhR0E1MG5sbWcKLS0tIFZWZmt1eDRqM3BENVpLOE16WEth
+            OHhVVXFIcUFzbGYzYWdheDBCM2FWM0EKHeRcjStV9KHrsjH1PWIMyxHbfZp2K47o
+            IGyNdsnUZvIzuFJp9H3vcg797XiCmjJ7j2csk/ad1HTrkXC5XtKo+w==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-10-01T19:24:21Z"
-    mac: ENC[AES256_GCM,data:f/jUNGicqElGm4Q7lNzrKVB/zQq4tpUky4/Bq5YZ2Zl2yxaeKRqR8o7/XGRG/oCA3Qc2swFrKcuKUddoBVg7CxlMh05DgShg1K9tVGOTobHmXvytnOpCe7V+4v8OATqQsD/arpTXpbDskoJoBp2rJdA3mJFeZMiznY6SAO0Uy5Q=,iv:j5wK5U0PEcq+aAY2h7Z3yfzJfrkxmvROrua/sdw7uJQ=,tag:K7vp30eeU970ik9qyrRQfw==,type:str]
+    lastmodified: "2022-10-24T08:29:07Z"
+    mac: ENC[AES256_GCM,data:fJMdzej0+NXaZHBQBUwFx8EPaPaWxFMGuWM5mu9uVcAxPdORoABjX1uT1ySF5RL5qcoavuveznWPVlZD1EkfAPr+XlwYgRXDSTt9lwQaCpbedpc2MnhQtbUxFKY4eVye0J0vcyq7SgVbVCxm38snF6zj6w9V1/45+qKx49/Tklw=,iv:3e+HY3M61DTFNrh1/cpzmy/v4zGAY4u6NpQordJiims=,tag:a4bi2NUFi4GZpbbGv3RmuQ==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3
