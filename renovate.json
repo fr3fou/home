@@ -1,0 +1,48 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "dependencyDashboard": true,
+  "flux": {
+    "fileMatch": [
+      "\\.yaml$"
+    ]
+  },
+  "helm-values": {
+    "fileMatch": [
+      "\\.yaml$"
+    ]
+  },
+  "kubernetes": {
+    "fileMatch": [
+      "\\.yaml$"
+    ]
+  },
+  "packageRules": [
+    {
+      "description": "Auto merge Docker images",
+      "matchDatasources": [
+        "docker"
+      ],
+      "automerge": true,
+      "automergeType": "branch",
+      "requiredStatusChecks": null,
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest"
+      ],
+      "matchPackageNames": [
+        "renovate/renovate"
+      ]
+    },
+    {
+      "description": "Disable kubernetes-api",
+      "matchManagers": [
+        "kubernetes"
+      ],
+      "matchDatasources": [
+        "kubernetes-api"
+      ],
+      "enabled": false
+    }
+  ]
+}

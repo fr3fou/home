@@ -5,6 +5,12 @@ $ # Run this on the master nodes
 $ curl -sfL https://raw.githubusercontent.com/fr3fou/home/main/install.sh | sh -
 ```
 
+## Secrets
+
+Make sure you add the secret age key to the corresponding directory.
+
+https://github.com/mozilla/sops#22encrypting-using-age
+
 ## TODO
 
 - [x] Proper dependency management with FluxCD's `dependsOn`
@@ -17,7 +23,7 @@ $ curl -sfL https://raw.githubusercontent.com/fr3fou/home/main/install.sh | sh -
 - [x] [libreddit](https://github.com/spikecodes/libreddit)
 - [x] [recyclarr](https://github.com/recyclarr/recyclarr)
 - [ ] [bazarr](https://github.com/morpheus65535/bazarr)
-- [ ] [renovate](https://github.com/renovatebot/renovate)
+- [x] [renovate](https://github.com/renovatebot/renovate)
 - [x] Decrease flux's --requeue-dependency flag to 5s
 - [ ] Flux GitHub Webhook for syncing
 - [ ] Backups for PVs

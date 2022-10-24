@@ -17,4 +17,5 @@ resources:
   - ./loki-stack.yaml
   - ./monitoring-config.yaml
   - ./recyclarr.yaml
+  - ./renovate.yaml
 

@@ -1,0 +1,66 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: renovate
+  namespace: apps
+spec:
+  schedule: "*/10 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          securityContext:
+            runAsGroup: 0
+            runAsUser: 0
+          containers:
+            - name: renovate
+              image: renovate/renovate:33.241.11@sha256:9a62f9a3941634b692e295eacc8bbd187069a9ce23f14a7ff7732c5cd38dbab4
+              command: ["sh"]
+              args:
+                - "-c"
+                - |
+                  usermod --uid ${SQUASH_UID} ubuntu
+
+                  cat >> run.sh <<EOS
+                  mkdir -p ~/.gnupg
+
+                  # https://stackoverflow.com/a/59170001/9320790
+                  cat >> ~/.gnupg/gpg.conf <<EOF
+                  use-agent 
+                  pinentry-mode loopback
+                  EOF
+
+                  cat >> ~/.gnupg/gpg-agent.conf <<EOF
+                  allow-loopback-pinentry
+                  EOF
+
+                  find ~/.gnupg -type f -exec chmod 600 {} \\;
+                  find ~/.gnupg -type d -exec chmod 700 {} \\;
+
+                  echo RELOADAGENT | gpg-connect-agent
+
+                  echo "$${RENOVATE_GIT_PRIVATE_KEY}" | gpg --import -
+
+                  renovate fr3fou/home
+                  EOS
+
+                  chmod +x run.sh
+                  su -p ubuntu -c ./run.sh
+              env:
+                - name: LOG_LEVEL
+                  value: debug
+              envFrom:
+                - secretRef:
+                    name: renovate-env
+              volumeMounts:
+                - mountPath: /data/cache
+                  name: cache
+              resources:
+                limits:
+                  cpu: 0.5
+          restartPolicy: Never
+          volumes:
+            - name: cache
+              persistentVolumeClaim:
+                claimName: renovate-cache
