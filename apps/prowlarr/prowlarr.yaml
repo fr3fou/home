@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 0.2.1
+      version: 0.2.2
       interval: 15m
       sourceRef:
         kind: HelmRepository
@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/prowlarr-nightly
-      tag: 0.4.7.1978@sha256:88bcd9955b4e0d1b3839e3084c1a97f7fda41111cf4b5901bc8ce6b68abb3b6f
+      tag: 0.4.7.2016@sha256:c745a0711067d707b50ec13deec094104c892d96ddcb75cf8cedb3431ff8cbf7
 
     podAnnotations:
       setGateway: "true"
