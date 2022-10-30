@@ -15,15 +15,18 @@ spec:
                 namespace: core
     values:
         auth:
-            rootPassword: ENC[AES256_GCM,data:9kayz2JXYYziLTDMpTAQIfZwUn2+3f8WDJbGRNxoPvI=,iv:0hL1PU3nUl6j1Zd2ITkwnRjKTY8ifIWT2HdfomFiwlU=,tag:cOziktlA65h4Qd/mPhEyEw==,type:str]
+            rootPassword: ENC[AES256_GCM,data:pUMxhincR7qCeEauFGZJv7sVcmPVE610zQZzEgeO1FE=,iv:2YmUV4vr8b7n+w8wrnNxN5GhBWO651I2O3tAUKIrWio=,tag:PJnJZODcD2ZJjBO6mgEczw==,type:str]
         primary:
             persistence:
                 enabled: true
-                existingClaim: ENC[AES256_GCM,data:N0tXjE4aQA==,iv:WFx8MfYTb2u6VsWPV9u9QJ0Hfhg/jrVbzzxCRUKjHLA=,tag:i3IA3sgGONV+lYdvrqRFyg==,type:str]
+                existingClaim: ENC[AES256_GCM,data:aGJEqyfgEA==,iv:lWndDr/4E/IzdfNmLav9MVlagZpQWamRNd8RhHbh81Q=,tag:hA9+o3ZKK8cZ2NFYP1icJA==,type:str]
         metrics:
             enabled: true
             serviceMonitor:
                 enabled: true
+        initdbScripts:
+            luncher-box.sql: |
+                CREATE DATABASE "${LUNCHERBOX_DB}";
 sops:
     kms: []
     gcp_kms: []
@@ -33,14 +36,14 @@ sops:
         - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSMjI1c2Z2bHpYb0FUek9G
-            QU43OW0yVmRMM0Q1b011b3k1aEVJQjZKbmdjCml4WHYxcnltRlF3bGVNc0FmVUZB
-            NE80Vk1qTWZJMDlhSTI4K1krc2ZhRjQKLS0tIGdMM1ZjQ1NKNW5rTFNKRVplRXV1
-            NE95dkhaKzRVVENjcHp1WHY1RUxlQkkK0rAiX5biF8zkFCRJikZ2FI9o0MRRgQnA
-            ifBaF9CWkDDhryx0gnLOSvqfU5TGUltflPgVEEczjfxR2/4+A/elrw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBad0Q3cW9DK0hKY0ExejlL
+            NmtXVnJZRWoxZjBVMlBVNFEyYWNzREZLOWtRClo5NnAraFFvUmFyeTVxWnZveEZa
+            U3ZQM3pnS2hULzR6VFlNek1hSUg4Y1UKLS0tIFhFWWhBdnM2V1JwckFud0tReWVo
+            NWtDb3grM1hMMDhjbDhuanlCM2t6WE0Km8ZT4FaWY87S3NbLHd6hmW0vaZIZcAoI
+            qR2BYnUnYxf6/H3/jOTTjPoLszlFxQQWP/CbR2h9TgpCHnfAiGpjaA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-10-30T21:03:06Z"
-    mac: ENC[AES256_GCM,data:Pec9wICDqVFxoCHfwxCyuXzjrtgZLjEu6j0YXSt3wuI5yIplgpHJ8GuFwihuIkL9l2qW2VEtQ/yuoNXvQkOgCtq5QbDDv+GcsCUcpP4BBKseLFpGlK0zZPO9R4b3oZsStIaHv6D1vLu1mgz0Q4X+FAwj1IHxmumjDHdcss5AFX8=,iv:ZIlS7Qq7dOqNTY0UWsBz4cbAJTMfBktlyJg8nf1DEOo=,tag:O9JjtdN1OiYAtz/9uCB6Tg==,type:str]
+    lastmodified: "2022-10-30T21:18:30Z"
+    mac: ENC[AES256_GCM,data:QSbMSEEPZ8H+bB1kJD+DaBgCD0PP/CMCVmA7J5Fv0rE2XZsosRmVe38/zo19H8aB1nrLjfwgbn682g/VSqIRSGhUVh3HGOdubRDKF8wTXQVYBPWkT2+WIQPnPmGlnQMKq++qQUt0w38hO1cQWp6jg2oEj1cyFtdOEr/oBsXgsFk=,iv:cgbx6dP2p0/6s2n+oUv1MkAxlrJEPfjxEOjCo0CjBAQ=,tag:ZThR8FKMtM4GmGKqCGhGVg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3

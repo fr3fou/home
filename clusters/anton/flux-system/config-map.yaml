@@ -8,3 +8,4 @@ data:
   ROOT_DOMAIN: simo.sh
   PERSONAL_DOMAIN: lab.simo.sh
   DDNS: mila.ddns.nbis.net
+  LUNCHERBOX_DB: luncherbox_production
