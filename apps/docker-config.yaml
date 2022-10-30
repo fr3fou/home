@@ -1,0 +1,28 @@
+kind: Secret
+type: kubernetes.io/dockerconfigjson
+apiVersion: v1
+metadata:
+    name: docker-config
+    namespace: apps
+data:
+    .dockerconfigjson: ENC[AES256_GCM,data:rSXeg/9Ci0EF/06/HIYUJLmzkNXRCqSDzmMvjDhVsALFJ8uQCxvkjBNqJy1YLEu3ZTcwhVDJaRw1O306klhAQSpT5VeO9X9pPth9L9yYFKHJIT5fztMOzJnCqS19oYkxqF6zvjigFAHmftcsYDgu2XWtAW58DuKmab/Ks5snUVG1KHGVvNZqfqhmcNmK0y6+/ifN/rdMasLh5l6frUN8kQ==,iv:/eGtDGyTcgLq5GFjXLbQcuckPuDGS2iHdQhhU+d7i5I=,tag:zw0jQhxW2zQWQFjrSqtkDA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA1c2dsNUVKeCtOcElFOVBV
+            WmIvYjR0OXV1anNlRVkvRlR4b1NJN3pGRUFjCjNVa2ZhcWNFNHNNdnYyd1lqakU4
+            UTQyd25JNUgvMG85V2lwVzByS0tRKzQKLS0tIGxHNSsyQU0zcld0V1AxUWdNL3dV
+            ZUNPZEsrNUxGUm5VQ01DZ21TeTNudlkK619tyT2Dg/fttS3oLB+8kYg5H1SNHoKt
+            py6xM0wgC8SfNSIxjPWSab9ELJ/h4O9VmY/ef6/cPu/U5qpinZ08Lw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-10-30T19:40:25Z"
+    mac: ENC[AES256_GCM,data:vTZTNkOSQ5f9QHBFk6C4Ejz0SE4T65tVXYh0hQeRxIVUID8md2qu4mtE9MWKePGBtQg/T2VavxCSvO7/PKm8P7Ji2C+C1iErPOBQAwf2dcyy9sxEXwyhYDBTJNYfX5k4Ny8ZUe4R0BXEIBZGKq1hrv05WIR3beHsEwYb++fsCCs=,iv:Fnc3FQhYuYgUMjqpqLQlgVB7Dfgk20fooLvGxtm76KM=,tag:pu/tSSyui51C2Zht90F59g==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
+    version: 3.7.3
