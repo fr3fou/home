@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: luncher-box-backend
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "${DDNS}"
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "${LUNCHERBOX_BACKEND_URL}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: luncher-box-backend
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+        - "${LUNCHERBOX_BACKEND_URL}"
+      secretName: letsencrypt-luncher-box-backend
+
