@@ -6,3 +6,4 @@ resources:
   - certs.yaml
   - ingress-nginx.yaml
   - external-dns.yaml
+  - mariadb.yaml

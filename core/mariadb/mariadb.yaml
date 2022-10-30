@@ -1,0 +1,46 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+    name: mariadb
+    namespace: core
+spec:
+    interval: 10m
+    chart:
+        spec:
+            chart: mariadb
+            version: 11.3.3
+            sourceRef:
+                kind: HelmRepository
+                name: bitnami
+                namespace: core
+    values:
+        auth:
+            rootPassword: ENC[AES256_GCM,data:9kayz2JXYYziLTDMpTAQIfZwUn2+3f8WDJbGRNxoPvI=,iv:0hL1PU3nUl6j1Zd2ITkwnRjKTY8ifIWT2HdfomFiwlU=,tag:cOziktlA65h4Qd/mPhEyEw==,type:str]
+        primary:
+            persistence:
+                enabled: true
+                existingClaim: ENC[AES256_GCM,data:N0tXjE4aQA==,iv:WFx8MfYTb2u6VsWPV9u9QJ0Hfhg/jrVbzzxCRUKjHLA=,tag:i3IA3sgGONV+lYdvrqRFyg==,type:str]
+        metrics:
+            enabled: true
+            serviceMonitor:
+                enabled: true
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSMjI1c2Z2bHpYb0FUek9G
+            QU43OW0yVmRMM0Q1b011b3k1aEVJQjZKbmdjCml4WHYxcnltRlF3bGVNc0FmVUZB
+            NE80Vk1qTWZJMDlhSTI4K1krc2ZhRjQKLS0tIGdMM1ZjQ1NKNW5rTFNKRVplRXV1
+            NE95dkhaKzRVVENjcHp1WHY1RUxlQkkK0rAiX5biF8zkFCRJikZ2FI9o0MRRgQnA
+            ifBaF9CWkDDhryx0gnLOSvqfU5TGUltflPgVEEczjfxR2/4+A/elrw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-10-30T21:03:06Z"
+    mac: ENC[AES256_GCM,data:Pec9wICDqVFxoCHfwxCyuXzjrtgZLjEu6j0YXSt3wuI5yIplgpHJ8GuFwihuIkL9l2qW2VEtQ/yuoNXvQkOgCtq5QbDDv+GcsCUcpP4BBKseLFpGlK0zZPO9R4b3oZsStIaHv6D1vLu1mgz0Q4X+FAwj1IHxmumjDHdcss5AFX8=,iv:ZIlS7Qq7dOqNTY0UWsBz4cbAJTMfBktlyJg8nf1DEOo=,tag:O9JjtdN1OiYAtz/9uCB6Tg==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
+    version: 3.7.3
