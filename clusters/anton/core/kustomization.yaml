@@ -7,3 +7,4 @@ resources:
   - ingress-nginx.yaml
   - external-dns.yaml
   - mariadb.yaml
+  - redis.yaml

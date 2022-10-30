@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+    name: redis
+    namespace: core
+spec:
+    interval: 15m
+    chart:
+        spec:
+            chart: redis
+            version: 17.3.7
+            sourceRef:
+                kind: HelmRepository
+                name: bitnami
+                namespace: core
+    values:
+        architecture: standalone
+        auth:
+            enabled: false
+        metrics:
+            enabled: true
+            serviceMonitor:
+                enabled: true
+        sentinel:
+            enabled: false
