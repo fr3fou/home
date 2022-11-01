@@ -19,8 +19,34 @@ spec:
     image:
       repository: spikecodes/libreddit
       pullPolicy: IfNotPresent
-      tag: latest
+      tag: latest@sha256:5c220f7f55b6c4c4ea7c3da4674a10bc957900b384d41d82cef3d6b9d8fc02c1
 
+    controller:
+      strategy: RollingUpdate
+
+    probes:
+      liveness:
+        custom: true
+        spec:
+          httpGet:
+            path: /settings
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 3
+      readiness:
+        custom: true
+        spec:
+          httpGet:
+            path: /settings
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 3
     service:
       main:
         ports:
