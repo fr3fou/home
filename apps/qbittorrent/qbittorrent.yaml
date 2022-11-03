@@ -52,6 +52,7 @@ spec:
 
     env:
       UMASK: "022"
+      TZ: ${TIMEZONE}
       QBITTORRENT__PORT: &port 8080
       QBITTORRENT__BT_PORT: 50413
       QBITTORRENT__USE_PROFILE: "true"

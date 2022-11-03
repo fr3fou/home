@@ -25,6 +25,7 @@ spec:
         - 65539
 
     env:
+      TZ: ${TIMEZONE}
       BAZARR_PORT: &port 6767
 
     service:

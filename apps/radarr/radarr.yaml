@@ -28,6 +28,7 @@ spec:
         - 65539
 
     env:
+      TZ: ${TIMEZONE}
       RADARR__INSTANCE_NAME: Radarr
       RADARR__PORT: &port 7878
       RADARR__APPLICATION_URL: "https://radarr.${PERSONAL_DOMAIN}"
