@@ -22,7 +22,7 @@ https://github.com/mozilla/sops#22encrypting-using-age
 - [x] [reddit-rss](https://github.com/trashhalo/reddit-rss) 
 - [x] [libreddit](https://github.com/spikecodes/libreddit)
 - [x] [recyclarr](https://github.com/recyclarr/recyclarr)
-- [ ] [bazarr](https://github.com/morpheus65535/bazarr)
+- [x] [bazarr](https://github.com/morpheus65535/bazarr)
 - [x] [renovate](https://github.com/renovatebot/renovate)
 - [x] Decrease flux's --requeue-dependency flag to 5s
 - [ ] Flux GitHub Webhook for syncing

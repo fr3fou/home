@@ -20,4 +20,5 @@ resources:
   - ./renovate.yaml
   - ./luncher-box-backend.yaml
   - ./luncher-box-frontend.yaml
+  - ./bazarr.yaml
 
