@@ -34,7 +34,8 @@ spec:
                     matchLabels:
                         app.kubernetes.io/component: monitoring
         grafana:
-            adminPassword: ENC[AES256_GCM,data:xgDpPE8YFbP378qicTZYUYV73IJ50A2JS1sCxd1t,iv:7Xq83gKaugsw3HuN4jclUblse8a/6OqX3DDX664DjUU=,tag:uURY3T+mjRTNHsHeED90Cw==,type:str]
+            defaultDashboardsTimezone: ${TIMEZONE}
+            adminPassword: ENC[AES256_GCM,data:5fLuSqwc4ODBSOoTjkuHBAWuqXcAMoLFau5hfsEy,iv:HRqDXVEG7lwyHr+pz1SB0MkqaEryhSLKkEyuDy6f+8A=,tag:1YhvPlho7RqZQAssD5Obxw==,type:str]
             ingress:
                 enabled: true
                 ingressClassName: nginx
@@ -57,14 +58,14 @@ sops:
         - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnRjh3WVlRNHAzVEN3N0xU
-            SXp2K245WjZYam8zVGV3UkN0YjZtOXRWUzBFCldoYnQvYVYrcCt5UHlpYUhYNHFw
-            RGNKL3JoUnA5ZUQrTDBhR0E1MG5sbWcKLS0tIFZWZmt1eDRqM3BENVpLOE16WEth
-            OHhVVXFIcUFzbGYzYWdheDBCM2FWM0EKHeRcjStV9KHrsjH1PWIMyxHbfZp2K47o
-            IGyNdsnUZvIzuFJp9H3vcg797XiCmjJ7j2csk/ad1HTrkXC5XtKo+w==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrWUVmODNVdHVHQUFpalJQ
+            V2JPWHdiL0tIYTFFbWxGZnFOdkVQbXd6TENzCjRneFdjRnlqWGY4SDJPMnU1Y0Jk
+            YXovVkV3VU1iS2FXcmcxQzAxMHlmNkEKLS0tIGJnUm1GOVllMnpDTVY0UW5iQVdC
+            Z2FzOHZsZDZlTVdOTTFRSk5CS1I5MG8Ks4BXbS5kl/jL5tu+9fgGhNFUPcGA6lDl
+            wpGcFD4slPKHGSDmaugwRorKFLc7MQFVvcj0XkhhWffg/w+h571YHA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-10-24T08:29:07Z"
-    mac: ENC[AES256_GCM,data:fJMdzej0+NXaZHBQBUwFx8EPaPaWxFMGuWM5mu9uVcAxPdORoABjX1uT1ySF5RL5qcoavuveznWPVlZD1EkfAPr+XlwYgRXDSTt9lwQaCpbedpc2MnhQtbUxFKY4eVye0J0vcyq7SgVbVCxm38snF6zj6w9V1/45+qKx49/Tklw=,iv:3e+HY3M61DTFNrh1/cpzmy/v4zGAY4u6NpQordJiims=,tag:a4bi2NUFi4GZpbbGv3RmuQ==,type:str]
+    lastmodified: "2022-11-03T16:07:35Z"
+    mac: ENC[AES256_GCM,data:3Wz9aBkCHvzNl7DKuGehRk/PXD1b5L/a6S2VJNVD7ap0+D8RJb4h8tVmQEjgg/m032imOm0X8Jn4/w5XupTk9ZXpnbUszAlqV1Cx/yIJMo5+Cj3dAtm8V4LWo03CqpLjArojjhwmTsm9Puu4VQD/qH+q7s5oWiENUXyFrSefjqs=,iv:Rn7J8Qd8QPpwCfKw1V6lBDm3CKj1WlC/rqqCn72Qrfg=,tag:6ZBYSxLmrzdMB1KXj/0ztQ==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3

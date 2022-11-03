@@ -11,3 +11,4 @@ data:
   LUNCHERBOX_DB: luncherbox_production
   LUNCHERBOX_BACKEND_URL: luncherbox-api.deliprods.com
   LUNCHERBOX_FRONTEND_URL: luncherbox.deliprods.com
+  TIMEZONE: "Europe/Sofia"
