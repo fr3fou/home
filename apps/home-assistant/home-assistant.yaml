@@ -77,7 +77,7 @@ spec:
 
         image:
           repository: ghcr.io/coder/code-server
-          tag: 4.8.2
+          tag: 4.8.3
           pullPolicy: Always
 
         args:
