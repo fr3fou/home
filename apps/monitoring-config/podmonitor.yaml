@@ -4,8 +4,6 @@ kind: PodMonitor
 metadata:
   name: flux-system
   namespace: apps
-  labels:
-    app.kubernetes.io/component: monitoring
 spec:
   namespaceSelector:
     matchNames:
