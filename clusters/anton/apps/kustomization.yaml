@@ -21,4 +21,5 @@ resources:
   - ./luncher-box-backend.yaml
   - ./luncher-box-frontend.yaml
   - ./bazarr.yaml
+  - ./notifications.yaml
 
