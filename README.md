@@ -25,6 +25,6 @@ https://github.com/mozilla/sops#22encrypting-using-age
 - [x] [bazarr](https://github.com/morpheus65535/bazarr)
 - [x] [renovate](https://github.com/renovatebot/renovate)
 - [x] Decrease flux's --requeue-dependency flag to 5s
-- [ ] Flux GitHub Webhook for syncing
+- [x] Flux GitHub Webhook for syncing
 - [ ] Backups for PVs
 - [ ] Group applications by namespaces - e.g `monitoring`, `rss`, `media-server`, `downloads`, etc

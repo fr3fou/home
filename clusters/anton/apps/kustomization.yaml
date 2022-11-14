@@ -22,4 +22,5 @@ resources:
   - ./luncher-box-frontend.yaml
   - ./bazarr.yaml
   - ./notifications.yaml
+  - ./webhook.yaml
 

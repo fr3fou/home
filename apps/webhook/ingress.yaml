@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/target: "${DDNS}"
+  name: webhook-receiver
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: &webhook-receiver-host "webhook-fluxcd.${ROOT_DOMAIN}"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: webhook-receiver
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - *webhook-receiver-host
+      secretName: letsencrypt-webhook-receiver
