@@ -24,7 +24,8 @@ spec:
             enabled: false
         prometheus:
             prometheusSpec:
-                retention: 24h
+                retention: 2w
+                retentionSize: 45GB
                 resources:
                     requests:
                         cpu: 200m
@@ -33,9 +34,17 @@ spec:
                 podMonitorSelector:
                     matchLabels:
                         app.kubernetes.io/component: monitoring
+                storageSpec:
+                    volumeClaimTemplate:
+                        spec:
+                            accessModes:
+                                - ENC[AES256_GCM,data:XnEbNakDaW8kiqCapg==,iv:w8czJzhB/aGEjDrnuq6LVSzu8GrE9KS16OdZM1K505Y=,tag:R0gobpEn0d+urWcsQu7IHg==,type:str]
+                            resources:
+                                requests:
+                                    storage: ENC[AES256_GCM,data:b3hVpQ==,iv:XbBcui05EGsU9Ep5gPLGX251r+iEMaYlXU+lyiTXfU8=,tag:FL5KmIzx5eA/kI8doN8BkA==,type:str]
         grafana:
             defaultDashboardsTimezone: ${TIMEZONE}
-            adminPassword: ENC[AES256_GCM,data:5fLuSqwc4ODBSOoTjkuHBAWuqXcAMoLFau5hfsEy,iv:HRqDXVEG7lwyHr+pz1SB0MkqaEryhSLKkEyuDy6f+8A=,tag:1YhvPlho7RqZQAssD5Obxw==,type:str]
+            adminPassword: ENC[AES256_GCM,data:xjd5gzDqUi3TPJaroU2KPMaxAS45Sj6MjJDu42a4,iv:lv49OfxMl0IhRg1kqt90ND2Vr+BXQo4ysb1V5ov8U2U=,tag:P/YHyBMK4DGgScJOe12pUQ==,type:str]
             ingress:
                 enabled: true
                 ingressClassName: nginx
@@ -43,13 +52,35 @@ spec:
                     cert-manager.io/cluster-issuer: letsencrypt
                     hajimari.io/enable: "true"
                     hajimari.io/icon: fire
-                    external-dns.alpha.kubernetes.io/target: "${DDNS}"
+                    external-dns.alpha.kubernetes.io/target: ${DDNS}
                 hosts:
                     - grafana.${ROOT_DOMAIN}
                 tls:
                     - hosts:
                         - grafana.${ROOT_DOMAIN}
                       secretName: letsencrypt-grafana
+            dashboardProviders:
+                dashboardproviders.yaml:
+                    apiVersion: 1
+                    providers:
+                        - name: default
+                          orgId: 1
+                          folder: ""
+                          type: file
+                          disableDeletion: false
+                          editable: true
+                          options:
+                            path: /var/lib/grafana/dashboards/default
+            dashboards:
+                default:
+                    node-exporter-full:
+                        gnetId: 1860
+                        revision: 29
+                        datasource: Prometheus
+                    ingress-nginx:
+                        gnetId: 9614
+                        revision: 1
+                        datasource: Prometheus
 sops:
     kms: []
     gcp_kms: []
@@ -59,14 +90,14 @@ sops:
         - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBrWUVmODNVdHVHQUFpalJQ
-            V2JPWHdiL0tIYTFFbWxGZnFOdkVQbXd6TENzCjRneFdjRnlqWGY4SDJPMnU1Y0Jk
-            YXovVkV3VU1iS2FXcmcxQzAxMHlmNkEKLS0tIGJnUm1GOVllMnpDTVY0UW5iQVdC
-            Z2FzOHZsZDZlTVdOTTFRSk5CS1I5MG8Ks4BXbS5kl/jL5tu+9fgGhNFUPcGA6lDl
-            wpGcFD4slPKHGSDmaugwRorKFLc7MQFVvcj0XkhhWffg/w+h571YHA==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3TUthMjRFeW5CTmoyVWtk
+            S3JEVzVYRWtCM1dFUHRHZmZMTkFXUVh1ZGdZClpjNXVtTkR6NU9TWVZxbU1CZzZV
+            ckw4L29mczFUOTl0QTBMV3B6WGo1djgKLS0tIElaRWx0UEU1QUdOb09DTUNzSE5V
+            SDIxL1p1ckpJOFlnNkl2S0FmbTRpS0UKvP4PEV6VHA2Z1madglk66vWDOPAjRlpO
+            Uqde8C/IQo0swJIZkgZInoLzzbuO7RVj3AKXjqZUfKOuFweK+PYZ4g==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-11-03T16:07:35Z"
-    mac: ENC[AES256_GCM,data:3Wz9aBkCHvzNl7DKuGehRk/PXD1b5L/a6S2VJNVD7ap0+D8RJb4h8tVmQEjgg/m032imOm0X8Jn4/w5XupTk9ZXpnbUszAlqV1Cx/yIJMo5+Cj3dAtm8V4LWo03CqpLjArojjhwmTsm9Puu4VQD/qH+q7s5oWiENUXyFrSefjqs=,iv:Rn7J8Qd8QPpwCfKw1V6lBDm3CKj1WlC/rqqCn72Qrfg=,tag:6ZBYSxLmrzdMB1KXj/0ztQ==,type:str]
+    lastmodified: "2022-11-14T09:23:43Z"
+    mac: ENC[AES256_GCM,data:PTo17TChVd5kTpp8oUm2JuUpbT/DYGBaEMFdDGfY33ePwVPKJJCRBbetzQl8EzVTopXDv4nRJTKOCTkVAw1pAEi9maTtnSYvD9x7Np0sYCWlP98sk85VTxSbZtws6ncdZ2QGIeEIm34nNxmQWunG9AFra/bLB8PQ05SJDjxW+Ww=,iv:ofhNmrmigVlYgLZlEioeKWMR+/nsiIrrMlRMBghBL08=,tag:Nn0koIFDeFA9plkF0N6eJQ==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3
