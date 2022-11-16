@@ -33,6 +33,20 @@ spec:
             mountPath: /data/config
           - name: configfiles
             mountPath: /data/configfiles
+      install-vuetorrent:
+        image: joshkeegan/zip:3.16.3@sha256:08369b2ea76c56419184aefe8b4d4fbdd2e0a74fb34628855cc936fd67aee801
+        command:
+          - "/bin/sh"
+          - -c
+        args:
+          - |
+            # renovate: github-release depName=WDaan/VueTorrent
+            VUETORRENT_VERSION="v1.0.0"
+            wget "https://github.com/WDaan/VueTorrent/releases/download/$${VUETORRENT_VERSION}/vuetorrent.zip" -O /data/config/vuetorrent.zip
+            unzip /data/config/vuetorrent.zip -d /data/config/
+        volumeMounts:
+          - name: config
+            mountPath: /data/config
 
     podAnnotations:
       setGateway: "true"

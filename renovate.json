@@ -16,6 +16,17 @@
       "\\.yaml$"
     ]
   },
+  "regexManagers": [
+    {
+      "description": ["Generic GitHub Release Regex manager"],
+      "fileMatch": ["\\.yaml$"],
+      "matchStrings": [
+        "# renovate: github-release depName=(?<depName>\\S+)( versioning=(?<versioning>.*=?))?\n.*=\"(?<currentValue>.*)\""
+      ],
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ],
   "packageRules": [
     {
       "description": "Auto merge Docker images",
