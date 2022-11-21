@@ -37,13 +37,13 @@ spec:
                     volumeClaimTemplate:
                         spec:
                             accessModes:
-                                - ENC[AES256_GCM,data:3fUsDUoY7EuH9hPVJA==,iv:eFNxnSfKM/uFK26pp3P3BYT0tBVsqh1ti5fTBgt7MI4=,tag:b8h4xjI8/Q+WU75yNtwgtQ==,type:str]
+                                - ENC[AES256_GCM,data:2ETDbMz8Uq01O9e4lQ==,iv:WFg5t6MQcegRamrho12gbtdnl+3YXk0bveOxJ2g6Z80=,tag:GBernOshARtSKZChLVqioA==,type:str]
                             resources:
                                 requests:
-                                    storage: ENC[AES256_GCM,data:fj7jEA==,iv:aeEvRVtAgArgEQZ47GJhx5TFCHDMCVd9bpQHl95a/iU=,tag:MPPa6c3nh1VDz6se7ZH0Jw==,type:str]
+                                    storage: ENC[AES256_GCM,data:1g8nBg==,iv:GPQLQZbbTb/5d1xykHioM9jP2un0lAwfyIsHtnJJTCo=,tag:QuULkAWTHsXd2JfZcZJ51g==,type:str]
         grafana:
             defaultDashboardsTimezone: ${TIMEZONE}
-            adminPassword: ENC[AES256_GCM,data:UxKzYVZOjo1FulDn1knj7+rd2/2vub/peqIZa+1o,iv:TtqM6CKOIxLy8AOkkxgXklD0CxKsA6C+0OweGR63vUk=,tag:vQO7CqWiBfHQq2ul7XiVMw==,type:str]
+            adminPassword: ENC[AES256_GCM,data:E/3QMe4QGQJuEgXwgCXcGHeuZDiNuEay1tvmICW6,iv:mW6YuBApeVUuN+Ah+c1iePa/8hgLNmucw0k6sbJar5s=,tag:5VUMwoq1vTLoQUokI64O0Q==,type:str]
             ingress:
                 enabled: true
                 ingressClassName: nginx
@@ -80,14 +80,6 @@ spec:
                         gnetId: 9614
                         revision: 1
                         datasource: Prometheus
-                    redis:
-                        gnetId: 11835
-                        revision: 1
-                        datasource: Prometheus
-                    mysql:
-                        gnetId: 7362
-                        revision: 1
-                        datasource: Prometheus
 sops:
     kms: []
     gcp_kms: []
@@ -97,14 +89,14 @@ sops:
         - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWVCtZVUhaZG1CS0V2UFhV
-            WnQ1eWRqY29YOUEvQVJLVHVEVExJNFRPS0M0ClFYQy9RTktaSFRFNVM0SlVTQkdN
-            VHhnaWV3Q1Y4c2FmcFg1SXc0M3U2UlkKLS0tIGlEd013ZWM4VFRoVzhIWHNBK2F6
-            TnhJSGNDUWZUVStwMTBXeU1VY0lCbXcKVZ+ekAj+tWdrdb6l0oKsqAeDjOzR9B8p
-            MjSEEnkXFK5etyfuDUy1DczTk1bRx8zOc6xzvQokCy+5F+UlN8OQpw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwMlRreTl2OWhvSlIxSW9p
+            WFhUZkhCbmV3MUk1Q1VxZGk3OVIzOGdEcWcwCmxDNm5BTjhpUjJSZVBZZEpaeGwv
+            bHFBVC9aU2RPNGg0cjNrZTNuYmxjTDQKLS0tIHVuUVAwN25Nczlqa01SM2ozT014
+            RHB6STRmcGIrYUFodSswa2JiUDVFd2cKb+3vggFq3b8jPV/Fp8zG998cjrl22u5l
+            TYpSIZ1yvfKIbNEftZp8ZlIvKdPEhO8T/+9x4JTmBScxX+0N2ZMNrw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-11-21T09:34:16Z"
-    mac: ENC[AES256_GCM,data:ggxvDat9djukDg6xhZozaraeP+JCL1W6PKPLU0+v+2Pa16hE5v37bdGbxwFQ5y8qObSr9CFZlyzCPNIU0Sjoyza3Bm0ISJz780WMN09XuRoPWditEHAGfsTpORZ06KbRtQPfoV4PgmlDzWTeh14m1viQsdd3hkaPqBSwnk5o2eY=,iv:NMGEXoMbudIy+d22rpEHnLonEJKdFkssAAppwFFiOrg=,tag:eFUAlIomvsfmK8PabHnFeQ==,type:str]
+    lastmodified: "2022-11-14T10:54:01Z"
+    mac: ENC[AES256_GCM,data:O/S+yng6QHczQ16HvEjsJf4beKcAukf0XmI7gQ5/HtQq/JtX9REa9AZh6xoCarsQovjD/NS6Qa7kRZMCR6WL8Vo6EiXvpLlvDjBVU1N50kI8V6DH9LRVA7U5pbi3lpGpRCULYiGIpNxLJPuJLYt/s41TrvaK62eMgoX8pBHGrnY=,iv:6SOOeENEtwj4ZRB/95DIvfLjs7XorpSUbv4eZZpVtMc=,tag:hAnSxv1aDzlX4R+/5AC40A==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3
