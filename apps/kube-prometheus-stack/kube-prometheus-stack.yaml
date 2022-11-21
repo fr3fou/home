@@ -51,6 +51,7 @@ spec:
                     cert-manager.io/cluster-issuer: letsencrypt
                     hajimari.io/enable: "true"
                     hajimari.io/icon: fire
+                    hajimari.io/appName: Grafana
                     external-dns.alpha.kubernetes.io/target: ${DDNS}
                 hosts:
                     - grafana.${ROOT_DOMAIN}
@@ -95,8 +96,8 @@ sops:
             aHJYTkExYU96S0g0d3FCR2ZoeExTcDQKaw5nGuedGVZwebMDN87fCy46HwLh2VjM
             wBuMB4dyAL+rXBEzdX4vKFc5ILP+vZcAI2nr0LE07WPZw7K7HseRLg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-11-21T09:44:02Z"
-    mac: ENC[AES256_GCM,data:juFt6j+wtEO9NkZl2WkfUONOp1+qMRE6GDaHYkGC0Vxo5DHzO3IiyyBHzbxb9ykrRDxRXk+qvhOwuGLaloKOcVVCurXJNzEaOJYjVQt9OqzWhLtT9J2g5euHMbS3XBqHQdHvt/xaMNHLJyHwUVt+3RxX5Vb/15WsCxUifJy3WSc=,iv:Eop3QTyEpp6+6ZAH0nq3VQlsozGEWCLOQ9D2JDL5tH4=,tag:7vk4EY3cZ24ACUVRdNr2ZA==,type:str]
+    lastmodified: "2022-11-21T13:10:37Z"
+    mac: ENC[AES256_GCM,data:u1fwlLjzaibcympEidg3EfeI0zA8vX9FUZz/esMQA6uIFyhhuu8lJhksKfE8zFvQ7UCOeUiLk3eJseywl5AYzc1AKkxpLc1wq54f7ypRjdIBwMs99kTBkyGbs/3s0ZO7NjWZ6zvQYm0PHjfoyBLuBn0hAM0szfKVLPfcRyPqrys=,iv:n41evhiXg4byz3Cy/IPKYQGqLttrTbbNTNsiD7XboQo=,tag:LkkZHUkggUBZkP/twv6lQA==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3
