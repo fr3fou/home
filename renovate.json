@@ -42,7 +42,8 @@
         "digest"
       ],
       "matchPackageNames": [
-        "renovate/renovate"
+        "renovate/renovate",
+        "spikecodes/libreddit"
       ]
     },
     {
