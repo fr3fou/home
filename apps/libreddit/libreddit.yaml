@@ -19,7 +19,7 @@ spec:
     image:
       repository: spikecodes/libreddit
       pullPolicy: IfNotPresent
-      tag: latest@sha256:22f25f40b968dbfed24a026dc5b8ca9d81a558cc80ab36334a7152abb7c3d012
+      tag: latest@sha256:08ea513173770836e3e6cdabe2a7ab80b3c112b583a2c0dfbe7215a40b9496ea
 
     controller:
       strategy: RollingUpdate
