@@ -34,7 +34,7 @@ spec:
           - name: configfiles
             mountPath: /data/configfiles
       install-vuetorrent:
-        image: joshkeegan/zip:3.16.3@sha256:08369b2ea76c56419184aefe8b4d4fbdd2e0a74fb34628855cc936fd67aee801
+        image: joshkeegan/zip:3.17.0@sha256:060fd9b5da1cb0fb0db1785945e1b5d583f69f54440b4deb8f6887b1f143eacd
         command:
           - "/bin/sh"
           - -c
