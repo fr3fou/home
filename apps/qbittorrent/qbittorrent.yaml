@@ -41,7 +41,7 @@ spec:
         args:
           - |
             # renovate: github-release depName=WDaan/VueTorrent
-            VUETORRENT_VERSION="v1.0.0"
+            VUETORRENT_VERSION="v1.0.1"
             wget "https://github.com/WDaan/VueTorrent/releases/download/$${VUETORRENT_VERSION}/vuetorrent.zip" -O /data/config/vuetorrent.zip
             unzip /data/config/vuetorrent.zip -d /data/config/
         volumeMounts:
