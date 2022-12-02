@@ -43,7 +43,8 @@
       ],
       "matchPackageNames": [
         "renovate/renovate",
-        "spikecodes/libreddit"
+        "spikecodes/libreddit",
+        "busybox"
       ]
     },
     {
