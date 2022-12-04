@@ -1,7 +1,8 @@
 # For more details on the configuration, see the Configuration Reference on the wiki here:
 # https://github.com/recyclarr/recyclarr/wiki/Configuration-Reference
 sonarr:
-  - base_url: ${SONARR_BASE_URL}
+  main:
+    base_url: ${SONARR_BASE_URL}
     api_key: ${SONARR_API_KEY}
     delete_old_custom_formats: true
     custom_formats:
@@ -114,7 +115,8 @@ sonarr:
           - name: Remux-1080p - Anime
             score: 1000
 radarr:
-  - base_url: ${RADARR_BASE_URL}
+  main:
+    base_url: ${RADARR_BASE_URL}
     api_key: ${RADARR_API_KEY}
     delete_old_custom_formats: true
     quality_definition:
