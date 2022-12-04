@@ -6,7 +6,7 @@ namespace: apps
 configMapGenerator:
   - name: recyclarr
     files:
-      - recyclarr.yaml
+      - recyclarr.yml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
