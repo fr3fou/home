@@ -11,6 +11,7 @@ resources:
   - ./prowlarr.yaml
   - ./qbittorrent.yaml
   - ./hajimari.yaml
+  - ./huginn.yaml
   - ./freshrss.yaml
   - ./reddit-rss.yaml
   - ./kube-prometheus-stack.yaml

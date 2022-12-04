@@ -9,6 +9,7 @@ data:
   PERSONAL_DOMAIN: lab.simo.sh
   DDNS: mila.ddns.nbis.net
   LUNCHERBOX_DB: luncherbox_production
+  HUGINN_DB: huginn
   LUNCHERBOX_BACKEND_URL: luncherbox-api.deliprods.com
   LUNCHERBOX_FRONTEND_URL: luncherbox.deliprods.com
   TIMEZONE: "Europe/Sofia"
