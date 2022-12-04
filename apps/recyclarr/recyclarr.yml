@@ -62,7 +62,8 @@ sonarr:
             score: 10
           - name: HD
             score: 10
-  - base_url: ${SONARR_BASE_URL}
+  anime:
+    base_url: ${SONARR_BASE_URL}
     api_key: ${SONARR_API_KEY}
     quality_definition: anime
     custom_formats:
