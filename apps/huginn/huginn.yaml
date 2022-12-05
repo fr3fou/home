@@ -40,6 +40,14 @@ spec:
         secretKeyRef:
           name: huginn-secrets
           key: HUGINN_DATABASE_PASSWORD
+      HUGINN_TWITTER_OAUTH_SECRET:
+        secretKeyRef:
+          name: huginn-secrets
+          key: HUGINN_TWITTER_OAUTH_SECRET
+      HUGINN_TWITTER_OAUTH_KEY:
+        secretKeyRef:
+          name: huginn-secrets
+          key: HUGINN_TWITTER_OAUTH_KEY
 
     service:
       main:
@@ -54,7 +62,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/enable: "true"
-          hajimari.io/icon: "hubspot"
+          hajimari.io/icon: "gear"
           external-dns.alpha.kubernetes.io/target: "${DDNS}"
         hosts:
           - host: &huginn-host "huginn.${PERSONAL_DOMAIN}"
