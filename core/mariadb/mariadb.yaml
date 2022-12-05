@@ -15,11 +15,11 @@ spec:
                 namespace: core
     values:
         auth:
-            rootPassword: ENC[AES256_GCM,data:Wy5m0dAAFv5V2wFdUpX34CUQWOv5uwIAfXRngX/35ug=,iv:bE37ESVEqaEXhcP12arfrcDK7G+P78Rj82UeosModeo=,tag:4+g8ZdFkpQ1/IpL+vRJ8Jg==,type:str]
+            rootPassword: ENC[AES256_GCM,data:pUMxhincR7qCeEauFGZJv7sVcmPVE610zQZzEgeO1FE=,iv:2YmUV4vr8b7n+w8wrnNxN5GhBWO651I2O3tAUKIrWio=,tag:PJnJZODcD2ZJjBO6mgEczw==,type:str]
         primary:
             persistence:
                 enabled: true
-                existingClaim: ENC[AES256_GCM,data:OJHy/wsJ9A==,iv:gvDiawXzVo2NjNxLCQfGr4awD80JLWv6lA8c1+9BxBI=,tag:QmHdV1Yg63qYap7eS2SpGw==,type:str]
+                existingClaim: ENC[AES256_GCM,data:aGJEqyfgEA==,iv:lWndDr/4E/IzdfNmLav9MVlagZpQWamRNd8RhHbh81Q=,tag:hA9+o3ZKK8cZ2NFYP1icJA==,type:str]
         metrics:
             enabled: true
             serviceMonitor:
@@ -27,8 +27,6 @@ spec:
         initdbScripts:
             luncher-box.sql: |
                 CREATE DATABASE "${LUNCHERBOX_DB}";
-            huginn.sql: |
-                CREATE DATABASE "${HUGINN_DB}";
 sops:
     kms: []
     gcp_kms: []
@@ -38,14 +36,14 @@ sops:
         - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBMblQyU2JqbVN6VkY0U2tk
-            Y0pzMFdMQSs0SzJvdTdPM1VKeEw0WWJXT21JCjk5dXhJYmJPLzRNWmhMeVI5eXY3
-            RUxEblZ0alFueUNXRUJwNkVrTzBiNkUKLS0tIEV0M1NyaU1hMXgwZHd4MFZuU3FE
-            T0FKa1lCTzJZY2xLWTB1anFpVFQzOWcKWXNVLVd6UyyE99jZEYcX4waiB2YZhvkp
-            t7JrA4R3P+jwj5Sfy16EtVPso7fOPzXP2o9r1iWrNvH+VTj6qqewMw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBad0Q3cW9DK0hKY0ExejlL
+            NmtXVnJZRWoxZjBVMlBVNFEyYWNzREZLOWtRClo5NnAraFFvUmFyeTVxWnZveEZa
+            U3ZQM3pnS2hULzR6VFlNek1hSUg4Y1UKLS0tIFhFWWhBdnM2V1JwckFud0tReWVo
+            NWtDb3grM1hMMDhjbDhuanlCM2t6WE0Km8ZT4FaWY87S3NbLHd6hmW0vaZIZcAoI
+            qR2BYnUnYxf6/H3/jOTTjPoLszlFxQQWP/CbR2h9TgpCHnfAiGpjaA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-12-04T18:44:06Z"
-    mac: ENC[AES256_GCM,data:CSeE+8rtHwQo6tVS247fHn5UhwFc4tJkydwcLetRGjNJIYk8iLLNG/bo1VVMhWpoy4i8QUvJCeHLo1Xd82aodth0Muu56rEO10S10uJ+B0778rm1aCUN8QpvzFDyQB+XZ/X+iZujqP1y0W/DyX8+IcTaOfCY8ofWNDVELFsM4yA=,iv:Q2nivVNWpBbxybG6PWBGCBkNN+xEZZnwYj4cUMjTU2o=,tag:xaVfK4WCDaBRjbaa26C/uw==,type:str]
+    lastmodified: "2022-10-30T21:18:30Z"
+    mac: ENC[AES256_GCM,data:QSbMSEEPZ8H+bB1kJD+DaBgCD0PP/CMCVmA7J5Fv0rE2XZsosRmVe38/zo19H8aB1nrLjfwgbn682g/VSqIRSGhUVh3HGOdubRDKF8wTXQVYBPWkT2+WIQPnPmGlnQMKq++qQUt0w38hO1cQWp6jg2oEj1cyFtdOEr/oBsXgsFk=,iv:cgbx6dP2p0/6s2n+oUv1MkAxlrJEPfjxEOjCo0CjBAQ=,tag:ZThR8FKMtM4GmGKqCGhGVg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3
