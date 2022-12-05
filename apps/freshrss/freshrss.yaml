@@ -18,7 +18,7 @@ spec:
       repository: docker.io/linuxserver/freshrss
       tag: version-1.19.2
     env:
-      TZ: Europe/Sofia
+      TZ: ${TIMEZONE}
       PUID: "1000"
       PGID: "1000"
     service:
