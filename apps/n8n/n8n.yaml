@@ -1,0 +1,73 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: n8n
+  namespace: apps
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.1.3
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: apps
+  values:
+    image:
+      repository: docker.io/n8nio/n8n
+      tag: 0.205.0
+
+    env:
+      TZ: ${TIMEZONE}
+      GENERIC_TIMEZONE: ${TIMEZONE}
+      N8N_PROTOCOL: "https"
+      N8N_PORT: &port 443
+      N8N_HOST: &n8n-host "n8n.${PERSONAL_DOMAIN}"
+      N8N_LOG_LEVEL: info
+      N8N_LOG_OUTPUT: console
+      DB_MYSQL_HOST: mariadb.core.svc.cluster.local
+      DB_MYSQL_USER: root
+      DB_MYSQL_DATABASE: n8n
+
+    envFrom:
+      - secretRef:
+          name: n8n-secrets
+
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "cog"
+        hosts:
+          - host: *n8n-host
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - *n8n-host
+            secretName: letsencrypt-n8n
+
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: n8n-config
+        mountPath: /home/node/.n8n
+
+    resources:
+      requests:
+        cpu: 20m
+        memory: 128M
+      limits:
+        memory: 512M

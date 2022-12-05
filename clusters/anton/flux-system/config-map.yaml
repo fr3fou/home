@@ -12,3 +12,4 @@ data:
   LUNCHERBOX_BACKEND_URL: luncherbox-api.deliprods.com
   LUNCHERBOX_FRONTEND_URL: luncherbox.deliprods.com
   TIMEZONE: "Europe/Sofia"
+  N8N_DB: n8n
