@@ -58,6 +58,16 @@ spec:
               - *n8n-host
             secretName: letsencrypt-n8n
 
+    command: ["sh"]
+    args:
+      - "-c"
+      - |
+        usermod --uid ${USER_UID} node
+        tini -- /docker-entrypoint.sh
+
+    podSecurityContext:
+      runAsUser: 0
+      runAsGroup: 0
 
     persistence:
       config:
