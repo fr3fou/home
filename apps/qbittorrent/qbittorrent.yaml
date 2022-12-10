@@ -52,12 +52,8 @@ spec:
       setGateway: "true"
 
     podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 65539
+      runAsUser: 0
+      runAsGroup: 0
 
     dnsConfig:
       options:
