@@ -12,11 +12,9 @@ spec:
   prune: true
   dependsOn:
     - name: apps-base
+    - name: mariadb
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
       name: n8n
       namespace: apps
-  dependsOn:
-    - name: apps-base
-    - name: mariadb
