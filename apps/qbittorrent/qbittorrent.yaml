@@ -55,7 +55,6 @@ spec:
       runAsUser: ${USER_UID}
       runAsGroup: ${USER_UID}
       fsGroup: ${USER_UID}
-      fsGroupChangePolicy: "OnRootMismatch"
 
     dnsConfig:
       options:

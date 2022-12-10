@@ -21,8 +21,9 @@ spec:
       tag: 1.1.3@sha256:b8cfaab8fa7c16ab254ea7612d129dd779119f1b88d14056148d8030e60be1b7
 
     podSecurityContext:
-      supplementalGroups:
-        - 65539
+      runAsUser: ${USER_UID}
+      runAsGroup: ${USER_UID}
+      fsGroup: ${USER_UID}
 
     env:
       TZ: ${TIMEZONE}
