@@ -27,6 +27,8 @@ spec:
       N8N_HOST: &n8n-host "n8n.${PERSONAL_DOMAIN}"
       N8N_LOG_LEVEL: info
       N8N_LOG_OUTPUT: console
+      EXECUTIONS_DATA_PRUNE: "true"
+      EXECUTIONS_DATA_MAX_AGE: "120"
       DB_MYSQL_HOST: mariadb.core.svc.cluster.local
       DB_MYSQL_USER: root
       DB_MYSQL_DATABASE: n8n
