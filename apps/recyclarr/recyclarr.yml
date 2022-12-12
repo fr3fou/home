@@ -65,7 +65,8 @@ sonarr:
   anime:
     base_url: ${SONARR_BASE_URL}
     api_key: ${SONARR_API_KEY}
-    quality_definition: anime
+    quality_definition: 
+      type: anime
     custom_formats:
       - trash_ids:
           # Anime CF's
