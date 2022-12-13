@@ -26,5 +26,6 @@ https://github.com/mozilla/sops#22encrypting-using-age
 - [x] [renovate](https://github.com/renovatebot/renovate)
 - [x] Decrease flux's --requeue-dependency flag to 5s
 - [x] Flux GitHub Webhook for syncing
+- [ ] Fix Home Assisstant networking - https://github.com/0dragosh/homelab/tree/main/k8s/clusters/homelab-talos-0/workloads/home/home-assistant
 - [ ] Backups for PVs
 - [ ] Group applications by namespaces - e.g `monitoring`, `rss`, `media-server`, `downloads`, etc
