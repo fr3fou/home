@@ -33,17 +33,18 @@ spec:
             mountPath: /data/config
           - name: configfiles
             mountPath: /data/configfiles
-      install-vuetorrent:
+      install-qbit-matui:
         image: joshkeegan/zip:3.17.0@sha256:060fd9b5da1cb0fb0db1785945e1b5d583f69f54440b4deb8f6887b1f143eacd
         command:
           - "/bin/sh"
           - -c
         args:
           - |
-            # renovate: github-release depName=WDaan/VueTorrent
-            VUETORRENT_VERSION="v1.0.1"
-            wget "https://github.com/WDaan/VueTorrent/releases/download/$${VUETORRENT_VERSION}/vuetorrent.zip" -O /data/config/vuetorrent.zip
-            unzip /data/config/vuetorrent.zip -d /data/config/
+            # renovate: github-release depName=bill-ahmed/qbit-matUI
+            QBIT_MATUI_VERSION="v1.16.4"
+            wget "https://github.com/bill-ahmed/qbit-matUI/releases/download/$${QBIT_MATUI_VERSION}/qbit-matUI_Unix_$${QBIT_MATUI_VERSION:1}.zip" -O /data/config/matui.zip
+            unzip /data/config/matui.zip -d /data/config
+            mv /data/config/qbit-matUI_Unix_$${QBIT_MATUI_VERSION:1} /data/config/matui
         volumeMounts:
           - name: config
             mountPath: /data/config
