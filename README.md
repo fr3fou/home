@@ -29,3 +29,4 @@ https://github.com/mozilla/sops#22encrypting-using-age
 - [ ] Fix Home Assisstant networking - https://github.com/0dragosh/homelab/tree/main/k8s/clusters/homelab-talos-0/workloads/home/home-assistant
 - [ ] Backups for PVs
 - [ ] Group applications by namespaces - e.g `monitoring`, `rss`, `media-server`, `downloads`, etc
+- [ ] Fix NFS mount 
