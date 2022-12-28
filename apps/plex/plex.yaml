@@ -23,12 +23,11 @@ spec:
       options:
         - name: ndots
           value: "1"
-
+    hostNetwork: true
+    dnsPolicy: "ClusterFirstWithHostNet"
     service:
       main:
-        type: LoadBalancer
         externalTrafficPolicy: Local
-        loadBalancerIP: "${SVC_PLEX_ADDR}"
         ports:
           http:
             port: 32400
