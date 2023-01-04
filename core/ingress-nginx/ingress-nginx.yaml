@@ -21,9 +21,8 @@ spec:
         enabled: true
         serviceMonitor:
           enabled: true
-          namespace: core
-          namespaceSelector:
-            any: true
+          additionalLabels:
+            release: "kube-prometheus-stack"
     defaultBackend:
       enabled: true
       image:
