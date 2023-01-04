@@ -78,8 +78,8 @@ spec:
                         revision: 29
                         datasource: Prometheus
                     ingress-nginx:
-                        gnetId: 9614
-                        revision: 1
+                        gnetId: 14314
+                        revision: 2
                         datasource: Prometheus
 sops:
     kms: []
