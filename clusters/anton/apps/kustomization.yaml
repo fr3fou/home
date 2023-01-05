@@ -24,3 +24,4 @@ resources:
   - ./notifications.yaml
   - ./webhook.yaml
   - ./n8n.yaml
+  - ./adguard.yaml

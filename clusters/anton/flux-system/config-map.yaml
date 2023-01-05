@@ -10,6 +10,7 @@ data:
   NGINX_IP: 192.168.1.1
   PLEX_IP: 192.168.1.2
   QBITTORRENT_IP: 192.168.1.3
+  ADGUARD_IP: 192.168.1.4
 
   DDNS: mila.ddns.nbis.net
 
