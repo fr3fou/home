@@ -13,10 +13,14 @@ spec:
         kind: HelmRepository
         name: ingress-nginx
   values:
-    config:
-      use-forwarded-headers: "true"
-      enable-real-ip: "true"
     controller:
+      config:
+        use-forwarded-headers: "true"
+        enable-real-ip: "true"
+      service:
+        externalIPs:
+          - "${NGINX_IP}"
+        externalTrafficPolicy: Local
       metrics:
         enabled: true
         serviceMonitor:
