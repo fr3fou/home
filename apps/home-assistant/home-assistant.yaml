@@ -48,6 +48,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/enable: "true"
           hajimari.io/icon: home-assistant
+          nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
         hosts:
           - host: &home-host home.${PERSONAL_DOMAIN}
             paths:

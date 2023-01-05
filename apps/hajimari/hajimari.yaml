@@ -59,6 +59,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/enable: "true"
           hajimari.io/icon: "weather-sunset"
+          nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
         hosts:
           - host: &hajimari-host "${PERSONAL_DOMAIN}"
             paths:

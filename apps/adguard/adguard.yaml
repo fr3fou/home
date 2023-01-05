@@ -43,6 +43,7 @@ spec:
         externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${ADGUARD_IP}"
+          nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
         ports:
           dns-tcp:
             enabled: true

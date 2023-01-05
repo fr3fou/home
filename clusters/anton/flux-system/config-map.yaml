@@ -12,6 +12,8 @@ data:
   QBITTORRENT_IP: 192.168.1.3
   ADGUARD_IP: 192.168.1.4
 
+  PRIVATE_WHITELIST: 100.64.0.0/10,10.42.0.0/16,192.168.0.0/23
+
   DDNS: mila.ddns.nbis.net
 
   LUNCHERBOX_DB: luncherbox_production
