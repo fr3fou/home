@@ -73,13 +73,13 @@ spec:
 
     service:
       main:
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${PLEX_IP}"
+        type: LoadBalancer
+        externalTrafficPolicy: Local
         ports:
           http:
             port: *port
-
-    hostNetwork: true
-
-    dnsPolicy: "ClusterFirstWithHostNet"
 
     ingress:
       main:
