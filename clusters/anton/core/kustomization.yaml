@@ -9,3 +9,4 @@ resources:
   - mariadb.yaml
   - redis.yaml
   - metallb.yaml
+  - ip-pools.yaml

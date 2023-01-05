@@ -4,13 +4,18 @@ metadata:
   name: cluster-config
   namespace: flux-system
 data:
-  SVC_PLEX_ADDR: 192.168.0.30
   ROOT_DOMAIN: simo.sh
   PERSONAL_DOMAIN: lab.simo.sh
+
+  NGINX_IP: 192.168.1.0
   DDNS: mila.ddns.nbis.net
+
   LUNCHERBOX_DB: luncherbox_production
   LUNCHERBOX_BACKEND_URL: luncherbox-api.deliprods.com
   LUNCHERBOX_FRONTEND_URL: luncherbox.deliprods.com
+
   TIMEZONE: "Europe/Sofia"
+
   N8N_DB: n8n
+
   USER_UID: "1000"
