@@ -27,6 +27,9 @@ spec:
     dnsPolicy: "ClusterFirstWithHostNet"
     service:
       main:
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${PLEX_IP}"
+        type: LoadBalancer
         externalTrafficPolicy: Local
         ports:
           http:
