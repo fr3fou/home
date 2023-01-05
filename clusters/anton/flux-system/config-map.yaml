@@ -7,7 +7,7 @@ data:
   ROOT_DOMAIN: simo.sh
   PERSONAL_DOMAIN: lab.simo.sh
 
-  NGINX_IP: 192.168.1.1
+  NGINX_IP: 192.168.1.2
   DDNS: mila.ddns.nbis.net
 
   LUNCHERBOX_DB: luncherbox_production
