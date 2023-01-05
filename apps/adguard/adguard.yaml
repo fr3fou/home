@@ -43,7 +43,6 @@ spec:
         externalTrafficPolicy: Local
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${ADGUARD_IP}"
-          nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
         ports:
           dns-tcp:
             enabled: true
@@ -74,6 +73,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/enable: "true"
           hajimari.io/icon: "shield-check"
+          nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
         hosts:
           - host: &host adguard.${PERSONAL_DOMAIN}
             paths:
