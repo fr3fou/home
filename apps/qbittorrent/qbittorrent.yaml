@@ -66,20 +66,25 @@ spec:
       UMASK: "022"
       TZ: ${TIMEZONE}
       QBITTORRENT__PORT: &port 8080
-      QBITTORRENT__BT_PORT: 50413
+      QBITTORRENT__BT_PORT: &bittorrent-port 50413
       QBITTORRENT__USE_PROFILE: "true"
 
     hostname: qbittorrent
 
     service:
       main:
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: "${PLEX_IP}"
-        type: LoadBalancer
-        externalTrafficPolicy: Local
+        primary: true
         ports:
           http:
             port: *port
+      bittorrent:
+        annotations:
+          metallb.universe.tf/loadBalancerIPs: "${QBITTORRENT_IP}"
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        ports:
+          bittorrent:
+            port: *bittorrent-port
 
     ingress:
       main:
