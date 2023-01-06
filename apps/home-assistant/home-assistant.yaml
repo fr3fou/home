@@ -50,7 +50,6 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: home-assistant
           nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
-          external-dns.alpha.kubernetes.io/target: ${HOME_ASSISTANT_IP}
         hosts:
           - host: &home-host home.${PERSONAL_DOMAIN}
             paths:
