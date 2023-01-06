@@ -45,6 +45,9 @@ spec:
                 return 301 $scheme://$host/web/index.html;
               }
             }
+            proxy_set_header Accept-Encoding "";
+            sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/radarr/overseerr.css"></head>';
+            sub_filter_once on;
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/enable: "true"
           hajimari.io/icon: plex
