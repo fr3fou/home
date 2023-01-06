@@ -74,6 +74,9 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "shield-check"
           nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/adguard/overseerr.css"></head>';
+            sub_filter_once on;
         hosts:
           - host: &host adguard.${PERSONAL_DOMAIN}
             paths:
