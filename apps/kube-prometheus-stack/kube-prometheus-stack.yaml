@@ -53,7 +53,6 @@ spec:
                     hajimari.io/icon: fire
                     hajimari.io/appName: Grafana
                     external-dns.alpha.kubernetes.io/target: ${DDNS}
-                    nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
                 hosts:
                     - grafana.${ROOT_DOMAIN}
                 tls:
