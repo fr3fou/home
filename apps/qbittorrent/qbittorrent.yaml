@@ -34,7 +34,7 @@ spec:
           - name: configfiles
             mountPath: /data/configfiles
       install-qbit-matui:
-        image: joshkeegan/zip:3.17.0@sha256:060fd9b5da1cb0fb0db1785945e1b5d583f69f54440b4deb8f6887b1f143eacd
+        image: joshkeegan/zip:3.17.1@sha256:c559357ed03108c2246c1deacbbc419e3b296c0d61061c45defa01703b574a62
         command:
           - "/bin/sh"
           - -c
