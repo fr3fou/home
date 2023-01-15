@@ -81,6 +81,10 @@ spec:
                         gnetId: 14314
                         revision: 2
                         datasource: Prometheus
+                    ingress-nginx-loki:
+                        gnetId: 12559
+                        revision: 13
+                        datasource: Loki
 sops:
     kms: []
     gcp_kms: []
