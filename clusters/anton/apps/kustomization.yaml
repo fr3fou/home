@@ -25,3 +25,4 @@ resources:
   - ./webhook.yaml
   - ./n8n.yaml
   - ./adguard.yaml
+  - ./homepage.yaml

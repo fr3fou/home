@@ -5,4 +5,5 @@ resources:
   - ./hajimari.yaml
   - ./prometheus-community.yaml
   - ./grafana-charts.yaml
+  - ./jameswynn.yaml
 namespace: apps
