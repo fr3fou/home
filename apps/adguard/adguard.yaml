@@ -71,8 +71,11 @@ spec:
         ingressClassName: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "shield-check"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: Network-wide ads & trackers blocking DNS server.
+          gethomepage.dev/group: Applications
+          gethomepage.dev/icon: adguard-home
+          gethomepage.dev/name: AdGuard Home
           nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
           nginx.ingress.kubernetes.io/configuration-snippet: |
             sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/adguard/overseerr.css"></head>';

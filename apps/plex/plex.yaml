@@ -49,8 +49,11 @@ spec:
             sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/plex/overseerr.css"></head>';
             sub_filter_once on;
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/enable: "true"
-          hajimari.io/icon: plex
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: Plex organizes all of your personal media so you can enjoy it no matter where you are.
+          gethomepage.dev/group: Media
+          gethomepage.dev/icon: plex
+          gethomepage.dev/name: Plex
           external-dns.alpha.kubernetes.io/target: "${DDNS}"
         ingressClassName: nginx
         hosts:
