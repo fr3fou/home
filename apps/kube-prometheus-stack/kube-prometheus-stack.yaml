@@ -84,10 +84,6 @@ spec:
                         gnetId: 14314
                         revision: 2
                         datasource: Prometheus
-                    ingress-nginx-loki:
-                        gnetId: 12559
-                        revision: 13
-                        datasource: Loki
 sops:
     kms: []
     gcp_kms: []
@@ -103,8 +99,8 @@ sops:
             aHJYTkExYU96S0g0d3FCR2ZoeExTcDQKaw5nGuedGVZwebMDN87fCy46HwLh2VjM
             wBuMB4dyAL+rXBEzdX4vKFc5ILP+vZcAI2nr0LE07WPZw7K7HseRLg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-01-15T18:16:10Z"
-    mac: ENC[AES256_GCM,data:vJhGpwVYvzRbLn0RKA0l9QqUC8EClKEyQbAbQGTzmtC7teKEFcxMbIENZXbrNN7fc1NmK4itqROu48etXvd7JpWv1TDJT9YOnoX5yBiWUog2nmijNf34B0wzfuNIw43GG4UTxjKKGjF9CYLiSpeXAk1OxGyJkLARplt1OqjIIRs=,iv:chBvEh4jhldvbfPnK0gB7RXHUHuWQjOA6FxklP8PfVU=,tag:Xq5a2Zu6411jXffnT86jSg==,type:str]
+    lastmodified: "2023-01-15T19:58:28Z"
+    mac: ENC[AES256_GCM,data:XlnOtF/k6iambq57vsfjQrsjm3OnXRpiTWGq6lGTI9bBvNAwxtaNPClX14eiYzWLSJ4Q65iy6cddsYWqdHy7v3b92EcwE1jwr3MsepfYXGvjLirC00893YqPGzFQckTrwNYKXY3D9LqQNI5O2wjvhXHIsVxAj1BD7Hy2vrt1440=,iv:6Smfw10UB6RmlV6c4ct3MH6uwoZ2V3afIGAqh4wEvh4=,tag:AFHKbSMHt3/dDUWAp4LzKA==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3
