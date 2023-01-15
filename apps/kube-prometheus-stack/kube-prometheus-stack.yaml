@@ -42,6 +42,9 @@ spec:
                                 requests:
                                     storage: ENC[AES256_GCM,data:zy4pbw==,iv:q9JL/dAX3ZVT9XWDBW7dxLB5WEPULzBE9f8LpTYMMQg=,tag:ZBduYwblfou8nd6Z/xC9zg==,type:str]
         grafana:
+            persistence:
+                enabled: true
+                size: 5Gi
             defaultDashboardsTimezone: ${TIMEZONE}
             adminPassword: ENC[AES256_GCM,data:Mlug63sajNsBbtzlJGto6wGOCIHN0E6KegtReRBZ,iv:JvdAnKKlx41WMHjvklzJ6PJdoc2Y6ZUK01yjKiH+9SY=,tag:1xt0H2chXpskW7RwHukeSw==,type:str]
             ingress:
@@ -100,8 +103,8 @@ sops:
             aHJYTkExYU96S0g0d3FCR2ZoeExTcDQKaw5nGuedGVZwebMDN87fCy46HwLh2VjM
             wBuMB4dyAL+rXBEzdX4vKFc5ILP+vZcAI2nr0LE07WPZw7K7HseRLg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-11-21T13:10:37Z"
-    mac: ENC[AES256_GCM,data:u1fwlLjzaibcympEidg3EfeI0zA8vX9FUZz/esMQA6uIFyhhuu8lJhksKfE8zFvQ7UCOeUiLk3eJseywl5AYzc1AKkxpLc1wq54f7ypRjdIBwMs99kTBkyGbs/3s0ZO7NjWZ6zvQYm0PHjfoyBLuBn0hAM0szfKVLPfcRyPqrys=,iv:n41evhiXg4byz3Cy/IPKYQGqLttrTbbNTNsiD7XboQo=,tag:LkkZHUkggUBZkP/twv6lQA==,type:str]
+    lastmodified: "2023-01-15T18:16:10Z"
+    mac: ENC[AES256_GCM,data:vJhGpwVYvzRbLn0RKA0l9QqUC8EClKEyQbAbQGTzmtC7teKEFcxMbIENZXbrNN7fc1NmK4itqROu48etXvd7JpWv1TDJT9YOnoX5yBiWUog2nmijNf34B0wzfuNIw43GG4UTxjKKGjF9CYLiSpeXAk1OxGyJkLARplt1OqjIIRs=,iv:chBvEh4jhldvbfPnK0gB7RXHUHuWQjOA6FxklP8PfVU=,tag:Xq5a2Zu6411jXffnT86jSg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3
