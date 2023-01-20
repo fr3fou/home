@@ -1,0 +1,68 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: unpackerr
+  namespace: apps
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: app-template
+      version: 1.2.1
+      interval: 10m0s
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: apps
+
+  values:
+    image:
+      repository: ghcr.io/onedr0p/unpackerr
+      tag: 0.10.1@sha256:8950b556d980285d13bb851199354f441d79454e0534ba1c0dd738ec4c92b1b0
+
+    env:
+      TZ: "${TIMEZONE}"
+      UN_SONARR_0_URL: https://sonarr.${PERSONAL_DOMAIN}
+      UN_SONARR_0_PATHS_0: /data/host/Downloads
+      UN_SONARR_0_API_KEY:
+        secretKeyRef:
+          name: sonarr-secrets
+          key: api-key
+      UN_RADARR_0_URL: https://radarr.${PERSONAL_DOMAIN}
+      UN_RADARR_0_PATHS_0: /data/host/Downloads
+      UN_RADARR_0_API_KEY:
+        secretKeyRef:
+          name: radarr-secrets
+          key: api-key
+
+    service:
+      main:
+        enabled: false
+
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+
+    podSecurityContext:
+      runAsUser: ${USER_UID}
+      runAsGroup: ${USER_UID}
+      fsGroup: ${USER_UID}
+
+    persistence:
+      data:
+        enabled: true
+        mountPath: /data/host
+        type: hostPath # TODO: use a nas?
+        hostPath: /home/simo/Media
+
+
+    resources:
+      requests:
+        cpu: 10m
+        memory: 250Mi
+      limits:
+        memory: 1000Mi

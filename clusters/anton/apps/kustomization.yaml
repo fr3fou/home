@@ -26,3 +26,4 @@ resources:
   - ./n8n.yaml
   - ./adguard.yaml
   - ./homepage.yaml
+  - ./unpackerr.yaml
