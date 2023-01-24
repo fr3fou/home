@@ -18,8 +18,7 @@ resources:
   - ./monitoring-config.yaml
   - ./recyclarr.yaml
   - ./renovate.yaml
-  - ./luncher-box-backend.yaml
-  - ./luncher-box-frontend.yaml
+  - ./luncher-box.yaml
   - ./bazarr.yaml
   - ./notifications.yaml
   - ./webhook.yaml
