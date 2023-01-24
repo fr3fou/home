@@ -84,6 +84,10 @@ spec:
                         gnetId: 14314
                         revision: 2
                         datasource: Prometheus
+                    mysql:
+                        gnetId: 14057
+                        revision: 1
+                        datasource: Prometheus
 sops:
     kms: []
     gcp_kms: []
@@ -99,8 +103,8 @@ sops:
             aHJYTkExYU96S0g0d3FCR2ZoeExTcDQKaw5nGuedGVZwebMDN87fCy46HwLh2VjM
             wBuMB4dyAL+rXBEzdX4vKFc5ILP+vZcAI2nr0LE07WPZw7K7HseRLg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-01-15T19:58:28Z"
-    mac: ENC[AES256_GCM,data:XlnOtF/k6iambq57vsfjQrsjm3OnXRpiTWGq6lGTI9bBvNAwxtaNPClX14eiYzWLSJ4Q65iy6cddsYWqdHy7v3b92EcwE1jwr3MsepfYXGvjLirC00893YqPGzFQckTrwNYKXY3D9LqQNI5O2wjvhXHIsVxAj1BD7Hy2vrt1440=,iv:6Smfw10UB6RmlV6c4ct3MH6uwoZ2V3afIGAqh4wEvh4=,tag:AFHKbSMHt3/dDUWAp4LzKA==,type:str]
+    lastmodified: "2023-01-24T08:11:08Z"
+    mac: ENC[AES256_GCM,data:FEfBkwuFL896wpPerax+pBeg4cLwY6WKr9B3r7tkb0NDp43tmJoQTbVr4qBZcYawDjNBZ/gT5Z9BCeDLQv758HN6R5cDU1hGAVxzoWERzU9t5DWvLjL1XdNeZhAN7CyyMCGWm6T49mNwmO8tWpTWy6kSZWTqsI2qxolNPF106mI=,iv:BUxsnq6W0jmsUh+8XhPFMMQnYaexLu/H2re3Dlo6KIE=,tag:Gvi6eyyX2rkuaesaCg0YDA==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3
