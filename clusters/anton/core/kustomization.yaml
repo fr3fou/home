@@ -10,3 +10,4 @@ resources:
   - redis.yaml
   - metallb.yaml
   - ip-pools.yaml
+  - mongodb.yaml
