@@ -1,0 +1,63 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: your-spotify-server
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: app-template
+      version: 1.2.1
+      interval: 10m0s
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: apps
+
+  values:
+    image:
+      repository: yooooomi/your_spotify_server
+      pullPolicy: IfNotPresent
+      tag: latest@sha256:627ea442517c5236d7236a8dbcec29135011f75c6c7998f8ee8734d25f98b997
+
+    env:
+      TIMEZONE: ${TIMEZONE}
+      API_ENDPOINT: https://api.spotify.${PERSONAL_DOMAIN}
+      CLIENT_ENDPOINT: &client-url https://spotify.${PERSONAL_DOMAIN}
+      SPOTIFY_PUBLIC:
+        secretKeyRef:
+          name: your-spotify
+          key: client-id
+      SPOTIFY_SECRET:
+        secretKeyRef:
+          name: your-spotify
+          key: secret
+      MONGO_ENDPOINT: 
+        secretKeyRef:
+          name: your-spotify
+          key: mongodb-url
+      CORS: *client-url
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
+          nginx.ingress.kubernetes.io/proxy-body-size: 256m
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - host: &your-spotify-server-host "api.spotify.${PERSONAL_DOMAIN}"
+            paths:
+              - path: /
+
+        tls:
+          - hosts:
+              - *your-spotify-server-host
+            secretName: letsencrypt-your-spotify-server

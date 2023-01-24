@@ -1,0 +1,54 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: your-spotify-client
+  namespace: apps
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: app-template
+      version: 1.2.1
+      interval: 10m0s
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: apps
+
+  values:
+    image:
+      repository: yooooomi/your_spotify_client
+      pullPolicy: IfNotPresent
+      tag: latest@sha256:d02ceb96256209835f990cb2b233a2a6048c6308c333f2891850236d3aacf6ed
+
+    env:
+      TIMEZONE: ${TIMEZONE}
+      API_ENDPOINT: https://api.spotify.${PERSONAL_DOMAIN}
+
+    service:
+      main:
+        ports:
+          http:
+            port: 3000
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
+          cert-manager.io/cluster-issuer: letsencrypt
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: your_spotify
+          gethomepage.dev/description: Spotify tracking dashboard
+          gethomepage.dev/group: Applications
+          gethomepage.dev/icon: spotify.png
+        hosts:
+          - host: &your-spotify-client-host "spotify.${PERSONAL_DOMAIN}"
+            paths:
+              - path: /
+
+        tls:
+          - hosts:
+              - *your-spotify-client-host
+            secretName: letsencrypt-your-spotify-client
