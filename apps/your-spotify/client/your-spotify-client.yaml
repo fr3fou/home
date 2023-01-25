@@ -36,7 +36,6 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         annotations:
-          nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
           cert-manager.io/cluster-issuer: letsencrypt
           gethomepage.dev/enabled: "true"
           gethomepage.dev/name: your_spotify
