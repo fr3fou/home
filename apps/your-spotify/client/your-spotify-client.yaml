@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
-metadata:
-  name: your-spotify-client
+metadata: 
+  name: your-spotify-client 
   namespace: apps
 spec:
   interval: 10m0s
@@ -42,6 +42,7 @@ spec:
           gethomepage.dev/description: Spotify tracking dashboard
           gethomepage.dev/group: Applications
           gethomepage.dev/icon: spotify.png
+          external-dns.alpha.kubernetes.io/target: "${DDNS}"
         hosts:
           - host: &your-spotify-client-host "spotify.${ROOT_DOMAIN}"
             paths:
