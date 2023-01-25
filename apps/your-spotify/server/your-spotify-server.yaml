@@ -53,7 +53,7 @@ spec:
           nginx.ingress.kubernetes.io/proxy-body-size: 256m
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
-          - host: &your-spotify-server-host "api.spotify.${PERSONAL_DOMAIN}"
+          - host: &your-spotify-server-host "api.spotify.${ROOT_DOMAIN}"
             paths:
               - path: /
 

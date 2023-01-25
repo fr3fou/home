@@ -23,7 +23,7 @@ spec:
 
     env:
       TIMEZONE: ${TIMEZONE}
-      API_ENDPOINT: https://api.spotify.${PERSONAL_DOMAIN}
+      API_ENDPOINT: https://api.spotify.${ROOT_DOMAIN}
 
     service:
       main:
@@ -44,7 +44,7 @@ spec:
           gethomepage.dev/group: Applications
           gethomepage.dev/icon: spotify.png
         hosts:
-          - host: &your-spotify-client-host "spotify.${PERSONAL_DOMAIN}"
+          - host: &your-spotify-client-host "spotify.${ROOT_DOMAIN}"
             paths:
               - path: /
 
