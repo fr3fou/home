@@ -22,8 +22,8 @@ spec:
 
     env:
       TIMEZONE: ${TIMEZONE}
-      API_ENDPOINT: https://api.spotify.${PERSONAL_DOMAIN}
-      CLIENT_ENDPOINT: &client-url https://spotify.${PERSONAL_DOMAIN}
+      API_ENDPOINT: https://api.spotify.${ROOT_DOMAIN}
+      CLIENT_ENDPOINT: &client-url https://spotify.${ROOT_DOMAIN}
       SPOTIFY_PUBLIC:
         secretKeyRef:
           name: your-spotify
