@@ -21,7 +21,7 @@ spec:
       tag: v2.0.0
 
     env:
-      PORT: &port "8080"
+      PORT: &port 8080
       REDDIT_URL: "https://reddit.simo.sh"
 
     service:
