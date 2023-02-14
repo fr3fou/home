@@ -7,7 +7,7 @@ scene: !include scenes.yaml
 color_extractor:
 homeassistant:
   allowlist_external_urls:
-    - https://home.lab.simo.sh
+    - https://home.simo.sh
 http:
   use_x_forwarded_for: true
   trusted_proxies:
