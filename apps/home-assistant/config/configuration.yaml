@@ -5,6 +5,7 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 color_extractor:
+ambient_extractor:
 homeassistant:
   allowlist_external_urls:
     - https://home.simo.sh
