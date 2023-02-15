@@ -6,9 +6,6 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 color_extractor:
 ambient_extractor:
-animated_scenes:
-    external_switches: # optional; list of entities to turn off when activating a scene
-    - switch.main_light
 homeassistant:
   allowlist_external_urls:
     - https://home.simo.sh
