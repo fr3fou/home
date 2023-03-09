@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: adguard/adguardhome
-      tag: v0.107.25@sha256:eb92ea6919ac526d91db7249505a6501ecd0fd2576a6ecaa5c4dc1ab1833150b
+      tag: v0.107.26@sha256:e6e73613d3d3b4e24c9cb1be0dc6e52647a22d0d1f6932f5885e0b91a18ab1bc
 
     env:
       TZ: "${TIMEZONE}"
