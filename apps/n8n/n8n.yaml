@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: docker.io/n8nio/n8n
-      tag: 0.222.1
+      tag: 0.223.0
 
     env:
       TZ: ${TIMEZONE}
