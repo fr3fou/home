@@ -30,3 +30,4 @@ https://github.com/mozilla/sops#22encrypting-using-age
 - [ ] Backups for PVs
 - [ ] Group applications by namespaces - e.g `monitoring`, `rss`, `media-server`, `downloads`, etc
 - [ ] Fix NFS mount 
+- [ ] https://github.com/onedr0p/home-ops/commit/d88a344fed90d44f3df2afbac93eafa143eac81b 
