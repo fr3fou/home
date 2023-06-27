@@ -36,7 +36,7 @@ spec:
 
     initContainers:
       install-hacs:
-        image: busybox:1.36.1@sha256:6e494387c901caf429c1bf77bd92fb82b33a68c0e19f6d1aa6a3ac8d27a7049d
+        image: busybox:1.36.1@sha256:498f4d13aa3cc201bc12993cefa6f693ae4315f224354105539b8e110d4249d5
         command:
           - "/bin/sh"
           - -c
