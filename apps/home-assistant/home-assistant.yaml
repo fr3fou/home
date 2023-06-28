@@ -51,7 +51,7 @@ spec:
           - name: config
             mountPath: /config
       copy-config:
-        image: busybox:latest@sha256:6e494387c901caf429c1bf77bd92fb82b33a68c0e19f6d1aa6a3ac8d27a7049d
+        image: busybox:latest@sha256:69765edf5f42ac8d2aba7bb0165e1ad498105bc766edc673ef349ce7ff87eb14
         command:
           - "/bin/sh"
           - -c
