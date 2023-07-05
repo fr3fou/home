@@ -4,7 +4,7 @@ resources:
   - gotk-components.yaml
   - gotk-sync.yaml
   - config-map.yaml
-patchesJSON6902:
+patches:
   - target:
       kind: Deployment
       name: "kustomize-controller"
