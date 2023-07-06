@@ -37,16 +37,16 @@ spec:
                     volumeClaimTemplate:
                         spec:
                             accessModes:
-                                - ENC[AES256_GCM,data:zdy2bO18PWSfRSYvNQ==,iv:VuruuYfMNvAEAPW1Tq9IfHVrXJ+kOHexhzEonSw1W9g=,tag:Mxsq78gwU5XDyRPvLO3+2w==,type:str]
+                                - ENC[AES256_GCM,data:DPfE8jDRSsTxZq6qCg==,iv:zEOGpZdv9HOX6mRidlquBIVtFsvne0rVKv3G2sQEG8k=,tag:WocD/GAoYmKEIqvyHn7qUw==,type:str]
                             resources:
                                 requests:
-                                    storage: ENC[AES256_GCM,data:zy4pbw==,iv:q9JL/dAX3ZVT9XWDBW7dxLB5WEPULzBE9f8LpTYMMQg=,tag:ZBduYwblfou8nd6Z/xC9zg==,type:str]
+                                    storage: ENC[AES256_GCM,data:yVsbkQ==,iv:F8xotjyLN2bgVuXt4nkkjr4cH8qlgiutcWN8qXEnIZw=,tag:xkf9piRhzfKtQ7QJLtAKRw==,type:str]
         grafana:
             persistence:
                 enabled: true
                 size: 5Gi
             defaultDashboardsTimezone: ${TIMEZONE}
-            adminPassword: ENC[AES256_GCM,data:Mlug63sajNsBbtzlJGto6wGOCIHN0E6KegtReRBZ,iv:JvdAnKKlx41WMHjvklzJ6PJdoc2Y6ZUK01yjKiH+9SY=,tag:1xt0H2chXpskW7RwHukeSw==,type:str]
+            adminPassword: ENC[AES256_GCM,data:ZNJHq0JZ6Km+35vY5AXJsyVGQ7bzOr/aH660KcP9,iv:qArWa0Ri3LszBlxtiH2dKKUkNHJjoiBmQ+y+bDcw1FE=,tag:Wj3uzphsnykpqev3IEM/6g==,type:str]
             ingress:
                 enabled: true
                 ingressClassName: nginx
@@ -101,14 +101,14 @@ sops:
         - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCRHRsNzYxck1ETng4TExF
-            MDI0SHFPK0NQNzUxVHp6c3VodVNHc1EzMHpJClRxWDJCMWp3R1hiU3cvM1NuWlVu
-            SUk5bTJCKzJMMmJEUEpnTnJJREMrYmMKLS0tIEVLRFRhcWhKTStjVDhkMEdqbTcz
-            aHJYTkExYU96S0g0d3FCR2ZoeExTcDQKaw5nGuedGVZwebMDN87fCy46HwLh2VjM
-            wBuMB4dyAL+rXBEzdX4vKFc5ILP+vZcAI2nr0LE07WPZw7K7HseRLg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnYWlSWDJzR3k4WFNXOElL
+            TURpUlFacCtmSzc1OUpDYzhMVDR4M3ZyMmhjCjBsVldPNlB5YmNxcks2TmJKemZo
+            Qi9xM3NRZm04TjFDMVBhMnRoRmNjVEUKLS0tIGRkUmxaUnV2MzZWNEpWTjZIbmhO
+            VTd0bFNXM2ljRkdDOEo1MkxVaUlGeFkKN6N8wv97aa+I2WvpD/1DHhTAfOgUpNMj
+            g9+WnBYK8Ob45c9JyULa0ZEpHkOUUlafYGPxo2P0MAiaZIdqi22xCA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-01-24T09:33:37Z"
-    mac: ENC[AES256_GCM,data:m+RoLFWp6r2uDrnvWTFvpg4QqXQPYpUQ6+Bh0ShtxMh3mrz92sE1RYHD9YirVzsiXqWzeEIuBtYU7LIyuWjhf383eLMHCRYo5hpNwyTALSZFM819DsKI84KZTy/H81tUR+wGhPgOBKmgtzklEUge/sBiq21ZCF1AVfFtBmxHIII=,iv:NYfaf4tswKki8o6hQzfOZtN6t9NPXSqn9XZzudmXIm4=,tag:hBaZOU/KMUMwT8wHwQXCPQ==,type:str]
+    lastmodified: "2023-07-06T06:37:26Z"
+    mac: ENC[AES256_GCM,data:/jipMbVF7EnBtMXeGDvZzR7REIenO5Nn1CYG10LYw09q3j0hNzbUKYjR3GpnsTutVWZzqCXI1erZyx2EQVUocdf+7QKpPCGIew7F3k7FY5TO+XmWMqPvsi8F572ZG+NCWnOcq0JPh348pC7AO+bXnYNKjJquNe0e8UeLULN6Z88=,iv:dn+c+Da002XeaTHcddF1RhHNj7+h4/omZb5jlkCOhHg=,tag:wj/V0ooAMthiLQ97zNzfQg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3
