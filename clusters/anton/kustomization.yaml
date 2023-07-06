@@ -9,5 +9,5 @@ patches:
   - target:
       kind: Kustomization
       group: kustomize.toolkit.fluxcd.io
-      version: v1beta2
+      version: v1
     path: decryption-and-config.yaml
