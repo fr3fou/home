@@ -22,7 +22,7 @@ spec:
 
     initContainers:
       copy-config:
-        image: busybox:latest@sha256:653b23f3092ab4861f1a32e699b648d43291378fe6d9d64ca0bf735312587237
+        image: busybox:latest@sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79
         command:
           - "/bin/sh"
           - -c
