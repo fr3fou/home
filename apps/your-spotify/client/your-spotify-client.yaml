@@ -19,7 +19,7 @@ spec:
     image:
       repository: yooooomi/your_spotify_client
       pullPolicy: IfNotPresent
-      tag: latest@sha256:c8cf0e8faac0abe45a65bc10b8fa017b662f1ad24fde3892fd3a18b37a2efaf8
+      tag: latest@sha256:7a6f86efa031ae757751f03adc7599888fd519b6775b935fc7771fa5b16eeea1
 
     env:
       TIMEZONE: ${TIMEZONE}
