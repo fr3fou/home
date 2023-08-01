@@ -9,7 +9,7 @@ spec:
     - name: kube-prometheus-stack
   chart:
     spec:
-      version: "2.9.10"
+      version: "2.9.11"
       chart: loki-stack
       sourceRef:
         kind: HelmRepository
