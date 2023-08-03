@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
+if [ -z $GITHUB_TOKEN ]; then
+  echo "GITHUB_TOKEN is not defined"
+  exit 1
+fi
+
 kubectl create namespace flux-system
 
-export SOPS_AGE_KEY_FILE=$(cat .sops.yaml | yq -r '.creation_rules[0].age')
-
-cat age.agekey |
-	kubectl create secret generic sops-age \
-	--namespace=flux-system \
-	--from-file=sops.agekey=/dev/stdin
+cat "$HOME/Library/Application Support/sops/age/keys.txt" | kubectl create secret generic sops-age --namespace=flux-system --from-file=sops.agekey=/dev/stdin
 
 flux bootstrap github \
   --owner=fr3fou \
