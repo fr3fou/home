@@ -21,9 +21,9 @@ spec:
                 enabled: true
                 existingClaim: ENC[AES256_GCM,data:JhWABXC/Xw==,iv:Fx1JIapAdRMYWZ49kAyBgvvvHKDpAGlljeda39DMn9I=,tag:EWSeXdBlyxybG4uB2UszXg==,type:str]
         metrics:
-            enabled: true
+            enabled: false
             serviceMonitor:
-                enabled: true
+                enabled: false
         initdbScripts:
             luncher-box.sql: |
                 CREATE DATABASE "${LUNCHERBOX_DB}";
@@ -44,8 +44,8 @@ sops:
             QWR2d0Z2SmlLZnEvM0RxNkZOdmxkM1kKAXKyefSNnMRszKcQvx4PpknC/fwCdDYh
             xmhS2QAahTGaIj85KG58IA8AQosr5mewh/9KFSo6B4lg0LXxVaYRNA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-12-05T12:34:04Z"
-    mac: ENC[AES256_GCM,data:Hg4QECB2CfUQyiZfMXeIDI4Izu3PG4/vbK1GaeeEM70HmwP1CRM5e7vXvaU50fIvwP3ekSW/zucTK8E8QsNwYD5To84u8Whvik+GxrjP979/130zlHGRWGBK3sCTgysFL5LVmHpN9uRLRoXif8YfEtwwjeLe6iOTH+HNzx+L0i0=,iv:9Lq5jyLGWt6OGau58FKPvEHd6qnVQkd2FnvPmbtz4s4=,tag:NCq2NW3NaITbENFoKSBFsg==,type:str]
+    lastmodified: "2023-08-03T09:53:55Z"
+    mac: ENC[AES256_GCM,data:6z/a4tBI8zou7UtrTQBYGcfBgi0yPAyF2FYqHGfBUxJbIE/vI3ZC3lGRTs1vpV/1de2CJqsyilOl/fUuiaV06APcAF4LndT8DLcuCrFra6fvLMQFA6t2ZuT75TZ9zF0ElPRSXz/LOvmygNsF6NIZdPPh2upcpsrYu+5oSpxy32A=,iv:cD+mKxo5/MXJEUWNi9m0Qr3+PdEZ7TQjl9N/mrpoj2w=,tag:wtWWJiaxDELiGOY3T2MmWA==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3
