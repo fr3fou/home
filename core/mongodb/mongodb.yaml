@@ -26,9 +26,9 @@ spec:
             enabled: true
             existingClaim: ENC[AES256_GCM,data:tJNZYSwN3A==,iv:ig4wXKpu0ApwzwBape+lv36DQ/c2kNQCJocUpsBuQzE=,tag:550uIDuhQeViFGp0L5nb8A==,type:str]
         metrics:
-            enabled: false
+            enabled: true
             serviceMonitor:
-                enabled: false
+                enabled: true
         podSecurityContext:
             enabled: true
             fsGroup: ${USER_UID}
@@ -50,8 +50,8 @@ sops:
             cTJ0RmthZmtHamF5Q2JjVU5WbXMyLzAKjB3K73aRBmLQ4nG2JItx+P9tl+GvkliE
             adoPWHx5bYZG2+3g0PqMXq7Bao6wH4NElBFkDtaSc2bnrSE38HFUrA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-08-08T14:21:28Z"
-    mac: ENC[AES256_GCM,data:XgzMfEWN7VdNhC7s99uaY2Dn0gXRs3z3RtK3N07rVM/m2kWCd/ceMkyjYMJF9E37BmjjVWC555ES5sHJP8BTBvGcDmQdOthC+Mn32h7sRQlX1h+SI6wHUqr5jO2nFThBwETPBPDBfQwLoiMuoOkeMqBztXUbXR/w7QvbCKQHSkA=,iv:3LZs2crxH2h9YcTQWwq/2sieh5LrjJZIecgvmw1wAtM=,tag:sDrQHe2brH3hkTjSjImyrA==,type:str]
+    lastmodified: "2023-08-08T14:36:13Z"
+    mac: ENC[AES256_GCM,data:nyt1FHiP3UK/Ang43jgyWSG1sshPfVQQkJGk9xUrT3KDWFwlsajIUbsnGdBFdfXjXoRx5jYIuHgHiXbueSIcXipOxrnPBsqzkFX/uVnOWyLB1aDx5VyGweQyF0YR++Ku/FdewfYgGo4vq2s+r+G/QWeWVamOm+JrjsZQtYL56tM=,iv:q2z/Rgq/DUkck7t9LFOvP8dwIfw7zDnxde8zybFxUX8=,tag:gmTR1dnUv8H4Yr6pvtLsSw==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3
