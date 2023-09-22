@@ -18,7 +18,7 @@ spec:
         global:
             postgresql:
                 auth:
-                    password: ENC[AES256_GCM,data:V0H0udBUZ8rj+RJe1piDT4NT8fGVP7bDutfs9mjMWkI=,iv:GLAS4ZyFhSwRXV4oIrLLcqYSAHbTFunKvCZbxRujrso=,tag:T5deG+xAVGCTzbJw5Rt8og==,type:str]
+                    password: ENC[AES256_GCM,data:KFrSwlo3+Pv476+wteSNOEueM1OJvUQ/kf8+Y/fTNA==,iv:jTlNLuL2viWZT7GWCGOlhMiEH8Sr+Rn/1lwN+mqv+Os=,tag:Ly3asMWtCeI7AhQSAoyRMg==,type:str]
         primary:
             initdb:
                 user: postgres
@@ -47,8 +47,8 @@ sops:
             QWR2d0Z2SmlLZnEvM0RxNkZOdmxkM1kKAXKyefSNnMRszKcQvx4PpknC/fwCdDYh
             xmhS2QAahTGaIj85KG58IA8AQosr5mewh/9KFSo6B4lg0LXxVaYRNA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-09-22T21:49:14Z"
-    mac: ENC[AES256_GCM,data:kgfVKnu4jUpWrzBNuGZAKcwuDVoF5vXBwooWq+40/c39gZ7UyUhfOUbzn3jxLH+YtaVPoxEPXbwZNaNPIUNfLRyohRfEtpZtKFbBLAP4ew8XwF19BgXihFQBuYw8GeEJXYauVlD0KVAM4XcMpQjnhk2dgX3s259oNahQ4y6/ZM8=,iv:XWbUnFGofl9kK2OJS/kHCQSz0CeUsZLPzjGYFtk39kM=,tag:iyuW4/8NuFCw2yuUPepBgA==,type:str]
+    lastmodified: "2023-09-22T22:05:11Z"
+    mac: ENC[AES256_GCM,data:kiupIfyGwo7n8ZfV+FpAhZ2EYFoWaWfjPFz09o62bgHwgnreOCgDoVgqYQlHlX4fmcTBxVCXimS+RQAr7Kn4+7k3eTf+5B9aNYfH5BjR5+5LHT+SteX4WZydqM663FPwfs6r07U99kgwOr7yEUrQ3HTt+NUV2SYyc+b6OUWB388=,iv:R4sdUq8BWQgxk49yif6VXB3DwtHjvEnIplS1/hXAM0I=,tag:HLidEA03h9Sj2/U6G38wNQ==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.7.3

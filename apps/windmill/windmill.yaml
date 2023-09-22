@@ -17,7 +17,7 @@ spec:
     values:
         windmill:
             baseDomain: windmill.${ROOT_DOMAIN}
-            databaseUrl: ENC[AES256_GCM,data:pBF6jesibJL1fI49B0yrSfDE/btZIv1gBNI3/L2hlhReFSMQEBK3KaUTyaneh+qis9j1oEShwVkb6WNv1xzivsEamZxLP3xnDs98oZmhs1r2z5LS9aKo4Nf0n7gCfhQCqtc0Z8VMA+QEgjrnCg==,iv:11B9MI2gJ6/oZQ4WWCT1/wMO6EdtEvfO+PKf40hAVBg=,tag:7TqhHkQ+opI99k2tGC3ZmQ==,type:str]
+            databaseUrl: ENC[AES256_GCM,data:tjg7u3HRFuKAWRsS+7BR4hMLYtIzLdJztBdp/yhkiSLC+SKyRHC2mvJKZYuiRDMJvz5zuXPW5KEmWmu7q10QepDQFJzLlx6FCZj8itx17JihGe7wCbwDee27kPKsk2dUouBtQ9p72SG2J+Mb,iv:uHs2yZO4EpzUJFdg6pA6Wu8o6WgG1rF0p63/TaMJbwM=,tag:vtoZH1taD4HgEMHh8oDOaQ==,type:str]
             appReplicas: 1
             workerReplicas: 1
             lspReplicas: 1
@@ -51,8 +51,8 @@ sops:
             Vk1IUlYxTGhBU2tIZm13N05GOHlMZmsKZIh2ZkP//ewpe/Utga6sRiJvG3rdEjqz
             FyfxdFPr/89ppW3KXTmZwNa5i056aQ4fYEXlINRhZWLINrDqmOHwCg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-09-22T21:43:36Z"
-    mac: ENC[AES256_GCM,data:zoDa0kmiXgFINbnLGavmVR85OS0uAQ+SDVWzvRPvLXY3/QrQYt6XZSu8k1jVr5V5RpLjKqD9gtZ4ya8BYCy6NFPR5xD9YvMV8nnzcMrA1RkgRItwZHfI8bgiOiqhzZDH++lWW7kU96SYS6Cx/ye/42QPnF8yD6MQnpoEMaGMXCU=,iv:BfW/YYG7wMRqbsBfo1t8Pcm/Im1/WJOC/kyfAfKJtWE=,tag:ZpUB8hADPI2FQicpR5kiRg==,type:str]
+    lastmodified: "2023-09-22T22:06:31Z"
+    mac: ENC[AES256_GCM,data:i/o3c7tFkrP5tHqh/O3B9O922B9qblLzHM7XY6dVPqNkSwEfEWX8KLNLCJrGTS+isVJsmrEeOmKkxAcpLlCEeF3gMfm2vi7WcOWbqbXsEJxgyiHumZIZuwrBk65PNlKMvK5ZH1TghOLXl06Nt09WUCgTY7Brz39Vmzs4MhsEqWU=,iv:9Gp50yjompozrMDaxlqVICkBXvBUvQJS+3Km4VMEZZs=,tag:q1bP/op8XPOW62oxlhPeLw==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
     version: 3.7.3
