@@ -1,0 +1,49 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+    name: postgres
+    namespace: core
+spec:
+    interval: 10m
+    chart:
+        spec:
+            chart: postgresql
+            version: 12.12.4
+            sourceRef:
+                kind: HelmRepository
+                name: bitnami
+                namespace: core
+    values:
+        fullnameOverride: postgres
+        global:
+            postgresql:
+                auth:
+                    password: ENC[AES256_GCM,data:V0H0udBUZ8rj+RJe1piDT4NT8fGVP7bDutfs9mjMWkI=,iv:GLAS4ZyFhSwRXV4oIrLLcqYSAHbTFunKvCZbxRujrso=,tag:T5deG+xAVGCTzbJw5Rt8og==,type:str]
+        primary:
+            persistence:
+                enabled: true
+                existingClaim: ENC[AES256_GCM,data:DdyCRrAOS44=,iv:oprl2Ah+H7yymhAKMjn1LAl6tQ0YQOpW7EoEqbfDFEc=,tag:VraumagrVzp0ALsT3KdHQA==,type:str]
+            startupProbe:
+                enabled: true
+                failureThreshold: 60
+                periodSeconds: 30
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLdnRVTFJLYnhCYm95UXhp
+            eUlWRWJuVVFEZDdod0FTZ0VBTUhETUt1aWdZCkVZU3ZFcVVYVUVQTTN3bU9lRW9Q
+            STF3NEJxUE1kOCtQSGdkL3lPaDJnZzQKLS0tIEZOWmRBQ0tVdTM1Y29XRWRIRkNq
+            QWR2d0Z2SmlLZnEvM0RxNkZOdmxkM1kKAXKyefSNnMRszKcQvx4PpknC/fwCdDYh
+            xmhS2QAahTGaIj85KG58IA8AQosr5mewh/9KFSo6B4lg0LXxVaYRNA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-09-22T21:25:17Z"
+    mac: ENC[AES256_GCM,data:Mnu8khdzg08NDG1Rd5Hr9CDxYr1Cbu4J3ghghb2q0y3X3H3vlI0GAXdyk2vKWAixD1/cyXuOunW67R0TK9Cv4+x+2yUlpM+cwGotmaAM2fW5RbwlajMPQ960uk7EY4humqvkvLzDdaKzQvAX2d5DjHeAE3Q6cCfF2b79wNysIik=,iv:u0Qqa673lFu2+9NMpAZ/+tyxxsEal2TEbKjFiKaKfME=,tag:L01sbWHYNZj+bQdnYXT/kQ==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
+    version: 3.7.3

@@ -11,3 +11,4 @@ resources:
   - metallb.yaml
   - ip-pools.yaml
   - mongodb.yaml
+  - postgres.yaml
