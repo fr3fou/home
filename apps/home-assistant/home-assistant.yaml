@@ -112,7 +112,7 @@ spec:
 
     addons:
       codeserver:
-        enabled: true
+        enabled: false
         image:
           repository: ghcr.io/coder/code-server
           tag: 4.16.1
