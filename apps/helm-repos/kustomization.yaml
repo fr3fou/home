@@ -6,4 +6,5 @@ resources:
   - ./prometheus-community.yaml
   - ./grafana-charts.yaml
   - ./jameswynn.yaml
+  - ./windmill.yaml
 namespace: apps

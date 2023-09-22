@@ -27,3 +27,4 @@ resources:
   - ./homepage.yaml
   - ./unpackerr.yaml
   - ./your-spotify.yaml
+  - ./windmill.yaml

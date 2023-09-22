@@ -4,25 +4,27 @@ metadata:
   name: cluster-config
   namespace: flux-system
 data:
-  ROOT_DOMAIN: simo.sh
-  PERSONAL_DOMAIN: lab.simo.sh
+  ROOT_DOMAIN: "simo.sh"
+  PERSONAL_DOMAIN: "lab.simo.sh"
 
-  HOME_ASSISTANT_IP: 192.168.0.30
-  NGINX_IP: 192.168.0.201
-  PLEX_IP: 192.168.0.202
-  QBITTORRENT_IP: 192.168.0.203
-  ADGUARD_IP: 192.168.0.204
+  HOME_ASSISTANT_IP: "192.168.0.30"
+  NGINX_IP: "192.168.0.201"
+  PLEX_IP: "192.168.0.202"
+  QBITTORRENT_IP: "192.168.0.203"
+  ADGUARD_IP: "192.168.0.204"
 
-  PRIVATE_WHITELIST: 100.64.0.0/10,10.42.0.0/16,192.168.0.0/24
+  PRIVATE_WHITELIST: "100.64.0.0/10,10.42.0.0/16,192.168.0.0/24"
 
-  DDNS: mila.ddns.nbis.net
+  DDNS: "mila.ddns.nbis.net"
 
-  LUNCHERBOX_DB: luncherbox_production
-  LUNCHERBOX_BACKEND_URL: luncherbox-api.deliprods.com
-  LUNCHERBOX_FRONTEND_URL: luncherbox.deliprods.com
+  LUNCHERBOX_DB: "luncherbox_production"
+  LUNCHERBOX_BACKEND_URL: "luncherbox-api.deliprods.com"
+  LUNCHERBOX_FRONTEND_URL: "luncherbox.deliprods.com"
+
+  WINDMILL_DB: "windmill"
 
   TIMEZONE: "Europe/Sofia"
 
-  N8N_DB: n8n
+  N8N_DB: "n8n"
 
   USER_UID: "1000"
