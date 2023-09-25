@@ -19,7 +19,7 @@ spec:
             baseDomain: windmill.${ROOT_DOMAIN}
             databaseUrl: ENC[AES256_GCM,data:tjg7u3HRFuKAWRsS+7BR4hMLYtIzLdJztBdp/yhkiSLC+SKyRHC2mvJKZYuiRDMJvz5zuXPW5KEmWmu7q10QepDQFJzLlx6FCZj8itx17JihGe7wCbwDee27kPKsk2dUouBtQ9p72SG2J+Mb,iv:uHs2yZO4EpzUJFdg6pA6Wu8o6WgG1rF0p63/TaMJbwM=,tag:vtoZH1taD4HgEMHh8oDOaQ==,type:str]
             appReplicas: 1
-            workerReplicas: 2
+            workerReplicas: 3
             lspReplicas: 1
             workerGroups: []
         postgresql:
