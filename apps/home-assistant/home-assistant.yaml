@@ -115,7 +115,7 @@ spec:
         enabled: false
         image:
           repository: ghcr.io/coder/code-server
-          tag: 4.16.1
+          tag: 4.17.0
         env:
           TZ: "${TIMEZONE}"
         workingDir: /config
