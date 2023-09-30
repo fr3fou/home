@@ -42,6 +42,9 @@ spec:
                                 requests:
                                     storage: ENC[AES256_GCM,data:yVsbkQ==,iv:F8xotjyLN2bgVuXt4nkkjr4cH8qlgiutcWN8qXEnIZw=,tag:xkf9piRhzfKtQ7QJLtAKRw==,type:str]
         grafana:
+            image:
+                repository: docker.io/grafana/grafana
+                tag: "10.1.2"
             persistence:
                 enabled: true
                 size: 5Gi
