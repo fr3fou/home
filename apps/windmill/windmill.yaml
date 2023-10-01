@@ -23,6 +23,8 @@ spec:
             workerGroups:
                 - name: "default"
                   replicas: 3
+                - name: "native"
+                  replicas: 1
         postgresql:
             enabled: false
         minio:
