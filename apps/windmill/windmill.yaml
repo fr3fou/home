@@ -22,7 +22,7 @@ spec:
             lspReplicas: 1
             workerGroups:
                 - name: "default"
-                  replicas: 3
+                  replicas: 5
                 - name: "native"
                   replicas: 1
         postgresql:
