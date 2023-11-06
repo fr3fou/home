@@ -24,7 +24,7 @@ spec:
                 - name: "default"
                   replicas: 5
                 - name: "native"
-                  replicas: 1
+                  replicas: 3
         postgresql:
             enabled: false
         minio:
