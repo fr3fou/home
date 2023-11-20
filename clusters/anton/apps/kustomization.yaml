@@ -22,7 +22,6 @@ resources:
   - ./bazarr.yaml
   - ./notifications.yaml
   - ./webhook.yaml
-  - ./n8n.yaml
   - ./adguard.yaml
   - ./homepage.yaml
   - ./unpackerr.yaml
