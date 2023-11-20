@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/radarr-develop
-      tag: 5.1.2.8207@sha256:7e026aae3fa4ac9d4066a0533fdbfaa35a0ccdc41033bc4f2460aa9401ecfb46
+      tag: 5.2.2.8288@sha256:a96055f121ec26d3165a954948bcd888dedd7da55fa7a67838c64dd4bda9e15d
 
     podSecurityContext:
       runAsUser: ${USER_UID}
