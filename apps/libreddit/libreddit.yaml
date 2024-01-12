@@ -62,6 +62,11 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "reddit"
           external-dns.alpha.kubernetes.io/target: "${DDNS}"
+          nginx.ingress.kubernetes.io/server-snippet: |
+            location = /robots.txt {
+              add_header Content-Type text/plain;
+              return 200 "User-agent: *\nDisallow: /\n";
+            }
         hosts:
           - host: &libreddit-host "reddit.${ROOT_DOMAIN}"
             paths:
