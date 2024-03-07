@@ -44,7 +44,7 @@ spec:
         grafana:
             image:
                 repository: grafana/grafana
-                tag: "10.3.3"
+                tag: "10.4.0"
             persistence:
                 enabled: true
                 size: 5Gi
