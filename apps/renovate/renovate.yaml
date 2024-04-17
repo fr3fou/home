@@ -16,7 +16,7 @@ spec:
             runAsUser: 0
           containers:
             - name: renovate
-              image: renovate/renovate:37.301.6@sha256:10ad8a8183463888ec4c7c086970b8c7e90fa92e726f39aee917d6255b68d1fd
+              image: renovate/renovate:37.301.7@sha256:01715e27313a765a9526003a3bec5e6df1870f21174e5a1ed3ef20738690b16b
               command: ["sh"]
               args:
                 - "-c"
