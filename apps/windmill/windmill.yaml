@@ -21,10 +21,19 @@ spec:
             appReplicas: 1
             lspReplicas: 1
             workerGroups:
-                - name: "default"
+                - name: default
                   replicas: 5
-                - name: "native"
+                - name: native
                   replicas: 3
+                - name: anton
+                  replicas: 3
+                  volumeMounts:
+                    - name: anton
+                      mountPath: /mnt/Anton
+                  volumes:
+                    - name: anton
+                      hostPath:
+                        path: /home/simo/Anton
         postgresql:
             enabled: false
         minio:
@@ -54,8 +63,8 @@ sops:
             Vk1IUlYxTGhBU2tIZm13N05GOHlMZmsKZIh2ZkP//ewpe/Utga6sRiJvG3rdEjqz
             FyfxdFPr/89ppW3KXTmZwNa5i056aQ4fYEXlINRhZWLINrDqmOHwCg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-09-22T22:06:31Z"
-    mac: ENC[AES256_GCM,data:i/o3c7tFkrP5tHqh/O3B9O922B9qblLzHM7XY6dVPqNkSwEfEWX8KLNLCJrGTS+isVJsmrEeOmKkxAcpLlCEeF3gMfm2vi7WcOWbqbXsEJxgyiHumZIZuwrBk65PNlKMvK5ZH1TghOLXl06Nt09WUCgTY7Brz39Vmzs4MhsEqWU=,iv:9Gp50yjompozrMDaxlqVICkBXvBUvQJS+3Km4VMEZZs=,tag:q1bP/op8XPOW62oxlhPeLw==,type:str]
+    lastmodified: "2024-04-28T11:24:44Z"
+    mac: ENC[AES256_GCM,data:I4ySCaBcAlNAKP/WB8TdVvmIst2DXo4iRr1CDY51gfNZRL3fccWKMcgb4rLqWMPau0oLSFEBz+m9NJyMv3EYzloFLQx1Aaodxzu9qEO6aSCDaXGiDbKOkxNz9X1Q01TnhDA1mejjtLCUZqNZCghsgXzYcCA9G5Zd3aOVWtYkOZU=,iv:XqRH5DlyC8LqVQEwgofzHXrLFlOb3erIvnCnL51qeVE=,tag:jrJrh+RP7ujrj0uKL+FzLg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
-    version: 3.7.3
+    version: 3.8.1
