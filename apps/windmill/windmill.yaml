@@ -26,7 +26,7 @@ spec:
                 - name: native
                   replicas: 3
                 - name: anton
-                  replicas: 3
+                  replicas: 8
                   extraEnv:
                     - name: WORKER_TAGS
                       value: anton
@@ -66,8 +66,8 @@ sops:
             Vk1IUlYxTGhBU2tIZm13N05GOHlMZmsKZIh2ZkP//ewpe/Utga6sRiJvG3rdEjqz
             FyfxdFPr/89ppW3KXTmZwNa5i056aQ4fYEXlINRhZWLINrDqmOHwCg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-04-28T11:34:58Z"
-    mac: ENC[AES256_GCM,data:JDifopRbFetssiyNQUL57LdANFsbd9gSG7dPySs/reXL5A2P0Ahiw5Mayq96Ut2bBlXUIx/PYNJ7hH4VL2nwA8QIZ93JCVSrK8Sqmr84ZLCe549VV1me25uCs2HXo0g6fh2vAPYoUpckNqPS8vQvUO1TYWnqzL3jLrchW85RICQ=,iv:ndDDqmqHYx9T45N6VUt9OLvFfsfk7j5/udPZYknRhxU=,tag:S3piLOaHUhOyTXxe6KfaHA==,type:str]
+    lastmodified: "2024-04-28T12:14:16Z"
+    mac: ENC[AES256_GCM,data:BtCnOmDvD2TkwBYv9fDvud68cM5NQ1Jj/bWsEaVuUx56xNVzP5mjo1S0MAHPmDNK87aFPH+Q5puVzflNlM0swJBADE1oSh88j0bcAUP1QDjelIXn/2s0WHbqP7twfEURwg7TzduJNVU952W2Zh2drKuuXgc7VoysfKnHJGupD4U=,iv:O1xRKVRZzxiUYGn+oWj6THTGcMXdJrY7kULzYtMSFb4=,tag:8qh7IdT/ogyMhHKxHr+ynw==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
     version: 3.8.1
