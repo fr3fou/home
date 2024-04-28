@@ -27,6 +27,9 @@ spec:
                   replicas: 3
                 - name: anton
                   replicas: 3
+                  extraEnv:
+                    - name: WORKER_TAGS
+                      value: anton
                   volumeMounts:
                     - name: anton
                       mountPath: /mnt/Anton
@@ -63,8 +66,8 @@ sops:
             Vk1IUlYxTGhBU2tIZm13N05GOHlMZmsKZIh2ZkP//ewpe/Utga6sRiJvG3rdEjqz
             FyfxdFPr/89ppW3KXTmZwNa5i056aQ4fYEXlINRhZWLINrDqmOHwCg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-04-28T11:24:44Z"
-    mac: ENC[AES256_GCM,data:I4ySCaBcAlNAKP/WB8TdVvmIst2DXo4iRr1CDY51gfNZRL3fccWKMcgb4rLqWMPau0oLSFEBz+m9NJyMv3EYzloFLQx1Aaodxzu9qEO6aSCDaXGiDbKOkxNz9X1Q01TnhDA1mejjtLCUZqNZCghsgXzYcCA9G5Zd3aOVWtYkOZU=,iv:XqRH5DlyC8LqVQEwgofzHXrLFlOb3erIvnCnL51qeVE=,tag:jrJrh+RP7ujrj0uKL+FzLg==,type:str]
+    lastmodified: "2024-04-28T11:34:58Z"
+    mac: ENC[AES256_GCM,data:JDifopRbFetssiyNQUL57LdANFsbd9gSG7dPySs/reXL5A2P0Ahiw5Mayq96Ut2bBlXUIx/PYNJ7hH4VL2nwA8QIZ93JCVSrK8Sqmr84ZLCe549VV1me25uCs2HXo0g6fh2vAPYoUpckNqPS8vQvUO1TYWnqzL3jLrchW85RICQ=,iv:ndDDqmqHYx9T45N6VUt9OLvFfsfk7j5/udPZYknRhxU=,tag:S3piLOaHUhOyTXxe6KfaHA==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
     version: 3.8.1
