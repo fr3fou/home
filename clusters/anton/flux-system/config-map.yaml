@@ -15,7 +15,7 @@ data:
 
   PRIVATE_WHITELIST: "100.64.0.0/10,10.42.0.0/16,192.168.0.0/24"
 
-  DDNS: "unit-01.duckdns.org"
+  DDNS: "ddns.simo.sh"
 
   LUNCHERBOX_DB: "luncherbox_production"
   LUNCHERBOX_BACKEND_URL: "luncherbox-api.deliprods.com"
