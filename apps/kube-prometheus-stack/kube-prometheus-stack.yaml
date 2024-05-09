@@ -81,7 +81,7 @@ spec:
                 default:
                     node-exporter-full:
                         gnetId: 1860
-                        revision: 29
+                        revision: 36
                         datasource: Prometheus
                     ingress-nginx:
                         gnetId: 14314
@@ -95,6 +95,10 @@ spec:
                         gnetId: 14997
                         revision: 3
                         datasource: Prometheus
+                    node-temperatures:
+                        gnetId: 15202
+                        revision: 1
+                        datasource: Prometheus                        
 sops:
     kms: []
     gcp_kms: []
