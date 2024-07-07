@@ -25,5 +25,4 @@ resources:
   - ./adguard.yaml
   - ./homepage.yaml
   - ./unpackerr.yaml
-  - ./your-spotify.yaml
   - ./windmill.yaml
