@@ -91,10 +91,6 @@ spec:
                         gnetId: 14057
                         revision: 1
                         datasource: Prometheus
-                    mongodb:
-                        gnetId: 14997
-                        revision: 3
-                        datasource: Prometheus
                     node-temperatures:
                         gnetId: 15202
                         revision: 1
