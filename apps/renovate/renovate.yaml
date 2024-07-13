@@ -4,7 +4,7 @@ metadata:
   name: renovate
   namespace: apps
 spec:
-  schedule: "*/30 * * * *"
+  schedule: "* */4 * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
