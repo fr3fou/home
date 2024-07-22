@@ -25,18 +25,8 @@ spec:
                   replicas: 5
                 - name: native
                   replicas: 3
-                - name: anton
-                  replicas: 8
-                  extraEnv:
-                    - name: WORKER_TAGS
-                      value: anton
-                  volumeMounts:
-                    - name: anton
-                      mountPath: /mnt/Anton
-                  volumes:
-                    - name: anton
-                      hostPath:
-                        path: /home/simo/Anton
+                - name: scar
+                  replicas: 5
         postgresql:
             enabled: false
         minio:
