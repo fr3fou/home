@@ -1,0 +1,59 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minio
+  namespace: core
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: minio
+      version: "14.6.25"
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+  install:
+    remediation:
+      retries: 10
+  upgrade:
+    remediation:
+      retries: 10
+
+  values:
+    auth:
+      existingSecret: minio-creds
+
+    persistence:
+      enabled: true
+      existingClaim: minio-data
+
+
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
+        cert-manager.io/cluster-issuer: letsencrypt
+      hostname: &console-host minio-console.${PERSONAL_DOMAIN}
+      tls:
+        - hosts:
+            - *console-host
+          secretName: letsencrypt-minio-console
+
+    extraEnvVars:
+      - name: MINIO_BROWSER_REDIRECT_URL
+        value: https://minio-console.${PERSONAL_DOMAIN}
+      - name: MINIO_STS_DURATION
+        value: "1000d"
+
+    apiIngress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
+      hostname: &api-host s3.${PERSONAL_DOMAIN}
+      tls:
+        - hosts:
+            - *api-host
+          secretName: letsencrypt-minio
