@@ -45,6 +45,8 @@ spec:
         value: https://minio-console.${PERSONAL_DOMAIN}
       - name: MINIO_STS_DURATION
         value: "1000d"
+      - name: MINIO_BROWSER_SESSION_DURATION
+        value: "14d"
 
     apiIngress:
       enabled: true
