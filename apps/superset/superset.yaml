@@ -15,9 +15,10 @@ spec:
     values:
         image:
             repository: apache/superset
-            tag: '4.0.2'
+            tag: 4.0.2
         runAsUser: ${USER_UID}
-        envFromSecret: superset-secrets
+        extraSecretEnv:
+            SUPERSET_SECRET_KEY: ENC[AES256_GCM,data:T170IvcZSL/P0q0ynMUXoBNrZss92LBegyMBM7cEH5sWKvJjQNXNhyyt,iv:6Prg+1JZwWRnKJ5LQPOH5F2LkZErddT7Q20rSvrjy1c=,tag:sfiu8bcCH18Js+hDBpUchA==,type:str]
         ingress:
             enabled: true
             ingressClassName: nginx
@@ -25,12 +26,42 @@ spec:
                 cert-manager.io/cluster-issuer: letsencrypt
                 nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
             hosts:
-                - &host superset.${PERSONAL_DOMAIN}
+                - superset.${PERSONAL_DOMAIN}
             tls:
                 - hosts:
-                    - *host
+                    - superset.${PERSONAL_DOMAIN}
                   secretName: letsencrypt-superset
         postgresql:
             enabled: false
         redis:
             enabled: false
+        supersetNode:
+            connections:
+                redis_host: redis-master.core.svc.cluster.local
+                redis_cache_db: 2
+                redis_port: 6379
+                db_host: postgres.core.svc.cluster.local
+                db_port: 5432
+                db_user: postgres
+                db_pass: ENC[AES256_GCM,data:9hnCMLZ31mAw6gd6U0x+wbcqdtrMC0kJ6klUFgT/LA==,iv:hamACDgTIaDI+tIIlvPdagnTl4/eQQdeDmFkxoX6GQY=,tag:R8A1xS+/xnYKbVDkwzs7iw==,type:str]
+                db_name: ${SUPERSET_DB}
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqOGJURi9FM3pob3dxK3FK
+            djNoUWxaSVRTbUtUMUVwK3dQOVBxcmpZY24wCnVNZlZEeWhtbDJJVHBPK2oyaFVP
+            T2lvYXJjZ2lVRjVHdTV4ckdxVjd5TlkKLS0tIHYzMGdpRjkvdGEwZ2loakZPVEZG
+            V1R5UEpkZ2VRYUhXVzBPSmFsSERMZG8KH6VREq1Vl83LoPXiEVk/KjuuWfAyEqbA
+            vjGhMn57fzPRhBuQJEd2PLSghafcj66CoMUG+pheG8L8ilkhbVqQvQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-07-29T22:52:16Z"
+    mac: ENC[AES256_GCM,data:UvTTpgdfQqHs/6xmn/3sYa+CP8a6nlWoGl8gvmwHrqqjAAw9k2iLNSDY/8OfYPZj+KFRSHORzduyYuGJvu9lSC6JRAQoPHCHSCCmLiOYJnhbvZzVxgShE7rY1Ie0si/jllef3RCs7byOYF9zu9bunyNRz+tPrMroRAQid9mTG00=,iv:yeTLOcgLAYrMVZfsZMcYaP0wDmJY05ZlGZfUQiuNQGs=,tag:GogIWT+WLPlsnC+5shgQHg==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
+    version: 3.9.0
