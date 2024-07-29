@@ -25,6 +25,8 @@ spec:
                 scripts:
                     windmill.sql: |
                         CREATE DATABASE "${WINDMILL_DB}" OWNER postgres;
+                    superset.sql: |
+                        CREATE DATABASE "${SUPERSET_DB}" OWNER postgres;
             persistence:
                 enabled: true
                 existingClaim: ENC[AES256_GCM,data:6+rF4ULJm24=,iv:cDmKmVzMRuju5mST5i3QP1jD0Bxdxsq7hTe8wY/qnzU=,tag:ddoTVa0WR5HcWhzZsE+mZA==,type:str]
@@ -47,8 +49,8 @@ sops:
             QWR2d0Z2SmlLZnEvM0RxNkZOdmxkM1kKAXKyefSNnMRszKcQvx4PpknC/fwCdDYh
             xmhS2QAahTGaIj85KG58IA8AQosr5mewh/9KFSo6B4lg0LXxVaYRNA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-09-22T22:05:11Z"
-    mac: ENC[AES256_GCM,data:kiupIfyGwo7n8ZfV+FpAhZ2EYFoWaWfjPFz09o62bgHwgnreOCgDoVgqYQlHlX4fmcTBxVCXimS+RQAr7Kn4+7k3eTf+5B9aNYfH5BjR5+5LHT+SteX4WZydqM663FPwfs6r07U99kgwOr7yEUrQ3HTt+NUV2SYyc+b6OUWB388=,iv:R4sdUq8BWQgxk49yif6VXB3DwtHjvEnIplS1/hXAM0I=,tag:HLidEA03h9Sj2/U6G38wNQ==,type:str]
+    lastmodified: "2024-07-29T18:37:56Z"
+    mac: ENC[AES256_GCM,data:TKClpd97zluLlX8/a2keFw4PkC+sh2z6cb2PJQ2aNNQPWvjaQc2w7rroaYz8leYOonbvBqvsS4IoE0yCeM8fpzjK2uDsduKIrBwaCZbh8NZuZEqUZlyGrVJENTUsFgmmUX+mRHa2h6887+RAluA1Y66QNZ+LCUsbgng40EWljYA=,iv:CMkfqfO4xslsHZy1hAEV5JAAz2zi72peb1wXixS0feU=,tag:vzMbd6VLdwx5pUxK5HD3JQ==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
-    version: 3.7.3
+    version: 3.9.0

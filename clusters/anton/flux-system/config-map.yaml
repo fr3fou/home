@@ -23,6 +23,8 @@ data:
 
   WINDMILL_DB: "windmill"
 
+  SUPERSET_DB: "superset"
+
   TIMEZONE: "Europe/Sofia"
 
   N8N_DB: "n8n"
