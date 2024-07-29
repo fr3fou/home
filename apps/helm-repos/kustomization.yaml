@@ -4,6 +4,7 @@ resources:
   - ./bjw-s.yaml
   - ./hajimari.yaml
   - ./prometheus-community.yaml
+  - ./superset.yaml
   - ./grafana-charts.yaml
   - ./jameswynn.yaml
   - ./windmill.yaml

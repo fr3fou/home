@@ -1,8 +1,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: jameswynn
+  name: superset
   namespace: apps
 spec:
   interval: 10m0s
-  url: https://jameswynn.github.io/helm-charts
+  url: https://apache.github.io/superset
