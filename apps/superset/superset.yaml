@@ -18,7 +18,6 @@ spec:
             tag: '4.0.2'
         runAsUser: ${USER_UID}
         envFromSecret: superset-secrets
-        configFromSecret: superset-config
         ingress:
             enabled: true
             ingressClassName: nginx

@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - ./secret.yaml
   - ./superset.yaml
-  - ./config.yaml
 namespace: apps
