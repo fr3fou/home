@@ -24,12 +24,12 @@ spec:
             ingressClassName: nginx
             annotations:
                 cert-manager.io/cluster-issuer: letsencrypt
-                nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
+                external-dns.alpha.kubernetes.io/target: "${DDNS}"
             hosts:
-                - superset.${PERSONAL_DOMAIN}
+                - &host superset.${ROOT_DOMAIN}
             tls:
                 - hosts:
-                    - superset.${PERSONAL_DOMAIN}
+                    - *host
                   secretName: letsencrypt-superset
         postgresql:
             enabled: false
