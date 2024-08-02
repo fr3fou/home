@@ -27,6 +27,11 @@ spec:
                   replicas: 3
                 - name: scar
                   replicas: 5
+                  extraEnv:
+                    - name: WORKER_TAGS
+                      value: scar
+                - name: reports
+                  replicas: 5
         postgresql:
             enabled: false
         minio:
