@@ -20,6 +20,9 @@ spec:
                 auth:
                     password: ENC[AES256_GCM,data:KFrSwlo3+Pv476+wteSNOEueM1OJvUQ/kf8+Y/fTNA==,iv:jTlNLuL2viWZT7GWCGOlhMiEH8Sr+Rn/1lwN+mqv+Os=,tag:Ly3asMWtCeI7AhQSAoyRMg==,type:str]
         primary:
+            extraEnvVars:
+                - name: POSTGRESQL_MAX_CONNECTIONS
+                  value: "500"
             initdb:
                 user: postgres
                 scripts:
@@ -49,8 +52,8 @@ sops:
             QWR2d0Z2SmlLZnEvM0RxNkZOdmxkM1kKAXKyefSNnMRszKcQvx4PpknC/fwCdDYh
             xmhS2QAahTGaIj85KG58IA8AQosr5mewh/9KFSo6B4lg0LXxVaYRNA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-07-29T18:37:56Z"
-    mac: ENC[AES256_GCM,data:TKClpd97zluLlX8/a2keFw4PkC+sh2z6cb2PJQ2aNNQPWvjaQc2w7rroaYz8leYOonbvBqvsS4IoE0yCeM8fpzjK2uDsduKIrBwaCZbh8NZuZEqUZlyGrVJENTUsFgmmUX+mRHa2h6887+RAluA1Y66QNZ+LCUsbgng40EWljYA=,iv:CMkfqfO4xslsHZy1hAEV5JAAz2zi72peb1wXixS0feU=,tag:vzMbd6VLdwx5pUxK5HD3JQ==,type:str]
+    lastmodified: "2024-08-08T09:41:01Z"
+    mac: ENC[AES256_GCM,data:RoxEw2u4rx8DGboC7YB/UI7VDf9I+rAAdKdg2RemYld92bB+Lh1rbaDrcmPCsx91lvC1TzD9YNLHVCUv//VHjMmprMZrge8ZTi+47OE+xgvMaOBKOnWsj1Ikg8Iv+TWhlPKkzv7ocfyGbH9x2ZW2w/BicVjkbs3D+qW4Grpxqrk=,iv:K/GSPsnncs1WZkyp4fQtM8mvI9SPVZSAgVJ2WzOI6G0=,tag:GAtRj6MoRKXh3znUNI3h9A==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData))
     version: 3.9.0
