@@ -27,3 +27,4 @@ resources:
   - ./homepage.yaml
   - ./unpackerr.yaml
   - ./windmill.yaml
+  - ./alloy.yaml
