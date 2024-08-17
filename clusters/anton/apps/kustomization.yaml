@@ -14,8 +14,6 @@ resources:
   - ./hajimari.yaml
   - ./freshrss.yaml
   - ./reddit-rss.yaml
-  - ./kube-prometheus-stack.yaml
-  - ./loki-stack.yaml
   - ./monitoring-config.yaml
   - ./recyclarr.yaml
   - ./renovate.yaml
