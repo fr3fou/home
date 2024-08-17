@@ -1,42 +1,107 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: alloy
+    name: alloy
 spec:
-  interval: 5m
-  timeout: 15m
-  chart:
-    spec:
-      chart: alloy
-      version: '0.6.0'
-      sourceRef:
-        kind: HelmRepository
-        name: grafana-charts
-        namespace: apps
-  maxHistory: 5
-  install:
-    crds: CreateReplace
-    remediation:
-      retries: 4
-  upgrade:
-    crds: CreateReplace
+    interval: 5m
     timeout: 15m
-    remediation:
-      remediateLastFailure: true
-  uninstall:
-    keepHistory: false
-  values:
-    alloy:
-      extraEnv:
-        - name: GRAFANA_CLOUD_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: grafana-cloud-secrets
-              key: API_KEY
-        - name: GRAFANA_CLOUD_LOGS_USER
-          value: '967489'
-      configMap:
-        create: false
-        name: alloy-config
-        key: config.alloy
+    chart:
+        spec:
+            chart: k8s-monitoring
+            version: 1.4.8
+            sourceRef:
+                kind: HelmRepository
+                name: grafana-charts
+                namespace: apps
+    maxHistory: 5
+    install:
+        crds: CreateReplace
+        remediation:
+            retries: 4
+    upgrade:
+        crds: CreateReplace
+        timeout: 15m
+        remediation:
+            remediateLastFailure: true
+    uninstall:
+        keepHistory: false
+    values:
+        cluster:
+            name: anton
+        externalServices:
+            prometheus:
+                host: https://prometheus-prod-24-prod-eu-west-2.grafana.net
+                basicAuth:
+                    username: "1735527"
+                    password: ENC[AES256_GCM,data:bfJD0mVbU1NurqP3GEyJa4KVwrdBTlMQph+QeDwUW3lDNxce5KelnFG5AdKBA5/WzjTJcWDXEdcnn05Bo5WUASr4uFObkRCS7s9ciogf48TmgNVP9en+BmAM2yGHDD8FTmr0gg1nTZEZZg0wm42PtFajf5ynz9U9qVu3iWVUOTX9ceP5TqQtjoAvGX5sIpmRbhL7XAYcImOZUe9U0zgedQ==,iv:2cdiGRFjvtsPwxf75TlQp161m68qXGU3Axg3cYjDMYQ=,tag:E/UB9cJDjO5lJ8yS4mXZyg==,type:str]
+            loki:
+                host: https://logs-prod-012.grafana.net
+                basicAuth:
+                    username: "967489"
+                    password: ENC[AES256_GCM,data:cnE0u0IyMKODItkjOdXEZzBFghtzUSce1kz8rQmQgNliIWmaxMZfvUcErjGgQqfEF8ZDZW5r8f1v9r93FD6EgWvl/FSrAHL+MEDF0nH+X7WRLWcFaZ4gseHBLllDCZ1k6KOnZ+1gbAHzSB1foQn0nA9aI3u6Lm7t410/L+j4tJm7neUPORsB5T2m4n/yYkqyS0VG4NYBfjdVk0jWkhGg9g==,iv:7nb4SEJZIIg/mx7AsPDRj6sV9b53EhZhLC3344VXCSw=,tag:HN5PFSnHYl+L0ehBSnXZOg==,type:str]
+            tempo:
+                host: https://tempo-prod-10-prod-eu-west-2.grafana.net:443
+                basicAuth:
+                    username: "961804"
+                    password: ENC[AES256_GCM,data:LiRTppkzWm3/ohhCJ4GAZrxPosZFnv8MWWrvEC8VtBzwcGNLgU9aNiWiBQtJoZqomZ7L8DSaUEooH90cuegoDdU2NYdcoymUMDkikiFCsO8SJ87Z+08eqCR7nyno71XSgO6bliOev0/CfZRHKPKLlHNNZDg/0d9/sGxxxg7OBSBJlpkTk2RiHbVlzTfZw8mFf2aYsWT/7dO6uYlE7hfaxQ==,iv:5iUK65lcl41KJoG5jVUjK43AJOMscIK5x9rGZleH4ks=,tag:i7y7sTloCTY/fj3BeZHh2w==,type:str]
+        metrics:
+            enabled: true
+            alloy:
+                metricsTuning:
+                    useIntegrationAllowList: true
+            cost:
+                enabled: false
+            kepler:
+                enabled: true
+            node-exporter:
+                enabled: true
+        logs:
+            enabled: true
+            pod_logs:
+                enabled: true
+            cluster_events:
+                enabled: true
+        traces:
+            enabled: false
+        receivers:
+            grpc:
+                enabled: false
+            http:
+                enabled: false
+            zipkin:
+                enabled: false
+            grafanaCloudMetrics:
+                enabled: false
+        opencost:
+            enabled: false
+        kube-state-metrics:
+            enabled: false
+        prometheus-node-exporter:
+            enabled: false
+        prometheus-operator-crds:
+            enabled: false
+        kepler:
+            enabled: true
+        alloy: {}
+        alloy-events: {}
+        alloy-logs: {}
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJNTdJTWxPcWowSDZpbkYy
+            bVFHU2wzU0tmN3BDc29YRjVHSWVGRmM2MDNZCjh2d2lyeWhIVkx6eXFkSW9GbFBH
+            QXdmUy9Wd1NzYTMwaGhkZ1RIMjUxMTAKLS0tIHBYVExyZitnTTc3cTFEZzVQd01W
+            blpERktLU1dJcXhuQ004bmkzNkcyUkkK8jvK3zlofUgI9zlM9O6heN4/12M0pH/P
+            Au31v2/90G9NXO6dSCnX3ARSljYyLDKI+txNLq7T+AuBuBuScwWO8g==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-08-17T11:42:52Z"
+    mac: ENC[AES256_GCM,data:7EuRr4+9tpN98kid73oH9LZS9r7IRedEAl8radET9pGreI61wDyIkUMcQPKiCqYPRihu1phhc3POd++qbnS2C/LaUuztx3tmNMkCfj7ytQ6ByfS9MJ4mX1/6AIRgc/mYq2gOz6LbP9FuMAJ8jPw5aHIych1XX8iy74BhxBqOtbU=,iv:jGQs58nht9itmj0z7NmJdgnPeQ6JOFQ5CE3VQzszu90=,tag:cMbmD/6R9SqVYx50J27rlw==,type:str]
+    pgp: []
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
+    version: 3.9.0

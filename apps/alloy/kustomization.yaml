@@ -3,10 +3,3 @@ kind: Kustomization
 namespace: apps
 resources:
   - ./alloy.yaml
-  - ./secret.yaml
-configMapGenerator:
-  - name: alloy-config
-    files:
-      - config.alloy=./resources/config.alloy
-generatorOptions:
-  disableNameSuffixHash: true
