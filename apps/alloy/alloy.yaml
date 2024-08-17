@@ -17,7 +17,7 @@ spec:
     install:
         crds: CreateReplace
         remediation:
-            retries: 4
+            retries: 5
     upgrade:
         crds: CreateReplace
         timeout: 15m
@@ -75,13 +75,24 @@ spec:
         opencost:
             enabled: false
         kube-state-metrics:
-            enabled: true
+            metricsTuning:
+                excludeMetrics:
+                    - kube_replicaset_status_.*
+                    - kube_replicaset_created
+                    - kube_replicaset_metadata_generation
+                    - kube_replicaset_owner
+                    - kube_replicaset_spec_replicas
+        node-exporter:
+            metricsTuning:
+                dropMetricsForFilesystem:
+                    - tempfs
+                    - tmpfs
         prometheus-node-exporter:
             enabled: true
         prometheus-operator-crds:
             enabled: true
         kepler:
-            enabled: true
+            enabled: false
         extraMetricRelabelingRules: |-
             rule {
               source_labels = ["namespace","pod"]
