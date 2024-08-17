@@ -82,6 +82,21 @@ spec:
             enabled: false
         kepler:
             enabled: true
+        extraMetricRelabelingRules: |-
+            rule {
+              source_labels = ["namespace","pod"]
+              separator = "@"
+              regex = "flux-system@(.+)-.+-.+"
+              target_label = "uid"
+              replacement = ""
+            }
+            rule {
+              source_labels = ["namespace","pod"]
+              separator = "@"
+              regex = "flux-system@(.+)-.+-.+"
+              target_label = "pod"
+              replacement = "$1"
+            }
         alloy: {}
         alloy-events: {}
         alloy-logs: {}
@@ -100,8 +115,8 @@ sops:
             blpERktLU1dJcXhuQ004bmkzNkcyUkkK8jvK3zlofUgI9zlM9O6heN4/12M0pH/P
             Au31v2/90G9NXO6dSCnX3ARSljYyLDKI+txNLq7T+AuBuBuScwWO8g==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-08-17T11:42:52Z"
-    mac: ENC[AES256_GCM,data:7EuRr4+9tpN98kid73oH9LZS9r7IRedEAl8radET9pGreI61wDyIkUMcQPKiCqYPRihu1phhc3POd++qbnS2C/LaUuztx3tmNMkCfj7ytQ6ByfS9MJ4mX1/6AIRgc/mYq2gOz6LbP9FuMAJ8jPw5aHIych1XX8iy74BhxBqOtbU=,iv:jGQs58nht9itmj0z7NmJdgnPeQ6JOFQ5CE3VQzszu90=,tag:cMbmD/6R9SqVYx50J27rlw==,type:str]
+    lastmodified: "2024-08-17T13:13:08Z"
+    mac: ENC[AES256_GCM,data:ONa+0kjMU3gOSYzk7Wf/+vrJWs9US6HbwzBjwMLow4eCgurBs5XLd6nb3zbKOq2OBT/+Gztjy+R00RkFy6vCnXlckCHHvZZrg14CD4Hrpoz0AiNexXVw+FG47bSqUhBDRb8S10NmIjJRLYUxD7fBtPQoctdZfYbUAdFrxzSsWao=,iv:EC6QXMZTVwb+98kXKa1Ds6/N5LfEY3rAGy6vyVk6YpQ=,tag:te2qm0iUn2N8ebwCZ6vcgg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
     version: 3.9.0
