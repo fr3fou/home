@@ -127,19 +127,7 @@ spec:
                 job_name   = "integrations/postgres_exporter"
             }
 
-            local.file_match "logs_integrations_postgres_exporter" {
-                path_targets = [{
-                    __address__ = "localhost",
-                    __path__    = "/var/log/postgresql/postgres.log",
-                    instance    = constants.hostname,
-                    job         = "integrations/postgres_exporter",
-                }]
-            }
 
-            loki.source.file "logs_integrations_postgres_exporter" {
-                targets    = local.file_match.logs_integrations_postgres_exporter.targets
-                forward_to = [loki.process.logs_service.receiver]
-            }
         extraMetricRelabelingRules: |-
             rule {
               source_labels = ["namespace","pod"]
