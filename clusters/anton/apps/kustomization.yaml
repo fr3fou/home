@@ -14,7 +14,6 @@ resources:
   - ./hajimari.yaml
   - ./freshrss.yaml
   - ./reddit-rss.yaml
-  - ./monitoring-config.yaml
   - ./recyclarr.yaml
   - ./renovate.yaml
   - ./luncher-box.yaml
