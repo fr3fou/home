@@ -33,17 +33,17 @@ spec:
                 host: https://prometheus-prod-24-prod-eu-west-2.grafana.net
                 basicAuth:
                     username: "1735527"
-                    password: ENC[AES256_GCM,data:bfJD0mVbU1NurqP3GEyJa4KVwrdBTlMQph+QeDwUW3lDNxce5KelnFG5AdKBA5/WzjTJcWDXEdcnn05Bo5WUASr4uFObkRCS7s9ciogf48TmgNVP9en+BmAM2yGHDD8FTmr0gg1nTZEZZg0wm42PtFajf5ynz9U9qVu3iWVUOTX9ceP5TqQtjoAvGX5sIpmRbhL7XAYcImOZUe9U0zgedQ==,iv:2cdiGRFjvtsPwxf75TlQp161m68qXGU3Axg3cYjDMYQ=,tag:E/UB9cJDjO5lJ8yS4mXZyg==,type:str]
+                    password: ENC[AES256_GCM,data:JyKSRjrc26USFBM0YZpIXZexZdGxNR3Y1ihV4sdFHwFTeTM3+Y0T3O+80ig5p50aUiV6r59O0gRZcf6Pe93O1KrtCvt9BdhscjoAIOVabvzWb1GdSxyTt6uyiRs7L8G8fHp/G0f/cLKHEW3htjS5B80z1n8E4EHH6JFuHrSPdeQ68XCwQxqE7FRf76qg8wIlZR5jW6DhZw55D2atqG2RQg==,iv:0kjE4pcCr+Xt0jyY4t/lOg5SdBIT/9dMNPxb29L5r2c=,tag:SUZuSjbB4/NWbTH24yWUhw==,type:str]
             loki:
                 host: https://logs-prod-012.grafana.net
                 basicAuth:
                     username: "967489"
-                    password: ENC[AES256_GCM,data:cnE0u0IyMKODItkjOdXEZzBFghtzUSce1kz8rQmQgNliIWmaxMZfvUcErjGgQqfEF8ZDZW5r8f1v9r93FD6EgWvl/FSrAHL+MEDF0nH+X7WRLWcFaZ4gseHBLllDCZ1k6KOnZ+1gbAHzSB1foQn0nA9aI3u6Lm7t410/L+j4tJm7neUPORsB5T2m4n/yYkqyS0VG4NYBfjdVk0jWkhGg9g==,iv:7nb4SEJZIIg/mx7AsPDRj6sV9b53EhZhLC3344VXCSw=,tag:HN5PFSnHYl+L0ehBSnXZOg==,type:str]
+                    password: ENC[AES256_GCM,data:sYxI0pNZjuzIf182tz7KXEN0Ic2dZReFoYKuLCeqFKgygTySLFlPE4btJi53hs49yqw3UVqGkmS9tXNmW3Z3RexIjOAPGdoRhJOgPJcqdYT6EXvjU+ke4NUEzcVvoFgIrjlZHIZys5gZsRs23UWadTz1TMEfg3ulYz3oJCWCCcXfbU7bKes86caR7WEV6MMMs1USEUkrlGN46TuyCwOhog==,iv:bZRpcokZTQd8R9DR35RwfWFPgRwB5CQ5SMEzyVMuoog=,tag:pJSsLRA5c8DIQ1PKGRA/Ew==,type:str]
             tempo:
                 host: https://tempo-prod-10-prod-eu-west-2.grafana.net:443
                 basicAuth:
                     username: "961804"
-                    password: ENC[AES256_GCM,data:LiRTppkzWm3/ohhCJ4GAZrxPosZFnv8MWWrvEC8VtBzwcGNLgU9aNiWiBQtJoZqomZ7L8DSaUEooH90cuegoDdU2NYdcoymUMDkikiFCsO8SJ87Z+08eqCR7nyno71XSgO6bliOev0/CfZRHKPKLlHNNZDg/0d9/sGxxxg7OBSBJlpkTk2RiHbVlzTfZw8mFf2aYsWT/7dO6uYlE7hfaxQ==,iv:5iUK65lcl41KJoG5jVUjK43AJOMscIK5x9rGZleH4ks=,tag:i7y7sTloCTY/fj3BeZHh2w==,type:str]
+                    password: ENC[AES256_GCM,data:7EFNL0W879XdbU9sTbPal/IcI2vgZMfK2jJBgiURSoZCkpuRZLK/X7jsFJY8JnFOdyHEBnLeFppwOi0iuXR3yYE0HmrMRXQLC8w+nN2cj+Kzy8A96ZqIdxVnATOYJHmtqPRWCVBy5rqbNpzCn11b1zBCf22hctcPX+OH7U/8bdnwHCQ2+w8wrc3rdmupVjod8laRdMwSI7nVvVFUIjmccQ==,iv:dPvjpZDgu61YCZXUlsAcxzkNADwUUtkPiTAlLxC25uE=,tag:sp1VSEQwcdzlWucEFtE6xg==,type:str]
         metrics:
             enabled: true
             alloy:
@@ -93,6 +93,53 @@ spec:
             enabled: true
         kepler:
             enabled: false
+        extraConfig: |-
+            prometheus.exporter.postgres "integrations_postgres_exporter" {
+                data_source_names = ["postgresql://postgres:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/postgres?sslmode=disable"]
+            }
+
+            discovery.relabel "integrations_postgres_exporter" {
+                targets = prometheus.exporter.postgres.integrations_postgres_exporter.targets
+
+                rule {
+                    target_label = "job"
+                    replacement  = "integrations/postgres_exporter"
+                }
+            }
+
+            prometheus.relabel "integrations_postgres_exporter" {
+                forward_to = [prometheus.remote_write.metrics_service.receiver]
+                rule {
+                    target_label = "instance"
+                    replacement  = constants.hostname
+                }
+
+                rule {
+                    source_labels = ["__name__"]
+                    regex         = "pg_settings_max_connections|pg_settings_superuser_reserved_connections|pg_stat_activity_count|pg_stat_activity_max_tx_duration|pg_stat_bgwriter_buffers_alloc_total|pg_stat_bgwriter_buffers_backend_fsync_total|pg_stat_bgwriter_buffers_backend_total|pg_stat_bgwriter_buffers_checkpoint_total|pg_stat_bgwriter_buffers_clean_total|pg_stat_database_blks_hit|pg_stat_database_blks_read|pg_stat_database_conflicts|pg_stat_database_deadlocks|pg_stat_database_numbackends|pg_stat_database_tup_deleted|pg_stat_database_tup_fetched|pg_stat_database_tup_inserted|pg_stat_database_tup_returned|pg_stat_database_tup_updated|pg_stat_database_xact_commit|pg_stat_database_xact_rollback|pg_up|up"
+                    action        = "keep"
+                }
+            }
+
+            prometheus.scrape "integrations_postgres_exporter" {
+                targets    = discovery.relabel.integrations_postgres_exporter.output
+                forward_to = [prometheus.relabel.integrations_postgres_exporter.receiver]
+                job_name   = "integrations/postgres_exporter"
+            }
+
+            local.file_match "logs_integrations_postgres_exporter" {
+                path_targets = [{
+                    __address__ = "localhost",
+                    __path__    = "/var/log/postgresql/postgres.log",
+                    instance    = constants.hostname,
+                    job         = "integrations/postgres_exporter",
+                }]
+            }
+
+            loki.source.file "logs_integrations_postgres_exporter" {
+                targets    = local.file_match.logs_integrations_postgres_exporter.targets
+                forward_to = [loki.process.logs_service.receiver]
+            }
         extraMetricRelabelingRules: |-
             rule {
               source_labels = ["namespace","pod"]
@@ -120,14 +167,14 @@ sops:
         - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJNTdJTWxPcWowSDZpbkYy
-            bVFHU2wzU0tmN3BDc29YRjVHSWVGRmM2MDNZCjh2d2lyeWhIVkx6eXFkSW9GbFBH
-            QXdmUy9Wd1NzYTMwaGhkZ1RIMjUxMTAKLS0tIHBYVExyZitnTTc3cTFEZzVQd01W
-            blpERktLU1dJcXhuQ004bmkzNkcyUkkK8jvK3zlofUgI9zlM9O6heN4/12M0pH/P
-            Au31v2/90G9NXO6dSCnX3ARSljYyLDKI+txNLq7T+AuBuBuScwWO8g==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJRWh2TzIvcGpESU9uMFZS
+            YkRzSWx2eVBDcmI5N3VzREdma21FRUdKdTFFCjFLQlhldTBXNG03WEhZMkZpV1gw
+            Mldkak8zMWdpMDRRTFFtaWIrMWh5RTAKLS0tIGpjMllSaDNBTnZnSXBDSnlRc1ZL
+            am9HbmVjVHFXMjVmbWlCanZsOGRFSzAK03GPEVZo7l70BDSZ+aNAInzy8Uah3BAC
+            XYFV9fuihi1X7eqiovGSAqoxDQFiMiJay3Fe6ejBvbsXuDd2zzRW3Q==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-08-17T13:58:15Z"
-    mac: ENC[AES256_GCM,data:RJM+D4bLYl/Ult0nkhGLrbCXb+uFX94apttSnVyVwKIuGMPlFnjwLk3DXzPZ4nBLGslg+Ve/5Qo2xhbWpCjNgUF/+BZhyLidmNgJvJ9IC2RtvllwMutXG40MkLciEKZULyvZ4944u+YsyJMW5EHXaW19pFcUg5Z3tiAaDivuD1M=,iv:6GCpcqrirt5rb3Yp/bu8I/4XTzyOoxyt0F2JnVC1KhQ=,tag:+mA5q9Er2GiFAnmkRxUsfg==,type:str]
+    lastmodified: "2024-08-17T16:55:36Z"
+    mac: ENC[AES256_GCM,data:B8bquPTbz4nSrB9GxBp2/qVOPi4if9K7nbtBD/LwrwNWwVntiiSK58V1WBZnCWe0KtBF/QFDybApr2DHl2eoemnrddvMxK2/2m6ROno01sIPaUJtZ6bA3jYFhv3cc8mEYHf+ODJ7B5xA8WvIVTbZglPbJ4vFCLlaRtMc5BwlLmE=,iv:KJcxYspJBXdESqXLItAY/xEWyGa+lYdO1fWU/0/87MU=,tag:fEpEL01Qh+GoJ424erAsKQ==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
     version: 3.9.0
