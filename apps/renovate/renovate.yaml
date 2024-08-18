@@ -59,7 +59,7 @@ spec:
                   name: cache
               resources:
                 limits:
-                  cpu: 0.5
+                  cpu: 2
           restartPolicy: Never
           volumes:
             - name: cache
