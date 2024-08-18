@@ -127,6 +127,35 @@ spec:
                 job_name   = "integrations/postgres_exporter"
             }
 
+            discovery.relabel "metrics_integrations_integrations_minio" {
+                targets = [{
+                  __address__ = "minio.core.svc.cluster.local:9000",
+                }]
+
+                rule {
+                    target_label = "instance"
+                    replacement  = constants.hostname
+                }
+            }
+
+            prometheus.scrape "metrics_integrations_integrations_minio" {
+                targets      = discovery.relabel.metrics_integrations_integrations_minio.output
+                forward_to   = [prometheus.relabel.metrics_integrations_integrations_minio.receiver]
+                job_name     = "integrations/minio"
+                metrics_path = "/minio/prometheus/metrics"
+                bearer_token = "${MINIO_PROMETHEUS_TOKEN}"
+            }
+
+            prometheus.relabel "metrics_integrations_integrations_minio" {
+                forward_to = [prometheus.remote_write.metrics_service.receiver]
+
+                rule {
+                    source_labels = ["__name__"]
+                    regex         = "up|bucket_objects_count|bucket_objects_histogram|bucket_usage_size|disk_storage_available|disk_storage_total|disk_storage_used|internode_rx_bytes_total|internode_tx_bytes_total|minio_disks_offline|minio_disks_total|minio_version_info|s3_errors_total|s3_requests_total|s3_ttfb_seconds_bucket|s3_ttfb_seconds_count|s3_ttfb_seconds_sum"
+                    action        = "keep"
+                }
+            }
+
 
         extraMetricRelabelingRules: |-
             rule {
@@ -143,6 +172,7 @@ spec:
               target_label = "pod"
               replacement = "$1"
             }
+
         alloy: {}
         alloy-events: {}
         alloy-logs: {}
