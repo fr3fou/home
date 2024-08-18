@@ -157,41 +157,6 @@ spec:
                     action        = "keep"
                 }
             }
-
-            // ---- Redis ----
-            prometheus.exporter.redis "integrations_redis_exporter" {
-            	redis_addr = "redis.core.svc.cluster.local:6379"
-            }
-
-            discovery.relabel "integrations_redis_exporter" {
-            	targets = prometheus.exporter.redis.integrations_redis_exporter.targets
-
-            	rule {
-            		target_label = "instance"
-            		replacement  = constants.hostname
-            	}
-
-            	rule {
-            		target_label = "job"
-            		replacement  = "integrations/redis_exporter"
-            	}
-            }
-
-            prometheus.scrape "integrations_redis_exporter" {
-            	targets    = discovery.relabel.integrations_redis_exporter.output
-            	forward_to = [prometheus.relabel.integrations_redis_exporter.receiver]
-            	job_name   = "integrations/redis_exporter"
-            }
-
-            prometheus.relabel "integrations_redis_exporter" {
-            	forward_to = [prometheus.remote_write.metrics_service.receiver]
-
-            	rule {
-            		source_labels = ["__name__"]
-            		regex         = "up|redis_blocked_clients|redis_cluster_slots_fail|redis_cluster_slots_pfail|redis_cluster_state|redis_commands_duration_seconds_total|redis_commands_total|redis_connected_clients|redis_connected_slaves|redis_db_keys|redis_db_keys_expiring|redis_evicted_keys_total|redis_keyspace_hits_total|redis_keyspace_misses_total|redis_master_last_io_seconds_ago|redis_memory_fragmentation_ratio|redis_memory_max_bytes|redis_memory_used_bytes|redis_memory_used_rss_bytes|redis_total_system_memory_bytes|redis_up"
-            		action        = "keep"
-            	}
-            }
         extraMetricRelabelingRules: |-
             rule {
               source_labels = ["namespace","pod"]
