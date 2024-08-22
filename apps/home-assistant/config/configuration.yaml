@@ -6,7 +6,6 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 frontend:
   themes: !include_dir_merge_named themes
-ambient_extractor:
 homeassistant:
   allowlist_external_urls:
     - https://home.simo.sh
