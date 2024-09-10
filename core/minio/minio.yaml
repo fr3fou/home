@@ -54,7 +54,7 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
         nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
-        nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+        nginx.ingress.kubernetes.io/proxy-body-size: "800m"
         nginx.ingress.kubernetes.io/proxy-max-temp-file-size: "0"
         nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
         nginx.ingress.kubernetes.io/proxy-write-timeout: "600"
