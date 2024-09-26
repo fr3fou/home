@@ -4,7 +4,6 @@ resources:
   - ./base.yaml
   - ./home-assistant.yaml
   - ./plex.yaml
-  - ./libreddit.yaml
   - ./superset.yaml
   - ./sonarr.yaml
   - ./radarr.yaml
