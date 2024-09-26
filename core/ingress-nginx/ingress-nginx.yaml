@@ -24,9 +24,9 @@ spec:
           metallb.universe.tf/loadBalancerIPs: "${NGINX_IP}"
         externalTrafficPolicy: Local
       metrics:
-        enabled: true
+        enabled: false
         serviceMonitor:
-          enabled: true
+          enabled: false
           namespaceSelector:
             any: true          
           additionalLabels:
