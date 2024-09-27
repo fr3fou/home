@@ -39,7 +39,7 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/gotson/komga
+              repository: gotson/komga
               tag: 1.13.0
             env:
               JAVA_TOOL_OPTIONS: '-Xmx4g'
