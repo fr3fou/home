@@ -58,12 +58,16 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/target: ${DDNS}
         hosts:
-          - host: "{{ .Release.Name }}.${ROOT_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.${ROOT_DOMAIN}"
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: letsencrypt-suwayomi
     persistence:
       data:
         existingClaim: suwayomi-data
