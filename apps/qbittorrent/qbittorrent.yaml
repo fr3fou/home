@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/qbittorrent
-      tag: 4.6.0@sha256:cb6259df3be61a5108bc4f85b09a523fc4b250589ca9b315ef927cbdf779afb6
+      tag: 5.0.1@sha256:7fc5af4f7f9c8e4998aaa18b5e2e634757c55f70c23b9bd46b40e09a4c7acda5
 
     initContainers:
       copy-config:
