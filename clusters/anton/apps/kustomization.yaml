@@ -24,5 +24,4 @@ resources:
   - ./unpackerr.yaml
   - ./windmill.yaml
   - ./alloy.yaml
-  - ./komga.yaml
   - ./suwayomi.yaml
