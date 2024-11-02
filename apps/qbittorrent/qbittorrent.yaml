@@ -8,62 +8,61 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.6.0
       interval: 15m
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: apps
-
+  install:
+    timeout: 30m
+    remediation:
+      retries: 3
+  upgrade:
+    timeout: 30m
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
-    image:
-      repository: ghcr.io/onedr0p/qbittorrent
-      tag: 5.0.1@sha256:7fc5af4f7f9c8e4998aaa18b5e2e634757c55f70c23b9bd46b40e09a4c7acda5
-
-    initContainers:
-      copy-config:
-        image: busybox:latest@sha256:768e5c6f5cb6db0794eec98dc7a967f40631746c32232b78a3105fb946f3ab83
-        command:
-          - "/bin/sh"
-          - -c
-        args:
-          - cp /data/configfiles/* /data/config/
-        volumeMounts:
-          - name: config
-            mountPath: /data/config
-          - name: configfiles
-            mountPath: /data/configfiles
-    podAnnotations:
-      setGateway: "true"
-
-    podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: OnRootMismatch
-      supplementalGroups: [10000]
-
-    dnsConfig:
-      options:
-        - name: ndots
-          value: "1"
-
-    env:
-      UMASK: "022"
-      TZ: ${TIMEZONE}
-      QBITTORRENT__PORT: &port 8080
-      QBITTORRENT__BT_PORT: &bittorrent-port 50413
-      QBITTORRENT__USE_PROFILE: "true"
-
-    hostname: qbittorrent
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/qbittorrent
+              tag: 5.0.1@sha256:7fc5af4f7f9c8e4998aaa18b5e2e634757c55f70c23b9bd46b40e09a4c7acda5
+            env:
+              UMASK: "022"
+              TZ: ${TIMEZONE}
+              QBITTORRENT__PORT: &port 8080
+              QBITTORRENT__BT_PORT: &bittorrent-port 50413
+              QBITTORRENT__USE_PROFILE: "true"
+            resources:
+              requests:
+                cpu: 49m
+                memory: 765M
+              limits:
+                memory: 1426M
+        initContainers:
+          copy-config:
+            image:
+              repository: busybox
+              tag: latest@sha256:768e5c6f5cb6db0794eec98dc7a967f40631746c32232b78a3105fb946f3ab83
+            command:
+              - "/bin/sh"
+              - -c
+            args:
+              - cp /data/configfiles/* /data/config/
 
     service:
       main:
-        primary: true
         ports:
           http:
             port: *port
       bittorrent:
+        controller: main
         annotations:
           metallb.universe.tf/loadBalancerIPs: "${QBITTORRENT_IP}"
         type: LoadBalancer
@@ -92,6 +91,9 @@ spec:
           - host: &qbittorrent-host "qb.${PERSONAL_DOMAIN}"
             paths:
               - path: /
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *qbittorrent-host
@@ -101,7 +103,8 @@ spec:
       config:
         enabled: true
         type: emptyDir
-        mountPath: /config/qBittorrent/config
+        globalMounts:
+          - path: /config/qBittorrent/config
 
       configfiles:
         enabled: true
@@ -111,22 +114,32 @@ spec:
       cache:
         enabled: true
         type: emptyDir
-        mountPath: /config/qBittorrent/cache
+        globalMounts:
+          - path: /config/.cache
 
       data:
         enabled: true
         existingClaim: qbittorrent-config
-        mountPath: /config/qBittorrent/data
+        globalMounts:
+          - path: /config/qBittorrent/data
 
       media:
         enabled: true
-        mountPath: /data/host
-        type: hostPath # TODO: use a nas?
+        type: hostPath
         hostPath: /home/simo/Media
+        globalMounts:
+          - path: /data/host
 
-    resources:
-      requests:
-        cpu: 49m
-        memory: 765M
-      limits:
-        memory: 1426M
+    defaultPodOptions:
+      annotations:
+        setGateway: "true"
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [10000]
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
