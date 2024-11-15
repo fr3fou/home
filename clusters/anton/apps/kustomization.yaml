@@ -25,3 +25,4 @@ resources:
   - ./windmill.yaml
   - ./alloy.yaml
   - ./suwayomi.yaml
+  - ./valhalla.yaml
