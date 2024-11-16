@@ -52,11 +52,6 @@ spec:
             sub_filter '</head>' '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/radarr/overseerr.css"></head>';
             sub_filter_once on;
           cert-manager.io/cluster-issuer: letsencrypt
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/description: A fork of Sonarr to work with movies à la Couchpotato.
-          gethomepage.dev/group: Media
-          gethomepage.dev/icon: radarr
-          gethomepage.dev/name: Radarr
         hosts:
           - host: &radarr-host "radarr.${PERSONAL_DOMAIN}"
             paths:
