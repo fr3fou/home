@@ -20,7 +20,6 @@ resources:
   - ./notifications.yaml
   - ./webhook.yaml
   - ./adguard.yaml
-  - ./homepage.yaml
   - ./unpackerr.yaml
   - ./windmill.yaml
   - ./alloy.yaml
