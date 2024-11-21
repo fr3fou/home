@@ -15,7 +15,7 @@ spec:
     values:
         image:
             repository: apache/superset
-            tag: 4.0.2
+            tag: 4.1.1
         bootstrapScript: |
             #!/bin/bash
             pip install duckdb-engine==0.13.2
