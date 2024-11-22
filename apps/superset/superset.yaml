@@ -18,7 +18,7 @@ spec:
             tag: 4.1.1
         bootstrapScript: |
             #!/bin/bash
-            pip install duckdb-engine==0.13.2
+            pip install duckdb-engine psycopg2-binary
             if [ ! -f ~/bootstrap ]; then echo "Running Superset with uid {{ .Values.runAsUser }}" > ~/bootstrap; fi
         extraSecretEnv:
             SUPERSET_SECRET_KEY: ENC[AES256_GCM,data:T170IvcZSL/P0q0ynMUXoBNrZss92LBegyMBM7cEH5sWKvJjQNXNhyyt,iv:6Prg+1JZwWRnKJ5LQPOH5F2LkZErddT7Q20rSvrjy1c=,tag:sfiu8bcCH18Js+hDBpUchA==,type:str]
