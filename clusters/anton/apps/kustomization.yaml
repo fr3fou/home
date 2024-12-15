@@ -10,7 +10,6 @@ resources:
   - ./overseerr.yaml
   - ./prowlarr.yaml
   - ./qbittorrent.yaml
-  - ./hajimari.yaml
   - ./freshrss.yaml
   - ./reddit-rss.yaml
   - ./recyclarr.yaml
