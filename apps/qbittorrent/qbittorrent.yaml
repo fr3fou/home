@@ -38,10 +38,9 @@ spec:
               TZ: ${TIMEZONE}
               QBITTORRENT__PORT: &port 8080
               QBITTORRENT__BT_PORT: &bittorrent-port 50413
-              QBITTORRENT__USE_PROFILE: "true"
             resources:
               requests:
-                cpu: 49m
+                cpu: 50m
                 memory: 765M
               limits:
                 memory: 1426M
@@ -54,8 +53,7 @@ spec:
               - "/bin/sh"
               - -c
             args:
-              - cp /data/configfiles/* /data/config/
-
+              - cp /configfiles/* /config/qBittorrent/
     service:
       main:
         ports:
@@ -100,28 +98,22 @@ spec:
             secretName: letsencrypt-qbittorrent
 
     persistence:
-      config:
-        enabled: true
-        type: emptyDir
-        globalMounts:
-          - path: /config/qBittorrent/config
-
       configfiles:
         enabled: true
         type: configMap
         name: qbittorrent-config
+
+      data:
+        enabled: true
+        existingClaim: qbittorrent-config
+        globalMounts:
+          - path: /config/qBittorrent
 
       cache:
         enabled: true
         type: emptyDir
         globalMounts:
           - path: /config/.cache
-
-      data:
-        enabled: true
-        existingClaim: qbittorrent-config
-        globalMounts:
-          - path: /config/qBittorrent/data
 
       media:
         enabled: true
@@ -134,9 +126,9 @@ spec:
       annotations:
         setGateway: "true"
       securityContext:
-        runAsUser: 568
-        runAsGroup: 568
-        fsGroup: 568
+        runAsUser: ${USER_UID}
+        runAsGroup: ${USER_UID}
+        fsGroup: ${USER_UID}
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [10000]
       dnsConfig:
