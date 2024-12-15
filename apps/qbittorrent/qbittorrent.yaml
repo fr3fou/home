@@ -72,7 +72,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        className: "nginx"
         annotations:
           nginx.ingress.kubernetes.io/whitelist-source-range: ${PRIVATE_WHITELIST}
           nginx.ingress.kubernetes.io/proxy-body-size: "5000m"
@@ -86,7 +86,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: cloud-download
         hosts:
-          - host: &qbittorrent-host "qb.${PERSONAL_DOMAIN}"
+          - host: &qbittorrent-host "qbit.${PERSONAL_DOMAIN}"
             paths:
               - path: /
                 service:
