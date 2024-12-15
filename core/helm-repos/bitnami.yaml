@@ -5,4 +5,5 @@ metadata:
   namespace: core
 spec:
   interval: 5m0s
-  url: https://charts.bitnami.com/bitnami
+  url: oci://registry-1.docker.io/bitnamicharts
+  type: oci
