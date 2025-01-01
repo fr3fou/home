@@ -9,6 +9,8 @@ frontend:
 homeassistant:
   allowlist_external_urls:
     - https://home.simo.sh
+  auth_mfa_modules:
+    - type: totp
 http:
   use_x_forwarded_for: true
   trusted_proxies:
