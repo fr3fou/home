@@ -43,7 +43,7 @@ spec:
         args:
           - |
             # renovate: github-release depName=hacs/integration
-            HACS_VERSION="2.0.1"
+            HACS_VERSION="2.0.2"
             mkdir -p /config/custom_components/hacs
             rm -rf /config/custom_components/hacs
             busybox wget -qO- "https://github.com/hacs/integration/releases/download/$${HACS_VERSION}/hacs.zip"  | busybox unzip -d /config/custom_components/hacs -
