@@ -47,8 +47,7 @@ spec:
         metrics:
             enabled: true
             alloy:
-                metricsTuning:
-                    useIntegrationAllowList: true
+                enabled: false
             cost:
                 enabled: false
             kepler:
