@@ -57,7 +57,7 @@ spec:
         logs:
             enabled: true
             pod_logs:
-                enabled: true
+                enabled: false
             cluster_events:
                 enabled: true
         traces:
