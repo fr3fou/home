@@ -24,3 +24,4 @@ resources:
   - ./alloy.yaml
   - ./suwayomi.yaml
   - ./valhalla.yaml
+  - ./open-webui.yaml

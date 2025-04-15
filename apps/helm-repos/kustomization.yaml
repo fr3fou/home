@@ -8,4 +8,5 @@ resources:
   - ./grafana-charts.yaml
   - ./jameswynn.yaml
   - ./windmill.yaml
+  - ./open-webui.yaml
 namespace: apps
