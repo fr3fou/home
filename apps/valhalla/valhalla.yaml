@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: ghcr.io/nilsnolde/docker-valhalla/valhalla
-              tag: latest@sha256:fe0a924abe7e5115f40ca628cc69ea757a05f7efe557fe41a8635e94d771ccf7
+              tag: latest@sha256:0509e3cadecbc000fc82b68b1e0c24aacc44200dcfa91aa9e6ada48f1ffe660f
     service:
       app:
         controller: *app
