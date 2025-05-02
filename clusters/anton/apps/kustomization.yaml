@@ -22,6 +22,5 @@ resources:
   - ./unpackerr.yaml
   - ./windmill.yaml
   - ./alloy.yaml
-  - ./suwayomi.yaml
   - ./valhalla.yaml
   - ./open-webui.yaml
