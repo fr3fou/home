@@ -4,3 +4,4 @@ resources:
 - gotk-components.yaml
 - gotk-sync.yaml
 - cluster-config.yaml
+- cluster-secrets.yaml
