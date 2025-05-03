@@ -1,0 +1,8 @@
+clusterName: nerv
+endpoint: https://192.168.0.134:6443
+nodes:
+  - hostname: master
+    controlPlane: true
+    ipAddress: 192.168.0.134
+    installDisk: /dev/sda
+    allowSchedulingOnControlPlanes: true

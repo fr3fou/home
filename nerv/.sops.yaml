@@ -1,0 +1,3 @@
+creation_rules:
+  - encrypted_regex: '((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))'
+    age: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf 
