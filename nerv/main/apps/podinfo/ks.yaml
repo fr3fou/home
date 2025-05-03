@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: apps
-  path: ./main/apps/podinfo/app
+  path: ./nerv/main/apps/podinfo/app
   prune: true
   sourceRef:
     kind: GitRepository
