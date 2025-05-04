@@ -6,3 +6,16 @@ nodes:
     controlPlane: true
     ipAddress: 192.168.0.134
     installDisk: /dev/sda
+    schematic:
+      customization:
+        extraKernelArgs:
+          - net.ifnames=0
+          - intel_iommu=on
+          - iommu=pt
+          - mitigations=off
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/mei
+            - siderolabs/intel-ucode
+            - siderolabs/i915
+            - siderolabs/thunderbolt
