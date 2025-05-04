@@ -1,0 +1,74 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Helm Release Patterns
+
+Standards for defining Helm releases for applications.
+
+<rule>
+name: helm_release_pattern
+description: Defines the pattern for Helm releases in Flux CD
+filters:
+  - type: file_path
+    pattern: ".*/apps/[^/]+/app/helmrelease\\.ya?ml$"
+  - type: content
+    pattern: "apiVersion: helm\\.toolkit\\.fluxcd\\.io"
+
+actions:
+  - type: suggest
+    message: |
+      When creating Helm releases (helmrelease.yaml):
+
+      1. Basic structure:
+         ```yaml
+         apiVersion: helm.toolkit.fluxcd.io/v2
+         kind: HelmRelease
+         metadata:
+           name: [app-name]
+         spec:
+           interval: 15m
+           chart:
+             spec:
+               chart: [chart-name]
+               version: [chart-version]
+               sourceRef:
+                 kind: HelmRepository
+                 name: [repo-name]
+                 namespace: flux-system
+           values:
+             # Application-specific values go here
+         ```
+
+      2. Resource configuration:
+         - Consider using resource presets or define explicit resource limits
+         - Example: 
+           ```yaml
+           spec:
+             values:
+               resources:
+                 requests:
+                   cpu: 100m
+                   memory: 128Mi
+                 limits:
+                   cpu: 500m
+                   memory: 512Mi
+           ```
+
+      3. Monitoring integration:
+         - Enable ServiceMonitor for Prometheus integration when available
+         - Example:
+           ```yaml
+           spec:
+             values:
+               metrics:
+                 enabled: true
+                 serviceMonitor:
+                   enabled: true
+           ```
+
+metadata:
+  priority: high
+  version: 1.0
+</rule>
