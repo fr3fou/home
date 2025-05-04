@@ -2,7 +2,7 @@ clusterName: nerv
 endpoint: https://192.168.0.134:6443
 allowSchedulingOnControlPlanes: true
 nodes:
-  - hostname: master
+  - hostname: melchior-01
     controlPlane: true
     ipAddress: 192.168.0.134
     installDisk: /dev/sda
