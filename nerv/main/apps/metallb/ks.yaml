@@ -5,7 +5,31 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: apps
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-config
+      - kind: Secret
+        name: cluster-secrets
   path: ./nerv/main/apps/metallb/app
+  prune: false
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: metallb-config
+  namespace: flux-system
+spec:
+  targetNamespace: apps
+  path: ./nerv/main/apps/metallb/config
   prune: true
   sourceRef:
     kind: GitRepository
@@ -14,4 +38,12 @@ spec:
   wait: true
   interval: 30m
   retryInterval: 1m
-  timeout: 5m 
+  timeout: 5m
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-config
+      - kind: Secret
+        name: cluster-secrets
+  dependsOn:
+    - name: metallb-crds
