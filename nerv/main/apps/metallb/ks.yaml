@@ -46,4 +46,4 @@ spec:
       - kind: Secret
         name: cluster-secrets
   dependsOn:
-    - name: metallb-crds
+    - name: metallb

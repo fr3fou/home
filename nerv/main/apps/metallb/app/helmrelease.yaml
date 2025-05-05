@@ -12,13 +12,4 @@ spec:
         kind: HelmRepository
         name: metallb
         namespace: flux-system
-  install:
-    createNamespace: true
-    remediation:
-      retries: 3
-  upgrade:
-    remediation:
-      retries: 3
-  values: {}
-  valuesFrom: []
-  crds: CreateReplace
+        

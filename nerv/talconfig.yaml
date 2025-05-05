@@ -1,14 +1,25 @@
 clusterName: nerv
-endpoint: https://192.168.0.134:6443
+endpoint: https://192.168.1.10:6443
+talosVersion: v1.9.6
 allowSchedulingOnControlPlanes: true
 nodes:
   - hostname: melchior-01
     controlPlane: true
-    ipAddress: 192.168.0.134
+    ipAddress: 192.168.1.10
     installDisk: /dev/sda
+    networkInterfaces:
+      - interface: eth0
+        addresses:
+          - 192.168.1.10/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 192.168.1.1
+            metric: 1024
     schematic:
       customization:
         extraKernelArgs:
+          - console=tty0
+          - console=ttyS0
           - net.ifnames=0
           - intel_iommu=on
           - iommu=pt

@@ -3,5 +3,3 @@ kind: Kustomization
 namespace: apps
 resources:
   - helmrelease.yaml
-  - ipaddresspool.yaml
-  - l2advertisement.yaml 
