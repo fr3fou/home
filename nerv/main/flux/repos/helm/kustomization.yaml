@@ -7,3 +7,4 @@ resources:
   - jetstack.yaml
   - node-feature-discovery.yaml
   - bjw-s.yaml
+  - metrics-server.yaml
