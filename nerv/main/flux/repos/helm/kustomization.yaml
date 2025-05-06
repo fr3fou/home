@@ -6,3 +6,4 @@ resources:
   - intel-charts.yaml
   - jetstack.yaml
   - node-feature-discovery.yaml
+  - bjw-s.yaml
