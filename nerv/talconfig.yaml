@@ -7,7 +7,19 @@ nodes:
     controlPlane: true
     ipAddress: 192.168.1.10
     installDisk: /dev/sda
-    patches:
+    # NOTE: User volumes are a v1.10 feature. Due to some instability issues
+    #       In v1.10, I'm using v1.9 temporarily.
+    # userVolumes:
+    #   - name: local-path-provisioner
+    #     filesystem:
+    #       type: ext4
+    #     provisioning:
+    #       diskSelector:
+    #         match: disk.transport == 'sata'
+    #       minSize: 10Gi
+    #       maxSize: 50Gi
+
+    # patches:
       # NOTE: Was required by https://github.com/siderolabs/talos/issues/10291#issuecomment-2637405378
       #       Alternative solution is to set `values.speaker.ignoreExcludeLB` to `true`
       # - |-

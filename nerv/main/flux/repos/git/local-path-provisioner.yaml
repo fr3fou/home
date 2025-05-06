@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: local-path-provisioner
+spec:
+  interval: 10m0s
+  url: https://github.com/rancher/local-path-provisioner
+  ref:
+    branch: master
