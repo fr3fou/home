@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - intel-device-plugin/ks.yaml
+  - node-feature-discovery/ks.yaml

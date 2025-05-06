@@ -5,3 +5,4 @@ resources:
   - metallb.yaml
   - intel-charts.yaml
   - jetstack.yaml
+  - node-feature-discovery.yaml
