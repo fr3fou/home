@@ -7,6 +7,33 @@ nodes:
     controlPlane: true
     ipAddress: 192.168.1.10
     installDisk: /dev/sda
+    networkInterfaces:
+      - interface: eth0
+        addresses:
+          - 192.168.1.10/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 192.168.1.1
+            metric: 1024
+    schematic:
+      customization:
+        extraKernelArgs:
+          # https://github.com/siderolabs/talos/issues/9852#issuecomment-2524001105
+          - console=tty0
+          - console=ttyS0
+          # https://gist.github.com/gavinmcfall/ea6cb1233d3a300e9f44caf65a32d519
+          - net.ifnames=0 # Simple network interface names
+          - intel_iommu=on # PCI passthrough
+          - iommu=pt # PCI passthrough
+          - mitigations=off # Less security, faster puter
+        systemExtensions:
+          officialExtensions:
+            # https://gist.github.com/gavinmcfall/ea6cb1233d3a300e9f44caf65a32d519
+            - siderolabs/mei
+            - siderolabs/intel-ucode
+            - siderolabs/i915
+            - siderolabs/thunderbolt
+            - siderolabs/qemu-guest-agent
     # NOTE: User volumes are a v1.10 feature. Due to some instability issues
     #       In v1.10, I'm using v1.9 temporarily.
     # userVolumes:
@@ -20,41 +47,15 @@ nodes:
     #       maxSize: 50Gi
 
     # patches:
-      # NOTE: Was required by https://github.com/siderolabs/talos/issues/10291#issuecomment-2637405378
-      #       Alternative solution is to set `values.speaker.ignoreExcludeLB` to `true`
-      # - |-
-      #   - op: remove
-      #     path: /machine/nodeLabels/node.kubernetes.io~1exclude-from-external-load-balancers
+    # NOTE: Was required by https://github.com/siderolabs/talos/issues/10291#issuecomment-2637405378
+    #       Alternative solution is to set `values.speaker.ignoreExcludeLB` to `true`
+    # - |-
+    #   - op: remove
+    #     path: /machine/nodeLabels/node.kubernetes.io~1exclude-from-external-load-balancers
 
-      # NOTE: Was required by https://github.com/siderolabs/talos/issues/10291#issuecomment-2639080043
-      #       Alternative solution is to create a new namespace with the privileged label
-      #       `pod-security.kubernetes.io/enforce: privileged` and deploy metallb in that namespace.
-      # - |
-      #   - op: remove
-      #     path: /cluster/apiServer/admissionControl
-    networkInterfaces:
-      - interface: eth0
-        addresses:
-          - 192.168.1.10/24
-        routes:
-          - network: 0.0.0.0/0
-            gateway: 192.168.1.1
-            metric: 1024
-    schematic:
-      customization:
-        extraKernelArgs:
-          # https://github.com/siderolabs/talos/issues/9852#issuecomment-2524001105
-          - console=tty0   
-          - console=ttyS0  
-          # https://gist.github.com/gavinmcfall/ea6cb1233d3a300e9f44caf65a32d519
-          - net.ifnames=0   # Simple network interface names
-          - intel_iommu=on  # PCI passthrough
-          - iommu=pt        # PCI passthrough
-          - mitigations=off # Less security, faster puter
-        systemExtensions:
-          officialExtensions:
-            # https://gist.github.com/gavinmcfall/ea6cb1233d3a300e9f44caf65a32d519
-            - siderolabs/mei
-            - siderolabs/intel-ucode
-            - siderolabs/i915
-            - siderolabs/thunderbolt
+    # NOTE: Was required by https://github.com/siderolabs/talos/issues/10291#issuecomment-2639080043
+    #       Alternative solution is to create a new namespace with the privileged label
+    #       `pod-security.kubernetes.io/enforce: privileged` and deploy metallb in that namespace.
+    # - |
+    #   - op: remove
+    #     path: /cluster/apiServer/admissionControl
