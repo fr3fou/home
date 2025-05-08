@@ -1,7 +1,9 @@
+---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: metallb
+  name: bjw-s
 spec:
-  interval: 2h
-  url: https://metallb.github.io/metallb 
+  type: oci
+  interval: 5m
+  url: oci://ghcr.io/bjw-s/helm

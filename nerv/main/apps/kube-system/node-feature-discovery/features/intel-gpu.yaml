@@ -1,0 +1,16 @@
+# https://github.com/gavinmcfall/home-ops/blob/main/kubernetes/apps/kube-system/node-feature-discovery/features/intel-gpu.yaml
+---
+apiVersion: nfd.k8s-sigs.io/v1alpha1
+kind: NodeFeatureRule
+metadata:
+  name: intel-gpu-device
+spec:
+  rules:
+    - name: intel.gpu
+      labels:
+        intel.feature.node.kubernetes.io/gpu: "true"
+      matchFeatures:
+        - feature: pci.device
+          matchExpressions:
+            vendor: { op: In, value: ["8086"] }
+            device: { op: In, value: ["a7a0"] } # https://dgpu-docs.intel.com/devices/hardware-table.html & https://cetteup.com/216/how-to-use-an-intel-vgpu-for-plexs-hardware-accelerated-streaming-in-a-proxmox-vm/

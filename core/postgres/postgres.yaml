@@ -20,6 +20,13 @@ spec:
                 auth:
                     password: ENC[AES256_GCM,data:KFrSwlo3+Pv476+wteSNOEueM1OJvUQ/kf8+Y/fTNA==,iv:jTlNLuL2viWZT7GWCGOlhMiEH8Sr+Rn/1lwN+mqv+Os=,tag:Ly3asMWtCeI7AhQSAoyRMg==,type:str]
         primary:
+            service:
+                type: LoadBalancer
+                externalTrafficPolicy: Local
+                annotations:
+                    metallb.universe.tf/loadBalancerIPs: "${POSTGRES_IP}"
+                ports:
+                    postgresql: 5432
             extraEnvVars:
                 - name: POSTGRESQL_MAX_CONNECTIONS
                   value: "500"

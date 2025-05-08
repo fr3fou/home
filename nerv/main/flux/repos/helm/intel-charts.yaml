@@ -1,7 +1,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: metallb
+  name: intel-charts
 spec:
   interval: 2h
-  url: https://metallb.github.io/metallb 
+  url: https://intel.github.io/helm-charts
