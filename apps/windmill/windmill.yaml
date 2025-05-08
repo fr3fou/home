@@ -34,16 +34,16 @@ spec:
             enabled: false
         minio:
             enabled: false
-        ingress:
-            enabled: true
-            className: nginx
-            tls:
-                - hosts:
-                    - windmill.${ROOT_DOMAIN}
-                  secretName: letsencrypt-windmill
-            annotations:
-                cert-manager.io/cluster-issuer: letsencrypt
-                external-dns.alpha.kubernetes.io/target: ${DDNS}
+        # ingress:
+        #     enabled: true
+        #     className: nginx
+        #     tls:
+        #         - hosts:
+        #             - windmill.${ROOT_DOMAIN}
+        #           secretName: letsencrypt-windmill
+        #     annotations:
+        #         cert-manager.io/cluster-issuer: letsencrypt
+        #         external-dns.alpha.kubernetes.io/target: ${DDNS}
 sops:
     kms: []
     gcp_kms: []
