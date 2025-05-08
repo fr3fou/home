@@ -17,9 +17,9 @@ spec:
     values:
         windmill:
             baseDomain: windmill.${ROOT_DOMAIN}
-            databaseUrl: ENC[AES256_GCM,data:tjg7u3HRFuKAWRsS+7BR4hMLYtIzLdJztBdp/yhkiSLC+SKyRHC2mvJKZYuiRDMJvz5zuXPW5KEmWmu7q10QepDQFJzLlx6FCZj8itx17JihGe7wCbwDee27kPKsk2dUouBtQ9p72SG2J+Mb,iv:uHs2yZO4EpzUJFdg6pA6Wu8o6WgG1rF0p63/TaMJbwM=,tag:vtoZH1taD4HgEMHh8oDOaQ==,type:str]
-            appReplicas: 1
-            lspReplicas: 1
+            databaseUrl: ENC[AES256_GCM,data:vyjPQxDd9WF1agBV2Wr8w4P19NMJlEhcZDxf8+RQU88yGMVSAY0zSuYhJGm4yyi/auOltmoH0zIkSKpnGCv7RrtRKMjmku0xBWx1PJveffBkmXS8UHhzPjuYMyFq4ygKfIj+wDqXFLsJ8noK,iv:qh3ysMo6OUt21tw/9PFAGc2CPFCyYHZS5AuKTmgGW4o=,tag:nLC2mtUVGvWdZ4Y+6PytOw==,type:str]
+            appReplicas: 0
+            lspReplicas: 0
             workerGroups:
                 - name: default
                   replicas: 5
@@ -53,14 +53,14 @@ sops:
         - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBDWWp4TktpQXNvKzQvaVNi
-            M0ZZSUJwRnU5QmRRRTZXV1pqSXBUY1Zta0hFCnVoVmVQenJPUHYrd2owTDltVlZJ
-            bFhsczN2RTF5NTJYUmNQNkJTV096VHMKLS0tIGFCcmMrVnlzWURsSUc3bTI0eStD
-            Vk1IUlYxTGhBU2tIZm13N05GOHlMZmsKZIh2ZkP//ewpe/Utga6sRiJvG3rdEjqz
-            FyfxdFPr/89ppW3KXTmZwNa5i056aQ4fYEXlINRhZWLINrDqmOHwCg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA1RytBL053akJuMzIzVDFO
+            Ry84Ui9qWGtSYk9sNzJaYWI5N2R5MkJsS1h3CjBIZEgxcEd4b0Y4VmNzTlhrQlZV
+            UTNEbkJEdlk5MFhub1A5V3NidHZEelkKLS0tIHo2eXdyWElxSi9JWjBiY3llMzVn
+            c0x5V1VZalM2d3pMNVNreDBHdGh1RncKMz3hHdlJmSOWpu88Wu8n82lXPi7obbah
+            zOlH1uvvjqJlmgIRi6ESvjfYBUsUqeiVabrz9asu7xCQFQPdD0og0w==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-04-28T12:14:16Z"
-    mac: ENC[AES256_GCM,data:BtCnOmDvD2TkwBYv9fDvud68cM5NQ1Jj/bWsEaVuUx56xNVzP5mjo1S0MAHPmDNK87aFPH+Q5puVzflNlM0swJBADE1oSh88j0bcAUP1QDjelIXn/2s0WHbqP7twfEURwg7TzduJNVU952W2Zh2drKuuXgc7VoysfKnHJGupD4U=,iv:O1xRKVRZzxiUYGn+oWj6THTGcMXdJrY7kULzYtMSFb4=,tag:8qh7IdT/ogyMhHKxHr+ynw==,type:str]
+    lastmodified: "2025-05-08T19:52:17Z"
+    mac: ENC[AES256_GCM,data:y2HqYAopZcLigDNNvb2oKBPIY/6oABKDv++Px2NoM5i4Q/2gQbBBd6I0hIaJ9fp9llVmG64tQmDCaNM0acBQvpIQw48CrxakXl/mZUJDIzL3p6ueAe/QrEzx8j6uqfwVuxOl6cmog2eG8wMlNe97RiqSxU+QNIPsdA754Cx1GVw=,iv:46T8xlPmCxfGLWBNLabOydqHuxaB5D6G2ElqlVS3KK8=,tag:Y198LcYv9it9cpW0HzWLXg==,type:str]
     pgp: []
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
-    version: 3.8.1
+    version: 3.9.4
