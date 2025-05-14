@@ -79,7 +79,7 @@ spec:
         controller: plex
         type: LoadBalancer
         annotations:
-          metallb.universe.tf/loadBalancerIP: ${PLEX_IP}
+          metallb.universe.tf/loadBalancerIPs: "${PLEX_IP}"
         ports:
           http:
             port: 32400
