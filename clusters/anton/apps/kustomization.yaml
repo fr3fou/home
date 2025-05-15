@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - ./base.yaml
   - ./home-assistant.yaml
-  - ./plex.yaml
+  # - ./plex.yaml
   - ./superset.yaml
   - ./sonarr.yaml
   - ./radarr.yaml
