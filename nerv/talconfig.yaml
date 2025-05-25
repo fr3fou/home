@@ -1,6 +1,6 @@
 clusterName: nerv
 endpoint: https://192.168.1.10:6443
-talosVersion: v1.9.6
+talosVersion: v1.10.1
 allowSchedulingOnControlPlanes: true
 nodes:
   - hostname: melchior-01
@@ -34,17 +34,15 @@ nodes:
             - siderolabs/i915
             - siderolabs/thunderbolt
             - siderolabs/qemu-guest-agent
-    # NOTE: User volumes are a v1.10 feature. Due to some instability issues
-    #       In v1.10, I'm using v1.9 temporarily.
-    # userVolumes:
-    #   - name: local-path-provisioner
-    #     filesystem:
-    #       type: ext4
-    #     provisioning:
-    #       diskSelector:
-    #         match: disk.transport == 'sata'
-    #       minSize: 10Gi
-    #       maxSize: 50Gi
+    userVolumes:
+      - name: local-hostpath
+        filesystem:
+          type: ext4
+        provisioning:
+          diskSelector:
+            match: disk.transport == 'sata'
+          minSize: 10Gi
+          maxSize: 50Gi
 
     # patches:
     # NOTE: Was required by https://github.com/siderolabs/talos/issues/10291#issuecomment-2637405378
