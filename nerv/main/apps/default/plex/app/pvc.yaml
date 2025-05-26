@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: plex-config
 spec:
+  storageClassName: openebs-hostpath
   accessModes:
     - ReadWriteOnce
   resources:

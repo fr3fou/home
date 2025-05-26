@@ -4,7 +4,7 @@ metadata:
   name: cluster-config
   namespace: flux-system
 data:
-  ROOT_DOMAIN: "nerv.local"
+  ROOT_DOMAIN: "nerv.id"
   TIMEZONE: "Europe/Sofia"
   USER_UID: "1000" 
   PLEX_IP: "192.168.1.32"

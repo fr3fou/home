@@ -9,3 +9,4 @@ resources:
   - bjw-s.yaml
   - metrics-server.yaml
   - windmill.yaml
+  - openebs.yaml
