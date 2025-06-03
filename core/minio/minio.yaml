@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: minio
-      version: "14.10.5"
+      version: "16.0.10"
       sourceRef:
         kind: HelmRepository
         name: bitnami
