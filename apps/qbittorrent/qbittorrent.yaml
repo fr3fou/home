@@ -122,6 +122,13 @@ spec:
         globalMounts:
           - path: /data/host
 
+      nas:
+        type: nfs
+        server: 192.168.1.72
+        path: /var/nfs/shared/Lab
+        globalMounts:
+          - path: /nas
+
     defaultPodOptions:
       annotations:
         setGateway: "true"
