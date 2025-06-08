@@ -40,7 +40,7 @@ spec:
               QBITTORRENT__BT_PORT: &bittorrent-port 50413
             resources:
               requests:
-                cpu: 50m
+                cpu: 60m
                 memory: 765M
               limits:
                 memory: 1426M
