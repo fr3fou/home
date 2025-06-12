@@ -35,3 +35,6 @@ spec:
       host: "chat.${ROOT_DOMAIN}"
       tls: true
       existingSecret: letsencrypt-open-webui
+    extraEnvVars:
+      - name: BYPASS_MODEL_ACCESS_CONTROL
+        value: "true"
