@@ -79,7 +79,7 @@ spec:
         controller: plex
         type: LoadBalancer
         annotations:
-          metallb.universe.tf/loadBalancerIPs: "${PLEX_IP}"
+          lbipam.cilium.io/ips: "${PLEX_IP}"
         ports:
           http:
             port: 32400
