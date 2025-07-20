@@ -3,6 +3,9 @@ kind: CiliumBGPClusterConfig
 metadata:
   name: cilium-bgp
 spec:
+  nodeSelector:
+    matchLabels:
+      kubernetes.io/hostname: melchior-01
   bgpInstances:
     - name: "65020" # The NERV cluster ASN
       localASN: 65020
