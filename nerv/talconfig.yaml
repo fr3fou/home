@@ -44,6 +44,17 @@ nodes:
           minSize: 10Gi
           maxSize: 50Gi
 
+    patches:
+      # Disable CNI and kube-proxy for Cilium
+      # - https://docs.cilium.io/en/stable/installation/k8s-install-helm/
+      # - https://www.talos.dev/v1.10/kubernetes-guides/network/deploying-cilium/
+      - |-
+        cluster:
+          network:
+            cni:
+              name: none
+          proxy:
+            disabled: true
     # patches:
     # NOTE: Was required by https://github.com/siderolabs/talos/issues/10291#issuecomment-2637405378
     #       Alternative solution is to set `values.speaker.ignoreExcludeLB` to `true`

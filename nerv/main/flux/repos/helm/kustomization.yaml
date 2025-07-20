@@ -10,3 +10,4 @@ resources:
   - metrics-server.yaml
   - windmill.yaml
   - openebs.yaml
+  - cilium.yaml
