@@ -25,6 +25,10 @@ spec:
   # dependsOn:
   #   - name: intel-device-plugin-gpu
   #     namespace: kube-system
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: ["/spec/replicas"]
   values:
     controllers:
       plex:
