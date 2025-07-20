@@ -5,7 +5,7 @@ metadata:
 spec:
   nodeSelector:
     matchLabels:
-      kubernetes.io/hostname: melchior-01
+      kubernetes.io/os: linux
   bgpInstances:
     - name: "65020" # The NERV cluster ASN
       localASN: 65020

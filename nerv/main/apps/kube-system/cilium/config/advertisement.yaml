@@ -6,18 +6,9 @@ metadata:
     advertise: bgp
 spec:
   advertisements:
-    # NOTE: Useful for debugging Pods directly
-    # - advertisementType: "PodCIDR"
-    #   attributes:
-    #     communities:
-    #       standard: ["65000:100"]
+    # Enable PodCIDR advertisement for debugging
+    - advertisementType: "PodCIDR"
     - advertisementType: "Service"
       service:
         addresses:
           - LoadBalancerIP
-      selector:
-        matchExpressions:
-          - key: ThisFakeSelector
-            operator: NotIn
-            values:
-              - will-match-and-announce-all-services
