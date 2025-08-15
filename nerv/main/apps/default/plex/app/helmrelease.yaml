@@ -36,7 +36,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/plex
-              tag: 1.42.1.10060@sha256:92d48d97cc896e0b771c64f715fc68fed931a8d80506b503d84cfdf1d81bff92
+              tag: 1.42.1.10060@sha256:e8c56c0bf7d08bf0e22de1449fe380abc95e5e077fe726adf1ca98d202a29d08
             env:
               TZ: ${TIMEZONE}
             probes:
