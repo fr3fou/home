@@ -6,5 +6,5 @@ metadata:
 data:
   ROOT_DOMAIN: "nerv.id"
   TIMEZONE: "Europe/Sofia"
-  USER_UID: "1000" 
-  PLEX_IP: "192.168.1.32"
+  USER_UID: "1000"
+  PLEX_IP: "192.168.5.10"

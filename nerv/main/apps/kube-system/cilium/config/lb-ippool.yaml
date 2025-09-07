@@ -4,5 +4,5 @@ metadata:
   name: lb-pool
 spec:
   blocks:
-    - start: "192.168.1.30"
-      stop: "192.168.1.40"
+    - start: "192.168.5.10"
+      stop: "192.168.5.20"
