@@ -1,8 +1,9 @@
-apiVersion: cilium.io/v2alpha1
+apiVersion: cilium.io/v2
 kind: CiliumBGPPeerConfig
 metadata:
   name: cilium-peer
 spec:
+  ebgpMultihop: 2
   families:
     - afi: ipv4
       safi: unicast
