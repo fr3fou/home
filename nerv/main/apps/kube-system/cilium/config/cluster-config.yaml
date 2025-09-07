@@ -7,10 +7,10 @@ spec:
     matchLabels:
       kubernetes.io/os: linux
   bgpInstances:
-    - name: "64514" # The NERV cluster ASN
+    - name: "cilium" # The NERV cluster ASN
       localASN: 64514
       peers:
-        - name: "dream-router-7"
+        - name: unifi
           peerASN: 64513
           peerAddress: "192.168.0.1"
           peerConfigRef:
