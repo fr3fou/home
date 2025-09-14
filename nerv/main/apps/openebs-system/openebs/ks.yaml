@@ -4,7 +4,7 @@ metadata:
   name: openebs
   namespace: flux-system
 spec:
-  targetNamespace: storage
+  targetNamespace: openebs-system
   interval: 30m
   retryInterval: 1m
   timeout: 5m
@@ -19,5 +19,5 @@ spec:
         name: cluster-config
       - kind: Secret
         name: cluster-secrets
-  path: ./nerv/main/apps/storage/openebs/app
+  path: ./nerv/main/apps/openebs-system/openebs/app
   prune: false

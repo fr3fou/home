@@ -5,8 +5,8 @@ metadata:
   name: &app cert-manager
   namespace: flux-system
 spec:
-  targetNamespace: network
-  path: ./nerv/main/apps/network/cert-manager/app
+  targetNamespace: cert-manager
+  path: ./nerv/main/apps/cert-manager/cert-manager/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -22,10 +22,10 @@ metadata:
   name: &app cert-manager-issuers
   namespace: flux-system
 spec:
-  targetNamespace: network
+  targetNamespace: cert-manager
   dependsOn:
     - name: cert-manager
-  path: ./nerv/main/apps/network/cert-manager/issuers
+  path: ./nerv/main/apps/cert-manager/cert-manager/issuers
   prune: true
   sourceRef:
     kind: GitRepository
