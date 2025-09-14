@@ -1,7 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: windmill
-spec:
-  interval: 10m0s
-  url: https://windmill-labs.github.io/windmill-helm-charts/
