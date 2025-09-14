@@ -12,5 +12,5 @@ cat "$HOME/Library/Application Support/sops/age/keys.txt" | kubectl create secre
 flux bootstrap github \
   --owner=fr3fou \
   --repository=home \
-  --path=clusters/anton \
+  --path=nerv/main/flux \
   --personal
