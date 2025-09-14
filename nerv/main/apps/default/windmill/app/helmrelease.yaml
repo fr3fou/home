@@ -26,7 +26,7 @@ spec:
         windmill:
             baseDomain: wm.nerv.id
             databaseUrl: ENC[AES256_GCM,data:FpPfXTePqQpJ6iYD3mP/F5bV7BJxOSqsZX525tsZcmXBvXRLxlWwoIHgbu3BTCRae0xeP/YFH5vOBr3pOhW2nYS8Pf8AmslW5HLanz/ieLkR2EwGfZvuNEiayRsdzvs=,iv:dRwXlcxQWHdURRvjx3835M8yH/a3VIAWjyBJJ7GiuQo=,tag:z2FldzqLFBDhHcjqp+MhUw==,type:str]
-            appReplicas: 1
+            appReplicas: 2
             lspReplicas: 1
             workerGroups:
                 - name: default
