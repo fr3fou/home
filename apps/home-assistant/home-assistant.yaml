@@ -23,7 +23,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-assistant/home-assistant
-      tag: 2025.10.2
+      tag: 2025.10.4
 
     dnsConfig:
       options:
