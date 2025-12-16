@@ -15,7 +15,7 @@ spec:
     values:
         image:
             repository: apache/superset
-            tag: 4.1.3
+            tag: 5.0.0
         bootstrapScript: |
             #!/bin/bash
             pip install duckdb-engine psycopg2-binary
