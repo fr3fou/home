@@ -34,6 +34,7 @@ spec:
               tag: 1.42.2.10156
             env:
               TZ: ${TIMEZONE}
+              ADVERTISE_IP: "http://${PLEX_IP}:32400"
             probes:
               liveness: &probes
                 enabled: true
