@@ -2,11 +2,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app cilium
+  name: cluster-apps-node-feature-discovery
   namespace: flux-system
 spec:
   targetNamespace: kube-system
-  path: ./nerv/main/apps/kube-system/cilium/app
+  path: ./nerv/main/cluster/kube-system/node-feature-discovery/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -19,18 +19,17 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cilium-config
+  name: cluster-apps-node-feature-discovery-features
   namespace: flux-system
 spec:
   targetNamespace: kube-system
   dependsOn:
-    - name: cilium
-  path: ./nerv/main/apps/kube-system/cilium/config
+    - name: cluster-apps-node-feature-discovery
+  path: ./nerv/main/cluster/kube-system/node-feature-discovery/features
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  wait: true
   interval: 30m
   retryInterval: 1m
   timeout: 5m

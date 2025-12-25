@@ -19,5 +19,5 @@ spec:
         name: cluster-config
       - kind: Secret
         name: cluster-secrets
-  path: ./nerv/main/apps/openebs-system/openebs/app
+  path: ./nerv/main/cluster/openebs-system/openebs/app
   prune: false

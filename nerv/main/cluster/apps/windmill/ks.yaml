@@ -6,8 +6,8 @@ metadata:
   name: &app windmill
   namespace: flux-system
 spec:
-  targetNamespace: default
-  path: ./nerv/main/apps/default/windmill/app
+  targetNamespace: apps
+  path: ./nerv/main/cluster/apps/windmill/app
   prune: true
   sourceRef:
     kind: GitRepository

@@ -2,11 +2,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-node-feature-discovery
+  name: &app cert-manager
   namespace: flux-system
 spec:
-  targetNamespace: kube-system
-  path: ./nerv/main/apps/kube-system/node-feature-discovery/app
+  targetNamespace: cert-manager
+  path: ./nerv/main/cluster/cert-manager/cert-manager/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -19,17 +19,18 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-node-feature-discovery-features
+  name: &app cert-manager-issuers
   namespace: flux-system
 spec:
-  targetNamespace: kube-system
+  targetNamespace: cert-manager
   dependsOn:
-    - name: cluster-apps-node-feature-discovery
-  path: ./nerv/main/apps/kube-system/node-feature-discovery/features
+    - name: cert-manager
+  path: ./nerv/main/cluster/cert-manager/cert-manager/issuers
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
+  wait: true
   interval: 30m
   retryInterval: 1m
   timeout: 5m

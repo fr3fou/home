@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./nerv/main/apps
+  path: ./nerv/main/cluster
   prune: true
   sourceRef:
     kind: GitRepository

@@ -6,8 +6,8 @@ metadata:
   name: &app plex
   namespace: flux-system
 spec:
-  targetNamespace: default
-  path: ./nerv/main/apps/default/plex/app
+  targetNamespace: apps
+  path: ./nerv/main/cluster/apps/plex/app
   prune: true
   sourceRef:
     kind: GitRepository
