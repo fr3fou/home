@@ -4,13 +4,10 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: windmill
-  annotations:
-    external-dns.alpha.kubernetes.io/target: ex.nerv.id
 spec:
   parentRefs:
     - name: external
-      namespace: networking
-      sectionName: https
+      namespace: networking-system
   hostnames:
     - wm.nerv.id
   rules:
