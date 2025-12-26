@@ -18,15 +18,15 @@ spec:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: networking
+  targetNamespace: networking-system
   timeout: 15m
   healthChecks:
     - apiVersion: gateway.networking.k8s.io/v1
       kind: Gateway
       name: external
-      namespace: networking
+      namespace: networking-system
     - apiVersion: gateway.networking.k8s.io/v1
       kind: Gateway
       name: internal
-      namespace: networking
+      namespace: networking-system
   wait: true

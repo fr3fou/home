@@ -34,6 +34,8 @@ nodes:
             - siderolabs/i915
             - siderolabs/thunderbolt
             - siderolabs/qemu-guest-agent
+            - siderolabs/iscsi-tools
+            - siderolabs/util-linux-tools
     userVolumes:
       - name: longhorn
         filesystem:
