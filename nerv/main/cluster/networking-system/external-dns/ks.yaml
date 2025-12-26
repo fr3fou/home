@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: envoy-gateway
   interval: 1h
-  path: ./nerv/main/cluster/networking/external-dns/app
+  path: ./nerv/main/cluster/networking-system/external-dns/app
   prune: true
   sourceRef:
     kind: GitRepository

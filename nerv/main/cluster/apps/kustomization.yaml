@@ -5,3 +5,4 @@ resources:
   - app-template.yaml
   - plex/ks.yaml
   - windmill/ks.yaml
+  - podinfo/ks.yaml

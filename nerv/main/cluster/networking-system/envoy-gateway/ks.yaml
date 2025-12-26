@@ -12,7 +12,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   interval: 1h
-  path: ./nerv/main/cluster/networking/envoy-gateway/app
+  path: ./nerv/main/cluster/networking-system/envoy-gateway/app
   prune: true
   sourceRef:
     kind: GitRepository

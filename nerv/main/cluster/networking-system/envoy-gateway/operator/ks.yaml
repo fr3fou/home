@@ -10,7 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: envoy-gateway
   interval: 1h
-  path: ./nerv/main/cluster/networking/envoy-gateway/operator
+  path: ./nerv/main/cluster/networking-system/envoy-gateway/operator
   prune: true
   sourceRef:
     kind: GitRepository
