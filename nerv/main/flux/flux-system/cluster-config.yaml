@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 data:
   ROOT_DOMAIN: "nerv.id"
+  DDNS_DOMAIN: "ex.nerv.id"
   TIMEZONE: "Europe/Sofia"
   USER_UID: "1000"
   PLEX_IP: "192.168.5.10"

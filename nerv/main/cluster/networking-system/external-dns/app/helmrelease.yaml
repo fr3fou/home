@@ -48,12 +48,6 @@ spec:
           secretKeyRef:
             name: *secret
             key: CF_API_KEY
-    extraArgs:
-      - --source=gateway-httproute
-      - --source=gateway-grpcroute
-      - --source=gateway-tlsroute
-      - --source=gateway-tcproute
-      - --source=gateway-udproute
     triggerLoopOnEvent: true
     policy: sync
     sources: ["crd", "gateway-httproute"]
