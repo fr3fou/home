@@ -23,7 +23,7 @@ spec:
           app:
             image:
               repository: ghcr.io/stefanprodan/podinfo
-              tag: 6.7.0
+              tag: 6.9.4
             env:
               TZ: UTC
             probes:
