@@ -35,14 +35,13 @@ nodes:
             - siderolabs/thunderbolt
             - siderolabs/qemu-guest-agent
     userVolumes:
-      - name: local-hostpath
+      - name: longhorn
         filesystem:
           type: ext4
         provisioning:
           diskSelector:
             match: disk.transport == 'sata'
-          minSize: 10Gi
-          maxSize: 50Gi
+          minSize: 50Gi
 
     patches:
       # Disable CNI and kube-proxy for Cilium

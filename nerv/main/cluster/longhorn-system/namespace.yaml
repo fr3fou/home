@@ -1,6 +1,8 @@
+---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: openebs-system
+  name: longhorn-system
   labels:
+    name: longhorn-system
     pod-security.kubernetes.io/enforce: privileged
