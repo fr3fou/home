@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nerv-id-wildcard
+spec:
+  secretName: nerv-id-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  commonName: "nerv.id"
+  dnsNames:
+    - "nerv.id"
+    - "*.nerv.id"

@@ -1,0 +1,19 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cert-manager-certificates
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: cert-manager
+  targetNamespace: networking-system
+  path: ./nerv/main/cluster/cert-manager/certificates
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
