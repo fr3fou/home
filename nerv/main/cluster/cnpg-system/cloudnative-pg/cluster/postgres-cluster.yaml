@@ -1,0 +1,20 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+spec:
+  instances: 1
+
+  storage:
+    storageClass: local-path
+    size: 20Gi
+
+  postgresql:
+    parameters:
+      max_connections: "500"
+
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
