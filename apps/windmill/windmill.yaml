@@ -1,66 +1,66 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-    name: windmill
-    namespace: apps
+  name: windmill
+  namespace: apps
 spec:
-    interval: 10m0s
-    chart:
-        spec:
-            chart: windmill
-            version: 3.0.68
-            interval: 10m0s
-            sourceRef:
-                kind: HelmRepository
-                name: windmill
-                namespace: apps
-    values:
-        windmill:
-            baseDomain: windmill.${ROOT_DOMAIN}
-            databaseUrl: ENC[AES256_GCM,data:vyjPQxDd9WF1agBV2Wr8w4P19NMJlEhcZDxf8+RQU88yGMVSAY0zSuYhJGm4yyi/auOltmoH0zIkSKpnGCv7RrtRKMjmku0xBWx1PJveffBkmXS8UHhzPjuYMyFq4ygKfIj+wDqXFLsJ8noK,iv:qh3ysMo6OUt21tw/9PFAGc2CPFCyYHZS5AuKTmgGW4o=,tag:nLC2mtUVGvWdZ4Y+6PytOw==,type:str]
-            appReplicas: 0
-            lspReplicas: 0
-            workerGroups:
-                - name: default
-                  replicas: 5
-                - name: native
-                  replicas: 3
-                - name: scar
-                  replicas: 0
-                  extraEnv:
-                    - name: WORKER_TAGS
-                      value: scar
-        postgresql:
-            enabled: false
-        minio:
-            enabled: false
-        # ingress:
-        #     enabled: true
-        #     className: nginx
-        #     tls:
-        #         - hosts:
-        #             - windmill.${ROOT_DOMAIN}
-        #           secretName: letsencrypt-windmill
-        #     annotations:
-        #         cert-manager.io/cluster-issuer: letsencrypt
-        #         external-dns.alpha.kubernetes.io/target: ${DDNS}
+  interval: 10m0s
+  chart:
+    spec:
+      chart: windmill
+      version: 4.0.20
+      interval: 10m0s
+      sourceRef:
+        kind: HelmRepository
+        name: windmill
+        namespace: apps
+  values:
+    windmill:
+      baseDomain: windmill.${ROOT_DOMAIN}
+      databaseUrl: ENC[AES256_GCM,data:vyjPQxDd9WF1agBV2Wr8w4P19NMJlEhcZDxf8+RQU88yGMVSAY0zSuYhJGm4yyi/auOltmoH0zIkSKpnGCv7RrtRKMjmku0xBWx1PJveffBkmXS8UHhzPjuYMyFq4ygKfIj+wDqXFLsJ8noK,iv:qh3ysMo6OUt21tw/9PFAGc2CPFCyYHZS5AuKTmgGW4o=,tag:nLC2mtUVGvWdZ4Y+6PytOw==,type:str]
+      appReplicas: 0
+      lspReplicas: 0
+      workerGroups:
+        - name: default
+          replicas: 5
+        - name: native
+          replicas: 3
+        - name: scar
+          replicas: 0
+          extraEnv:
+            - name: WORKER_TAGS
+              value: scar
+    postgresql:
+      enabled: false
+    minio:
+      enabled: false
+    # ingress:
+    #     enabled: true
+    #     className: nginx
+    #     tls:
+    #         - hosts:
+    #             - windmill.${ROOT_DOMAIN}
+    #           secretName: letsencrypt-windmill
+    #     annotations:
+    #         cert-manager.io/cluster-issuer: letsencrypt
+    #         external-dns.alpha.kubernetes.io/target: ${DDNS}
 sops:
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age:
-        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA1RytBL053akJuMzIzVDFO
-            Ry84Ui9qWGtSYk9sNzJaYWI5N2R5MkJsS1h3CjBIZEgxcEd4b0Y4VmNzTlhrQlZV
-            UTNEbkJEdlk5MFhub1A5V3NidHZEelkKLS0tIHo2eXdyWElxSi9JWjBiY3llMzVn
-            c0x5V1VZalM2d3pMNVNreDBHdGh1RncKMz3hHdlJmSOWpu88Wu8n82lXPi7obbah
-            zOlH1uvvjqJlmgIRi6ESvjfYBUsUqeiVabrz9asu7xCQFQPdD0og0w==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-05-08T19:52:17Z"
-    mac: ENC[AES256_GCM,data:y2HqYAopZcLigDNNvb2oKBPIY/6oABKDv++Px2NoM5i4Q/2gQbBBd6I0hIaJ9fp9llVmG64tQmDCaNM0acBQvpIQw48CrxakXl/mZUJDIzL3p6ueAe/QrEzx8j6uqfwVuxOl6cmog2eG8wMlNe97RiqSxU+QNIPsdA754Cx1GVw=,iv:46T8xlPmCxfGLWBNLabOydqHuxaB5D6G2ElqlVS3KK8=,tag:Y198LcYv9it9cpW0HzWLXg==,type:str]
-    pgp: []
-    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
-    version: 3.9.4
+  kms: []
+  gcp_kms: []
+  azure_kv: []
+  hc_vault: []
+  age:
+    - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA1RytBL053akJuMzIzVDFO
+        Ry84Ui9qWGtSYk9sNzJaYWI5N2R5MkJsS1h3CjBIZEgxcEd4b0Y4VmNzTlhrQlZV
+        UTNEbkJEdlk5MFhub1A5V3NidHZEelkKLS0tIHo2eXdyWElxSi9JWjBiY3llMzVn
+        c0x5V1VZalM2d3pMNVNreDBHdGh1RncKMz3hHdlJmSOWpu88Wu8n82lXPi7obbah
+        zOlH1uvvjqJlmgIRi6ESvjfYBUsUqeiVabrz9asu7xCQFQPdD0og0w==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2025-05-08T19:52:17Z"
+  mac: ENC[AES256_GCM,data:y2HqYAopZcLigDNNvb2oKBPIY/6oABKDv++Px2NoM5i4Q/2gQbBBd6I0hIaJ9fp9llVmG64tQmDCaNM0acBQvpIQw48CrxakXl/mZUJDIzL3p6ueAe/QrEzx8j6uqfwVuxOl6cmog2eG8wMlNe97RiqSxU+QNIPsdA754Cx1GVw=,iv:46T8xlPmCxfGLWBNLabOydqHuxaB5D6G2ElqlVS3KK8=,tag:Y198LcYv9it9cpW0HzWLXg==,type:str]
+  pgp: []
+  encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
+  version: 3.9.4
