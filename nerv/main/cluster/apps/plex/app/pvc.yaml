@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: plex-config
 spec:
-  storageClassName: local-path
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   resources:
