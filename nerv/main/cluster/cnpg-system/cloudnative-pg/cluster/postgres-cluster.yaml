@@ -30,3 +30,8 @@ spec:
         superuser: true
         passwordSecret:
           name: postgres-apps-elevated
+      - name: windmill
+        ensure: present
+        login: true
+        passwordSecret:
+          name: postgres-windmill-user

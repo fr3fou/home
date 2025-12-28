@@ -5,4 +5,6 @@ resources:
   - postgres-superuser.yaml
   - postgres-apps-user.yaml
   - postgres-apps-elevated.yaml
+  - postgres-windmill-user.yaml
   - postgres-cluster.yaml
+  - windmill-database.yaml
