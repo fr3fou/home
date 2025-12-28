@@ -22,6 +22,11 @@ spec:
       - name: apps
         ensure: present
         login: true
-        createdb: true
         passwordSecret:
           name: postgres-apps-user
+      - name: apps_elevated
+        ensure: present
+        login: true
+        superuser: true
+        passwordSecret:
+          name: postgres-apps-elevated

@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - postgres-superuser.yaml
   - postgres-apps-user.yaml
+  - postgres-apps-elevated.yaml
   - postgres-cluster.yaml
