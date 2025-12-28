@@ -5,19 +5,20 @@ metadata:
     namespace: cnpg-system
 type: Opaque
 stringData:
-    password: ENC[AES256_GCM,data:i98U00FzXQxCxbETWQ0PqDNsid3sbLHxyWP4kAYiWEY+4mYgJc+ah5a2Rao=,iv:ys6ResASa/k/yzbjMBQLbskny5EqISX0nP2c6u9Z6fo=,tag:KvxFlk6fF83Vd5d0lD0msA==,type:str]
+    username: ENC[AES256_GCM,data:Km8kFU52SL4=,iv:eN5J1CDzghbfwdmmV0myLE6V3TQ9gLXRMHsohR7LLaw=,tag:sV68CdM0tgKZObm9zbljjA==,type:str]
+    password: ENC[AES256_GCM,data:JfvK95vwp8uUQihfIh9RkozxntFn0C74FL93k1pCQRyp4tSNzaPhuMq5yZk=,iv:fakpi1TrORLUgcVKdNVyIT4Ag06HsulOdzkk9RqAC8w=,tag:CPAYS+8ko8IhRJo/qxJJgg==,type:str]
 sops:
     age:
         - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2MHhwakRpbFF6V1h0emtU
-            S2toaUdKN1I5OWoyL01JdUF4aEtxOTdrTG40CmdZMHFaWHRjdnlMRGwzK1V1SFIw
-            aERGSEppVHpZSjE5bUpDc3U3azBkR3MKLS0tIFR2dkZEVTZqVjhxV2luNURyZGZC
-            a0hQU2UvSzZzRjcrTThqNmwwR01PbFEK85WvxLjio8vikgixKXmNq8Ow4mnMJi/V
-            I6A+Cs8SMKwOSYzDbOXzhqu8tU5TCdfHOU5dA6euRblCso8HLm9/mg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJdHBaR0g1M3Uybi9hZTRE
+            aUxINnliSjJlU0NQQ1B1Z0NyS2tkR0dFakVFCmppT3NFWllFQmZkdnZYZkVMRHEy
+            bVJxWmx1cnRUbm1xVUoxTkU5M0EweGMKLS0tIEQxQ0xoOEIvdno1bHFvS05Za1Qx
+            YmRrblp3Z1JhdlhtSEZBbnBMMjZCOFkKWD8AH3GJLvw/kDmgAYrOPx+yCS88PaN7
+            PcRygAYih0Cn5sk4e0uHThd0eJiyv75vSjFfor6xdNIZ7sQ8KA71Vg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-12-28T22:02:30Z"
-    mac: ENC[AES256_GCM,data:Vw+pdGen/yubIflJTzzoEfQH8VbgdSc6EShqaj/rGo96WNDXiWb6r0G3LLKI8HiAXrF/J3/qZIT8wMZnyvmYdPk+cxroZBdiKj8kwuqO+ZyoWfkCEpcGrlJ7ObtPvX8ZsezMOgcDkqWJBO/ijM99uS9SLyr3natUftjNY5iCQ3E=,iv:xHvikHdTDKIUbHbUzEwWnFwgB3QsSgUlGrLCq/K9nrA=,tag:OCEjPXjAISrxtVcujjF97A==,type:str]
+    lastmodified: "2025-12-29T13:15:08Z"
+    mac: ENC[AES256_GCM,data:qAlGD49AImJN3kBzuGDS04yW/abZ9QtGc/ur43hvp8T2qrN7ZVnlisgk0BAS7EL4stzzK9r5T9vUVEXoLQ8zFRgl3eyJyKqL5VnFy6EjzsLCrE72jXMyN3L0xBic5ASlWvdAMtXsB3zlS9tWj49wiOcRGhFx2ZKmrCXnaO9gjkA=,iv:U8BN+9dJfEk9wgZcS70uU+jj6R/W4rPPFeTpmUX9jTE=,tag:sF6Zl3eckiBuijYieenjEw==,type:str]
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
     version: 3.11.0

@@ -22,6 +22,7 @@ spec:
       - name: apps
         ensure: present
         login: true
+        superuser: false
         passwordSecret:
           name: postgres-apps-user
       - name: apps_elevated
@@ -33,5 +34,6 @@ spec:
       - name: windmill
         ensure: present
         login: true
+        superuser: false
         passwordSecret:
           name: postgres-windmill-user

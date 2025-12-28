@@ -7,4 +7,3 @@ resources:
   - postgres-apps-elevated.yaml
   - postgres-windmill-user.yaml
   - postgres-cluster.yaml
-  - windmill-database.yaml
