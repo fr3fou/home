@@ -25,7 +25,8 @@ spec:
   values:
     windmill:
       baseDomain: wm.nerv.id
-      databaseUrl: ENC[AES256_GCM,data:FpPfXTePqQpJ6iYD3mP/F5bV7BJxOSqsZX525tsZcmXBvXRLxlWwoIHgbu3BTCRae0xeP/YFH5vOBr3pOhW2nYS8Pf8AmslW5HLanz/ieLkR2EwGfZvuNEiayRsdzvs=,iv:dRwXlcxQWHdURRvjx3835M8yH/a3VIAWjyBJJ7GiuQo=,tag:z2FldzqLFBDhHcjqp+MhUw==,type:str]
+      databaseUrlSecretName: windmill-db
+      databaseUrlSecretKey: DATABASE_URL
       appReplicas: 1
       lspReplicas: 1
       workerGroups:
@@ -44,23 +45,3 @@ spec:
       enabled: false
     ingress:
       enabled: false
-sops:
-  kms: []
-  gcp_kms: []
-  azure_kv: []
-  hc_vault: []
-  age:
-    - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
-      enc: |
-        -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBoL1Q4K01JeVl5d2VCT0Ny
-        TlczUlhRbWZMZFRFdE8yNmhDUjZMOWlybkZRCjBIQThEdFRDYXVuTU4wdVdPMnli
-        Ym5PYXNSSWhzYXJ0blkvNkVoYWxLZDQKLS0tIGJicHlZM0FtcmtFTlRsSXBscTdu
-        MjhYWVBnVUNacEM5NE43cm1SMjZ3Z0EKdHLsJVKbXub8LrfYsLe3nUoEnAMI/+63
-        nM1QTk3JoGWwCq5J4lIPkVlBN8MXp/7PzAwKxj2yFtlBynrMFVq8hw==
-        -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2025-05-08T19:58:54Z"
-  mac: ENC[AES256_GCM,data:bJNEJxygNLNnncptzy72Xqcr75HYYiO/tq0PJHVSdZp28xm4x1zV0re8lAJu28Dh2gIsf++LLFeDWwH3YkgvW9EJJ2EDmdIHCt63HdkJ1rbV05gx0CPJHDcpBif/83kkotbC5oJGjravfPRVx40UA2ea9sSO6jkyNX3lOdrgihc=,iv:sxHCq0ju+q0vqtfI3JAQkF4OQDPpC8ByRj6TWrTyL8Y=,tag:vBmVgrx2PsnYMY7XOWYP1Q==,type:str]
-  pgp: []
-  encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
-  version: 3.9.4

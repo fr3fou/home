@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: postgres-superuser
+    namespace: cnpg-system
+type: kubernetes.io/basic-auth
+stringData:
+    username: ENC[AES256_GCM,data:mYU90rGXl8Q=,iv:qh68pAhQlXiCzsvKq4/vVAkm014g8c0QoIfiGzjEjew=,tag:9B57GnWAOsxautgaoKsWnQ==,type:str]
+    password: ENC[AES256_GCM,data:uD9Ac3jA2q+mfOnWaIYVEzhABzlpaoK2bQJ2O0gJtRI=,iv:uStlmo3NBa1SOxUSsjOzYZ2glmnAXpeMDxnG8gtJr74=,tag:zUhlaPcd9Jzn+FYJ1t1AFw==,type:str]
+sops:
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqeWxIaXQ0N2c4b0JHbmFB
+            QnhVdUJCcmpaQUFsY0NaSGI0VlZPM2ZzclNzCmlzVm1vckN4Z2dHTTVwczhuTlJF
+            MHQ4K2VkaWlNV0h0WVFyS090aUp6a1kKLS0tIFpEZHhTMVBTK3BvR0E4SUkrRnda
+            VjZBMFBKYTQ1dmdNQ2Q5M3JpcHNtRHMKrF/nB2161MiyPvYjF3duZbE1QKo4tdyg
+            kTN6L+SqZ2tEv519rM+9FLnPAVUIf3B+eWFFT7nIZNOlB4W7BfzSeg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-12-28T16:09:06Z"
+    mac: ENC[AES256_GCM,data:p5BxJRuR/GfwqhZ4lKiSdWhWcgNSnX65UowiM/tLlrWTbqqW+c1zOGZLb4z1SGCyLnyq0KIz3mKjF4K23I+a5WcMGUm5kWPE6rOBYHgtAEizybhpYT2zXGljCWD5C26vPRdFxyCe32bxXkAO5DDzp1xVSvJ7H4nolEHQPilOGS8=,iv:7Mfi9DFxz4Y5062BW24l5BKz7Ovwf1jUnMztIHwz4qI=,tag:pqrLjHqwPNGmRyc4JJDU7w==,type:str]
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
+    version: 3.11.0

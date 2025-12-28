@@ -8,13 +8,20 @@ spec:
 
   storage:
     storageClass: local-path
-    size: 20Gi
+    size: 40Gi
 
   postgresql:
     parameters:
       max_connections: "500"
 
-  bootstrap:
-    initdb:
-      database: app
-      owner: app
+  superuserSecret:
+    name: postgres-superuser
+
+  managed:
+    roles:
+      - name: apps
+        ensure: present
+        login: true
+        createdb: true
+        passwordSecret:
+          name: postgres-apps-user
