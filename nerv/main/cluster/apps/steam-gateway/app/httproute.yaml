@@ -8,7 +8,6 @@ spec:
   parentRefs:
     - name: internal
       namespace: networking-system
-      sectionName: https
   hostnames:
     - steam.nerv.id
   rules:
