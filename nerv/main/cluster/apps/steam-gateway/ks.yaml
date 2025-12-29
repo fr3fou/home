@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: steam-gateway
+  namespace: flux-system
+spec:
+  targetNamespace: apps
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: steam-gateway
+  path: ./nerv/main/cluster/apps/steam-gateway/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: false
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
