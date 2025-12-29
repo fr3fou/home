@@ -5,7 +5,7 @@ metadata:
   name: podinfo
 spec:
   parentRefs:
-    - name: external
+    - name: internal
       namespace: networking-system
   hostnames:
     - pod.nerv.id
