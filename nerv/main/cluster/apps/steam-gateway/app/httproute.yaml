@@ -12,5 +12,5 @@ spec:
     - steam.nerv.id
   rules:
     - backendRefs:
-        - name: steam-gateway-app
+        - name: steam-gateway
           port: 3001
