@@ -39,3 +39,9 @@ spec:
         bypassrls: true
         inRoles:
           - windmill_user
+      - name: home_assistant
+        ensure: present
+        login: true
+        superuser: false
+        passwordSecret:
+          name: postgres-home-assistant-user

@@ -1,0 +1,11 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: home-assistant
+  namespace: cnpg-system
+spec:
+  cluster:
+    name: postgres
+  name: home_assistant
+  owner: home_assistant

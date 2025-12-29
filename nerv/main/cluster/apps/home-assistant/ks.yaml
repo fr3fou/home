@@ -1,0 +1,26 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: home-assistant
+  namespace: flux-system
+spec:
+  targetNamespace: apps
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: home-assistant
+  dependsOn:
+    - name: postgres-databases
+  path: ./nerv/main/cluster/apps/home-assistant/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  wait: false
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: home-assistant-secrets

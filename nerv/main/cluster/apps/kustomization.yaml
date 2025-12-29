@@ -7,3 +7,4 @@ resources:
   - windmill/ks.yaml
   - podinfo/ks.yaml
   - steam-gateway/ks.yaml
+  - home-assistant/ks.yaml

@@ -1,0 +1,26 @@
+default_config:
+
+recorder:
+  db_url: postgresql://home_assistant:${HOME_ASSISTANT_DB_PASSWORD}@postgres-rw.cnpg-system.svc.cluster.local:5432/home_assistant
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+homeassistant:
+  allowlist_external_urls:
+    - https://home.nerv.id
+  auth_mfa_modules:
+    - type: totp
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 10.42.0.0/16
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+    - 127.0.0.1
+    - ::1
