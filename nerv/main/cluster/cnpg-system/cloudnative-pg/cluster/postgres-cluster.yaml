@@ -37,3 +37,17 @@ spec:
         superuser: false
         passwordSecret:
           name: postgres-windmill-user
+        inRoles:
+          - windmill_admin
+          - windmill_user
+      - name: windmill_user
+        ensure: present
+        login: false
+        superuser: false
+      - name: windmill_admin
+        ensure: present
+        login: false
+        superuser: false
+        bypassrls: true
+        inRoles:
+          - windmill_user
