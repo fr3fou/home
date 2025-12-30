@@ -21,6 +21,7 @@ spec:
     remediation:
       retries: 5
   values:
+    replicas: 0
     image:
       repository: ghcr.io/home-assistant/home-assistant
       tag: 2025.12.4
