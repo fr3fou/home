@@ -19,7 +19,7 @@ spec:
       - host replication postgres all md5
 
   enableSuperuserAccess: true
-  
+
   superuserSecret:
     name: postgres-superuser
 

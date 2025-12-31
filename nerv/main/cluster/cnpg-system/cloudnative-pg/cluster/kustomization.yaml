@@ -6,4 +6,4 @@ resources:
   - postgres-windmill-user.yaml
   - postgres-home-assistant-user.yaml
   - postgres-luncherbox-user.yaml
-  - postgres-cluster.yaml
+# - postgres-cluster.yaml
