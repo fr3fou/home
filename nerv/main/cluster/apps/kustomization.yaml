@@ -9,3 +9,4 @@ resources:
   - steam-gateway/ks.yaml
   - home-assistant/ks.yaml
   - shared/redis/ks.yaml
+  - shared/postgres/ks.yaml

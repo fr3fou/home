@@ -1,0 +1,11 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: luncherbox
+  namespace: cnpg-system
+spec:
+  cluster:
+    name: postgres
+  name: luncherbox
+  owner: luncherbox

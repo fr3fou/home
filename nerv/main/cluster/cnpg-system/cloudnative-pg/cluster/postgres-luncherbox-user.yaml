@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: postgres-luncherbox-user
+    namespace: cnpg-system
+type: Opaque
+stringData:
+    username: ENC[AES256_GCM,data:r1LgTrHII7do+Q==,iv:VezG70wFjd8Nujj2fDsF67hkec1Mv24nw12MxvMmuk4=,tag:bZ41YH5FhPO5XScqIa7Z2A==,type:str]
+    password: ENC[AES256_GCM,data:/l4ZqQiwX+otz4Y0dfXFs/6QD2jGag+F/kIotyj7TiL7VuOvHKUi3VSMdWU=,iv:frHlfitpesiSUgAyGFyk7ELUqHd1sVGPkNhOLBvSXJs=,tag:Rn4LE/LEyYNhaOl7nCr7Ew==,type:str]
+sops:
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEMFFESi9ZZkVYNFg0WThI
+            MzVYM3JhN2dCaGZiMzRCUG5PRHFmQ0tuRlNrCmE5UlpQQndmZG0yMFlQUnVLMDVI
+            dUh4K05zUVRjSlk0NExoOTVUTkYyTTgKLS0tIHdoK2dNSm51d0ZLU2hQWDRocW02
+            MTlwVjRjQjFoVjVCYVFrQUJ0am92MEEKo6egkaikB8c7532Skno//FBf7zzQorZ/
+            fEl2h0rPAmriY3kBErQmhBWQqwCb26tyFvTBeonlsFEAjyu2ydCMEg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-12-31T14:08:09Z"
+    mac: ENC[AES256_GCM,data:0qcCTeiyQrJS32Fl8Qs0/aHlNNNSHKLLHVqG79d5fvnDxSpRoAvn4HesQG9NcIFNPtUsdEvSl3xbgHTe2xDcTa0DfG6S2KVbrYV7zsjvAYuuhlONc0M0RmiaBd7XkX0s+PZyAqkMjnmvAof0Np1/14GFuapBuW9Zj6ElXO5G8VM=,iv:2L8Gk9QcAkBqcofKDQktucXBLVxGb07fBVC+tzVO4Fo=,tag:jM5NETNbaTcL9lwB2CAv8g==,type:str]
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
+    version: 3.11.0

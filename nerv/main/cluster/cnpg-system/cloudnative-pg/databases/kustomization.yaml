@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - windmill-database.yaml
   - home-assistant-database.yaml
+  - luncherbox-database.yaml

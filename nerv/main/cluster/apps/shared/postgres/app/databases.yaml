@@ -1,0 +1,33 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: windmill
+  namespace: apps
+spec:
+  cluster:
+    name: postgres-apps
+  name: windmill
+  owner: windmill
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: home-assistant
+  namespace: apps
+spec:
+  cluster:
+    name: postgres-apps
+  name: home_assistant
+  owner: home_assistant
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: luncherbox
+  namespace: apps
+spec:
+  cluster:
+    name: postgres-apps
+  name: luncherbox
+  owner: luncherbox

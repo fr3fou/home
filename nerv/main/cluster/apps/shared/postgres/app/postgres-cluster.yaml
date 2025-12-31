@@ -2,8 +2,8 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: postgres
-  namespace: cnpg-system
+  name: postgres-apps
+  namespace: apps
 spec:
   instances: 1
 
@@ -14,14 +14,26 @@ spec:
   postgresql:
     parameters:
       max_connections: "500"
-    pg_hba:
-      # Allow replication connections from pods in the cluster
-      - host replication postgres all md5
 
-  enableSuperuserAccess: true
-  
   superuserSecret:
-    name: postgres-superuser
+    name: postgres-apps-superuser
+
+  # Bootstrap from the existing postgres cluster in cnpg-system
+  bootstrap:
+    pg_basebackup:
+      source: postgres-old
+      database: app
+      owner: app
+
+  externalClusters:
+    - name: postgres-old
+      connectionParameters:
+        host: postgres-rw.cnpg-system.svc.cluster.local
+        user: postgres
+        dbname: postgres
+      password:
+        name: postgres-old-superuser
+        key: password
 
   managed:
     roles:
