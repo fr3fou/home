@@ -10,7 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: home-assistant
   dependsOn:
-    - name: postgres-databases
+    - name: shared-postgres
   path: ./nerv/main/cluster/apps/home-assistant/app
   prune: true
   sourceRef:

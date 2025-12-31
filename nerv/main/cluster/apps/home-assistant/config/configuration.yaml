@@ -1,7 +1,7 @@
 default_config:
 
 recorder:
-  db_url: postgresql://home_assistant:${HOME_ASSISTANT_DB_PASSWORD}@postgres-rw.cnpg-system.svc.cluster.local:5432/home_assistant
+  db_url: postgresql://home_assistant:${HOME_ASSISTANT_DB_PASSWORD}@postgres-apps-rw.apps.svc.cluster.local:5432/home_assistant
 
 automation: !include automations.yaml
 script: !include scripts.yaml
