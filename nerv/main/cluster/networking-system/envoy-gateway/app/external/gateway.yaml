@@ -36,3 +36,5 @@ spec:
         certificateRefs:
           - kind: Secret
             name: nerv-id-tls
+          - kind: Secret
+            name: deliprods-com-tls

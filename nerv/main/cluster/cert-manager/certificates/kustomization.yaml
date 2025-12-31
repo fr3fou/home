@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: networking-system
 resources:
   - nerv-id.yaml
+  - deliprods-com.yaml
