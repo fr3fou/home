@@ -29,15 +29,15 @@ spec:
             - containerPort: 8080
           env:
             - name: COOKIE_URL
-              value: ".nerv.id"
+              value: ".deliprods.com"
             - name: BACKEND_PORT
               value: "8080"
             - name: FRONTEND_URL
-              value: "https://luncherbox.nerv.id"
+              value: "https://luncherbox.deliprods.com"
             - name: BACKEND_URL
-              value: "https://luncherbox-api.nerv.id"
+              value: "https://luncherbox-api.deliprods.com"
             - name: SOCKET_URL
-              value: "https://luncherbox-api.nerv.id"
+              value: "https://luncherbox-api.deliprods.com"
           envFrom:
             - secretRef:
                 name: luncher-box-backend-secrets

@@ -31,11 +31,11 @@ spec:
             - name: FRONTEND_PORT
               value: "3000"
             - name: FRONTEND_URL
-              value: "https://luncherbox.nerv.id"
+              value: "https://luncherbox.deliprods.com"
             - name: BACKEND_URL
-              value: "https://luncherbox-api.nerv.id"
+              value: "https://luncherbox-api.deliprods.com"
             - name: SOCKET_URL
-              value: "https://luncherbox-api.nerv.id"
+              value: "https://luncherbox-api.deliprods.com"
 ---
 apiVersion: v1
 kind: Service

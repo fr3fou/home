@@ -9,7 +9,7 @@ spec:
     - name: external
       namespace: networking-system
   hostnames:
-    - luncherbox.nerv.id
+    - luncherbox.deliprods.com
   rules:
     - backendRefs:
         - name: luncher-box-frontend
