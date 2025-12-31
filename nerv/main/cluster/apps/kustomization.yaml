@@ -8,3 +8,4 @@ resources:
   - podinfo/ks.yaml
   - steam-gateway/ks.yaml
   - home-assistant/ks.yaml
+  - shared/redis/ks.yaml
