@@ -18,23 +18,6 @@ spec:
   superuserSecret:
     name: postgres-apps-superuser
 
-  # Bootstrap from the existing postgres cluster in cnpg-system
-  bootstrap:
-    pg_basebackup:
-      source: postgres-old
-      database: app
-      owner: app
-
-  externalClusters:
-    - name: postgres-old
-      connectionParameters:
-        host: postgres-rw.cnpg-system.svc.cluster.local
-        user: postgres
-        dbname: postgres
-      password:
-        name: postgres-old-superuser
-        key: password
-
   managed:
     roles:
       - name: windmill
