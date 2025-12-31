@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: luncher-box-backend
+  namespace: apps
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: luncher-box-backend
+  template:
+    metadata:
+      labels:
+        app: luncher-box-backend
+    spec:
+      containers:
+        - name: luncher-box-backend
+          image: ghcr.io/deliriumproducts/luncher-box-backend:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              cpu: 500m
+              memory: 600Mi
+          ports:
+            - containerPort: 8080
+          env:
+            - name: COOKIE_URL
+              value: ".nerv.id"
+            - name: BACKEND_PORT
+              value: "8080"
+            - name: FRONTEND_URL
+              value: "https://luncherbox.nerv.id"
+            - name: BACKEND_URL
+              value: "https://luncherbox-api.nerv.id"
+            - name: SOCKET_URL
+              value: "https://luncherbox-api.nerv.id"
+          envFrom:
+            - secretRef:
+                name: luncher-box-backend-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: luncher-box-backend
+  namespace: apps
+  labels:
+    app: luncher-box-backend
+spec:
+  selector:
+    app: luncher-box-backend
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080

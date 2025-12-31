@@ -35,9 +35,6 @@ spec:
   values:
     redisStandalone:
       name: redis
-      redisSecret:
-        secretName: redis-secret
-        secretKey: redis_password
     storageSpec:
       volumeClaimTemplate:
         spec:

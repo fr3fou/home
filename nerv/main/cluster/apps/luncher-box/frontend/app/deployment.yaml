@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: luncher-box-frontend
+  namespace: apps
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: luncher-box-frontend
+  template:
+    metadata:
+      labels:
+        app: luncher-box-frontend
+    spec:
+      containers:
+        - name: luncher-box-frontend
+          image: ghcr.io/deliriumproducts/luncher-box-frontend:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              cpu: 500m
+              memory: 600Mi
+          ports:
+            - containerPort: 3000
+          env:
+            - name: FRONTEND_PORT
+              value: "3000"
+            - name: FRONTEND_URL
+              value: "https://luncherbox.nerv.id"
+            - name: BACKEND_URL
+              value: "https://luncherbox-api.nerv.id"
+            - name: SOCKET_URL
+              value: "https://luncherbox-api.nerv.id"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: luncher-box-frontend
+  namespace: apps
+  labels:
+    app: luncher-box-frontend
+spec:
+  selector:
+    app: luncher-box-frontend
+  ports:
+    - port: 3000
+      protocol: TCP
+      targetPort: 3000

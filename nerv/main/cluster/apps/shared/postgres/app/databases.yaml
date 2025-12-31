@@ -24,10 +24,10 @@ spec:
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
-  name: luncherbox
+  name: luncherbox-production
   namespace: apps
 spec:
   cluster:
     name: postgres-apps
-  name: luncherbox
+  name: luncherbox_production
   owner: luncherbox
