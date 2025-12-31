@@ -4,6 +4,7 @@ metadata:
   name: luncher-box-backend
   namespace: apps
 spec:
+  replicas: 0
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -13,7 +14,7 @@ spec:
       labels:
         app: luncher-box-backend
     spec:
-      imagePullSecrets: 
+      imagePullSecrets:
         - name: docker-config
       containers:
         - name: luncher-box-backend
@@ -56,4 +57,3 @@ spec:
     - port: 8080
       protocol: TCP
       targetPort: 8080
-
