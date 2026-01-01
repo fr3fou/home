@@ -17,9 +17,9 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  # dependsOn:
-  #   - name: intel-device-plugin-gpu
-  #     namespace: kube-system
+  dependsOn:
+    - name: intel-device-plugin-gpu
+      namespace: kube-system
   driftDetection:
     mode: enabled
     ignore:
@@ -60,9 +60,8 @@ spec:
             resources:
               requests:
                 cpu: 100m
-    #            limits:
-    #              gpu.intel.com/i915: 1
-    #              memory: 16Gi
+              limits:
+                gpu.intel.com/i915: 1
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -72,8 +71,8 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [44, 10000]
         seccompProfile: { type: RuntimeDefault }
-    #     nodeSelector:
-    #       intel.feature.node.kubernetes.io/gpu: "true"
+      nodeSelector:
+        intel.feature.node.kubernetes.io/gpu: "true"
     service:
       app:
         controller: plex
