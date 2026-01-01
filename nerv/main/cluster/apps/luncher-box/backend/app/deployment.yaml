@@ -15,6 +15,7 @@ spec:
       labels:
         app: luncher-box-backend
     spec:
+      terminationGracePeriodSeconds: 5
       containers:
         - name: luncher-box-backend
           image: ghcr.io/deliriumproducts/luncher-box-backend:latest
