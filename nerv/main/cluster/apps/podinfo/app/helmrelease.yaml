@@ -19,7 +19,7 @@ spec:
   values:
     controllers:
       podinfo:
-        replicas: 0
+        replicas: 1
         containers:
           app:
             image:
