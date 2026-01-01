@@ -5,6 +5,7 @@ metadata:
   name: luncher-box-backend
   namespace: apps
 spec:
+  replicas: 0
   revisionHistoryLimit: 10
   selector:
     matchLabels:
