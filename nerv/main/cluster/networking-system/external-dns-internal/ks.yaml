@@ -19,3 +19,7 @@ spec:
   wait: true
   dependsOn:
     - name: external-dns
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
