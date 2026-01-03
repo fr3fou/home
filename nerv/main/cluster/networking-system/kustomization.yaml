@@ -6,3 +6,5 @@ resources:
   - envoy-gateway/operator/ks.yaml
   - envoy-gateway/ks.yaml
   - external-dns/ks.yaml
+  - external-dns-unifi-webhook/ks.yaml
+  - external-dns-internal/ks.yaml

@@ -6,6 +6,7 @@ metadata:
   name: external
   annotations:
     external-dns.alpha.kubernetes.io/target: &hostname ${PUBLIC_DOMAIN}
+    external-dns.alpha.kubernetes.io/internal-hostname: "true"
 spec:
   gatewayClassName: envoy-external
   addresses:
