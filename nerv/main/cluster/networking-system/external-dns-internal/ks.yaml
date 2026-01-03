@@ -18,4 +18,4 @@ spec:
     name: flux-system
   wait: true
   dependsOn:
-    - name: external-dns-unifi-webhook
+    - name: external-dns
