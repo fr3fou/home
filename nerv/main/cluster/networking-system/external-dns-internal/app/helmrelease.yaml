@@ -38,16 +38,6 @@ spec:
             value: *logLevel
           - name: UNIFI_HOST
             value: "https://192.168.0.1"
-          - name: UNIFI_USER
-            valueFrom:
-              secretKeyRef:
-                name: &secret external-dns-unifi-secret
-                key: UNIFI_USER
-          - name: UNIFI_PASS
-            valueFrom:
-              secretKeyRef:
-                name: *secret
-                key: UNIFI_PASS
           - name: UNIFI_SKIP_TLS_VERIFY
             value: "true"
         livenessProbe:
