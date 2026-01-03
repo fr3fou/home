@@ -5,5 +5,5 @@ resources:
   - namespace.yaml
   - envoy-gateway/operator/ks.yaml
   - envoy-gateway/ks.yaml
-  - external-dns/external/ks.yaml
-  - external-dns/internal/ks.yaml
+  - external-dns/cloudflare/ks.yaml
+  - external-dns/unifi/ks.yaml
