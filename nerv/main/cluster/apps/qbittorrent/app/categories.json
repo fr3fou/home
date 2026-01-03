@@ -1,0 +1,32 @@
+{
+  "Series": {
+    "save_path": "/mnt/downloads/Series"
+  },
+  "Movies": {
+    "save_path": "/mnt/downloads/Movies"
+  },
+  "Movies (4K)": {
+    "save_path": "/mnt/downloads/Movies (4K)"
+  },
+  "VSTs": {
+    "save_path": "/mnt/downloads/VSTs"
+  },
+  "ISOs": {
+    "save_path": "/mnt/downloads/ISOs"
+  },
+  "Programs": {
+    "save_path": "/mnt/downloads/Programs"
+  },
+  "Music Kits": {
+    "save_path": "/mnt/downloads/Music Kits"
+  },
+  "Music": {
+    "save_path": "/mnt/downloads/Music"
+  },
+  "Books": {
+    "save_path": "/mnt/downloads/Books"
+  },
+  "Courses": {
+    "save_path": "/mnt/downloads/Courses"
+  }
+}

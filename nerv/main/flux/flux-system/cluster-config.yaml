@@ -10,3 +10,4 @@ data:
   TIMEZONE: "Europe/Sofia"
   USER_UID: "1000"
   PLEX_IP: "192.168.5.10"
+  QBITTORRENT_IP: "192.168.5.13"
