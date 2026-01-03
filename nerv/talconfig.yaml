@@ -44,6 +44,13 @@ nodes:
           diskSelector:
             match: disk.transport == 'sata'
           minSize: 50Gi
+      - name: local-hostpath
+        filesystem:
+          type: ext4
+        provisioning:
+          diskSelector:
+            match: disk.transport == 'sata'
+          minSize: 50Gi
 
     patches:
       # Disable CNI and kube-proxy for Cilium
