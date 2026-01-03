@@ -11,14 +11,14 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   interval: 1h
-  path: ./nerv/main/cluster/networking-system/external-dns-internal/app
+  path: ./nerv/main/cluster/networking-system/external-dns/internal/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
   wait: true
   dependsOn:
-    - name: external-dns
+    - name: external-dns-external
   decryption:
     provider: sops
     secretRef:

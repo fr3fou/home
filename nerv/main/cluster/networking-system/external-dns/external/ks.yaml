@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app external-dns
+  name: &app external-dns-external
   namespace: flux-system
 spec:
   targetNamespace: networking-system
@@ -13,7 +13,7 @@ spec:
   dependsOn:
     - name: envoy-gateway
   interval: 1h
-  path: ./nerv/main/cluster/networking-system/external-dns/app
+  path: ./nerv/main/cluster/networking-system/external-dns/external/app
   prune: true
   sourceRef:
     kind: GitRepository
