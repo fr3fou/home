@@ -44,7 +44,7 @@ spec:
                     port: 8080
                   initialDelaySeconds: 30
                   periodSeconds: 10
-                  timeoutSeconds: 1
+                  timeoutSeconds: 5
                   failureThreshold: 3
               readiness: *probes
               startup:
@@ -52,6 +52,7 @@ spec:
                 spec:
                   failureThreshold: 30
                   periodSeconds: 10
+                  timeoutSeconds: 5
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
