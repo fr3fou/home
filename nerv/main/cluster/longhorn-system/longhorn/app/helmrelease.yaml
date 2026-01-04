@@ -37,7 +37,7 @@ spec:
       defaultReplicaCount: 1
       defaultDataLocality: best-effort
       # Use the Talos userVolume mount
-      defaultDataPath: /var/mnt/longhorn
+      defaultDataPath: /var/mnt/data/longhorn
     defaultBackupStore:
       backupTarget: CIFS
       backupTargetCredentialSecret: longhorn-backup-secret
