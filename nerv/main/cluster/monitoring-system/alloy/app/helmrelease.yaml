@@ -1,0 +1,104 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.ok8.sh/source.toolkit.fluxcd.io/helmrepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: grafana
+spec:
+  interval: 1h
+  url: https://grafana.github.io/helm-charts
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.ok8.sh/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: alloy
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: k8s-monitoring
+      version: 3.7.1
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    crds: CreateReplace
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    cluster:
+      name: nerv
+
+    # Destinations for telemetry data (v3.x structure)
+    destinations:
+      - name: grafanacloud-prometheus
+        type: prometheus
+        url: https://prometheus-prod-24-prod-eu-west-2.grafana.net/api/prom/push
+        auth:
+          type: basic
+          usernameKey: prometheus-username
+          passwordKey: prometheus-password
+        secret:
+          create: false
+          name: grafana-cloud-credentials
+          namespace: monitoring-system
+
+      - name: grafanacloud-loki
+        type: loki
+        url: https://logs-prod-012.grafana.net/loki/api/v1/push
+        auth:
+          type: basic
+          usernameKey: loki-username
+          passwordKey: loki-password
+        secret:
+          create: false
+          name: grafana-cloud-credentials
+          namespace: monitoring-system
+
+      - name: grafanacloud-tempo
+        type: otlp
+        url: https://tempo-prod-10-prod-eu-west-2.grafana.net:443
+        protocol: grpc
+        auth:
+          type: basic
+          usernameKey: tempo-username
+          passwordKey: tempo-password
+        secret:
+          create: false
+          name: grafana-cloud-credentials
+          namespace: monitoring-system
+        traces:
+          enabled: true
+        metrics:
+          enabled: false
+        logs:
+          enabled: false
+
+    # Features
+    clusterMetrics:
+      enabled: true
+
+    clusterEvents:
+      enabled: true
+
+    podLogs:
+      enabled: true
+
+    # Alloy collectors
+    # Enable annotation-based autodiscovery for scraping pods with k8s.grafana.com/scrape annotations
+    annotationAutodiscovery:
+      enabled: true
+    alloy-metrics:
+      enabled: true
+
+    alloy-singleton:
+      enabled: true
+
+    alloy-logs:
+      enabled: true
