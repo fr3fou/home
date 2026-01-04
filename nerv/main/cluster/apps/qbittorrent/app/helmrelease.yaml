@@ -57,12 +57,6 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
-            resources:
-              requests:
-                cpu: 60m
-                memory: 765M
-              limits:
-                memory: 1426M
         initContainers:
           copy-config:
             image:
