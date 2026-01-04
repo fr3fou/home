@@ -4,5 +4,44 @@
   },
   "tv-sonarr": {
     "save_path": "/nas/Downloads"
+  },
+  "Series": {
+    "save_path": "/nas/Downloads/Series"
+  },
+  "Movies": {
+    "save_path": "/nas/Downloads/Movies"
+  },
+  "Movies (4K)": {
+    "save_path": "/nas/Downloads/Movies"
+  },
+  "Anime": {
+    "save_path": "/nas/Downloads/Anime"
+  },
+  "Anime Movies": {
+    "save_path": "/nas/Downloads/Anime Movies"
+  },
+  "VSTs": {
+    "save_path": "/nas/Downloads/VSTs"
+  },
+  "ISOs": {
+    "save_path": "/nas/Downloads/ISOs"
+  },
+  "Programs": {
+    "save_path": "/nas/Downloads/Programs"
+  },
+  "Music Kits": {
+    "save_path": "/nas/Downloads/Music Kits"
+  },
+  "Music": {
+    "save_path": "/nas/Downloads/Music"
+  },
+  "Books": {
+    "save_path": "/nas/Downloads/Books"
+  },
+  "Courses": {
+    "save_path": "/nas/Downloads/Courses"
+  },
+  "Junk": {
+    "save_path": "/nas/Downloads/Junk"
   }
 }
