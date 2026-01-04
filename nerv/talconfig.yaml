@@ -42,7 +42,7 @@ nodes:
           type: ext4
         provisioning:
           diskSelector:
-            match: disk.transport == 'sata'
+            match: disk.transport == 'virtio'
           minSize: 230Gi
           grow: true
 

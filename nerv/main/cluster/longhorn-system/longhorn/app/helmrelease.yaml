@@ -38,8 +38,8 @@ spec:
       defaultDataLocality: best-effort
       # Use the Talos userVolume mount
       defaultDataPath: /var/mnt/data/longhorn
-    defaultBackupStore:
-      backupTarget: CIFS
+      # CIFS backup target
+      backupTarget: cifs://192.168.1.72/Kubernetes/longhorn
       backupTargetCredentialSecret: longhorn-backup-secret
     persistence:
       defaultClass: false
