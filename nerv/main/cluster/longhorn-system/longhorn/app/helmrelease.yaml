@@ -38,9 +38,9 @@ spec:
       defaultDataLocality: best-effort
       # Use the Talos userVolume mount
       defaultDataPath: /var/mnt/longhorn
-      # NFS backup target
-      backupTarget: nfs://192.168.1.72:/var/nfs/shared/Kubernetes/longhorn-backups
-      backupTargetCredentialSecret: ""
+    defaultBackupStore:
+      backupTarget: CIFS
+      backupTargetCredentialSecret: longhorn-backup-secret
     persistence:
       defaultClass: false
       defaultClassReplicaCount: 1
