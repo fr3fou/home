@@ -133,13 +133,7 @@ spec:
         existingClaim: qbittorrent-incomplete
         globalMounts:
           - path: /incomplete
-      nas-old:
-        type: nfs
-        server: 192.168.1.72
-        path: /var/nfs/shared/Lab
-        globalMounts:
-          - path: /mnt/lab
-      nas-new:
+      nas:
         type: nfs
         server: 192.168.1.72
         path: /var/nfs/shared/Downloads
