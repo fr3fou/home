@@ -57,19 +57,6 @@ spec:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
-        initContainers:
-          copy-config:
-            image:
-              repository: busybox
-              tag: 1.37.0
-            command:
-              - /bin/sh
-              - -c
-            args:
-              - |
-                if [ ! -f /config/categories.json ]; then
-                  cp /configfiles/* /config/
-                fi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
