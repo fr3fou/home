@@ -4,4 +4,5 @@ resources:
   - cluster-config.yaml
   - peer-config.yaml
   - advertisement.yaml
-  - lb-ippool.yaml 
+  - lb-ippool.yaml
+  - httproute.yaml 
