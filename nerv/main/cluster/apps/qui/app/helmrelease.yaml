@@ -81,7 +81,7 @@ spec:
             namespace: networking-system
         rules:
           - backendRefs:
-              - name: qui-app
+              - name: qui
                 port: 80
     persistence:
       config:
