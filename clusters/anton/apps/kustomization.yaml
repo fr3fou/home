@@ -21,6 +21,5 @@ resources:
   - ./adguard.yaml
   - ./unpackerr.yaml
   - ./windmill.yaml
-  - ./alloy.yaml
   - ./valhalla.yaml
   - ./open-webui.yaml
