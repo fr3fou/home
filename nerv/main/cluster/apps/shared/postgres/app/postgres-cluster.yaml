@@ -58,3 +58,9 @@ spec:
         superuser: false
         passwordSecret:
           name: prowlarr-postgres-user
+      - name: netronome
+        ensure: present
+        login: true
+        superuser: false
+        passwordSecret:
+          name: netronome-postgres-user

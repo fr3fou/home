@@ -1,0 +1,100 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: netronome
+  namespace: apps
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: apps
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controllers:
+      netronome:
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            runAsNonRoot: true
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          app:
+            image:
+              repository: ghcr.io/autobrr/netronome
+              tag: v0.8.0
+            env:
+              TZ: UTC
+              NETRONOME__HOST: 0.0.0.0
+              NETRONOME__PORT: "7575"
+              NETRONOME__DB_TYPE: postgres
+              NETRONOME__DB_HOST: postgres-apps-rw.apps.svc.cluster.local
+              NETRONOME__DB_PORT: "5432"
+              NETRONOME__DB_NAME: netronome
+              NETRONOME__DB_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: netronome-postgres
+                    key: username
+              NETRONOME__DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: netronome-postgres
+                    key: password
+              NETRONOME__DB_SSLMODE: disable
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+
+    service:
+      app:
+        controller: netronome
+        ports:
+          http:
+            port: 7575
+
+    route:
+      app:
+        hostnames:
+          - net.nerv.id
+        parentRefs:
+          - name: internal
+            namespace: networking-system
+        rules:
+          - backendRefs:
+              - name: netronome
+                port: 7575
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: netronome-config
+        globalMounts:
+          - path: /data
+      tmp:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /tmp

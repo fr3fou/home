@@ -53,3 +53,14 @@ spec:
     name: postgres-apps
   name: prowlarr-log
   owner: prowlarr
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: netronome
+  namespace: apps
+spec:
+  cluster:
+    name: postgres-apps
+  name: netronome
+  owner: netronome
