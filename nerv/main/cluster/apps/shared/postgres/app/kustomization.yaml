@@ -6,5 +6,6 @@ resources:
   - postgres-windmill-user-secret.yaml
   - postgres-home-assistant-user-secret.yaml
   - postgres-luncherbox-user-secret.yaml
+  - postgres-prowlarr-user-secret.yaml
   - postgres-cluster.yaml
   - databases.yaml
