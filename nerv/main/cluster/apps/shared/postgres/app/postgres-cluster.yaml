@@ -52,3 +52,9 @@ spec:
         superuser: false
         passwordSecret:
           name: postgres-luncherbox-user
+      - name: prowlarr
+        ensure: present
+        login: true
+        superuser: false
+        passwordSecret:
+          name: prowlarr-postgres-user

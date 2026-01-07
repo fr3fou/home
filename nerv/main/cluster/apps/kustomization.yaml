@@ -4,6 +4,7 @@ resources:
   - namespace.yaml
   - app-template.yaml
   - plex/ks.yaml
+  - prowlarr/ks.yaml
   - qbittorrent/ks.yaml
   - qui/ks.yaml
   - windmill/ks.yaml
