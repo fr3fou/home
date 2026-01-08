@@ -57,6 +57,9 @@ nodes:
               name: none
           proxy:
             disabled: true
+      # Disable OOM controller to prevent killing processes during I/O pressure
+      # https://github.com/siderolabs/talos/issues/12526#issuecomment-3707193227
+      - "@./patches/oomconfig.yaml"
     # patches:
     # NOTE: Was required by https://github.com/siderolabs/talos/issues/10291#issuecomment-2637405378
     #       Alternative solution is to set `values.speaker.ignoreExcludeLB` to `true`
