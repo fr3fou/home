@@ -38,6 +38,12 @@ spec:
                   httpGet:
                     path: /health
                     port: 3001
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
     service:
       app:
         controller: steam-gateway
