@@ -1,112 +1,120 @@
----
 # yaml-language-server: $schema=https://kubernetes-schemas.ok8.sh/source.toolkit.fluxcd.io/helmrepository_v1.json
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: grafana
+    name: grafana
 spec:
-  interval: 1h
-  url: https://grafana.github.io/helm-charts
+    interval: 1h
+    url: https://grafana.github.io/helm-charts
+sops:
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6WEtFL3RVelBTZWpRdXNK
+            OXZZbzhDeGd2Q0pLUjh2VmhUWjRVTkFTcmtNCmpLMHVEd3dHaC8wY21hMHBCdGlY
+            V1IxS2k3blBITGp5WWZRYmxDNlZSdDgKLS0tIHUvbldpazlFSWplbWFPNzRGMlp6
+            ZE85aGczZktlcmRBMHJ3MFA1WmZBR3cKTgvxq65EavfqYyA2kgWg1CtKUAnEPPld
+            ef5pXK1W7oYSEjZc6k08i7vo9yMQk/tPUirjVIYmsXwgD5CveyAHvg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-01-08T16:50:25Z"
+    mac: ENC[AES256_GCM,data:nmbafdTi26/vuAyQ0zgDUjFyldmrOHXA87u2TNi5Wo9U6hAXxbkFfepphTWUqlEO45zP6tOT86JFLli8BApSp72R2rWjzgICmX4a2MFp1Ltp/lCZS6ZV5DTj1KINvC1IJ9xqZb+B2NcDSB5zAYtlqpijZkL3RxCWp1NkH5Sh0vc=,iv:BpQh+DHjBvTSOqSz6a8VMtU6xIKNVEKiqhNOXaO8JZw=,tag:XMk6pTXplyIb1gkcTPDEjw==,type:str]
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
+    version: 3.11.0
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.ok8.sh/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: alloy
+    name: alloy
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: k8s-monitoring
-      version: 3.7.1
-      sourceRef:
-        kind: HelmRepository
-        name: grafana
-  install:
-    crds: CreateReplace
-    remediation:
-      retries: 3
-  upgrade:
-    crds: CreateReplace
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  values:
-    cluster:
-      name: nerv
-
-    # Destinations for telemetry data (v3.x structure)
-    destinations:
-      - name: grafanacloud-prometheus
-        type: prometheus
-        url: https://prometheus-prod-24-prod-eu-west-2.grafana.net/api/prom/push
-        auth:
-          type: basic
-          usernameKey: prometheus-username
-          passwordKey: prometheus-password
-        secret:
-          create: false
-          name: grafana-cloud-credentials
-          namespace: monitoring-system
-
-      - name: grafanacloud-loki
-        type: loki
-        url: https://logs-prod-012.grafana.net/loki/api/v1/push
-        auth:
-          type: basic
-          usernameKey: loki-username
-          passwordKey: loki-password
-        secret:
-          create: false
-          name: grafana-cloud-credentials
-          namespace: monitoring-system
-
-      - name: grafanacloud-tempo
-        type: otlp
-        url: https://tempo-prod-10-prod-eu-west-2.grafana.net:443
-        protocol: grpc
-        auth:
-          type: basic
-          usernameKey: tempo-username
-          passwordKey: tempo-password
-        secret:
-          create: false
-          name: grafana-cloud-credentials
-          namespace: monitoring-system
-        traces:
-          enabled: true
-        metrics:
-          enabled: false
-        logs:
-          enabled: false
-
-    # Features
-    clusterMetrics:
-      enabled: true
-      # Override kube-state-metrics discovery to use service role instead of endpoints
-      # Endpoints don't inherit the "release" label from the service, causing discovery to fail
-      kube-state-metrics:
-        discoveryType: service
-      # Enable the Node Exporter integration metrics list for Grafana Cloud
-      node-exporter:
-        metricsTuning:
-          useIntegrationAllowList: true
-
-    clusterEvents:
-      enabled: true
-
-    podLogs:
-      enabled: true
-
-    # Alloy collectors
-    # Enable annotation-based autodiscovery for scraping pods with k8s.grafana.com/scrape annotations
-    annotationAutodiscovery:
-      enabled: true
-    alloy-metrics:
-      enabled: true
-
-    alloy-singleton:
-      enabled: true
-
-    alloy-logs:
-      enabled: true
+    interval: 30m
+    chart:
+        spec:
+            chart: k8s-monitoring
+            version: 3.7.1
+            sourceRef:
+                kind: HelmRepository
+                name: grafana
+    install:
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    upgrade:
+        crds: CreateReplace
+        cleanupOnFail: true
+        remediation:
+            retries: 3
+    values:
+        cluster:
+            name: nerv
+        # Destinations for telemetry data (v3.x structure)
+        destinations:
+            - name: grafanacloud-prometheus
+              type: prometheus
+              url: https://prometheus-prod-24-prod-eu-west-2.grafana.net/api/prom/push
+              auth:
+                type: basic
+                username: "1735527"
+                password: ENC[AES256_GCM,data:g5lVKNFOvjOB5VGtfue8Sq84hQfZBXBdFm8HcJjF/4dRQmFKHEXbis626qHm1BdZNLhPQgDOhVSmgf7xmA+mrNkR1+8P0oCUkT8W1Y9cajHRhjyxLLMdS247dd5s/dSC8R7BiFWkSOMcHc7fme2tNTIZCEzUJ7hdVk5qEw==,iv:gjLVqpnrESFkbPtrKQG3yPmUSu6rV520Ex27VQGfx3I=,tag:IHIRW6Wy7gQborhNQKUIWg==,type:str]
+            - name: grafanacloud-loki
+              type: loki
+              url: https://logs-prod-012.grafana.net/loki/api/v1/push
+              auth:
+                type: basic
+                username: "967489"
+                password: ENC[AES256_GCM,data:2iqyatyXogOIdT1k/CVgsJ8wfXyjThb+UAT0LZd4ZBvBZeZQ4YIvPA/F/bf5ichsWQMqz1efa4GLo7KD/XTqw1LEYCOAwW56bb7q5e5/1S2UsfRFw7rcdRZ2PQMBIpwwYUwJPq/U8hYyO2tZFCV2wrp7tq5DXOwxD2A6gQ==,iv:7CH5tO3KYTYHl+O3oxmmGLSX0xFwclLAKt/5AHdtugY=,tag:APvaxcZVWrldlCt5NAzmNw==,type:str]
+            - name: grafanacloud-tempo
+              type: otlp
+              url: https://otlp-gateway-prod-eu-west-2.grafana.net/otlp
+              protocol: http
+              auth:
+                type: basic
+                username: "1009709"
+                password: ENC[AES256_GCM,data:ZnkSwYEKTKGRuuox3ZWAvWUT+iT6KaEB1xXyrHrO5W+73iomPT5eh7kJ75Qo4OEnPompnWMMhWbOMwqtRh89bowukO0Jo2FSu+oVmHID2RVboYiuLoX+hMkoaVAPUpHAqLOSjO/tE9W0ctjfit7Caztp3BUuOZ5bfiKjeQ==,iv:9F6L6CJ9wDXsYPFAcNfG5A0dvzv8YYG4K6Rrbn40LaM=,tag:WbpqhvXykzPQ4kUeh4Cezw==,type:str]
+              traces:
+                enabled: true
+              metrics:
+                enabled: false
+              logs:
+                enabled: false
+        # Features
+        clusterMetrics:
+            enabled: true
+            # Override kube-state-metrics discovery to use service role instead of endpoints
+            # Endpoints don't inherit the "release" label from the service, causing discovery to fail
+            kube-state-metrics:
+                discoveryType: service
+            # Enable the Node Exporter integration metrics list for Grafana Cloud
+            node-exporter:
+                metricsTuning:
+                    useIntegrationAllowList: true
+        clusterEvents:
+            enabled: true
+        podLogs:
+            enabled: true
+        # Alloy collectors
+        # Enable annotation-based autodiscovery for scraping pods with k8s.grafana.com/scrape annotations
+        annotationAutodiscovery:
+            enabled: true
+        alloy-metrics:
+            enabled: true
+        alloy-singleton:
+            enabled: true
+        alloy-logs:
+            enabled: true
+sops:
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6WEtFL3RVelBTZWpRdXNK
+            OXZZbzhDeGd2Q0pLUjh2VmhUWjRVTkFTcmtNCmpLMHVEd3dHaC8wY21hMHBCdGlY
+            V1IxS2k3blBITGp5WWZRYmxDNlZSdDgKLS0tIHUvbldpazlFSWplbWFPNzRGMlp6
+            ZE85aGczZktlcmRBMHJ3MFA1WmZBR3cKTgvxq65EavfqYyA2kgWg1CtKUAnEPPld
+            ef5pXK1W7oYSEjZc6k08i7vo9yMQk/tPUirjVIYmsXwgD5CveyAHvg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-01-08T16:50:25Z"
+    mac: ENC[AES256_GCM,data:nmbafdTi26/vuAyQ0zgDUjFyldmrOHXA87u2TNi5Wo9U6hAXxbkFfepphTWUqlEO45zP6tOT86JFLli8BApSp72R2rWjzgICmX4a2MFp1Ltp/lCZS6ZV5DTj1KINvC1IJ9xqZb+B2NcDSB5zAYtlqpijZkL3RxCWp1NkH5Sh0vc=,iv:BpQh+DHjBvTSOqSz6a8VMtU6xIKNVEKiqhNOXaO8JZw=,tag:XMk6pTXplyIb1gkcTPDEjw==,type:str]
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
+    version: 3.11.0
