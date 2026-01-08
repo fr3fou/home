@@ -83,6 +83,10 @@ spec:
     # Features
     clusterMetrics:
       enabled: true
+      # Override kube-state-metrics discovery to use service role instead of endpoints
+      # Endpoints don't inherit the "release" label from the service, causing discovery to fail
+      kube-state-metrics:
+        discoveryType: service
 
     clusterEvents:
       enabled: true
