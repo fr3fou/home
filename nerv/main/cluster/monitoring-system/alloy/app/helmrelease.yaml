@@ -87,6 +87,10 @@ spec:
       # Endpoints don't inherit the "release" label from the service, causing discovery to fail
       kube-state-metrics:
         discoveryType: service
+      # Enable the Node Exporter integration metrics list for Grafana Cloud
+      node-exporter:
+        metricsTuning:
+          useIntegrationAllowList: true
 
     clusterEvents:
       enabled: true
