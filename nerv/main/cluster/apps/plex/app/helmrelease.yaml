@@ -45,8 +45,8 @@ spec:
                     port: 32400
                   initialDelaySeconds: 0
                   periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
+                  timeoutSeconds: 10
+                  failureThreshold: 6
               readiness: *probes
               startup:
                 enabled: true
@@ -60,9 +60,8 @@ spec:
             resources:
               requests:
                 cpu: 100m
-    #            limits:
-    #              gpu.intel.com/i915: 1
-    #              memory: 16Gi
+               limits:
+                 memory: 8Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
