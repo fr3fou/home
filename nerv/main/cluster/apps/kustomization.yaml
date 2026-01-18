@@ -5,6 +5,7 @@ resources:
   - app-template.yaml
   - autobrr/ks.yaml
   - coder/ks.yaml
+  - pgadmin/ks.yaml
   - plex/ks.yaml
   - prowlarr/ks.yaml
   - qbittorrent/ks.yaml
