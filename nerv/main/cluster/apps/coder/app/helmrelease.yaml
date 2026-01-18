@@ -1,0 +1,57 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.ok8.sh/source.toolkit.fluxcd.io/helmrepository_v1.json
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: coder
+spec:
+  interval: 10m0s
+  url: https://helm.coder.com/v2
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.ok8.sh/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: coder
+spec:
+  interval: 10m0s
+  chart:
+    spec:
+      chart: coder
+      version: 2.29.1
+      sourceRef:
+        kind: HelmRepository
+        name: coder
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    coder:
+      env:
+        - name: CODER_PG_CONNECTION_URL
+          valueFrom:
+            secretKeyRef:
+              name: coder-postgres
+              key: url
+        - name: CODER_ACCESS_URL
+          value: "https://code.nerv.id"
+        - name: CODER_OAUTH2_GITHUB_DEFAULT_PROVIDER_ENABLE
+          value: "false"
+
+      ingress:
+        enable: false
+
+      service:
+        enable: true
+        type: ClusterIP
+        sessionAffinity: None
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 2Gi
