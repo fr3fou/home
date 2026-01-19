@@ -6,6 +6,7 @@ resources:
   - anby/ks.yaml
   - autobrr/ks.yaml
   - coder/ks.yaml
+  - flaresolverr/ks.yaml
   - pgadmin/ks.yaml
   - plex/ks.yaml
   - prowlarr/ks.yaml
