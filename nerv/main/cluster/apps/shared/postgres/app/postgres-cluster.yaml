@@ -82,3 +82,9 @@ spec:
         superuser: false
         passwordSecret:
           name: postgres-coder-user
+      - name: anby
+        ensure: present
+        login: true
+        superuser: false
+        passwordSecret:
+          name: postgres-anby-user

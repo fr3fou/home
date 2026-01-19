@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - app-template.yaml
+  - anby/ks.yaml
   - autobrr/ks.yaml
   - coder/ks.yaml
   - pgadmin/ks.yaml

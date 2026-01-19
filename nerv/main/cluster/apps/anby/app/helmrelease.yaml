@@ -1,0 +1,86 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: anby
+  namespace: apps
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: apps
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controllers:
+      anby:
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            fsGroup: 1000
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          app:
+            image:
+              repository: ghcr.io/fr3fou/anby
+              tag: latest
+            env:
+              HTTP_HOST: "0.0.0.0"
+              HTTP_PORT: &port 8080
+              LOG_LEVEL: info
+              PROWLARR_URL: http://prowlarr.apps.svc.cluster.local:9696
+              QBITTORRENT_URL: http://qbittorrent-app.apps.svc.cluster.local:8080
+            envFrom:
+              - secretRef:
+                  name: anby
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: *port
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop:
+                  - ALL
+
+    service:
+      app:
+        controller: anby
+        ports:
+          http:
+            port: *port
+
+    route:
+      app:
+        hostnames:
+          - anby.nerv.id
+        parentRefs:
+          - name: internal
+            namespace: networking-system
+        rules:
+          - backendRefs:
+              - name: anby
+                port: *port

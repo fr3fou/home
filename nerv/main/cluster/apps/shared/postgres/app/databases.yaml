@@ -75,3 +75,14 @@ spec:
     name: postgres-apps
   name: coder
   owner: coder
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: anby
+  namespace: apps
+spec:
+  cluster:
+    name: postgres-apps
+  name: anby
+  owner: anby
