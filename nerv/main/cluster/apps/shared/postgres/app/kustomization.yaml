@@ -10,5 +10,6 @@ resources:
   - postgres-netronome-user-secret.yaml
   - postgres-coder-user-secret.yaml
   - postgres-anby-user-secret.yaml
+  - postgres-pocket-id-user-secret.yaml
   - postgres-cluster.yaml
   - databases.yaml

@@ -88,3 +88,9 @@ spec:
         superuser: false
         passwordSecret:
           name: postgres-anby-user
+      - name: pocket_id
+        ensure: present
+        login: true
+        superuser: false
+        passwordSecret:
+          name: postgres-pocket-id-user

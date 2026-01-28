@@ -86,3 +86,14 @@ spec:
     name: postgres-apps
   name: anby
   owner: anby
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: pocket-id
+  namespace: apps
+spec:
+  cluster:
+    name: postgres-apps
+  name: pocket_id
+  owner: pocket_id
