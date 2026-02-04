@@ -99,6 +99,15 @@ nodes:
             - siderolabs/qemu-guest-agent
             - siderolabs/iscsi-tools
             - siderolabs/util-linux-tools
+    userVolumes:
+      - name: data
+        filesystem:
+          type: ext4
+        provisioning:
+          diskSelector:
+            match: disk.transport == 'virtio'
+          minSize: 230Gi
+          grow: true
     patches:
       - |-
         cluster:
@@ -134,6 +143,15 @@ nodes:
             - siderolabs/qemu-guest-agent
             - siderolabs/iscsi-tools
             - siderolabs/util-linux-tools
+    userVolumes:
+      - name: data
+        filesystem:
+          type: ext4
+        provisioning:
+          diskSelector:
+            match: disk.transport == 'virtio'
+          minSize: 230Gi
+          grow: true
     patches:
       - |-
         cluster:
