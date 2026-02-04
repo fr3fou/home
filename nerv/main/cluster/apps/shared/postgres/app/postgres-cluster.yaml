@@ -5,7 +5,10 @@ metadata:
   name: postgres-apps
   namespace: apps
 spec:
-  instances: 1
+  instances: 3
+
+  affinity:
+    topologyKey: kubernetes.io/hostname
 
   storage:
     storageClass: local-path
