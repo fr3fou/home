@@ -64,6 +64,8 @@ spec:
               limits:
                 memory: 8Gi
     defaultPodOptions:
+      nodeSelector:
+        kubernetes.io/hostname: melchior-01
       securityContext:
         runAsNonRoot: true
         runAsUser: 568
@@ -72,8 +74,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         supplementalGroups: [44, 10000]
         seccompProfile: { type: RuntimeDefault }
-    #     nodeSelector:
-    #       intel.feature.node.kubernetes.io/gpu: "true"
     service:
       app:
         controller: plex
