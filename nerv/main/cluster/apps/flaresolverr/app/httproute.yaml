@@ -13,4 +13,4 @@ spec:
   rules:
     - backendRefs:
         - name: flaresolverr
-          port: 8191
+          port: 80

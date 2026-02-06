@@ -55,4 +55,5 @@ spec:
         controller: flaresolverr
         ports:
           http:
-            port: *port
+            port: 80
+            targetPort: *port
