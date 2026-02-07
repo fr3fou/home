@@ -25,4 +25,3 @@ resources:
   - luncher-box/frontend/ks.yaml
   - zot/ks.yaml
   - swarmui/ks.yaml
-  - tailscale-operator/ks.yaml

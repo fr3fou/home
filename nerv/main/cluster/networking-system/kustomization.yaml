@@ -7,3 +7,4 @@ resources:
   - envoy-gateway/ks.yaml
   - external-dns/cloudflare/ks.yaml
   - external-dns/unifi/ks.yaml
+  - tailscale-operator/ks.yaml

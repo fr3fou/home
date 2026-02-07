@@ -5,11 +5,11 @@ metadata:
   name: &app tailscale-operator
   namespace: flux-system
 spec:
-  targetNamespace: networking
+  targetNamespace: networking-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./nerv/main/cluster/apps/tailscale-operator/app
+  path: ./nerv/main/cluster/networking-system/tailscale-operator/app
   prune: true
   sourceRef:
     kind: GitRepository
