@@ -65,18 +65,26 @@ spec:
             port: *port
     persistence:
       data:
-        existingClaim: swarmui-data
+        type: nfs
+        server: 192.168.1.72
+        path: /var/nfs/shared/Swarm/Data
         globalMounts:
           - path: /SwarmUI/Data
       output:
-        existingClaim: swarmui-output
+        type: nfs
+        server: 192.168.1.72
+        path: /var/nfs/shared/Swarm/Output
         globalMounts:
           - path: /SwarmUI/Output
       models:
-        existingClaim: swarmui-models
+        type: nfs
+        server: 192.168.1.72
+        path: /var/nfs/shared/Swarm/Models
         globalMounts:
           - path: /SwarmUI/Models
       dlbackend:
-        existingClaim: swarmui-dlbackend
+        type: nfs
+        server: 192.168.1.72
+        path: /var/nfs/shared/Swarm/dlbackend
         globalMounts:
           - path: /SwarmUI/dlbackend
