@@ -23,4 +23,3 @@ resources:
   - shared/postgres/ks.yaml
   - luncher-box/backend/ks.yaml
   - luncher-box/frontend/ks.yaml
-  - zot/ks.yaml
