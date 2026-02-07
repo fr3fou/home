@@ -1,0 +1,82 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: swarmui
+  namespace: apps
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: apps
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controllers:
+      swarmui:
+        containers:
+          app:
+            image:
+              repository: oci.nerv.id/swarmui
+              tag: v0.9.8
+            env:
+              TZ: Europe/Sofia
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: &port 7801
+                  initialDelaySeconds: 30
+                  periodSeconds: 15
+                  failureThreshold: 10
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: *port
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  failureThreshold: 10
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: *port
+                  initialDelaySeconds: 10
+                  periodSeconds: 5
+                  failureThreshold: 30
+    service:
+      app:
+        controller: swarmui
+        ports:
+          http:
+            port: *port
+    persistence:
+      data:
+        existingClaim: swarmui-data
+        globalMounts:
+          - path: /SwarmUI/Data
+      output:
+        existingClaim: swarmui-output
+        globalMounts:
+          - path: /SwarmUI/Output
+      models:
+        existingClaim: swarmui-models
+        globalMounts:
+          - path: /SwarmUI/Models
+      dlbackend:
+        existingClaim: swarmui-dlbackend
+        globalMounts:
+          - path: /SwarmUI/dlbackend
