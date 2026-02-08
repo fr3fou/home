@@ -1,51 +1,78 @@
----
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: tailscale
+    name: tailscale
 spec:
-  interval: 30m
-  url: https://pkgs.tailscale.com/helmcharts
+    interval: 30m
+    url: https://pkgs.tailscale.com/helmcharts
+sops:
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBieFdTTWVURnp1L25yOG9W
+            U0QrbGgrLyt2UVhjbjhlbjBGVW1adHhSUEQ0CnI3bnMreGZaTUtMSGF1alkxamhj
+            SForby9lTmgyMFNKWXk4ZTZSeWMwNzgKLS0tIEpRVVpTS2pJbE9JYW5zSm4yR25X
+            MFhDb3pGb1diMXhmOFRxMmRvT0xJSDQKlxy0/6ftsh8ggyJwGm3Ub5b2F70mJVmw
+            AkOymuBXUZPIMcYfUS8nzV6Qysf1Q/dT3o+Zftl1voYpwAAyLmUhzA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-02-08T01:47:03Z"
+    mac: ENC[AES256_GCM,data:s8yQrMHY5JlUoHRNHs8TWThel8+5GPPbu/te68E0AEGTmNOADhi9xRB+IxECwSn/GxV9e++bxqWZobacEW0mbla2U/tZnj7g0JnQ1k6oVZlEmRby0G/mokYUxFMBeGnyBFm7tXPqfuy4KZevoUCX/rvKOi2cJAC6nuKP8TWi1Bw=,iv:3VCV39GW6N0+BaAvVsbXYUSUDf/RMAhlKa1vsUbeBk8=,tag:b1CT9yuVI9fwW0dyvvaSrQ==,type:str]
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
+    version: 3.11.0
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: tailscale-operator
+    name: tailscale-operator
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: tailscale-operator
-      version: 1.94.1
-      sourceRef:
-        kind: HelmRepository
-        name: tailscale
-      interval: 30m
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      strategy: rollback
-      retries: 3
-  postRenderers:
-    - kustomize:
-        patches:
-          - target:
-              kind: Deployment
-              name: operator
-            patch: |
-              - op: replace
-                path: /metadata/name
-                value: tailscale-operator
-  values:
-    oauth:
-      clientId: kiwGc4ACw921CNTRL
-      clientSecretKeyRef:
-        name: tailscale-operator-secret
-        key: clientSecret
-    operatorConfig:
-      hostname: k8s-operator-nerv
-    apiServerProxyConfig:
-      mode: "false"
+    interval: 30m
+    chart:
+        spec:
+            chart: tailscale-operator
+            version: 1.94.1
+            sourceRef:
+                kind: HelmRepository
+                name: tailscale
+            interval: 30m
+    install:
+        remediation:
+            retries: 3
+    upgrade:
+        cleanupOnFail: true
+        remediation:
+            strategy: rollback
+            retries: 3
+    postRenderers:
+        - kustomize:
+            patches:
+                - target:
+                    kind: Deployment
+                    name: operator
+                  patch: |
+                    - op: replace
+                      path: /metadata/name
+                      value: tailscale-operator
+    values:
+        oauth:
+            clientId: kiwGc4ACw921CNTRL
+            clientSecret: ENC[AES256_GCM,data:rRU9hU3NOaeGqpMAKapirEvQjyymHzN9YeQeshISHuhWc5d5tWSoQbHLWNgMO1NCuZTwrvzSXryNKYjJZbyM,iv:VpIJAyiDCXw1n+xExxMDT5cthprzHmS/8UP2Utlfdnw=,tag:qKGpEcuGYnzvd3R7ORDIdQ==,type:str]
+        operatorConfig:
+            hostname: k8s-operator-nerv
+        apiServerProxyConfig:
+            mode: "false"
+sops:
+    age:
+        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBieFdTTWVURnp1L25yOG9W
+            U0QrbGgrLyt2UVhjbjhlbjBGVW1adHhSUEQ0CnI3bnMreGZaTUtMSGF1alkxamhj
+            SForby9lTmgyMFNKWXk4ZTZSeWMwNzgKLS0tIEpRVVpTS2pJbE9JYW5zSm4yR25X
+            MFhDb3pGb1diMXhmOFRxMmRvT0xJSDQKlxy0/6ftsh8ggyJwGm3Ub5b2F70mJVmw
+            AkOymuBXUZPIMcYfUS8nzV6Qysf1Q/dT3o+Zftl1voYpwAAyLmUhzA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-02-08T01:47:03Z"
+    mac: ENC[AES256_GCM,data:s8yQrMHY5JlUoHRNHs8TWThel8+5GPPbu/te68E0AEGTmNOADhi9xRB+IxECwSn/GxV9e++bxqWZobacEW0mbla2U/tZnj7g0JnQ1k6oVZlEmRby0G/mokYUxFMBeGnyBFm7tXPqfuy4KZevoUCX/rvKOi2cJAC6nuKP8TWi1Bw=,iv:3VCV39GW6N0+BaAvVsbXYUSUDf/RMAhlKa1vsUbeBk8=,tag:b1CT9yuVI9fwW0dyvvaSrQ==,type:str]
+    encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
+    version: 3.11.0
