@@ -29,8 +29,17 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: operator
+            patch: |
+              - op: replace
+                path: /metadata/name
+                value: tailscale-operator
   values:
-    fullnameOverride: tailscale-operator
     oauth:
       clientId: kiwGc4ACw921CNTRL
       clientSecretKeyRef:
