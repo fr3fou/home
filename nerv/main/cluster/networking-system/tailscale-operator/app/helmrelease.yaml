@@ -30,6 +30,7 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    fullnameOverride: tailscale-operator
     oauth:
       clientId: kiwGc4ACw921CNTRL
       clientSecretKeyRef:
