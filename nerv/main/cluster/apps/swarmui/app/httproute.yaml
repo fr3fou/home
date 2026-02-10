@@ -14,3 +14,5 @@ spec:
     - backendRefs:
         - name: swarmui
           port: 7801
+      timeouts:
+        request: 5m
