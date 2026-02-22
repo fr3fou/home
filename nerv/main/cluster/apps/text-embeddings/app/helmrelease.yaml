@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app ollama-embeddings
+  name: &app text-embeddings
 spec:
   interval: 30m
   chartRef:
@@ -20,7 +20,7 @@ spec:
       retries: 3
   values:
     controllers:
-      ollama-embeddings:
+      text-embeddings:
         pod:
           runtimeClassName: nvidia
           nodeSelector:
@@ -74,7 +74,7 @@ spec:
 
     service:
       app:
-        controller: ollama-embeddings
+        controller: text-embeddings
         ports:
           http:
             port: 8000
@@ -88,7 +88,7 @@ spec:
             namespace: networking-system
         rules:
           - backendRefs:
-              - name: ollama-embeddings-app
+              - name: text-embeddings-app
                 port: 8000
 
     persistence:

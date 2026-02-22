@@ -3,11 +3,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app ollama-embeddings
+  name: &app text-embeddings
   namespace: flux-system
 spec:
   targetNamespace: apps
-  path: ./nerv/main/cluster/apps/ollama-embeddings/app
+  path: ./nerv/main/cluster/apps/text-embeddings/app
   prune: true
   sourceRef:
     kind: GitRepository
