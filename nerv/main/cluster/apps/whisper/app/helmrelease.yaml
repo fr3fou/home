@@ -50,7 +50,7 @@ spec:
               repository: ghcr.io/ggml-org/whisper.cpp
               tag: main-cuda
             command:
-              - /app/whisper-server
+              - /app/build/bin/whisper-server
             args:
               - --model
               - /models/ggml-large-v3-turbo.bin
