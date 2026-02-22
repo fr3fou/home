@@ -39,7 +39,6 @@ spec:
                 /bin/ollama serve &
                 sleep 5
                 ollama pull nomic-embed-text
-                kill %1
             env:
               OLLAMA_MODELS: /models
               NVIDIA_VISIBLE_DEVICES: ""
