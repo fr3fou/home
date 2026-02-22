@@ -102,12 +102,6 @@ spec:
         type: emptyDir
       transcode:
         type: emptyDir
-      media:
-        type: nfs
-        server: 192.168.0.100
-        path: /home/simo/Media
-        globalMounts:
-          - path: /media
       nas:
         type: nfs
         server: 192.168.1.72
