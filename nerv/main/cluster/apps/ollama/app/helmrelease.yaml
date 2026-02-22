@@ -43,5 +43,5 @@ spec:
         effect: NoSchedule
     persistentVolume:
       enabled: true
-      storageClass: longhorn
+      storageClass: local-path
       size: 20Gi
