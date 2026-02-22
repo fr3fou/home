@@ -11,9 +11,11 @@ spec:
     name: app-template
     namespace: apps
   install:
+    timeout: 15m
     remediation:
       retries: 3
   upgrade:
+    timeout: 15m
     cleanupOnFail: true
     remediation:
       strategy: rollback
@@ -25,18 +27,30 @@ spec:
           runtimeClassName: nvidia
           nodeSelector:
             kubernetes.io/hostname: casper-03
+        initContainers:
+          pull-model:
+            image:
+              repository: ollama/ollama
+              tag: 0.6.2
+            command:
+              - /bin/sh
+              - -c
+              - |
+                /bin/ollama serve &
+                sleep 5
+                ollama pull nomic-embed-text
+                kill %1
+            env:
+              OLLAMA_MODELS: /models
+              NVIDIA_VISIBLE_DEVICES: ""
         containers:
           app:
             image:
-              repository: ghcr.io/huggingface/text-embeddings-inference
-              tag: cuda-1.9
-            args:
-              - --model-id
-              - mixedbread-ai/mxbai-embed-large-v1
-              - --port
-              - "8080"
+              repository: ollama/ollama
+              tag: 0.6.2
             env:
-              HF_HOME: /cache
+              OLLAMA_MODELS: /models
+              OLLAMA_HOST: 0.0.0.0:11434
             resources:
               limits:
                 nvidia.com/gpu: 1
@@ -46,26 +60,26 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
-                    port: 8080
+                    path: /
+                    port: 11434
                   periodSeconds: 30
               readiness:
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
-                    port: 8080
+                    path: /
+                    port: 11434
                   periodSeconds: 10
               startup:
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
-                    port: 8080
-                  initialDelaySeconds: 15
-                  periodSeconds: 10
+                    path: /
+                    port: 11434
+                  initialDelaySeconds: 10
+                  periodSeconds: 5
                   failureThreshold: 30
 
     service:
@@ -73,7 +87,7 @@ spec:
         controller: text-embeddings
         ports:
           http:
-            port: 8080
+            port: 11434
 
     route:
       app:
@@ -85,14 +99,14 @@ spec:
         rules:
           - backendRefs:
               - name: text-embeddings-app
-                port: 8080
+                port: 11434
 
     persistence:
-      cache:
+      models:
         enabled: true
         type: persistentVolumeClaim
         storageClass: local-path
         size: 20Gi
         accessMode: ReadWriteOnce
         globalMounts:
-          - path: /cache
+          - path: /models
