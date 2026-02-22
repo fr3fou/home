@@ -28,16 +28,13 @@ spec:
         containers:
           app:
             image:
-              repository: vllm/vllm-openai
-              tag: latest
+              repository: ghcr.io/huggingface/text-embeddings-inference
+              tag: cuda-1.9
             args:
-              - serve
-              - --model
+              - --model-id
               - mixedbread-ai/mxbai-embed-large-v1
               - --port
-              - "8000"
-              - --max-model-len
-              - "512"
+              - "8080"
             env:
               HF_HOME: /cache
             resources:
@@ -50,8 +47,7 @@ spec:
                 spec:
                   httpGet:
                     path: /health
-                    port: 8000
-                  initialDelaySeconds: 60
+                    port: 8080
                   periodSeconds: 30
               readiness:
                 enabled: true
@@ -59,8 +55,7 @@ spec:
                 spec:
                   httpGet:
                     path: /health
-                    port: 8000
-                  initialDelaySeconds: 60
+                    port: 8080
                   periodSeconds: 10
               startup:
                 enabled: true
@@ -68,8 +63,8 @@ spec:
                 spec:
                   httpGet:
                     path: /health
-                    port: 8000
-                  initialDelaySeconds: 30
+                    port: 8080
+                  initialDelaySeconds: 15
                   periodSeconds: 10
                   failureThreshold: 30
 
@@ -78,7 +73,7 @@ spec:
         controller: text-embeddings
         ports:
           http:
-            port: 8000
+            port: 8080
 
     route:
       app:
@@ -90,7 +85,7 @@ spec:
         rules:
           - backendRefs:
               - name: text-embeddings-app
-                port: 8000
+                port: 8080
 
     persistence:
       cache:
