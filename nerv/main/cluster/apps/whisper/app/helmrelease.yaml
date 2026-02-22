@@ -27,17 +27,41 @@ spec:
           runtimeClassName: nvidia
           nodeSelector:
             kubernetes.io/hostname: casper-03
+        initContainers:
+          download-model:
+            image:
+              repository: ghcr.io/ggml-org/whisper.cpp
+              tag: main-cuda
+            command:
+              - /bin/sh
+              - -c
+              - |
+                MODEL=/models/ggml-large-v3-turbo.bin
+                if [ -f "$MODEL" ]; then
+                  echo "Model already exists, skipping download"
+                  exit 0
+                fi
+                /app/models/download-ggml-model.sh large-v3-turbo /models
+            env:
+              NVIDIA_VISIBLE_DEVICES: ""
         containers:
           app:
             image:
-              repository: ghcr.io/speaches-ai/speaches
-              tag: latest-cuda
-            env:
-              WHISPER__MODEL: Systran/faster-whisper-large-v3-turbo
-              WHISPER__INFERENCE_DEVICE: cuda
-              WHISPER__COMPUTE_TYPE: float16
-              UVICORN_HOST: 0.0.0.0
-              UVICORN_PORT: "8000"
+              repository: ghcr.io/ggml-org/whisper.cpp
+              tag: main-cuda
+            command:
+              - /app/whisper-server
+            args:
+              - --model
+              - /models/ggml-large-v3-turbo.bin
+              - --host
+              - 0.0.0.0
+              - --port
+              - "8080"
+              - --gpu-device
+              - "0"
+              - --inference-path
+              - /v1/audio/transcriptions
             resources:
               limits:
                 nvidia.com/gpu: 1
@@ -47,26 +71,26 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
-                    port: 8000
+                    path: /
+                    port: 8080
                   periodSeconds: 30
               readiness:
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
-                    port: 8000
+                    path: /
+                    port: 8080
                   periodSeconds: 10
               startup:
                 enabled: true
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
-                    port: 8000
-                  initialDelaySeconds: 30
-                  periodSeconds: 10
+                    path: /
+                    port: 8080
+                  initialDelaySeconds: 10
+                  periodSeconds: 5
                   failureThreshold: 30
 
     service:
@@ -74,7 +98,7 @@ spec:
         controller: whisper
         ports:
           http:
-            port: 8000
+            port: 8080
 
     route:
       app:
@@ -86,14 +110,14 @@ spec:
         rules:
           - backendRefs:
               - name: whisper
-                port: 8000
+                port: 8080
 
     persistence:
-      cache:
+      models:
         enabled: true
         type: persistentVolumeClaim
         storageClass: local-path
         size: 10Gi
         accessMode: ReadWriteOnce
         globalMounts:
-          - path: /root/.cache
+          - path: /models
