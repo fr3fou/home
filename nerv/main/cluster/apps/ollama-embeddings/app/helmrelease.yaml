@@ -6,14 +6,10 @@ metadata:
   name: &app ollama-embeddings
 spec:
   interval: 30m
-  chart:
-    spec:
-      chart: ollama
-      version: "1.44.0"
-      sourceRef:
-        kind: HelmRepository
-        name: ollama
-      interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: apps
   install:
     remediation:
       retries: 3
@@ -23,25 +19,86 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    ollama:
-      gpu:
+    controllers:
+      ollama-embeddings:
+        pod:
+          runtimeClassName: nvidia
+          nodeSelector:
+            kubernetes.io/hostname: casper-03
+        containers:
+          app:
+            image:
+              repository: vllm/vllm-openai
+              tag: latest
+            args:
+              - --model
+              - mixedbread-ai/mxbai-embed-large-v1
+              - --task
+              - embed
+              - --port
+              - "8000"
+              - --max-model-len
+              - "512"
+            env:
+              HF_HOME: /cache
+            resources:
+              limits:
+                nvidia.com/gpu: 1
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8000
+                  initialDelaySeconds: 60
+                  periodSeconds: 30
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8000
+                  initialDelaySeconds: 60
+                  periodSeconds: 10
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8000
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  failureThreshold: 30
+
+    service:
+      app:
+        controller: ollama-embeddings
+        ports:
+          http:
+            port: 8000
+
+    route:
+      app:
+        hostnames:
+          - embeddings.nerv.id
+        parentRefs:
+          - name: internal
+            namespace: networking-system
+        rules:
+          - backendRefs:
+              - name: ollama-embeddings-app
+                port: 8000
+
+    persistence:
+      cache:
         enabled: true
-        type: nvidia
-        number: 1
-      models:
-        pull:
-          - mxbai-embed-large
-    runtimeClassName: nvidia
-    resources:
-      limits:
-        nvidia.com/gpu: 1
-    nodeSelector:
-      kubernetes.io/hostname: casper-03
-    tolerations:
-      - key: node.kubernetes.io/unschedulable
-        operator: Exists
-        effect: NoSchedule
-    persistentVolume:
-      enabled: true
-      storageClass: local-path
-      size: 20Gi
+        type: persistentVolumeClaim
+        storageClass: local-path
+        size: 20Gi
+        accessMode: ReadWriteOnce
+        globalMounts:
+          - path: /cache
