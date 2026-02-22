@@ -7,3 +7,4 @@ resources:
   - metrics-server/ks.yaml
   - cilium/ks.yaml
   - local-path-provisioner/ks.yaml
+  - nvidia-device-plugin/ks.yaml
