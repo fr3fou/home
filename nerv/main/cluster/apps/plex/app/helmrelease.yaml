@@ -64,8 +64,6 @@ spec:
               limits:
                 memory: 8Gi
     defaultPodOptions:
-      nodeSelector:
-        kubernetes.io/hostname: melchior-01
       securityContext:
         runAsNonRoot: true
         runAsUser: 568
