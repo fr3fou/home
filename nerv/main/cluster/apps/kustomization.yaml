@@ -25,4 +25,4 @@ resources:
   - luncher-box/frontend/ks.yaml
   - zot/ks.yaml
   - swarmui/ks.yaml
-  - ollama/ks.yaml
+  - ollama-embeddings/ks.yaml
