@@ -26,3 +26,4 @@ resources:
   - zot/ks.yaml
   - swarmui/ks.yaml
   - text-embeddings/ks.yaml
+  - whisper/ks.yaml
