@@ -31,10 +31,8 @@ spec:
               repository: vllm/vllm-openai
               tag: latest
             args:
-              - --model
+              - serve
               - mixedbread-ai/mxbai-embed-large-v1
-              - --task
-              - embed
               - --port
               - "8000"
               - --max-model-len
