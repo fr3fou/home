@@ -30,8 +30,8 @@ spec:
         containers:
           app:
             image:
-              repository: fedirz/faster-whisper-server
-              tag: 0.5.1-cuda
+              repository: ghcr.io/speaches-ai/speaches
+              tag: latest-cuda
             env:
               WHISPER__MODEL: Systran/faster-whisper-large-v3-turbo
               WHISPER__INFERENCE_DEVICE: cuda
