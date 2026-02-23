@@ -96,4 +96,4 @@ spec:
         size: 10Gi
         accessMode: ReadWriteOnce
         globalMounts:
-          - path: /root/.cache/huggingface/hub
+          - path: /root/.cache
