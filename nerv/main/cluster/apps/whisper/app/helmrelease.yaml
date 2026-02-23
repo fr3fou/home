@@ -33,7 +33,7 @@ spec:
               repository: fedirz/faster-whisper-server
               tag: latest-cuda
             env:
-              WHISPER__MODEL: Systran/faster-whisper-large-v3-turbo
+              WHISPER__MODEL: deepdml/faster-whisper-large-v3-turbo-ct2
               WHISPER__INFERENCE_DEVICE: cuda
               UVICORN_HOST: 0.0.0.0
               UVICORN_PORT: "8080"
