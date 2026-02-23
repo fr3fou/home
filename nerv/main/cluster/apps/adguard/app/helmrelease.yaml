@@ -103,7 +103,7 @@ spec:
             namespace: networking-system
         rules:
           - backendRefs:
-              - name: adguard
+              - name: adguard-app
                 port: 3000
 
     persistence:
