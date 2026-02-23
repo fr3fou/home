@@ -37,6 +37,7 @@ spec:
               WHISPER__INFERENCE_DEVICE: cuda
               UVICORN_HOST: 0.0.0.0
               UVICORN_PORT: "8080"
+              HF_HUB_OFFLINE: "0"
             resources:
               limits:
                 nvidia.com/gpu: 1
