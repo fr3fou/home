@@ -27,41 +27,16 @@ spec:
           runtimeClassName: nvidia
           nodeSelector:
             kubernetes.io/hostname: casper-03
-        initContainers:
-          download-model:
-            image:
-              repository: ghcr.io/ggml-org/whisper.cpp
-              tag: main-cuda
-            command:
-              - /bin/sh
-              - -c
-              - |
-                MODEL=/models/ggml-large-v3-turbo.bin
-                if [ -f "$MODEL" ]; then
-                  echo "Model already exists, skipping download"
-                  exit 0
-                fi
-                /app/models/download-ggml-model.sh large-v3-turbo /models
-            env:
-              NVIDIA_VISIBLE_DEVICES: ""
         containers:
           app:
             image:
-              repository: ghcr.io/ggml-org/whisper.cpp
-              tag: main-cuda
-            command:
-              - /app/build/bin/whisper-server
-            args:
-              - --model
-              - /models/ggml-large-v3-turbo.bin
-              - --host
-              - 0.0.0.0
-              - --port
-              - "8080"
-              - --device
-              - "0"
-              - --inference-path
-              - /v1/audio/transcriptions
+              repository: fedirz/faster-whisper-server
+              tag: latest-cuda
+            env:
+              WHISPER__MODEL: Systran/faster-whisper-large-v3-turbo
+              WHISPER__INFERENCE_DEVICE: cuda
+              UVICORN_HOST: 0.0.0.0
+              UVICORN_PORT: "8080"
             resources:
               limits:
                 nvidia.com/gpu: 1
@@ -71,7 +46,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /
+                    path: /health
                     port: 8080
                   periodSeconds: 30
               readiness:
@@ -79,7 +54,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /
+                    path: /health
                     port: 8080
                   periodSeconds: 10
               startup:
@@ -87,10 +62,10 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /
+                    path: /health
                     port: 8080
-                  initialDelaySeconds: 10
-                  periodSeconds: 5
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
                   failureThreshold: 30
 
     service:
@@ -120,4 +95,4 @@ spec:
         size: 10Gi
         accessMode: ReadWriteOnce
         globalMounts:
-          - path: /models
+          - path: /root/.cache/huggingface
