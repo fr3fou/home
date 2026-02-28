@@ -8,7 +8,14 @@ nodes:
     ipAddress: 192.168.1.11
     installDisk: /dev/sda
     networkInterfaces:
-      - interface: eth0
+      - interface: bond0
+        bond:
+          mode: active-backup
+          primaryReselect: always
+          primary: eth0
+          interfaces:
+            - eth0  # 10G (vmbr1)
+            - eth1  # 2.5G (vmbr0)
         addresses:
           - 192.168.1.11/23
         routes:
