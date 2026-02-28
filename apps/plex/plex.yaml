@@ -17,7 +17,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/plex
-      tag: 1.42.1.10060@sha256:92d48d97cc896e0b771c64f715fc68fed931a8d80506b503d84cfdf1d81bff92
+      tag: 1.43.0.10492
 
     dnsConfig:
       options:
