@@ -13,7 +13,6 @@ nodes:
           mode: active-backup
           primaryReselect: always
           primary: eth0
-          miimon: 100
           interfaces:
             - eth0  # 10G (vmbr1)
             - eth1  # 2.5G (vmbr0)
@@ -92,7 +91,6 @@ nodes:
           mode: active-backup
           primaryReselect: always
           primary: eth0
-          miimon: 100
           interfaces:
             - eth0  # 10G (vmbr1)
             - eth1  # 2.5G (vmbr0)
