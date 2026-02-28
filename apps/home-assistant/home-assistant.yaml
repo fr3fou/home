@@ -24,7 +24,7 @@ spec:
     replicas: 0
     image:
       repository: ghcr.io/home-assistant/home-assistant
-      tag: 2025.12.5
+      tag: 2026.2.3
 
     dnsConfig:
       options:
