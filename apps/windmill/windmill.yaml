@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: windmill
-      version: 4.0.21
+      version: 4.0.84
       interval: 10m0s
       sourceRef:
         kind: HelmRepository
