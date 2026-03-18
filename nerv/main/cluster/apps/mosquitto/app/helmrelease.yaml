@@ -42,7 +42,7 @@ spec:
                 mosquitto_passwd -U /mosquitto/external_config/mosquitto_pwd
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+              readOnlyRootFilesystem: false
               capabilities:
                 drop: ["ALL"]
             resources:
