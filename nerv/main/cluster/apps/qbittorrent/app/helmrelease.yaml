@@ -45,8 +45,6 @@ spec:
               readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
     defaultPodOptions:
-      nodeSelector:
-        kubernetes.io/hostname: melchior-01
       securityContext:
         runAsNonRoot: true
         runAsUser: 1001
