@@ -82,7 +82,7 @@ spec:
     route:
       app:
         hostnames:
-          - jellyfin.nerv.id
+          - jelly.nerv.id
         parentRefs:
           - name: internal
             namespace: networking-system
