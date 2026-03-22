@@ -8,6 +8,7 @@ resources:
   - coder/ks.yaml
   - flaresolverr/ks.yaml
   - pgadmin/ks.yaml
+  - jellyfin/ks.yaml
   - plex/ks.yaml
   - pocket-id/ks.yaml
   - prowlarr/ks.yaml
