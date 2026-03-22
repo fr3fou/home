@@ -34,7 +34,7 @@ spec:
               tag: 1.43.0.10492
             env:
               TZ: ${TIMEZONE}
-              ADVERTISE_IP: "http://${PLEX_IP}:32400"
+              ADVERTISE_IP: "http://${PLEX_IP}:1337"
             probes:
               liveness: &probes
                 enabled: true
@@ -82,7 +82,8 @@ spec:
           tailscale.com/hostname: "plex"
         ports:
           http:
-            port: 32400
+            port: 1337
+            targetPort: 32400
     # ingress:
     #   app:
     #     annotations:
