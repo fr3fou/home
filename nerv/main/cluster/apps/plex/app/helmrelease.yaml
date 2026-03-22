@@ -78,6 +78,8 @@ spec:
         type: LoadBalancer
         annotations:
           lbipam.cilium.io/ips: "${PLEX_IP}"
+          tailscale.com/expose: "true"
+          tailscale.com/hostname: "plex"
         ports:
           http:
             port: 32400
