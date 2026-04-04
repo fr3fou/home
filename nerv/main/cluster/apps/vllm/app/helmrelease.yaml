@@ -46,7 +46,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
+                    path: /api/tags
                     port: 8000
                   periodSeconds: 30
               readiness:
@@ -54,7 +54,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
+                    path: /api/tags
                     port: 8000
                   periodSeconds: 10
               startup:
@@ -62,10 +62,10 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /health
+                    path: /api/tags
                     port: 8000
-                  initialDelaySeconds: 60
-                  periodSeconds: 10
+                  initialDelaySeconds: 10
+                  periodSeconds: 5
                   failureThreshold: 30
 
     service:
