@@ -30,22 +30,13 @@ spec:
         containers:
           app:
             image:
-              repository: vllm/vllm-openai
-              tag: gemma4
+              repository: ollama/ollama
+              tag: latest
             args:
-              - --model
-              - google/gemma-4-E4B-it
-              - --max-model-len
-              - "8192"
-              - --gpu-memory-utilization
-              - "0.85"
-              - --host
-              - "0.0.0.0"
-              - --port
-              - "8000"
+              - serve
             env:
-              HF_HUB_OFFLINE: "0"
-              VLLM_ATTENTION_BACKEND: FLASHINFER
+              OLLAMA_HOST: "0.0.0.0:8000"
+              OLLAMA_MODELS: "/models"
             resources:
               limits:
                 nvidia.com/gpu: 1
@@ -104,4 +95,4 @@ spec:
         size: 20Gi
         accessMode: ReadWriteOnce
         globalMounts:
-          - path: /root/.cache/huggingface
+          - path: /models
