@@ -28,5 +28,6 @@ resources:
   - swarmui/ks.yaml
   - text-embeddings/ks.yaml
   - whisper/ks.yaml
+  - vllm/ks.yaml
   - adguard/ks.yaml
   - mosquitto/ks.yaml

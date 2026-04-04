@@ -1,0 +1,107 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.ok8.sh/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app vllm
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: apps
+  install:
+    timeout: 15m
+    remediation:
+      retries: 3
+  upgrade:
+    timeout: 15m
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      vllm:
+        pod:
+          runtimeClassName: nvidia
+          nodeSelector:
+            kubernetes.io/hostname: casper-03
+        containers:
+          app:
+            image:
+              repository: vllm/vllm-openai
+              tag: gemma4
+            args:
+              - --model
+              - google/gemma-4-E4B-it
+              - --max-model-len
+              - "8192"
+              - --gpu-memory-utilization
+              - "0.85"
+              - --host
+              - "0.0.0.0"
+              - --port
+              - "8000"
+            env:
+              HF_HUB_OFFLINE: "0"
+              VLLM_ATTENTION_BACKEND: FLASHINFER
+            resources:
+              limits:
+                nvidia.com/gpu: 1
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8000
+                  periodSeconds: 30
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8000
+                  periodSeconds: 10
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8000
+                  initialDelaySeconds: 60
+                  periodSeconds: 10
+                  failureThreshold: 30
+
+    service:
+      app:
+        controller: vllm
+        ports:
+          http:
+            port: 8000
+
+    route:
+      app:
+        hostnames:
+          - vllm.nerv.id
+        parentRefs:
+          - name: internal
+            namespace: networking-system
+        rules:
+          - backendRefs:
+              - name: vllm
+                port: 8000
+
+    persistence:
+      models:
+        enabled: true
+        type: persistentVolumeClaim
+        storageClass: local-path
+        size: 20Gi
+        accessMode: ReadWriteOnce
+        globalMounts:
+          - path: /root/.cache/huggingface
