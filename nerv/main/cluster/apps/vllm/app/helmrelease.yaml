@@ -96,7 +96,7 @@ spec:
     route:
       app:
         hostnames:
-          - vllm.nerv.id
+          - llm.nerv.id
         parentRefs:
           - name: internal
             namespace: networking-system
