@@ -39,7 +39,7 @@ spec:
                 /bin/ollama serve &
                 SERVE_PID=$!
                 sleep 5
-                ollama pull qwen3:4b
+                ollama pull qwen3.5:4b
                 kill $SERVE_PID 2>/dev/null
                 exit 0
             env:
