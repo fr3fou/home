@@ -27,6 +27,24 @@ spec:
           runtimeClassName: nvidia
           nodeSelector:
             kubernetes.io/hostname: casper-03
+        initContainers:
+          pull-model:
+            image:
+              repository: ollama/ollama
+              tag: latest
+            command:
+              - /bin/sh
+              - -c
+              - |
+                /bin/ollama serve &
+                SERVE_PID=$!
+                sleep 5
+                ollama pull qwen3:4b
+                kill $SERVE_PID 2>/dev/null
+                exit 0
+            env:
+              OLLAMA_MODELS: /models
+              NVIDIA_VISIBLE_DEVICES: ""
         containers:
           app:
             image:
