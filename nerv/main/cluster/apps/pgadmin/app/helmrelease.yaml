@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: docker.io/dpage/pgadmin4
-              tag: "9.11"
+              tag: "9.12"
             env:
               TZ: UTC
               PGADMIN_DEFAULT_EMAIL:
