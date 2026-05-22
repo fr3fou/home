@@ -84,7 +84,7 @@ spec:
         hostnames:
           - jelly.nerv.id
         parentRefs:
-          - name: external
+          - name: internal
             namespace: networking-system
         rules:
           - backendRefs:

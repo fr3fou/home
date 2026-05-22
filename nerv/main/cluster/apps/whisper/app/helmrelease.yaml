@@ -23,6 +23,7 @@ spec:
   values:
     controllers:
       whisper:
+        replicas: 0
         pod:
           runtimeClassName: nvidia
           nodeSelector:
