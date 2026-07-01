@@ -31,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/plex
-              tag: 1.43.0.10492
+              tag: 1.43.2.10687
             env:
               TZ: ${TIMEZONE}
               ADVERTISE_IP: "http://${PLEX_IP}:1337"
