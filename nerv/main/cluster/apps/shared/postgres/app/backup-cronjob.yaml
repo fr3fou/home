@@ -81,6 +81,6 @@ spec:
             - name: nas
               nfs:
                 server: 192.168.1.72
-                path: /var/nfs/shared
+                path: /var/nfs/shared/Kubernetes
             - name: tmp
               emptyDir: {}
