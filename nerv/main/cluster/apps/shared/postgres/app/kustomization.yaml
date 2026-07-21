@@ -13,3 +13,4 @@ resources:
   - postgres-pocket-id-user-secret.yaml
   - postgres-cluster.yaml
   - databases.yaml
+  - backup-cronjob.yaml

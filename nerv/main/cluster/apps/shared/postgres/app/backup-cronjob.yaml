@@ -1,0 +1,86 @@
+---
+# Nightly logical backup of the postgres-apps CNPG cluster.
+# Dumps all databases + globals with pg_dumpall, gzips the result, and writes
+# it to the NAS over NFS. No WAL archiving / PITR - point-in-time granularity
+# is one dump per run, which is intentional for this cluster.
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup
+  namespace: apps
+spec:
+  schedule: "0 3 * * *"
+  timeZone: "${TIMEZONE}"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 300
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 3600
+      template:
+        spec:
+          restartPolicy: OnFailure
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: ${USER_UID}
+            runAsGroup: ${USER_UID}
+            fsGroup: ${USER_UID}
+            fsGroupChangePolicy: OnRootMismatch
+            seccompProfile: { type: RuntimeDefault }
+          containers:
+            - name: dump
+              image: ghcr.io/cloudnative-pg/postgresql:17
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities: { drop: ["ALL"] }
+              env:
+                - name: PGHOST
+                  value: postgres-apps-rw.apps.svc.cluster.local
+                - name: PGPORT
+                  value: "5432"
+                - name: PGUSER
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgres-apps-superuser
+                      key: username
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgres-apps-superuser
+                      key: password
+                - name: BACKUP_DIR
+                  value: /nas/postgres-backups
+                - name: RETENTION_DAYS
+                  value: "14"
+              command:
+                - bash
+                - -c
+                - |
+                  set -euo pipefail
+                  mkdir -p "$BACKUP_DIR"
+                  ts="$(date +%Y%m%d-%H%M%S)"
+                  file="$BACKUP_DIR/postgres-apps-${ts}.sql.gz"
+                  echo "Dumping all databases to ${file}"
+                  pg_dumpall --clean --if-exists | gzip -c > "${file}.tmp"
+                  mv "${file}.tmp" "${file}"
+                  echo "Backup complete: $(du -h "${file}" | cut -f1)"
+                  echo "Pruning backups older than ${RETENTION_DAYS} days"
+                  find "$BACKUP_DIR" -maxdepth 1 -name 'postgres-apps-*.sql.gz' \
+                    -mtime "+$((RETENTION_DAYS - 1))" -delete
+                  echo "Remaining backups:"
+                  ls -lh "$BACKUP_DIR"
+              volumeMounts:
+                - name: nas
+                  mountPath: /nas
+                - name: tmp
+                  mountPath: /tmp
+          volumes:
+            - name: nas
+              nfs:
+                server: 192.168.1.72
+                path: /var/nfs/shared
+            - name: tmp
+              emptyDir: {}
