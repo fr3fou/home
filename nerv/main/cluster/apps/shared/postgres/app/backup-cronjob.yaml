@@ -1,18 +1,18 @@
 ---
+# Nightly logical backup of the postgres-apps CNPG cluster.
+# Dumps all databases + globals with pg_dumpall, gzips the result, and writes
+# it to the NAS over NFS. No WAL archiving / PITR - point-in-time granularity
+# is one dump per run, which is intentional for this cluster.
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: postgres-backup
   namespace: apps
-  annotations:
-    # This resource embeds a shell script using ${...} syntax. Flux applies
-    # postBuild.substituteFrom to every Kustomization (see nerv/main/flux/apps.yaml),
-    # which would blank out every ${var} it cannot resolve. Opt this resource out.
-    kustomize.toolkit.fluxcd.io/substitute: disabled
 spec:
   schedule: "0 3 * * *"
-  timeZone: Europe/Sofia
+  timeZone: "${TIMEZONE}"
   concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 300
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
   jobTemplate:
@@ -23,22 +23,19 @@ spec:
         spec:
           restartPolicy: OnFailure
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
             runAsNonRoot: true
-            fsGroup: 1000
+            runAsUser: ${USER_UID}
+            runAsGroup: ${USER_UID}
+            fsGroup: ${USER_UID}
             fsGroupChangePolicy: OnRootMismatch
-            seccompProfile:
-              type: RuntimeDefault
+            seccompProfile: { type: RuntimeDefault }
           containers:
             - name: dump
               image: ghcr.io/cloudnative-pg/postgresql:17
-              imagePullPolicy: IfNotPresent
               securityContext:
                 allowPrivilegeEscalation: false
                 readOnlyRootFilesystem: true
-                capabilities:
-                  drop: ["ALL"]
+                capabilities: { drop: ["ALL"] }
               env:
                 - name: PGHOST
                   value: postgres-apps-rw.apps.svc.cluster.local
@@ -63,26 +60,18 @@ spec:
                 - -c
                 - |
                   set -euo pipefail
-
+                  mkdir -p "$BACKUP_DIR"
                   ts="$(date +%Y%m%d-%H%M%S)"
-                  file="${BACKUP_DIR}/postgres-apps-${ts}.sql.gz"
-                  tmp="${file}.tmp"
-
-                  mkdir -p "${BACKUP_DIR}"
-
+                  file="$BACKUP_DIR/postgres-apps-${ts}.sql.gz"
                   echo "Dumping all databases to ${file}"
-                  # pipefail ensures a failed pg_dumpall aborts before the mv below,
-                  # so a truncated dump is never promoted to a real backup filename.
-                  pg_dumpall --clean --if-exists | gzip -c > "${tmp}"
-                  mv "${tmp}" "${file}"
+                  pg_dumpall --clean --if-exists | gzip -c > "${file}.tmp"
+                  mv "${file}.tmp" "${file}"
                   echo "Backup complete: $(du -h "${file}" | cut -f1)"
-
                   echo "Pruning backups older than ${RETENTION_DAYS} days"
-                  find "${BACKUP_DIR}" -maxdepth 1 -name 'postgres-apps-*.sql.gz' \
+                  find "$BACKUP_DIR" -maxdepth 1 -name 'postgres-apps-*.sql.gz' \
                     -mtime "+$((RETENTION_DAYS - 1))" -delete
-
                   echo "Remaining backups:"
-                  ls -lh "${BACKUP_DIR}"
+                  ls -lh "$BACKUP_DIR"
               volumeMounts:
                 - name: nas
                   mountPath: /nas
