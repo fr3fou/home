@@ -31,7 +31,14 @@ spec:
             seccompProfile: { type: RuntimeDefault }
           containers:
             - name: dump
-              image: ghcr.io/cloudnative-pg/postgresql:17
+              # pg_dumpall refuses to run when the server is NEWER than the
+              # client, so this must track the cluster's PG major (currently
+              # 18.x - the Cluster does not pin imageName, so the operator
+              # default decides). Floating :18 + Always keeps the client at or
+              # ahead of the server across minor bumps; bump this tag whenever
+              # the cluster moves to a new major.
+              image: ghcr.io/cloudnative-pg/postgresql:18
+              imagePullPolicy: Always
               securityContext:
                 allowPrivilegeEscalation: false
                 readOnlyRootFilesystem: true
@@ -79,6 +86,13 @@ spec:
                   echo "Pruning backups older than $RETENTION_DAYS days"
                   find "$BACKUP_DIR" -maxdepth 1 -name 'postgres-apps-*.sql.gz' \
                     -mtime "+$((RETENTION_DAYS - 1))" -delete
+                  # Failed runs leave a *.sql.gz.tmp behind; the prune above
+                  # only matches *.sql.gz, so sweep those separately. -mtime +1
+                  # keeps this clear of any in-flight run.
+                  echo "Pruning stale .tmp files from failed runs"
+                  find "$BACKUP_DIR" -maxdepth 1 -name 'postgres-apps-*.sql.gz.tmp' \
+                    -mtime +1 -delete
+
                   echo "Remaining backups:"
                   ls -lh "$BACKUP_DIR"
               volumeMounts:
