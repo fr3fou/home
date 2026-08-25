@@ -30,6 +30,10 @@ spec:
       maintenance_work_mem: "512MB"
       work_mem: "8MB"
 
+  # Required for the postgres-backup CronJob: without this CNPG leaves the
+  # postgres role's password NULL and pg_dumpall cannot authenticate.
+  enableSuperuserAccess: true
+
   superuserSecret:
     name: postgres-apps-superuser
 
