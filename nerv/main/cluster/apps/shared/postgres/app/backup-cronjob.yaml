@@ -59,15 +59,24 @@ spec:
                 - bash
                 - -c
                 - |
+                  # NOTE: shell variables here are deliberately UNBRACED.
+                  # Flux applies postBuild.substituteFrom to every Kustomization
+                  # (see nerv/main/flux/apps.yaml) and blanks out any
+                  # dollar-brace reference it cannot resolve. Braced shell vars
+                  # get silently emptied; unbraced $var passes through untouched.
+                  # The TIMEZONE / USER_UID refs above are braced on purpose -
+                  # those are real substitutions from the cluster-config CM.
                   set -euo pipefail
                   mkdir -p "$BACKUP_DIR"
                   ts="$(date +%Y%m%d-%H%M%S)"
-                  file="$BACKUP_DIR/postgres-apps-${ts}.sql.gz"
-                  echo "Dumping all databases to ${file}"
-                  pg_dumpall --clean --if-exists | gzip -c > "${file}.tmp"
-                  mv "${file}.tmp" "${file}"
-                  echo "Backup complete: $(du -h "${file}" | cut -f1)"
-                  echo "Pruning backups older than ${RETENTION_DAYS} days"
+                  file="$BACKUP_DIR/postgres-apps-$ts.sql.gz"
+                  echo "Dumping all databases to $file"
+                  # pipefail means a failed pg_dumpall aborts before the mv, so a
+                  # truncated dump is never promoted to a real backup filename.
+                  pg_dumpall --clean --if-exists | gzip -c > "$file.tmp"
+                  mv "$file.tmp" "$file"
+                  echo "Backup complete: $(du -h "$file" | cut -f1)"
+                  echo "Pruning backups older than $RETENTION_DAYS days"
                   find "$BACKUP_DIR" -maxdepth 1 -name 'postgres-apps-*.sql.gz' \
                     -mtime "+$((RETENTION_DAYS - 1))" -delete
                   echo "Remaining backups:"
