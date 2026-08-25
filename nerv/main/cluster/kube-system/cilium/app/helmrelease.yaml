@@ -56,6 +56,12 @@ spec:
     k8sServicePort: 7445
     hubble:
       enabled: true
+      tls:
+        auto:
+          enabled: true
+          method: cronJob
+          certValidityDuration: 365
+          schedule: "0 0 1 */4 *"
       relay:
         enabled: true
       ui:
