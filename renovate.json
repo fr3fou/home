@@ -65,6 +65,14 @@
       "enabled": false
     },
     {
+      "description": "Fully SOPS-encrypted HelmReleases: editing any value invalidates the SOPS MAC and Flux can't decrypt them. Bump these by hand with `sops`.",
+      "matchFileNames": [
+        "nerv/main/cluster/networking-system/tailscale-operator/app/helmrelease.yaml",
+        "nerv/main/cluster/monitoring-system/alloy/app/helmrelease.yaml"
+      ],
+      "enabled": false
+    },
+    {
       "description": "Flux components move together",
       "matchPackageNames": [
         "/fluxcd/"
