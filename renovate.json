@@ -1,63 +1,96 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    "docker:enableMajor",
+    "helpers:pinGitHubActionDigests"
+  ],
   "dependencyDashboard": true,
-  "prConcurrentLimit": 0,
+  "prConcurrentLimit": 30,
+  "prHourlyLimit": 0,
+  "rebaseWhen": "conflicted",
+  "ignorePaths": [
+    "apps/**",
+    "core/**",
+    "clusters/**",
+    ".ref/**"
+  ],
   "flux": {
-    "fileMatch": [
-      "\\.yaml$"
-    ]
-  },
-  "helm-values": {
-    "fileMatch": [
-      "\\.yaml$"
+    "managerFilePatterns": [
+      "/^nerv/.+\\.ya?ml$/"
     ]
   },
   "kubernetes": {
-    "fileMatch": [
-      "\\.yaml$"
+    "managerFilePatterns": [
+      "/^nerv/.+\\.ya?ml$/"
     ]
   },
-  "regexManagers": [
+  "customManagers": [
     {
-      "description": ["Generic GitHub Release Regex manager"],
-      "fileMatch": ["\\.yaml$"],
-      "matchStrings": [
-        "# renovate: github-release depName=(?<depName>\\S+)( versioning=(?<versioning>.*=?))?\n.*=\"(?<currentValue>.*)\""
+      "customType": "regex",
+      "description": "Annotated deps: `# renovate: datasource=<ds> depName=<name>` on the line above the value",
+      "managerFilePatterns": [
+        "/^nerv/.+\\.ya?ml$/"
       ],
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\\n.+?: \"?(?<currentValue>[^\"\\s]+)\"?"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}"
     }
   ],
   "packageRules": [
     {
-      "description": "Auto merge Docker images",
-      "matchDatasources": [
-        "docker"
-      ],
-      "automerge": true,
-      "automergeType": "branch",
-      "requiredStatusChecks": null,
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "digest"
-      ],
-      "matchPackageNames": [
-        "renovate/renovate",
-        "libreddit/libreddit",
-        "busybox",
-        "ghcr.io/onedr0p/alpine"
-      ]
-    },
-    {
-      "description": "Disable kubernetes-api",
-      "matchManagers": [
-        "kubernetes"
-      ],
+      "description": "Kubernetes API versions are not dependencies",
       "matchDatasources": [
         "kubernetes-api"
       ],
       "enabled": false
+    },
+    {
+      "description": "Flux components move together",
+      "matchPackageNames": [
+        "/fluxcd/"
+      ],
+      "groupName": "flux"
+    },
+    {
+      "description": "Intel device plugin charts move together",
+      "matchPackageNames": [
+        "/^intel-device-plugins-/"
+      ],
+      "groupName": "intel-device-plugins"
+    },
+    {
+      "description": "Only tested one minor at a time - open a PR per minor instead of jumping to latest",
+      "matchPackageNames": [
+        "cilium",
+        "longhorn",
+        "/fluxcd/"
+      ],
+      "separateMultipleMinor": true
+    },
+    {
+      "description": "Major updates need a human",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "labels": [
+        "renovate/major"
+      ]
+    },
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true,
+      "automergeType": "branch",
+      "ignoreTests": true,
+      "description": "GitHub Actions minor/patch bumps don't touch the cluster - auto-merge them"
     }
   ]
 }
