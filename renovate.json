@@ -7,7 +7,7 @@
     "helpers:pinGitHubActionDigests"
   ],
   "dependencyDashboard": true,
-  "prConcurrentLimit": 30,
+  "prConcurrentLimit": 50,
   "prHourlyLimit": 0,
   "rebaseWhen": "conflicted",
   "ignorePaths": [
@@ -44,6 +44,31 @@
       "description": "Kubernetes API versions are not dependencies",
       "matchDatasources": [
         "kubernetes-api"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "gotk-components.yaml is regenerated as a whole by the flux manager (fluxcd/flux2); don't also bump its controller images one by one",
+      "matchManagers": [
+        "kubernetes"
+      ],
+      "matchFileNames": [
+        "nerv/main/flux/flux-system/gotk-components.yaml"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Internal registry, not reachable from GitHub runners",
+      "matchPackageNames": [
+        "oci.nerv.id/**"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Fully SOPS-encrypted HelmReleases: editing any value invalidates the SOPS MAC and Flux can't decrypt them. Bump these by hand with `sops`.",
+      "matchFileNames": [
+        "nerv/main/cluster/networking-system/tailscale-operator/app/helmrelease.yaml",
+        "nerv/main/cluster/monitoring-system/alloy/app/helmrelease.yaml"
       ],
       "enabled": false
     },
