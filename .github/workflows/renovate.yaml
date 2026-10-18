@@ -1,30 +1,30 @@
 name: Renovate
 
 on:
-  # Run every 4 hours (matching your previous schedule)
   schedule:
     - cron: "23 */4 * * *"
-  # Allow manual trigger
   workflow_dispatch:
     inputs:
-      repoCache:
-        description: "Reset or disable the cache?"
-        type: choice
-        default: enabled
-        options:
-          - enabled
-          - disabled
-          - reset
       dryRun:
         description: "Dry run mode"
         type: boolean
         default: false
+      logLevel:
+        description: "Log level"
+        type: choice
+        default: info
+        options:
+          - info
+          - debug
+  push:
+    branches: ["main"]
+    paths:
+      - renovate.json
+      - .github/workflows/renovate.yaml
 
-env:
-  LOG_LEVEL: debug
-  cache_archive: renovate_cache.tar.gz
-  cache_dir: /tmp/renovate/cache/renovate/repository
-  cache_key: renovate-cache
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
   renovate:
@@ -32,52 +32,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      # Download cache from previous run
-      - name: Download cache
-        uses: dawidd6/action-download-artifact@v6
-        if: github.event.inputs.repoCache != 'disabled'
-        continue-on-error: true
-        with:
-          name: ${{ env.cache_key }}
-          path: cache-download
-
-      - name: Extract renovate cache
-        run: |
-          set -x
-          if [ ! -d cache-download ]; then
-            echo "No cache found."
-            exit 0
-          fi
-
-          mkdir -p ${{ env.cache_dir }}
-          tar -xzf cache-download/${{ env.cache_archive }} -C ${{ env.cache_dir }}
-
-          # Fix permissions for renovate container
-          sudo chown -R 12021:0 /tmp/renovate/
-          ls -R ${{ env.cache_dir }}
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Run Renovate
-        uses: renovatebot/github-action@v41.0.18
+        uses: renovatebot/github-action@f0f41e5f2e706165f6814b1d0f0d0e319de7d1d9 # v46.3.8
         with:
           configurationFile: renovate.json
           token: ${{ secrets.RENOVATE_TOKEN }}
+          renovate-version: 44.167.0
         env:
-          RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.repoCache || 'enabled' }}
-          RENOVATE_DRY_RUN: ${{ github.event.inputs.dryRun == 'true' && 'full' || '' }}
-
-      - name: Compress renovate cache
-        run: |
-          ls ${{ env.cache_dir }} || true
-          if [ -d "${{ env.cache_dir }}" ]; then
-            tar -czvf ${{ env.cache_archive }} -C ${{ env.cache_dir }} .
-          fi
-
-      - name: Upload cache
-        uses: actions/upload-artifact@v4
-        if: github.event.inputs.repoCache != 'disabled'
-        with:
-          name: ${{ env.cache_key }}
-          path: ${{ env.cache_archive }}
-          retention-days: 7
+          # Without this Renovate has nothing to process and exits "successfully"
+          # ("No repositories found"), which is why no PRs were opened for months.
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
+          RENOVATE_ONBOARDING: "false"
+          RENOVATE_REQUIRE_CONFIG: optional
+          RENOVATE_DRY_RUN: ${{ inputs.dryRun == true && 'full' || '' }}
+          LOG_LEVEL: ${{ inputs.logLevel || 'info' }}
