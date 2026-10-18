@@ -6,11 +6,11 @@ metadata:
   namespace: apps
 spec:
   parentRefs:
-    - name: external
+    - name: internal
       namespace: networking-system
   hostnames:
     - plex.nerv.id
   rules:
     - backendRefs:
         - name: plex
-          port: 32400
+          port: 1337
