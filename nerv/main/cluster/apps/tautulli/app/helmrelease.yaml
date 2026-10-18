@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/tautulli
-              tag: 2.17.0@sha256:30391b735be4c2051cbbeaa84d641e13be4f049f8d1376ae2e7097263da2b226
+              tag: 2.18.2@sha256:2b245abe32455f9b9ac8c855b5a6d7261f65995a17d8ccb23aa2fffd8aab87c8
             env:
               TZ: UTC
               TAUTULLI_HTTP_PORT: &port 80
