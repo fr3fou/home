@@ -62,6 +62,15 @@
       "groupName": "intel-device-plugins"
     },
     {
+      "description": "Only tested one minor at a time - open a PR per minor instead of jumping to latest",
+      "matchPackageNames": [
+        "cilium",
+        "longhorn",
+        "/fluxcd/"
+      ],
+      "separateMultipleMinor": true
+    },
+    {
       "description": "Major updates need a human",
       "matchUpdateTypes": [
         "major"
