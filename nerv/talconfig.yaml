@@ -1,6 +1,7 @@
 clusterName: nerv
 endpoint: https://192.168.1.11:6443
-talosVersion: v1.12.0
+talosVersion: v1.14.4
+kubernetesVersion: v1.35.8
 allowSchedulingOnControlPlanes: true
 nodes:
   - hostname: melchior-01
@@ -25,7 +26,6 @@ nodes:
           - net.ifnames=0 # Simple network interface names
           - intel_iommu=on # PCI passthrough
           - iommu=pt # PCI passthrough
-          - mitigations=off # Less security, faster puter
         systemExtensions:
           officialExtensions:
             # https://gist.github.com/gavinmcfall/ea6cb1233d3a300e9f44caf65a32d519
@@ -94,7 +94,6 @@ nodes:
           - console=tty0
           - console=ttyS0
           - net.ifnames=0
-          - mitigations=off
         systemExtensions:
           officialExtensions:
             - siderolabs/amd-ucode
@@ -140,7 +139,6 @@ nodes:
           - console=tty0
           - console=ttyS0
           - net.ifnames=0
-          - mitigations=off
         systemExtensions:
           officialExtensions:
             - siderolabs/amd-ucode

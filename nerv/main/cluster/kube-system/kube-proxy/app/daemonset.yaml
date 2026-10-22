@@ -1,0 +1,95 @@
+---
+# Adopt the legacy Talos DaemonSet. Talos proxy.disabled remains true.
+# Preserve nftables alongside the existing Cilium network configuration.
+# The existing kube-proxy ServiceAccount/RBAC and kubeconfig-in-cluster ConfigMap
+# remain externally managed; credentials must not be copied into this manifest.
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kube-proxy
+  namespace: kube-system
+  labels:
+    k8s-app: kube-proxy
+    tier: node
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: kube-proxy
+      tier: node
+  # Updates require explicit pod replacement, one node at a time. Check DNS
+  # UDP/TCP, ClusterIP, cross-node and gateway traffic before the next node.
+  # Pod readiness alone is insufficient: this legacy template has no probe.
+  updateStrategy:
+    type: OnDelete
+  template:
+    metadata:
+      labels:
+        k8s-app: kube-proxy
+        tier: node
+    spec:
+      containers:
+        - name: kube-proxy
+          image: registry.k8s.io/kube-proxy:v1.35.8@sha256:5d641d163114b212229b8bceba9f859cff1265ba40e02a2bb0ec8743f56c1033
+          imagePullPolicy: IfNotPresent
+          command:
+            - /usr/local/bin/kube-proxy
+            - --cluster-cidr=10.244.0.0/16
+            - --conntrack-max-per-core=0
+            - --hostname-override=$(NODE_NAME)
+            - --kubeconfig=/etc/kubernetes/kubeconfig
+            - --proxy-mode=nftables
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+          # Preserve the existing host networking privileges during adoption.
+          # Capability, resource and probe changes require separate testing.
+          resources: {}
+          securityContext:
+            privileged: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - name: lib-modules
+              mountPath: /lib/modules
+              readOnly: true
+            - name: ssl-certs-host
+              mountPath: /etc/ssl/certs
+              readOnly: true
+            - name: kubeconfig
+              mountPath: /etc/kubernetes
+              readOnly: true
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      priorityClassName: system-cluster-critical
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccountName: kube-proxy
+      terminationGracePeriodSeconds: 30
+      tolerations:
+        - effect: NoSchedule
+          operator: Exists
+        - effect: NoExecute
+          operator: Exists
+      volumes:
+        - name: lib-modules
+          hostPath:
+            path: /usr/lib/modules
+            type: ""
+        - name: ssl-certs-host
+          hostPath:
+            path: /etc/ssl/certs
+            type: ""
+        - name: kubeconfig
+          configMap:
+            defaultMode: 420
+            name: kubeconfig-in-cluster
