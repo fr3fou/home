@@ -37,7 +37,7 @@ spec:
       name: redis
       clusterSize: 3
       image: quay.io/opstree/redis
-      tag: v7.2.16@sha256:68d3bb380d755dc5ec1c8656af24aaa801a16b3aa1cf9ed137087cfc89f26b62
+      tag: v7.4.11@sha256:115d8e221b1459b9f2db7d927ed40318ffac4eb2cddb5702974bce92d32b7a51
       resources:
         requests:
           cpu: 10m
