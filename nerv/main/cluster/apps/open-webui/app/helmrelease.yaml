@@ -23,6 +23,7 @@ spec:
   values:
     controllers:
       open-webui:
+        replicas: 0
         containers:
           app:
             image:

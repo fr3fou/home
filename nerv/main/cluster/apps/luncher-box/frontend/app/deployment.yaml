@@ -15,11 +15,24 @@ spec:
       labels:
         app: luncher-box-frontend
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       terminationGracePeriodSeconds: 5
       containers:
         - name: luncher-box-frontend
-          image: ghcr.io/deliriumproducts/luncher-box-frontend:latest
+          image: ghcr.io/deliriumproducts/luncher-box-frontend:latest@sha256:5f2477cf591db24b2e9c33f1c0feb499e892a2ab1fb2eee159549924719a1ae6
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
           resources:
             requests:
               cpu: 100m
@@ -29,6 +42,20 @@ spec:
               memory: 600Mi
           ports:
             - containerPort: 3000
+          startupProbe:
+            tcpSocket:
+              port: 3000
+            periodSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            tcpSocket:
+              port: 3000
+          livenessProbe:
+            tcpSocket:
+              port: 3000
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
           env:
             - name: FRONTEND_PORT
               value: "3000"
@@ -38,6 +65,10 @@ spec:
               value: "https://luncherbox-api.deliprods.com"
             - name: SOCKET_URL
               value: "https://luncherbox-api.deliprods.com"
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 128Mi
 ---
 apiVersion: v1
 kind: Service

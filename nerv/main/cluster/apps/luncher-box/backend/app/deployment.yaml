@@ -15,11 +15,24 @@ spec:
       labels:
         app: luncher-box-backend
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       terminationGracePeriodSeconds: 5
       containers:
         - name: luncher-box-backend
-          image: ghcr.io/deliriumproducts/luncher-box-backend:latest
+          image: ghcr.io/deliriumproducts/luncher-box-backend:latest@sha256:5a0a7290756891e7215d8d65c6b1c0831bd9f51f3247b1119787cf5d06e61c46
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
           resources:
             requests:
               cpu: 100m
@@ -29,7 +42,23 @@ spec:
               memory: 600Mi
           ports:
             - containerPort: 8080
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            periodSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
           env:
+            - name: YARN_CACHE_FOLDER
+              value: /tmp/yarn-cache
             - name: COOKIE_URL
               value: ".deliprods.com"
             - name: BACKEND_PORT
@@ -43,6 +72,10 @@ spec:
           envFrom:
             - secretRef:
                 name: luncher-box-backend-secrets
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 128Mi
 ---
 apiVersion: v1
 kind: Service
