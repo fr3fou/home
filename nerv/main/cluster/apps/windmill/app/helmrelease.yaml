@@ -18,12 +18,15 @@ spec:
   chart:
     spec:
       chart: windmill
-      version: 4.0.286
+      version: 4.0.291
       sourceRef:
         kind: HelmRepository
         name: windmill
   values:
     windmill:
+      tag: 1.846.1@sha256:1c394f5c436b5e7716fab8cc9001e35024507e84b41fac9b1cca767b10eaa43d
+      windmillExtra:
+        tag: 1.846.1@sha256:e1d9b0afa883a611d0f05abf0c837834588776b4f30ef8b60ff9fc18ceccdd71
       baseDomain: wm.nerv.id
       databaseUrlSecretName: windmill-db
       databaseUrlSecretKey: DATABASE_URL
