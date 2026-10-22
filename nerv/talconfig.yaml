@@ -36,6 +36,7 @@ nodes:
             - siderolabs/qemu-guest-agent
             - siderolabs/iscsi-tools
             - siderolabs/util-linux-tools
+            - siderolabs/gvisor
     userVolumes:
       - name: data
         filesystem:
@@ -60,6 +61,7 @@ nodes:
       # Disable OOM controller to prevent killing processes during I/O pressure
       # https://github.com/siderolabs/talos/issues/12526#issuecomment-3707193227
       - "@./patches/oomconfig.yaml"
+      - "@./patches/gvisor.yaml"
     # patches:
     # NOTE: Was required by https://github.com/siderolabs/talos/issues/10291#issuecomment-2637405378
     #       Alternative solution is to set `values.speaker.ignoreExcludeLB` to `true`
@@ -99,6 +101,7 @@ nodes:
             - siderolabs/qemu-guest-agent
             - siderolabs/iscsi-tools
             - siderolabs/util-linux-tools
+            - siderolabs/gvisor
     userVolumes:
       - name: data
         filesystem:
@@ -117,6 +120,7 @@ nodes:
           proxy:
             disabled: true
       - "@./patches/oomconfig.yaml"
+      - "@./patches/gvisor.yaml"
 
   - hostname: casper-03
     controlPlane: true
