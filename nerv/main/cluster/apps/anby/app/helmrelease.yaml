@@ -20,6 +20,7 @@ spec:
     controllers:
       anby:
         pod:
+          runtimeClassName: gvisor
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -30,7 +31,7 @@ spec:
           app:
             image:
               repository: ghcr.io/fr3fou/anby
-              tag: latest
+              tag: latest@sha256:923a0f398a5683ec85a4a43f4e9e8480292ba154c1632911b6ae62e59e2e2026
             env:
               HTTP_HOST: "0.0.0.0"
               HTTP_PORT: &port 8080

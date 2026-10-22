@@ -20,6 +20,7 @@ spec:
     controllers:
       autobrr:
         pod:
+          runtimeClassName: gvisor
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000

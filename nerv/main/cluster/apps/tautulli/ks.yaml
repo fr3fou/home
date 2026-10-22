@@ -5,6 +5,8 @@ metadata:
   name: tautulli
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: gvisor
   interval: 10m
   targetNamespace: apps
   path: ./nerv/main/cluster/apps/tautulli/app
