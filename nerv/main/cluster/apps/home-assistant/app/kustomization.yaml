@@ -5,6 +5,7 @@ resources:
   - helmrelease.yaml
   - pvc.yaml
   - secret.yaml
+  - code-server-secret.yaml
 configMapGenerator:
   - name: home-assistant-config
     files:

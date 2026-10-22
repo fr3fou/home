@@ -16,6 +16,12 @@ spec:
         app: luncher-box-frontend
     spec:
       runtimeClassName: gvisor
+      # Server-side rendering uses the public API hostname. Keep TLS/Host intact
+      # while routing through the external gateway instead of router hairpin NAT.
+      hostAliases:
+        - ip: 192.168.5.11
+          hostnames:
+            - luncherbox-api.deliprods.com
       automountServiceAccountToken: false
       securityContext:
         runAsUser: 1000

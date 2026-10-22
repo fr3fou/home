@@ -17,11 +17,16 @@ spec:
     remediation:
       retries: 3
   values:
+    defaultPodOptions:
+      automountServiceAccountToken: false
+
     controllers:
       podinfo:
         replicas: 1
         containers:
           app:
+            securityContext:
+              allowPrivilegeEscalation: false
             image:
               repository: ghcr.io/stefanprodan/podinfo
               tag: 6.15.0@sha256:ec73780a8425f59ea49f5bc8cdff0d598805a224fbaa1f86c67a244f250fa9da

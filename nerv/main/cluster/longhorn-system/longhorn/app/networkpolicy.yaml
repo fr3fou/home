@@ -1,0 +1,25 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: deny-apps-longhorn-administration
+  namespace: longhorn-system
+spec:
+  endpointSelector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values: [longhorn-manager, longhorn-ui]
+  # Deny only application access to administration. Preserve existing storage,
+  # control-plane, CSI, webhook and monitoring flows during the staged rollout.
+  enableDefaultDeny:
+    ingress: false
+    egress: false
+  ingressDeny:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: apps
+      toPorts:
+        - ports:
+            - {port: "9500", protocol: TCP}
+            - {port: "80", protocol: TCP}

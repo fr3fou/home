@@ -21,6 +21,9 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    defaultPodOptions:
+      automountServiceAccountToken: false
+
     controllers:
       open-webui:
         replicas: 0

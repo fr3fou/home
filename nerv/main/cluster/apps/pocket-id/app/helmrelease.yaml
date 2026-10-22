@@ -17,6 +17,9 @@ spec:
     remediation:
       retries: 5
   values:
+    defaultPodOptions:
+      automountServiceAccountToken: false
+
     controllers:
       pocket-id:
         pod:

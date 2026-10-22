@@ -1,6 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - hubble-basicauth.yaml
+  - hubble-basicauth-secret.yaml
   - cluster-config.yaml
   - peer-config.yaml
   - advertisement.yaml

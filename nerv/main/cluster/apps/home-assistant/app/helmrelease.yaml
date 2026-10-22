@@ -18,6 +18,7 @@ spec:
       retries: 5
   values:
     defaultPodOptions:
+      automountServiceAccountToken: false
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
@@ -61,9 +62,14 @@ spec:
               tag: 4.141.0@sha256:72ab24b5680ee597dd647b30d82625752f40109b5f61bef90ffbf1ea1f02dbb8
             env:
               TZ: UTC
+              PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: home-assistant-code-server
+                    key: password
             args:
               - --auth
-              - none
+              - password
               - --user-data-dir
               - /config/.vscode
               - --extensions-dir

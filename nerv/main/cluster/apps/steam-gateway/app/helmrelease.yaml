@@ -17,14 +17,31 @@ spec:
     remediation:
       retries: 5
   values:
+    defaultPodOptions:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+
     controllers:
       steam-gateway:
         replicas: 1
+        strategy: Recreate
         containers:
           app:
             image:
               repository: ghcr.io/fr3fou/steam-messaging-gateway
-              tag: latest
+              tag: latest@sha256:da53decf6d284c9745cd485c48c554d0b0adfefff48569290962411e2e245200
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop: ["ALL"]
             envFrom:
               - secretRef:
                   name: steam-gateway
@@ -52,6 +69,11 @@ spec:
             port: 3001
 
     persistence:
+      tmp:
+        type: emptyDir
+        sizeLimit: 128Mi
+        globalMounts:
+          - path: /tmp
       data:
         enabled: true
         existingClaim: steam-gateway-data

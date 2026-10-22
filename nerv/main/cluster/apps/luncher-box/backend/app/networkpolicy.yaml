@@ -1,0 +1,70 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: luncher-box-backend
+  namespace: apps
+spec:
+  podSelector:
+    matchLabels:
+      app: luncher-box-backend
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: networking-system
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: envoy
+              gateway.envoyproxy.io/owning-gateway-name: external
+        - podSelector:
+            matchLabels:
+              app: luncher-box-frontend
+      ports:
+        - protocol: TCP
+          port: 8080
+  egress:
+    # runsc traffic can reach Cilium policy evaluation before Service DNAT.
+    # Permit the stable Service VIPs as well as their selected pod endpoints.
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+        - ipBlock:
+            cidr: 10.96.0.10/32
+      ports:
+        - {protocol: UDP, port: 53}
+        - {protocol: TCP, port: 53}
+    - to:
+        - podSelector:
+            matchLabels:
+              cnpg.io/cluster: postgres-apps
+        - ipBlock:
+            cidr: 10.98.154.135/32
+      ports:
+        - {protocol: TCP, port: 5432}
+    - to:
+        - podSelector:
+            matchLabels:
+              app: redis
+        - ipBlock:
+            cidr: 10.105.230.39/32
+      ports:
+        - {protocol: TCP, port: 6379}
+    # Registration sends mail through Gmail's TLS SMTP service.
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8
+              - 172.16.0.0/12
+              - 192.168.0.0/16
+              - 169.254.0.0/16
+              - 100.64.0.0/10
+      ports:
+        - {protocol: TCP, port: 465}
+        - {protocol: TCP, port: 587}

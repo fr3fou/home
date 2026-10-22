@@ -15,6 +15,63 @@ metadata:
   name: windmill
 spec:
   interval: 10m0s
+  postRenderers:
+    - kustomize:
+        patches:
+          # The chart has no runtimeClassName setting. Keep every Windmill pod
+          # in the same non-root sandbox, including the code editor helpers.
+          - target:
+              kind: Deployment
+              name: windmill-(app|extra|workers-.*)
+            patch: |
+              apiVersion: apps/v1
+              kind: Deployment
+              metadata:
+                name: unused
+              spec:
+                template:
+                  spec:
+                    runtimeClassName: gvisor
+                    automountServiceAccountToken: false
+                    initContainers:
+                      - name: prepare-tmp
+                        image: ghcr.io/windmill-labs/windmill:1.846.1@sha256:1c394f5c436b5e7716fab8cc9001e35024507e84b41fac9b1cca767b10eaa43d
+                        command: [/bin/sh, -ec, "mkdir -p /scratch/tmp && chmod 1777 /scratch/tmp"]
+                        securityContext:
+                          allowPrivilegeEscalation: false
+                          readOnlyRootFilesystem: true
+                          capabilities:
+                            drop: [ALL]
+                        resources:
+                          requests:
+                            cpu: 10m
+                            memory: 32Mi
+                          limits:
+                            memory: 64Mi
+                        volumeMounts:
+                          - name: tmp
+                            mountPath: /scratch
+                    volumes:
+                      - name: tmp
+                        emptyDir:
+                          sizeLimit: 2Gi
+          - target:
+              kind: Deployment
+              name: windmill-extra
+            patch: |
+              apiVersion: apps/v1
+              kind: Deployment
+              metadata:
+                name: windmill-extra
+              spec:
+                template:
+                  spec:
+                    containers:
+                      - name: windmill-extra
+                        volumeMounts:
+                          - name: tmp
+                            mountPath: /tmp
+                            subPath: tmp
   chart:
     spec:
       chart: windmill
@@ -27,6 +84,26 @@ spec:
       tag: 1.846.1@sha256:1c394f5c436b5e7716fab8cc9001e35024507e84b41fac9b1cca767b10eaa43d
       windmillExtra:
         tag: 1.846.1@sha256:e1d9b0afa883a611d0f05abf0c837834588776b4f30ef8b60ff9fc18ceccdd71
+        podSecurityContext: &podSecurityContext
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          fsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        containerSecurityContext: &containerSecurityContext
+          privileged: false
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop: [ALL]
+        debugAllowedOrigins: https://wm.nerv.id
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            memory: 512Mi
       baseDomain: wm.nerv.id
       databaseUrlSecretName: windmill-db
       databaseUrlSecretKey: DATABASE_URL
@@ -35,6 +112,21 @@ spec:
       workerGroups:
         - name: default
           replicas: 3
+          privileged: false
+          automountServiceAccountToken: false
+          podSecurityContext: *podSecurityContext
+          containerSecurityContext: *containerSecurityContext
+          # PID isolation is supported without an Enterprise NSJAIL license.
+          # gVisor permits these namespaces without host privileges.
+          extraEnv: &workerIsolationEnv
+            - name: DISABLE_NSJAIL
+              value: "true"
+            - name: ENABLE_UNSHARE_PID
+              value: "true"
+          volumeMounts: &tmpMount
+            - name: tmp
+              mountPath: /tmp
+              subPath: tmp
           resources:
             requests:
               cpu: 100m
@@ -43,6 +135,12 @@ spec:
               memory: 1Gi
         - name: native
           replicas: 3
+          privileged: false
+          automountServiceAccountToken: false
+          podSecurityContext: *podSecurityContext
+          containerSecurityContext: *containerSecurityContext
+          extraEnv: *workerIsolationEnv
+          volumeMounts: *tmpMount
           resources:
             requests:
               cpu: 100m
@@ -50,6 +148,9 @@ spec:
             limits:
               memory: 1Gi
       app:
+        podSecurityContext: *podSecurityContext
+        containerSecurityContext: *containerSecurityContext
+        volumeMounts: *tmpMount
         resources:
           requests:
             cpu: 100m
@@ -63,6 +164,8 @@ spec:
             memory: 128Mi
           limits:
             memory: 512Mi
+    serviceAccount:
+      automountServiceAccountToken: false
     postgresql:
       enabled: false
     minio:

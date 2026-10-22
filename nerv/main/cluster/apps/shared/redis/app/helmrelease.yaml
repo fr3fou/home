@@ -36,6 +36,8 @@ spec:
     redisReplication:
       name: redis
       clusterSize: 3
+      image: quay.io/opstree/redis
+      tag: v7.2.16@sha256:68d3bb380d755dc5ec1c8656af24aaa801a16b3aa1cf9ed137087cfc89f26b62
       resources:
         requests:
           cpu: 10m
@@ -53,4 +55,13 @@ spec:
     podSecurityContext:
       runAsUser: 1000
       runAsGroup: 1000
+      runAsNonRoot: true
       fsGroup: 1000
+      seccompProfile:
+        type: RuntimeDefault
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop: ["ALL"]
+      # The upstream entrypoint generates /etc/redis/redis.conf at startup.
+    serviceAccountName: redis

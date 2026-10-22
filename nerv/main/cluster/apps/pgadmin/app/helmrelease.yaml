@@ -18,7 +18,11 @@ spec:
       retries: 5
   values:
     defaultPodOptions:
+      automountServiceAccountToken: false
       securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
         runAsUser: 5050
         runAsGroup: 5050
         fsGroup: 5050
@@ -33,6 +37,9 @@ spec:
               tag: 9.18@sha256:c332c5f6dfba995d9ebc4af261d93506d6876085d712eaaa3defc8dd1a3f26de
             env:
               TZ: UTC
+              PGADMIN_LISTEN_PORT: 8080
+              PGADMIN_DISABLE_POSTFIX: "true"
+              PGADMIN_CUSTOM_CONFIG_DISTRO_FILE: /tmp/config_distro.py
               PGADMIN_DEFAULT_EMAIL:
                 valueFrom:
                   secretKeyRef:
@@ -50,7 +57,7 @@ spec:
                 spec:
                   httpGet:
                     path: /misc/ping
-                    port: &port 80
+                    port: &port 8080
                   initialDelaySeconds: 15
                   periodSeconds: 10
                   timeoutSeconds: 5
@@ -63,7 +70,10 @@ spec:
               limits:
                 memory: 512Mi
             securityContext:
-              allowPrivilegeEscalation: true
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop: ["ALL"]
 
     service:
       app:
@@ -85,6 +95,16 @@ spec:
                 port: *port
 
     persistence:
+      tmp:
+        type: emptyDir
+        sizeLimit: 128Mi
+        globalMounts:
+          - path: /tmp
+      run:
+        type: emptyDir
+        sizeLimit: 16Mi
+        globalMounts:
+          - path: /run/pgadmin
       config:
         enabled: true
         existingClaim: pgadmin-config
