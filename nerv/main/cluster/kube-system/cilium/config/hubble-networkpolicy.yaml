@@ -1,0 +1,26 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: deny-apps-hubble-administration
+  namespace: kube-system
+spec:
+  endpointSelector:
+    matchExpressions:
+      - key: k8s-app
+        operator: In
+        values: [hubble-ui, hubble-relay]
+  # Block application access to the UI, its backend, and the relay. Gateway
+  # authentication protects the routed UI; other namespaces keep their access.
+  enableDefaultDeny:
+    ingress: false
+    egress: false
+  ingressDeny:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: apps
+      toPorts:
+        - ports:
+            - {port: "8081", protocol: TCP}
+            - {port: "8090", protocol: TCP}
+            - {port: "4245", protocol: TCP}
