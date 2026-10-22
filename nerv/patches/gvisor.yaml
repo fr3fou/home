@@ -1,0 +1,6 @@
+machine:
+  sysctls:
+    # Required by the Talos gVisor extension; enabled only on sandbox nodes.
+    user.max_user_namespaces: "11255"
+  nodeLabels:
+    sandbox.nerv.id/gvisor: "true"

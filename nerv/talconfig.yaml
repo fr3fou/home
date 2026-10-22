@@ -145,6 +145,7 @@ nodes:
             - siderolabs/util-linux-tools
             - siderolabs/nonfree-kmod-nvidia-production
             - siderolabs/nvidia-container-toolkit-production
+            - siderolabs/gvisor
     userVolumes:
       - name: data
         filesystem:
@@ -163,6 +164,7 @@ nodes:
           proxy:
             disabled: true
       - "@./patches/oomconfig.yaml"
+      - "@./patches/gvisor.yaml"
       - |-
         machine:
           kernel:

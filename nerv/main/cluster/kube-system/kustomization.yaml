@@ -8,3 +8,4 @@ resources:
   - cilium/ks.yaml
   - local-path-provisioner/ks.yaml
   - nvidia-device-plugin/ks.yaml
+  - gvisor/ks.yaml
