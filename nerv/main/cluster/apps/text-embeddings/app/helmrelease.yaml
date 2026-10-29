@@ -35,7 +35,7 @@ spec:
           pull-model:
             image:
               repository: ollama/ollama
-              tag: 0.6.2
+              tag: 0.40.13
             command:
               - /bin/sh
               - -c
@@ -53,7 +53,7 @@ spec:
           app:
             image:
               repository: ollama/ollama
-              tag: 0.6.2
+              tag: 0.40.13
             env:
               OLLAMA_MODELS: /models
               OLLAMA_HOST: 0.0.0.0:11434
