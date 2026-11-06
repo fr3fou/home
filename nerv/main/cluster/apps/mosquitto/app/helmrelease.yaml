@@ -34,7 +34,7 @@ spec:
           init-config:
             image:
               repository: public.ecr.aws/docker/library/eclipse-mosquitto
-              tag: 2.1.2-alpine@sha256:9cfdd46ad59f3e3e5f592f6baf57ab23e1ad00605509d0f5c1e9b179c5314d87
+              tag: 2.1.2-alpine@sha256:467ee25e5b6aaaa5562e1f64c60f723274ebb2dbad62cbb89f981d051eb7c6b7
             command:
               - /bin/sh
               - -c
@@ -58,7 +58,7 @@ spec:
           app:
             image:
               repository: public.ecr.aws/docker/library/eclipse-mosquitto
-              tag: 2.1.2-alpine@sha256:9cfdd46ad59f3e3e5f592f6baf57ab23e1ad00605509d0f5c1e9b179c5314d87
+              tag: 2.1.2-alpine@sha256:467ee25e5b6aaaa5562e1f64c60f723274ebb2dbad62cbb89f981d051eb7c6b7
             probes:
               liveness: &probes
                 enabled: true
