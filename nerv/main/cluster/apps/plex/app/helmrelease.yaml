@@ -35,10 +35,10 @@ spec:
             env:
               TZ: ${TIMEZONE}
               ADVERTISE_IP: "http://${PLEX_IP}:1337"
-              # Remote access: router forwards WAN TCP 1336 -> ${PLEX_IP}:1336
+              # Remote access: router forwards WAN TCP 1337 -> ${PLEX_IP}:1337
               PLEX_PREFERENCE_1: "PublishServerOnPlexOnlineKey=1"
               PLEX_PREFERENCE_2: "ManualPortMappingMode=1"
-              PLEX_PREFERENCE_3: "ManualPortMappingPort=1336"
+              PLEX_PREFERENCE_3: "ManualPortMappingPort=1337"
             probes:
               liveness: &probes
                 enabled: true
@@ -90,9 +90,6 @@ spec:
         ports:
           http:
             port: 1337
-            targetPort: 32400
-          external:
-            port: 1336
             targetPort: 32400
     # ingress:
     #   app:
