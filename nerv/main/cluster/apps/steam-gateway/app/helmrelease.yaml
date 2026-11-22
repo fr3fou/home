@@ -30,7 +30,7 @@ spec:
 
     controllers:
       steam-gateway:
-        replicas: 1
+        replicas: 0
         strategy: Recreate
         containers:
           app:
