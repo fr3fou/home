@@ -8,19 +8,19 @@ spec:
     url: https://grafana.github.io/helm-charts
 sops:
     age:
-        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
-          enc: |
+        - enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6WEtFL3RVelBTZWpRdXNK
-            OXZZbzhDeGd2Q0pLUjh2VmhUWjRVTkFTcmtNCmpLMHVEd3dHaC8wY21hMHBCdGlY
-            V1IxS2k3blBITGp5WWZRYmxDNlZSdDgKLS0tIHUvbldpazlFSWplbWFPNzRGMlp6
-            ZE85aGczZktlcmRBMHJ3MFA1WmZBR3cKTgvxq65EavfqYyA2kgWg1CtKUAnEPPld
-            ef5pXK1W7oYSEjZc6k08i7vo9yMQk/tPUirjVIYmsXwgD5CveyAHvg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5U0d0YzhtU1l2WnVmZzMz
+            WnM0aTJ4QnpuZ1puV2liZHhSVjhxZkVjVHc0CitRZXlxNmFoSjRkblhCb1NHdTgv
+            SUd6dWNSOXZraC9LQ0R5MlhvZWhvMnMKLS0tIGc1TFBUcWJvdkNWdHFudktURTQx
+            Q0xrQ1pMSUd2d1htM3JjSWc0S2xoZmsKoim/4Lk58QrXYbbqVEd9HFDtO0/Ezsx4
+            /YmhY/k7+cJA78ayMsNwtJj6dS6smxoe5Qz+10XEou6GBl30BCc7EQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-01-08T16:50:25Z"
-    mac: ENC[AES256_GCM,data:nmbafdTi26/vuAyQ0zgDUjFyldmrOHXA87u2TNi5Wo9U6hAXxbkFfepphTWUqlEO45zP6tOT86JFLli8BApSp72R2rWjzgICmX4a2MFp1Ltp/lCZS6ZV5DTj1KINvC1IJ9xqZb+B2NcDSB5zAYtlqpijZkL3RxCWp1NkH5Sh0vc=,iv:BpQh+DHjBvTSOqSz6a8VMtU6xIKNVEKiqhNOXaO8JZw=,tag:XMk6pTXplyIb1gkcTPDEjw==,type:str]
+          recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
-    version: 3.11.0
+    lastmodified: "2026-11-24T16:28:20Z"
+    mac: ENC[AES256_GCM,data:kGipADVajwz4Xso+2a3VILxDZxitg8MRbegPXkJlXqsn6l3NORKxBHfvbgEV3WCmXOTV3j6DRIEItemcgVL3CsqUh8aufTKOuBUAYxB53CberiapbccHndDB2uQSwW6G8G2iJts503prK3lcoX6yNoaydtcaszmbxlNTeb2g/Qw=,iv:m4l60WN7XI2CqHJkJziZ+tYd7hoYIYU99y5eoYPXtYg=,tag:ywTvUMY2S73hipiYm9UUJQ==,type:str]
+    version: 3.13.3
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.ok8.sh/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
@@ -32,7 +32,7 @@ spec:
     chart:
         spec:
             chart: k8s-monitoring
-            version: 3.7.1
+            version: 4.6.1
             sourceRef:
                 kind: HelmRepository
                 name: grafana
@@ -48,73 +48,110 @@ spec:
     values:
         cluster:
             name: nerv
-        # Destinations for telemetry data (v3.x structure)
+        # Destinations (v4: map keyed by name)
         destinations:
-            - name: grafanacloud-prometheus
-              type: prometheus
-              url: https://prometheus-prod-24-prod-eu-west-2.grafana.net/api/prom/push
-              auth:
-                type: basic
-                username: "1735527"
-                password: ENC[AES256_GCM,data:g5lVKNFOvjOB5VGtfue8Sq84hQfZBXBdFm8HcJjF/4dRQmFKHEXbis626qHm1BdZNLhPQgDOhVSmgf7xmA+mrNkR1+8P0oCUkT8W1Y9cajHRhjyxLLMdS247dd5s/dSC8R7BiFWkSOMcHc7fme2tNTIZCEzUJ7hdVk5qEw==,iv:gjLVqpnrESFkbPtrKQG3yPmUSu6rV520Ex27VQGfx3I=,tag:IHIRW6Wy7gQborhNQKUIWg==,type:str]
-            - name: grafanacloud-loki
-              type: loki
-              url: https://logs-prod-012.grafana.net/loki/api/v1/push
-              auth:
-                type: basic
-                username: "967489"
-                password: ENC[AES256_GCM,data:2iqyatyXogOIdT1k/CVgsJ8wfXyjThb+UAT0LZd4ZBvBZeZQ4YIvPA/F/bf5ichsWQMqz1efa4GLo7KD/XTqw1LEYCOAwW56bb7q5e5/1S2UsfRFw7rcdRZ2PQMBIpwwYUwJPq/U8hYyO2tZFCV2wrp7tq5DXOwxD2A6gQ==,iv:7CH5tO3KYTYHl+O3oxmmGLSX0xFwclLAKt/5AHdtugY=,tag:APvaxcZVWrldlCt5NAzmNw==,type:str]
-            - name: grafanacloud-tempo
-              type: otlp
-              url: https://otlp-gateway-prod-eu-west-2.grafana.net/otlp
-              protocol: http
-              auth:
-                type: basic
-                username: "1009709"
-                password: ENC[AES256_GCM,data:ZnkSwYEKTKGRuuox3ZWAvWUT+iT6KaEB1xXyrHrO5W+73iomPT5eh7kJ75Qo4OEnPompnWMMhWbOMwqtRh89bowukO0Jo2FSu+oVmHID2RVboYiuLoX+hMkoaVAPUpHAqLOSjO/tE9W0ctjfit7Caztp3BUuOZ5bfiKjeQ==,iv:9F6L6CJ9wDXsYPFAcNfG5A0dvzv8YYG4K6Rrbn40LaM=,tag:WbpqhvXykzPQ4kUeh4Cezw==,type:str]
-              traces:
-                enabled: true
-              metrics:
-                enabled: false
-              logs:
-                enabled: false
+            grafanacloud-prometheus:
+                type: prometheus
+                url: https://prometheus-prod-24-prod-eu-west-2.grafana.net/api/prom/push
+                auth:
+                    type: basic
+                    username: "1735527"
+                    password: ENC[AES256_GCM,data:FjRSiHWi9KSI7Cq10ZltDSw4HDNYhrapYgL65F12fcba902RmeT3th7ZxDed71zxrSTHsoItW/ngI7RAvsuiSev2885fOfS1JudJ6wYZOaxW1zydEE8G/mRPRub+NxftqQ3Q9ekY3e1MD4WhjINRInDfLD758e2/faMENg==,iv:XUnL53977r3I5Qw5vIsf7EnxYwLt7pAx88bynRaCM+A=,tag:l/LPT0sjNpoSBFSKmBOjVQ==,type:str]
+            grafanacloud-loki:
+                type: loki
+                url: https://logs-prod-012.grafana.net/loki/api/v1/push
+                auth:
+                    type: basic
+                    username: "967489"
+                    password: ENC[AES256_GCM,data:f2lJc8LN4/kynSbhYn66RLebUOfFM86fG9HnhGeH4JpJ+4iLJ57+HQDO7T7ylrGD+DqwPCZiSpmbML5IRxmACYBme3ebAzW0hqVLqvWxj36HrQVaMDAZWwrySYIehAauLnlEBmkjuRWfVmFn6lM7yTesmXQd/Xcxku2igA==,iv:f3QlET6Pa8A3Y3CjKNJP00Ot/RDcxMuxzUrJJQFpAl0=,tag:GrFJs0r//N5xS7+AruO5tQ==,type:str]
+            grafanacloud-tempo:
+                type: otlp
+                url: https://otlp-gateway-prod-eu-west-2.grafana.net/otlp
+                protocol: http
+                auth:
+                    type: basic
+                    username: "1009709"
+                    password: ENC[AES256_GCM,data:utUSG9jLls4lTz0uUxEpXJoI+jq78PzPJL89IWhYUbfUCjAdaOHupAU5dyTG5VPlQgGCADYx50zw4azEZ8iP0hY0TV1KeOMXAP/U7JeFY3DqmV5I+7tZO2cFf8dTbrrwsKdtED9AqaKTUdd/E4hI4e0wsLi82ewcoPWFsg==,iv:xMzSciKPOWbLYxrD3VOotkXy9Od+TgBhSXirdy9QxbY=,tag:HJbu1JkNJhAIYRclB5RVXg==,type:str]
+                traces:
+                    enabled: true
+                metrics:
+                    enabled: false
+                logs:
+                    enabled: false
         # Features
         clusterMetrics:
             enabled: true
-            # Override kube-state-metrics discovery to use service role instead of endpoints
-            # Endpoints don't inherit the "release" label from the service, causing discovery to fail
+            collector: alloy-metrics
             kube-state-metrics:
+                # Single replica: discover via the Service rather than Endpoints
                 discoveryType: service
-            # Enable the Node Exporter integration metrics list for Grafana Cloud
-            node-exporter:
+                metricsTuning:
+                    # Grafana Cloud free tier caps active series at 15k.
+                    # Old ReplicaSets (revision history) were ~1.6k series; keep only
+                    # kube_replicaset_owner, which workload mapping needs.
+                    excludeMetrics:
+                        - kube_replicaset_(created|metadata_generation|spec_replicas|status_.*)
+                        - kube_secret_metadata_resource_version
+            cadvisor:
+                metricsTuning:
+                    # New in chart v4 (~900 series); not used by our dashboards.
+                    excludeMetrics:
+                        - container_pressure_.*
+        hostMetrics:
+            enabled: true
+            collector: alloy-metrics
+            linuxHosts:
+                enabled: true
                 metricsTuning:
                     useIntegrationAllowList: true
+                # Per-pod Cilium veths (lxc*) were ~1.7k node_network_* series.
+                extraMetricProcessingRules: |-
+                    rule {
+                      source_labels = ["__name__", "device"]
+                      regex         = "node_network_.+;lxc.*"
+                      action        = "drop"
+                    }
         clusterEvents:
             enabled: true
-        podLogs:
+            collector: alloy-singleton
+        podLogsViaLoki:
             enabled: true
-        # Alloy collectors
-        # Enable annotation-based autodiscovery for scraping pods with k8s.grafana.com/scrape annotations
+            collector: alloy-logs
+        # Scrape pods/services annotated with k8s.grafana.com/scrape
         annotationAutodiscovery:
             enabled: true
-        alloy-metrics:
-            enabled: true
-        alloy-singleton:
-            enabled: true
-        alloy-logs:
-            enabled: true
+            collector: alloy-metrics
+        # Workloads feeding the features above (v4 telemetryServices)
+        telemetryServices:
+            kube-state-metrics:
+                deploy: true
+            node-exporter:
+                deploy: true
+        # Alloy collectors (v4: map with presets)
+        collectors:
+            alloy-metrics:
+                presets:
+                    - clustered
+                    - statefulset
+            alloy-singleton:
+                presets:
+                    - singleton
+            alloy-logs:
+                presets:
+                    - filesystem-log-reader
+                    - daemonset
 sops:
     age:
-        - recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
-          enc: |
+        - enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6WEtFL3RVelBTZWpRdXNK
-            OXZZbzhDeGd2Q0pLUjh2VmhUWjRVTkFTcmtNCmpLMHVEd3dHaC8wY21hMHBCdGlY
-            V1IxS2k3blBITGp5WWZRYmxDNlZSdDgKLS0tIHUvbldpazlFSWplbWFPNzRGMlp6
-            ZE85aGczZktlcmRBMHJ3MFA1WmZBR3cKTgvxq65EavfqYyA2kgWg1CtKUAnEPPld
-            ef5pXK1W7oYSEjZc6k08i7vo9yMQk/tPUirjVIYmsXwgD5CveyAHvg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA5U0d0YzhtU1l2WnVmZzMz
+            WnM0aTJ4QnpuZ1puV2liZHhSVjhxZkVjVHc0CitRZXlxNmFoSjRkblhCb1NHdTgv
+            SUd6dWNSOXZraC9LQ0R5MlhvZWhvMnMKLS0tIGc1TFBUcWJvdkNWdHFudktURTQx
+            Q0xrQ1pMSUd2d1htM3JjSWc0S2xoZmsKoim/4Lk58QrXYbbqVEd9HFDtO0/Ezsx4
+            /YmhY/k7+cJA78ayMsNwtJj6dS6smxoe5Qz+10XEou6GBl30BCc7EQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-01-08T16:50:25Z"
-    mac: ENC[AES256_GCM,data:nmbafdTi26/vuAyQ0zgDUjFyldmrOHXA87u2TNi5Wo9U6hAXxbkFfepphTWUqlEO45zP6tOT86JFLli8BApSp72R2rWjzgICmX4a2MFp1Ltp/lCZS6ZV5DTj1KINvC1IJ9xqZb+B2NcDSB5zAYtlqpijZkL3RxCWp1NkH5Sh0vc=,iv:BpQh+DHjBvTSOqSz6a8VMtU6xIKNVEKiqhNOXaO8JZw=,tag:XMk6pTXplyIb1gkcTPDEjw==,type:str]
+          recipient: age194r4u78jlkcg3waxh5ddpwe6y0pwenuhk9avnkmc3huzcpf26d0spa3ggf
     encrypted_regex: ((?i)(pass($|word)|claim|secret($|[^N])|key|token|^data$|^stringData|^databaseUrl))
-    version: 3.11.0
+    lastmodified: "2026-11-24T16:28:20Z"
+    mac: ENC[AES256_GCM,data:kGipADVajwz4Xso+2a3VILxDZxitg8MRbegPXkJlXqsn6l3NORKxBHfvbgEV3WCmXOTV3j6DRIEItemcgVL3CsqUh8aufTKOuBUAYxB53CberiapbccHndDB2uQSwW6G8G2iJts503prK3lcoX6yNoaydtcaszmbxlNTeb2g/Qw=,iv:m4l60WN7XI2CqHJkJziZ+tYd7hoYIYU99y5eoYPXtYg=,tag:ywTvUMY2S73hipiYm9UUJQ==,type:str]
+    version: 3.13.3
