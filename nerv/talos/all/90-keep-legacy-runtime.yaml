@@ -1,0 +1,13 @@
+# Talos 1.14 defaults that the cluster was not created with. Removed to keep
+# runtime behaviour identical to the pre-topf (talhelper) config; opt in later.
+# - SecurityProfileConfig.workloadIsolation runs containerd/kubelet/pods in a
+#   separate PID+mount namespace (in-tree iSCSI plugin unsupported).
+# - VolumeConfig EPHEMERAL mount.secure adds nosuid,nodev to /var.
+apiVersion: v1alpha1
+kind: SecurityProfileConfig
+$patch: delete
+---
+apiVersion: v1alpha1
+kind: VolumeConfig
+name: EPHEMERAL
+$patch: delete

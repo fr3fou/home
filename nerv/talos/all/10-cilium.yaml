@@ -1,0 +1,10 @@
+# Disable the default CNI (Flannel) and kube-proxy for Cilium
+# - https://docs.cilium.io/en/stable/installation/k8s-install-helm/
+# - https://docs.siderolabs.com/talos/v1.14/configure-your-talos-cluster/system-configuration/patching
+apiVersion: v1alpha1
+kind: KubeFlannelCNIConfig
+$patch: delete
+---
+apiVersion: v1alpha1
+kind: KubeProxyConfig
+enabled: false

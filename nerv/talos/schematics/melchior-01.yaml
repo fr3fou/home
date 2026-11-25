@@ -1,0 +1,20 @@
+customization:
+  extraKernelArgs:
+    # https://github.com/siderolabs/talos/issues/9852#issuecomment-2524001105
+    - console=tty0
+    - console=ttyS0
+    # https://gist.github.com/gavinmcfall/ea6cb1233d3a300e9f44caf65a32d519
+    - net.ifnames=0 # Simple network interface names
+    - intel_iommu=on # PCI passthrough
+    - iommu=pt # PCI passthrough
+  systemExtensions:
+    officialExtensions:
+      # https://gist.github.com/gavinmcfall/ea6cb1233d3a300e9f44caf65a32d519
+      - siderolabs/mei
+      - siderolabs/intel-ucode
+      - siderolabs/i915
+      - siderolabs/thunderbolt
+      - siderolabs/qemu-guest-agent
+      - siderolabs/iscsi-tools
+      - siderolabs/util-linux-tools
+      - siderolabs/gvisor

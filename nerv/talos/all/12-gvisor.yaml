@@ -1,0 +1,9 @@
+# Required by the Talos gVisor extension; enabled only on sandbox nodes.
+machine:
+  sysctls:
+    user.max_user_namespaces: "11255"
+---
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+labels:
+  sandbox.nerv.id/gvisor: "true"

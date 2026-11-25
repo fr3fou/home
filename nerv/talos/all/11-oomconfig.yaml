@@ -1,0 +1,7 @@
+# Disable OOM controller to prevent killing processes during I/O pressure
+# https://github.com/siderolabs/talos/issues/12526#issuecomment-3707193227
+apiVersion: v1alpha1
+kind: OOMConfig
+triggerExpression: "false"
+cgroupRankingExpression: "0.0"
+sampleInterval: "5s"

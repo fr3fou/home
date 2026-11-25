@@ -1,0 +1,10 @@
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: data
+provisioning:
+  diskSelector:
+    match: disk.transport == 'virtio'
+  minSize: 230Gi
+  grow: true
+filesystem:
+  type: ext4

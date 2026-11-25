@@ -1,0 +1,26 @@
+# Talos machine configuration for nerv, managed with topf
+# https://github.com/postfinance/topf
+clusterName: nerv
+clusterEndpoint: https://192.168.1.11:6443
+kubernetesVersion: 1.35.8
+talosVersion: 1.14.4
+
+secretsPath: secrets.sops.yaml
+
+data:
+  gateway: 192.168.0.1
+  prefixLength: 23
+
+nodes:
+  - host: melchior-01
+    ip: 192.168.1.11
+    role: control-plane
+    schematicId: "@schematics/melchior-01.yaml"
+  - host: balthasar-02
+    ip: 192.168.1.12
+    role: control-plane
+    schematicId: "@schematics/balthasar-02.yaml"
+  - host: casper-03
+    ip: 192.168.1.13
+    role: control-plane
+    schematicId: "@schematics/casper-03.yaml"
