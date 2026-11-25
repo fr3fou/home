@@ -15,10 +15,11 @@ metadata:
   name: longhorn
 spec:
   interval: 30m
+  timeout: 15m
   chart:
     spec:
       chart: longhorn
-      version: 1.10.2
+      version: 1.11.3
       sourceRef:
         kind: HelmRepository
         name: longhorn
@@ -29,8 +30,10 @@ spec:
   upgrade:
     cleanupOnFail: true
     crds: CreateReplace
+    # Longhorn cannot be downgraded once its manager has migrated; never
+    # auto-rollback a failed upgrade.
     remediation:
-      retries: 3
+      retries: 0
   values:
     # NFSv4.1 backup target (same directory the former CIFS target used)
     defaultBackupStore:
@@ -43,8 +46,12 @@ spec:
       defaultDataPath: /var/mnt/data/longhorn
       # Reduce storage reservation to allow more volume expansion
       storageMinimalAvailablePercentage: 10
+      # Upgrade volume engines automatically after a Longhorn upgrade
+      concurrentAutomaticEngineUpgradePerNodeLimit: 1
     persistence:
       defaultClass: false
       defaultClassReplicaCount: 1
+    networkPolicies:
+      restrictInternalTraffic: false
     ingress:
       enabled: false
