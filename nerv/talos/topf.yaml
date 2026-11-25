@@ -3,7 +3,7 @@
 clusterName: nerv
 clusterEndpoint: https://192.168.1.11:6443
 kubernetesVersion: 1.35.8
-talosVersion: 1.14.4
+talosVersion: 1.14.7
 
 secretsPath: secrets.sops.yaml
 
