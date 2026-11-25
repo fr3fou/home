@@ -14,4 +14,6 @@ spec:
       name: external
   compressor:
     - type: Brotli
+      brotli: {}
     - type: Gzip
+      gzip: {}
