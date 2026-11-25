@@ -5,13 +5,8 @@ kind: Gateway
 metadata:
   name: external
   annotations:
-    # external-dns >= 0.22 only reads the external-dns.kubernetes.io/ prefix.
-    # The alpha keys keep the old version working until the upgrade rolls out;
-    # drop them once external-dns is on 0.22+.
     external-dns.kubernetes.io/target: &hostname ${PUBLIC_DOMAIN}
     external-dns.kubernetes.io/internal-hostname: "true"
-    external-dns.alpha.kubernetes.io/target: *hostname
-    external-dns.alpha.kubernetes.io/internal-hostname: "true"
 spec:
   gatewayClassName: envoy-external
   addresses:
@@ -20,7 +15,6 @@ spec:
   infrastructure:
     annotations:
       external-dns.kubernetes.io/hostname: *hostname
-      external-dns.alpha.kubernetes.io/hostname: *hostname
       lbipam.cilium.io/ips: *address
     parametersRef:
       group: gateway.envoyproxy.io

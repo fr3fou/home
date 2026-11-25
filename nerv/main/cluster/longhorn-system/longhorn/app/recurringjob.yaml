@@ -1,0 +1,14 @@
+---
+# Nightly backup of every volume in the default group to the backup target.
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: backup
+spec:
+  name: backup
+  task: backup
+  cron: "0 0 * * *"
+  retain: 3
+  concurrency: 5
+  groups:
+    - default

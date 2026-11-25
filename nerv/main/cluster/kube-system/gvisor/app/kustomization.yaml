@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - runtimeclass.yaml
   - runtimeclass-orb.yaml
+  - runtimeclass-orb-policy.yaml

@@ -59,7 +59,7 @@ spec:
                       name: postgres-apps-superuser
                       key: password
                 - name: BACKUP_DIR
-                  value: /nas/postgres-backups
+                  value: /backups
                 - name: RETENTION_DAYS
                   value: "14"
               command:
@@ -74,7 +74,8 @@ spec:
                   # The TIMEZONE / USER_UID refs above are braced on purpose -
                   # those are real substitutions from the cluster-config CM.
                   set -euo pipefail
-                  mkdir -p "$BACKUP_DIR"
+                  umask 077
+                  chmod 600 "$BACKUP_DIR"/postgres-apps-*.sql.gz* 2>/dev/null || true
                   ts="$(date +%Y%m%d-%H%M%S)"
                   file="$BACKUP_DIR/postgres-apps-$ts.sql.gz"
                   echo "Dumping all databases to $file"
@@ -96,14 +97,14 @@ spec:
                   echo "Remaining backups:"
                   ls -lh "$BACKUP_DIR"
               volumeMounts:
-                - name: nas
-                  mountPath: /nas
+                - name: backups
+                  mountPath: /backups
                 - name: tmp
                   mountPath: /tmp
           volumes:
-            - name: nas
+            - name: backups
               nfs:
                 server: 192.168.1.72
-                path: /Kubernetes
+                path: /Kubernetes/postgres-backups
             - name: tmp
               emptyDir: {}

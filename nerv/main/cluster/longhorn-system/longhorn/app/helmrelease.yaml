@@ -39,8 +39,7 @@ spec:
     defaultBackupStore:
       backupTarget: nfs://192.168.1.72:/Kubernetes/longhorn
     defaultSettings:
-      # Single node setup
-      defaultReplicaCount: 1
+      defaultReplicaCount: 3
       defaultDataLocality: best-effort
       # Use the Talos userVolume mount
       defaultDataPath: /var/mnt/data/longhorn
@@ -50,7 +49,7 @@ spec:
       concurrentAutomaticEngineUpgradePerNodeLimit: 1
     persistence:
       defaultClass: false
-      defaultClassReplicaCount: 1
+      defaultClassReplicaCount: 3
     networkPolicies:
       restrictInternalTraffic: false
     ingress:

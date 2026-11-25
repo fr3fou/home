@@ -7,4 +7,4 @@ resources:
   - networkpolicy.yaml
   - helmrelease.yaml
   - httproute.yaml
-  - backup-secret.yaml
+  - recurringjob.yaml

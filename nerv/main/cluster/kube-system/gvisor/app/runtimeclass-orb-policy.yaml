@@ -1,0 +1,29 @@
+---
+# gvisor-orb allows setuid inside the sandbox. Only Amp orb pods in
+# ampere-dev may request it.
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: restrict-gvisor-orb
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["pods"]
+  validations:
+    - expression: >-
+        !has(object.spec.runtimeClassName) ||
+        object.spec.runtimeClassName != 'gvisor-orb' ||
+        request.namespace == 'ampere-dev'
+      message: runtimeClassName gvisor-orb is reserved for the ampere-dev namespace
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: restrict-gvisor-orb
+spec:
+  policyName: restrict-gvisor-orb
+  validationActions: ["Deny"]

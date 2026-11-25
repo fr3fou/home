@@ -33,6 +33,13 @@ spec:
     remediation:
       retries: 3
   values:
+    config:
+      envoyGateway:
+        rateLimit:
+          backend:
+            type: Redis
+            redis:
+              url: ratelimit-redis.networking-system.svc.cluster.local:6379
     hpa:
       enabled: true
       minReplicas: 1

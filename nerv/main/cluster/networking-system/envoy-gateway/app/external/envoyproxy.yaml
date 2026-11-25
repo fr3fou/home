@@ -31,6 +31,8 @@ spec:
                     matchLabels:
                       gateway.envoyproxy.io/owning-gateway-name: external
                   topologyKey: kubernetes.io/hostname
+      envoyPDB:
+        minAvailable: 2
       envoyService:
         externalTrafficPolicy: Local
         name: envoy-external

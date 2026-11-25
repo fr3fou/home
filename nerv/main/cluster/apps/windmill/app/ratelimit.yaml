@@ -11,8 +11,7 @@ spec:
       kind: HTTPRoute
       name: windmill
   rateLimit:
-    type: Local
-    local:
+    global:
       rules:
         - clientSelectors:
             - path:
@@ -20,6 +19,9 @@ spec:
                 value: /api/auth/login
               methods:
                 - value: POST
+              sourceCIDR:
+                type: Distinct
+                value: 0.0.0.0/0
           limit:
             requests: 10
             unit: Minute

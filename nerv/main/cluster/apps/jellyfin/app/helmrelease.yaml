@@ -111,3 +111,4 @@ spec:
         path: /Downloads
         globalMounts:
           - path: /nas
+            readOnly: true

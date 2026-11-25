@@ -1,0 +1,81 @@
+---
+# Memory-only Redis for Envoy Gateway global rate limiting (counters only).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ratelimit-redis
+  labels: &labels
+    app.kubernetes.io/name: ratelimit-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels: *labels
+  template:
+    metadata:
+      labels: *labels
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        runAsGroup: 999
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: redis
+          image: docker.io/library/redis:8.4-alpine@sha256:ff72f74e4f471df79ed920aa8bbc35efe72ff8a1f8acdc50aad5dbb9b14a4034
+          args: ["--save", "", "--appendonly", "no", "--maxmemory", "64mb", "--maxmemory-policy", "allkeys-lru"]
+          ports:
+            - name: redis
+              containerPort: 6379
+          readinessProbe: &probe
+            tcpSocket:
+              port: redis
+          livenessProbe: *probe
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              memory: 96Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ratelimit-redis
+spec:
+  selector:
+    app.kubernetes.io/name: ratelimit-redis
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: redis
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ratelimit-redis
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: ratelimit-redis
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: envoy-ratelimit
+      ports:
+        - {protocol: TCP, port: 6379}
+  egress: []

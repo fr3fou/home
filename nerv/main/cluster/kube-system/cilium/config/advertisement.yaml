@@ -12,7 +12,17 @@ spec:
       service:
         addresses:
           - LoadBalancerIP
-          - ExternalIP
       selector:
         matchExpressions:
           - { key: somekey, operator: NotIn, values: ["never-used-value"] }
+    # Envoy Gateway also sets spec.externalIPs to the gateway address, and
+    # Cilium then only programs the ExternalIP frontend. Announce externalIPs
+    # for the Envoy gateway Services only.
+    - advertisementType: "Service"
+      service:
+        addresses:
+          - ExternalIP
+      selector:
+        matchLabels:
+          app.kubernetes.io/managed-by: envoy-gateway
+          gateway.envoyproxy.io/owning-gateway-namespace: networking-system

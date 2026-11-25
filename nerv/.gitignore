@@ -1,2 +1,3 @@
 postgres-backup-*.sql
+postgres-apps-*.sql.gz*
 /clusterconfig/
