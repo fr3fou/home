@@ -12,6 +12,7 @@ spec:
       service:
         addresses:
           - LoadBalancerIP
+          - ExternalIP
       selector:
         matchExpressions:
           - { key: somekey, operator: NotIn, values: ["never-used-value"] }
