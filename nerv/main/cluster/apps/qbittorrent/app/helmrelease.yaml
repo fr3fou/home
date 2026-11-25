@@ -106,6 +106,6 @@ spec:
       nas:
         type: nfs
         server: 192.168.1.72
-        path: /var/nfs/shared/Downloads
+        path: /Downloads
         globalMounts:
           - path: /nas/Downloads
