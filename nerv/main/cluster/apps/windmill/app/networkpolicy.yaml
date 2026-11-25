@@ -17,8 +17,6 @@ spec:
           podSelector:
             matchLabels:
               k8s-app: kube-dns
-        - ipBlock:
-            cidr: 10.96.0.10/32
       ports:
         - {protocol: UDP, port: 53}
         - {protocol: TCP, port: 53}
@@ -26,16 +24,12 @@ spec:
         - podSelector:
             matchLabels:
               cnpg.io/cluster: postgres-apps
-        - ipBlock:
-            cidr: 10.98.154.135/32
       ports:
         - {protocol: TCP, port: 5432}
     - to:
         - podSelector:
             matchLabels:
               app: windmill-app
-        - ipBlock:
-            cidr: 10.98.242.129/32
       ports:
         - {protocol: TCP, port: 8000}
     - to:

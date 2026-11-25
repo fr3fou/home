@@ -25,8 +25,6 @@ spec:
         - protocol: TCP
           port: 8080
   egress:
-    # runsc traffic can reach Cilium policy evaluation before Service DNAT.
-    # Permit the stable Service VIPs as well as their selected pod endpoints.
     - to:
         - namespaceSelector:
             matchLabels:
@@ -34,8 +32,6 @@ spec:
           podSelector:
             matchLabels:
               k8s-app: kube-dns
-        - ipBlock:
-            cidr: 10.96.0.10/32
       ports:
         - {protocol: UDP, port: 53}
         - {protocol: TCP, port: 53}
@@ -43,16 +39,12 @@ spec:
         - podSelector:
             matchLabels:
               cnpg.io/cluster: postgres-apps
-        - ipBlock:
-            cidr: 10.98.154.135/32
       ports:
         - {protocol: TCP, port: 5432}
     - to:
         - podSelector:
             matchLabels:
               app: redis
-        - ipBlock:
-            cidr: 10.105.230.39/32
       ports:
         - {protocol: TCP, port: 6379}
     # Registration sends mail through Gmail's TLS SMTP service.

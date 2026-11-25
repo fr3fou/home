@@ -21,8 +21,6 @@ spec:
       ports:
         - {protocol: TCP, port: 3000}
   egress:
-    # runsc traffic can reach Cilium policy evaluation before Service DNAT.
-    # Permit the stable Service VIPs as well as their selected pod endpoints.
     - to:
         - namespaceSelector:
             matchLabels:
@@ -30,8 +28,6 @@ spec:
           podSelector:
             matchLabels:
               k8s-app: kube-dns
-        - ipBlock:
-            cidr: 10.96.0.10/32
       ports:
         - {protocol: UDP, port: 53}
         - {protocol: TCP, port: 53}
@@ -39,8 +35,6 @@ spec:
         - podSelector:
             matchLabels:
               app: luncher-box-backend
-        - ipBlock:
-            cidr: 10.111.42.167/32
       ports:
         - {protocol: TCP, port: 8080}
     # Server-side rendering calls the backend's public HTTPS hostname.
@@ -58,8 +52,6 @@ spec:
     - to:
         - ipBlock:
             cidr: 192.168.5.11/32
-        - ipBlock:
-            cidr: 10.104.22.64/32
       ports:
         - {protocol: TCP, port: 443}
     - to:
