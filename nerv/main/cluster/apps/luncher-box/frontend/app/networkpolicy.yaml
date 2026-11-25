@@ -48,12 +48,7 @@ spec:
               app.kubernetes.io/name: envoy
               gateway.envoyproxy.io/owning-gateway-name: external
       ports:
-        - {protocol: TCP, port: 8443}
-    - to:
-        - ipBlock:
-            cidr: 192.168.5.11/32
-      ports:
-        - {protocol: TCP, port: 443}
+        - {protocol: TCP, port: 10443}
     - to:
         - ipBlock:
             cidr: 0.0.0.0/0
