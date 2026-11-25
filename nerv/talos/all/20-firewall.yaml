@@ -1,0 +1,157 @@
+---
+apiVersion: v1alpha1
+kind: NetworkDefaultActionConfig
+ingress: block
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: apid
+portSelector:
+  ports:
+    - 50000
+  protocol: tcp
+ingress:
+  - subnet: 192.168.0.0/23
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: trustd
+portSelector:
+  ports:
+    - 50001
+  protocol: tcp
+ingress:
+  - subnet: 192.168.1.11/32
+  - subnet: 192.168.1.12/32
+  - subnet: 192.168.1.13/32
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: kube-apiserver
+portSelector:
+  ports:
+    - 6443
+  protocol: tcp
+ingress:
+  - subnet: 192.168.0.0/23
+  - subnet: 10.244.0.0/16
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: etcd
+portSelector:
+  ports:
+    - 2379-2380
+  protocol: tcp
+ingress:
+  - subnet: 192.168.1.11/32
+  - subnet: 192.168.1.12/32
+  - subnet: 192.168.1.13/32
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: kubelet
+portSelector:
+  ports:
+    - 10250
+  protocol: tcp
+ingress:
+  - subnet: 192.168.1.11/32
+  - subnet: 192.168.1.12/32
+  - subnet: 192.168.1.13/32
+  - subnet: 10.244.0.0/16
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: cilium-vxlan
+portSelector:
+  ports:
+    - 8472
+  protocol: udp
+ingress:
+  - subnet: 192.168.1.11/32
+  - subnet: 192.168.1.12/32
+  - subnet: 192.168.1.13/32
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: cilium-health-hubble
+portSelector:
+  ports:
+    - 4240
+    - 4244
+  protocol: tcp
+ingress:
+  - subnet: 192.168.1.11/32
+  - subnet: 192.168.1.12/32
+  - subnet: 192.168.1.13/32
+  - subnet: 10.244.0.0/16
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: metrics
+portSelector:
+  ports:
+    - 9100
+    - 9963-9964
+    - 10256
+  protocol: tcp
+ingress:
+  - subnet: 192.168.1.11/32
+  - subnet: 192.168.1.12/32
+  - subnet: 192.168.1.13/32
+  - subnet: 10.244.0.0/16
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: home-assistant-tcp
+portSelector:
+  ports:
+    - 8123
+    - 18555
+    - 21064
+  protocol: tcp
+ingress:
+  - subnet: 192.168.0.0/23
+  - subnet: fd86:3300:dd7a:4735::/64
+  - subnet: 10.244.0.0/16
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: home-assistant-udp
+portSelector:
+  ports:
+    - 1900
+    - 5353
+    - 18555
+  protocol: udp
+ingress:
+  - subnet: 192.168.0.0/23
+  - subnet: fd86:3300:dd7a:4735::/64
+  - subnet: fe80::/10
+  - subnet: 10.244.0.0/16
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: home-assistant-discovery-replies
+portSelector:
+  ports:
+    - 32768-60999
+  protocol: udp
+ingress:
+  - subnet: 192.168.0.0/23
+  - subnet: fd86:3300:dd7a:4735::/64
+  - subnet: fe80::/10
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: home-assistant-code-server
+portSelector:
+  ports:
+    - 8080
+  protocol: tcp
+ingress:
+  - subnet: 192.168.1.11/32
+  - subnet: 192.168.1.12/32
+  - subnet: 192.168.1.13/32
+  - subnet: 10.244.0.0/16
