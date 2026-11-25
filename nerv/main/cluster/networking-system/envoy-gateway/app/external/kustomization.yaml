@@ -5,3 +5,5 @@ resources:
   - gatewayclass.yaml
   - gateway.yaml
   - envoyproxy.yaml
+  - https-redirect.yaml
+  - clienttrafficpolicy.yaml

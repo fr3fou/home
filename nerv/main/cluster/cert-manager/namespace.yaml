@@ -3,4 +3,4 @@ kind: Namespace
 metadata:
   name: cert-manager
   labels:
-    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/enforce: restricted

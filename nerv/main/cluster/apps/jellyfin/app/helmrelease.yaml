@@ -87,6 +87,7 @@ spec:
         parentRefs:
           - name: external
             namespace: networking-system
+            sectionName: https
         rules:
           - backendRefs:
               - name: jellyfin

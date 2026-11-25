@@ -29,5 +29,5 @@ spec:
                         gateway.envoyproxy.io/owning-gateway-name: external
                     topologyKey: kubernetes.io/hostname
       envoyService:
-        externalTrafficPolicy: Cluster
+        externalTrafficPolicy: Local
         name: envoy-external

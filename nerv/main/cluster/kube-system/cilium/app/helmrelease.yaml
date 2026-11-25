@@ -30,6 +30,8 @@ spec:
     bgpControlPlane:
       enabled: true
     kubeProxyReplacement: true
+    socketLB:
+      hostNamespaceOnly: true
     securityContext:
       capabilities:
         ciliumAgent:

@@ -8,9 +8,14 @@ spec:
   parentRefs:
     - name: external
       namespace: networking-system
+      sectionName: https
   hostnames:
     - flux.nerv.id
   rules:
-    - backendRefs:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /hook/
+      backendRefs:
         - name: webhook-receiver
           port: 80

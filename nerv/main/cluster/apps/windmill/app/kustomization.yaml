@@ -5,3 +5,5 @@ resources:
   - ./helmrelease.yaml
   - ./httproute.yaml
   - ./secret.yaml
+  - ./ratelimit.yaml
+  - ./networkpolicy.yaml
