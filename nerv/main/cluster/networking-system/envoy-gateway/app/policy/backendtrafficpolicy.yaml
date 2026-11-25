@@ -12,6 +12,6 @@ spec:
     - group: gateway.networking.k8s.io
       kind: Gateway
       name: external
-  compression:
+  compressor:
     - type: Brotli
     - type: Gzip
