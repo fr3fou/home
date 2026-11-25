@@ -1,7 +1,8 @@
 default_config:
 
 recorder:
-  db_url: postgresql://home_assistant:${HOME_ASSISTANT_DB_PASSWORD}@postgres-apps-rw.apps.svc.cluster.local:5432/home_assistant
+  # Seed only: copied to /config on first install. The URL lives in /config/secrets.yaml.
+  db_url: !secret database_url
 
 automation: !include automations.yaml
 script: !include scripts.yaml
