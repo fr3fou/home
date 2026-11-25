@@ -21,6 +21,18 @@ spec:
             - 192.168.5.12/30
             - 192.168.5.16/30
             - 192.168.5.20/32
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: deny-apps-node-management
+  namespace: apps
+spec:
+  endpointSelector: {}
+  enableDefaultDeny:
+    ingress: false
+    egress: false
+  egressDeny:
     - toEntities: [host, remote-node]
       toPorts:
         - ports:
@@ -30,3 +42,4 @@ spec:
             - {port: "4240", protocol: TCP}
             - {port: "4244", protocol: TCP}
             - {port: "22", protocol: TCP}
+            - {port: "8472", protocol: UDP}

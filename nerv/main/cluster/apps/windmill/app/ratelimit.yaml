@@ -5,6 +5,7 @@ kind: BackendTrafficPolicy
 metadata:
   name: windmill-login-ratelimit
 spec:
+  mergeType: StrategicMerge
   targetRefs:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
@@ -17,6 +18,8 @@ spec:
             - path:
                 type: PathPrefix
                 value: /api/auth/login
+              methods:
+                - value: POST
           limit:
             requests: 10
             unit: Minute

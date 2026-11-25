@@ -18,16 +18,19 @@ spec:
     kubernetes:
       envoyDeployment:
         replicas: 3
+        strategy:
+          type: RollingUpdate
+          rollingUpdate:
+            maxSurge: 0
+            maxUnavailable: 1
         pod:
           affinity:
             podAntiAffinity:
-              preferredDuringSchedulingIgnoredDuringExecution:
-                - weight: 100
-                  podAffinityTerm:
-                    labelSelector:
-                      matchLabels:
-                        gateway.envoyproxy.io/owning-gateway-name: external
-                    topologyKey: kubernetes.io/hostname
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchLabels:
+                      gateway.envoyproxy.io/owning-gateway-name: external
+                  topologyKey: kubernetes.io/hostname
       envoyService:
         externalTrafficPolicy: Local
         name: envoy-external

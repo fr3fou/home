@@ -5,6 +5,7 @@ kind: BackendTrafficPolicy
 metadata:
   name: jellyfin-login-ratelimit
 spec:
+  mergeType: StrategicMerge
   targetRefs:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
@@ -16,7 +17,9 @@ spec:
         - clientSelectors:
             - path:
                 type: RegularExpression
-                value: "(?i)/users/authenticate(byname|withquickconnect).*"
+                value: "(?i)(/emby|/mediabrowser)?/users/(authenticatebyname|authenticatewithquickconnect|[^/]+/authenticate)/?(\\?.*)?"
+              methods:
+                - value: POST
           limit:
             requests: 10
             unit: Minute

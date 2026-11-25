@@ -31,8 +31,8 @@ topf render                        # write configs to ./output (gitignored)
 topf apply --dry-run               # server-side diff; exit 2 on changes
 topf apply                         # apply (prompts for confirmation)
 topf upgrade                       # roll Talos to talosVersion/schematics
-topf talosconfig > talosconfig     # used via .envrc
-topf kubeconfig > kubeconfig       # 12h admin kubeconfig
+(umask 077; topf talosconfig > talosconfig)   # used via .envrc
+(umask 077; topf kubeconfig > kubeconfig)     # 12h admin kubeconfig
 ```
 
 New or changed schematics must be registered once with `--submit-to-factory`.
