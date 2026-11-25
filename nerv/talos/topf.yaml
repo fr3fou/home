@@ -2,7 +2,7 @@
 # https://github.com/postfinance/topf
 clusterName: nerv
 clusterEndpoint: https://192.168.1.11:6443
-kubernetesVersion: 1.35.11
+kubernetesVersion: 1.36.7
 talosVersion: 1.14.7
 
 secretsPath: secrets.sops.yaml
