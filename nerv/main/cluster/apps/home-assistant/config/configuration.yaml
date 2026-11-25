@@ -16,12 +16,5 @@ homeassistant:
     - https://home.nerv.id
   auth_mfa_modules:
     - type: totp
-
-http:
-  use_x_forwarded_for: true
-  trusted_proxies:
-    - 10.42.0.0/16
-    - 172.16.0.0/12
-    - 192.168.0.0/16
-    - 127.0.0.1
-    - ::1
+# http: (reverse proxy settings) is configured in the UI since 2026.11:
+# Settings > System > Network. YAML is ignored after the one-time migration.
