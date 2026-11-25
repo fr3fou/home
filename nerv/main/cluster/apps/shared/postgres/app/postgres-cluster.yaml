@@ -84,11 +84,7 @@ spec:
         passwordSecret:
           name: netronome-postgres-user
       - name: coder
-        ensure: present
-        login: true
-        superuser: false
-        passwordSecret:
-          name: postgres-coder-user
+        ensure: absent
       - name: anby
         ensure: present
         login: true

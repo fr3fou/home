@@ -8,7 +8,6 @@ resources:
   - postgres-luncherbox-user-secret.yaml
   - postgres-prowlarr-user-secret.yaml
   - postgres-netronome-user-secret.yaml
-  - postgres-coder-user-secret.yaml
   - postgres-anby-user-secret.yaml
   - postgres-pocket-id-user-secret.yaml
   - postgres-cluster.yaml

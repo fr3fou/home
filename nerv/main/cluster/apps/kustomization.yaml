@@ -6,7 +6,6 @@ resources:
   - app-template.yaml
   - anby/ks.yaml
   - autobrr/ks.yaml
-  - coder/ks.yaml
   - flaresolverr/ks.yaml
   - pgadmin/ks.yaml
   - jellyfin/ks.yaml

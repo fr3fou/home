@@ -75,6 +75,8 @@ spec:
     name: postgres-apps
   name: coder
   owner: coder
+  ensure: absent
+  databaseReclaimPolicy: delete
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
