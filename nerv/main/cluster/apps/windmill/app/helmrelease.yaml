@@ -35,7 +35,7 @@ spec:
                     automountServiceAccountToken: false
                     initContainers:
                       - name: prepare-tmp
-                        image: ghcr.io/windmill-labs/windmill:1.846.1@sha256:1c394f5c436b5e7716fab8cc9001e35024507e84b41fac9b1cca767b10eaa43d
+                        image: ghcr.io/windmill-labs/windmill:1.884.1@sha256:8e190deeb36a39aa6b25bca7dbe2c033d1c6069c077bdd569b52bec635123ff2
                         command: [/bin/sh, -ec, "mkdir -p /scratch/tmp && chmod 1777 /scratch/tmp"]
                         securityContext:
                           allowPrivilegeEscalation: false
