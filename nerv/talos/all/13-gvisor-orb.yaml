@@ -2,7 +2,10 @@
 # with allow-suid so `sudo` works inside the sandbox (Amp's orb image needs
 # passwordless sudo; Amp's own Substrate runtime passes the same flag).
 # Root inside the orb is gVisor's emulated root, not host root.
-# Other gVisor pods keep using `runsc` without it. RuntimeClass: gvisor-orb.
+# cpu-num-from-quota makes nproc report the pod's CPU limit instead of the
+# host's core count, so build tools don't start one worker per host core.
+# Other gVisor pods keep using `runsc` without these. RuntimeClass: gvisor-orb.
+# Talos writes machine.files only at boot: changes here need a node reboot.
 machine:
   files:
     - path: /var/etc/runsc/orb.toml
@@ -11,6 +14,7 @@ machine:
       content: |
         [runsc_config]
           allow-suid = "true"
+          cpu-num-from-quota = "true"
 ---
 apiVersion: v1alpha1
 kind: CRICustomizationConfig
