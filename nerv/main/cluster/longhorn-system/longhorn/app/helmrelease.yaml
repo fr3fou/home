@@ -32,15 +32,15 @@ spec:
     remediation:
       retries: 3
   values:
+    # NFSv4.1 backup target (same directory the former CIFS target used)
+    defaultBackupStore:
+      backupTarget: nfs://192.168.1.72:/Kubernetes/longhorn
     defaultSettings:
       # Single node setup
       defaultReplicaCount: 1
       defaultDataLocality: best-effort
       # Use the Talos userVolume mount
       defaultDataPath: /var/mnt/data/longhorn
-      # CIFS backup target
-      backupTarget: cifs://192.168.1.72/Kubernetes/longhorn
-      backupTargetCredentialSecret: longhorn-backup-secret
       # Reduce storage reservation to allow more volume expansion
       storageMinimalAvailablePercentage: 10
     persistence:
