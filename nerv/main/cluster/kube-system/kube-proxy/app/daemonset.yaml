@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: kube-proxy
-          image: registry.k8s.io/kube-proxy:v1.36.7@sha256:b96a60ec0ba3e6b2526fb648d5dd4d51ca094b7a785f77b1e32f87938cbae234
+          image: registry.k8s.io/kube-proxy:v1.37.3@sha256:bc290f252d4d1dbfd92dbfc66acf2d1f5a83855a0f3e2656e2acb0128dcfcea2
           imagePullPolicy: IfNotPresent
           command:
             - /usr/local/bin/kube-proxy
