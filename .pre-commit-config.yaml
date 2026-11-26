@@ -3,3 +3,10 @@ repos:
   rev: v2.1.0
   hooks:
   - id: forbid-secrets
+# Scans staged changes for credentials (API keys, tokens, private keys).
+# Uses the installed gitleaks binary (brew install gitleaks).
+# SOPS-encrypted values (ENC[...]) do not match its rules.
+- repo: https://github.com/gitleaks/gitleaks
+  rev: v8.30.1
+  hooks:
+  - id: gitleaks-system
