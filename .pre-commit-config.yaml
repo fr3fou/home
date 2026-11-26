@@ -10,3 +10,6 @@ repos:
   rev: v8.30.1
   hooks:
   - id: gitleaks-system
+    # gitleaks scans the staged diff itself; file arguments make it scan
+    # nothing and still pass.
+    pass_filenames: false
