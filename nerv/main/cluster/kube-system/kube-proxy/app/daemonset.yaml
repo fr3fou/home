@@ -28,6 +28,16 @@ spec:
         k8s-app: kube-proxy
         tier: node
     spec:
+      # Cilium kube-proxy replacement takes over node by node: nodes labelled
+      # nerv.id/kube-proxy=removed no longer run kube-proxy.
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: nerv.id/kube-proxy
+                    operator: NotIn
+                    values: ["removed"]
       containers:
         - name: kube-proxy
           image: registry.k8s.io/kube-proxy:v1.36.7@sha256:b96a60ec0ba3e6b2526fb648d5dd4d51ca094b7a785f77b1e32f87938cbae234
