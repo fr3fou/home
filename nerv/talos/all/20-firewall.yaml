@@ -114,6 +114,7 @@ portSelector:
 ingress:
   - subnet: 192.168.0.0/23
   - subnet: fd86:3300:dd7a:4735::/64
+  - subnet: fe80::/10
   - subnet: 10.244.0.0/16
 ---
 apiVersion: v1alpha1
@@ -140,8 +141,6 @@ portSelector:
   protocol: udp
 ingress:
   - subnet: 192.168.0.0/23
-  - subnet: fd86:3300:dd7a:4735::/64
-  - subnet: fe80::/10
 ---
 apiVersion: v1alpha1
 kind: NetworkRuleConfig
