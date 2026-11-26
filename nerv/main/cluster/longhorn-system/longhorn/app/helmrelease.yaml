@@ -51,6 +51,7 @@ spec:
       defaultClass: false
       defaultClassReplicaCount: 3
     networkPolicies:
-      restrictInternalTraffic: false
+      enabled: true
+      restrictInternalTraffic: true
     ingress:
       enabled: false
