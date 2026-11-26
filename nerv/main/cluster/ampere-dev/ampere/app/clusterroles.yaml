@@ -1,0 +1,89 @@
+# Copied from github.com/fr3fou/ampere v0.1.0 (config/rbac). Regenerate from there.
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ampere-controller
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumeclaims
+  - pods
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - delete
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  - events.k8s.io
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+- apiGroups:
+  - ampere.nerv.id
+  resources:
+  - orbs
+  - orbsnapshots
+  verbs:
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ampere.nerv.id
+  resources:
+  - orbs/finalizers
+  - orbsnapshots/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - ampere.nerv.id
+  resources:
+  - orbs/status
+  - orbsnapshots/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ampere-provider
+rules:
+  - apiGroups: ["ampere.nerv.id"]
+    resources: ["orbs"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["ampere.nerv.id"]
+    resources: ["orbsnapshots"]
+    verbs: ["get", "list", "watch", "create"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "create", "update"]

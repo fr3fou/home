@@ -1,0 +1,13 @@
+---
+# Caps the orbs that can run at once (about 5 default-size orbs plus the
+# controller and provider). A spawn over the cap fails with a clear message.
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: ampere
+spec:
+  hard:
+    limits.memory: 44Gi
+    pods: "7"
+    persistentvolumeclaims: "40"
+    requests.storage: 1200Gi

@@ -1,0 +1,13 @@
+---
+# Amp orbs (github.com/fr3fou/ampere). Orbs run as their image's user with
+# sudo (privilege escalation), so not "restricted". Never pruned: deleting the
+# namespace would delete every orb's disk.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ampere-dev
+  labels:
+    pod-security.kubernetes.io/enforce: baseline
+    pod-security.kubernetes.io/warn: baseline
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled

@@ -1,0 +1,271 @@
+# Copied from github.com/fr3fou/ampere v0.1.0 (config/crd). Regenerate from there.
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
+    controller-gen.kubebuilder.io/version: v0.23.0
+  name: orbs.ampere.nerv.id
+spec:
+  group: ampere.nerv.id
+  names:
+    kind: Orb
+    listKind: OrbList
+    plural: orbs
+    singular: orb
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.state
+      name: State
+      type: string
+    - jsonPath: .status.phase
+      name: Phase
+      type: string
+    - jsonPath: .spec.type
+      name: Type
+      type: string
+    - jsonPath: .status.node
+      name: Node
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: 'Orb is one Amp orb: a sandboxed pod plus its persistent disk.'
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: |-
+              OrbSpec is the desired state of one Amp orb. One Orb exists per Amp thread;
+              its name is Amp's ORB_ID (amp-<thread id>).
+            properties:
+              fromSnapshot:
+                description: |-
+                  FromSnapshot names an OrbSnapshot to create the disk from (ORB_SNAPSHOT_ID on spawn).
+                  Only used when the orb has no disk yet.
+                type: string
+              image:
+                description: Image is the orb image to seed a new disk from (ORB_IMAGE).
+                type: string
+              spawnGeneration:
+                description: |-
+                  SpawnGeneration is bumped on every spawn job. The controller starts a fresh pod
+                  for each new value, because each spawn job carries a new short-lived token.
+                format: int64
+                type: integer
+              state:
+                description: 'State Amp asked for: spawn sets Running, pause sets
+                  Paused.'
+                enum:
+                - Running
+                - Paused
+                type: string
+              tokenSecretRef:
+                description: TokenSecretRef holds ORB_TOKEN for the current spawn
+                  job (key "token").
+                properties:
+                  name:
+                    default: ""
+                    description: |-
+                      Name of the referent.
+                      This field is effectively required, but due to backwards compatibility is
+                      allowed to be empty. Instances of this type with an empty value here are
+                      almost certainly wrong.
+                      More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    type: string
+                type: object
+                x-kubernetes-map-type: atomic
+              type:
+                description: Type is the orb type (size). Empty means the provider's
+                  default type.
+                type: string
+            required:
+            - state
+            type: object
+          status:
+            description: OrbStatus is the observed state of an Orb.
+            properties:
+              conditions:
+                items:
+                  description: Condition contains details for one aspect of the current
+                    state of this API Resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        lastTransitionTime is the last time the condition transitioned from one status to another.
+                        This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        message is a human readable message indicating details about the transition.
+                        This may be an empty string.
+                      maxLength: 32768
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        observedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      minimum: 0
+                      type: integer
+                    reason:
+                      description: |-
+                        reason contains a programmatic identifier indicating the reason for the condition's last transition.
+                        Producers of specific condition types may define expected values and meanings for this field,
+                        and whether the values are considered a guaranteed API.
+                        The value should be a CamelCase string.
+                        This field may not be empty.
+                      maxLength: 1024
+                      minLength: 1
+                      pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                      type: string
+                    status:
+                      description: status of the condition, one of True, False, Unknown.
+                      enum:
+                      - "True"
+                      - "False"
+                      - Unknown
+                      type: string
+                    type:
+                      description: type of condition in CamelCase or in foo.example.com/CamelCase.
+                      maxLength: 316
+                      pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - message
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              message:
+                description: Message explains the phase, e.g. why it failed.
+                type: string
+              node:
+                description: Node the orb pod runs on.
+                type: string
+              observedSpawnGeneration:
+                description: ObservedSpawnGeneration is the spawnGeneration the current
+                  pod was started for.
+                format: int64
+                type: integer
+              phase:
+                description: OrbPhase is where the orb actually is.
+                type: string
+              pvcName:
+                description: PVCName is the orb's disk.
+                type: string
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
+    controller-gen.kubebuilder.io/version: v0.23.0
+  name: orbsnapshots.ampere.nerv.id
+spec:
+  group: ampere.nerv.id
+  names:
+    kind: OrbSnapshot
+    listKind: OrbSnapshotList
+    plural: orbsnapshots
+    singular: orbsnapshot
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.sourceOrb
+      name: Source
+      type: string
+    - jsonPath: .status.phase
+      name: Phase
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: OrbSnapshot is a cloned orb disk that new orbs can start from.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: |-
+              OrbSnapshotSpec is a saved copy of an orb's disk (an Amp project snapshot).
+              Its name is Amp's ORB_SNAPSHOT_ID.
+            properties:
+              sourceOrb:
+                description: SourceOrb is the Orb whose disk is copied. It must be
+                  paused.
+                type: string
+            required:
+            - sourceOrb
+            type: object
+          status:
+            description: OrbSnapshotStatus is the observed state of an OrbSnapshot.
+            properties:
+              message:
+                type: string
+              phase:
+                description: OrbSnapshotPhase is the state of a snapshot.
+                type: string
+              pvcName:
+                description: PVCName is the cloned volume holding the snapshot.
+                type: string
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

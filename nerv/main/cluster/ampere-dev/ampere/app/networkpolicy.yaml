@@ -1,0 +1,89 @@
+---
+# Orbs: no inbound; outbound only DNS and the public internet on 80/443.
+# Private ranges (LAN, nodes, NAS), CGNAT, link-local (metadata) and every
+# in-cluster address are unreachable.
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: ampere-orbs
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: ampere-orb
+  enableDefaultDeny:
+    ingress: true
+    egress: true
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: ANY
+    - toCIDRSet:
+        - cidr: 0.0.0.0/0
+          except:
+            - 10.0.0.0/8
+            - 172.16.0.0/12
+            - 192.168.0.0/16
+            - 100.64.0.0/10
+            - 169.254.0.0/16
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+            - port: "80"
+              protocol: TCP
+---
+# Controller: only the Kubernetes API.
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: ampere-controller
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: ampere-controller
+  enableDefaultDeny:
+    ingress: true
+    egress: true
+  egress:
+    - toEntities:
+        - kube-apiserver
+---
+# Provider: the Kubernetes API, DNS, and Amp over HTTPS.
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: ampere-provider
+spec:
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: ampere-provider
+  enableDefaultDeny:
+    ingress: true
+    egress: true
+  egress:
+    - toEntities:
+        - kube-apiserver
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: ANY
+          rules:
+            dns:
+              - matchPattern: "*"
+    - toFQDNs:
+        - matchName: ampcode.com
+        - matchPattern: "*.ampcode.com"
+        - matchName: registry.npmjs.org
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
